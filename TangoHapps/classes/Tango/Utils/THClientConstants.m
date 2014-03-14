@@ -105,6 +105,9 @@ NSString * const kEventColorChanged = @"eventColorChanged";
 
 NSString * const kEventTriggered = @"triggered";
 
+NSString * const kEventRecognized = @"recognized";
+NSString * const kEventNotRecognized = @"norRecognized";
+
 //methods
 NSString * const kMethodTurnOn = @"turnOn";
 NSString * const kMethodTurnOff = @"turnOff";

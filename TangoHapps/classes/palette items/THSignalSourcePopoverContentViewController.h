@@ -11,6 +11,9 @@
 
 
 @interface THSignalSourcePopoverContentViewController : UIViewController
+
+@property (nonatomic, assign, readwrite) UIPopoverController *currentPopoverController;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil
                bundle:(NSBundle *)nibBundleOrNil
          signalSourceEditable:(THSignalSourceEditable *)signalSourceEditable;

@@ -10,6 +10,11 @@
 #import "THSignalSource.h"
 
 
+@interface THSignalSource ()
+@property (nonatomic, assign, readwrite) float leftBorderPercentage;
+@property (nonatomic, assign, readwrite) float rightBorderPercentage;
+@end
+
 @implementation THSignalSourceEditable
 
 - (void)load
@@ -58,10 +63,31 @@
     return @"SignalSource";
 }
 
+- (void)setLeftBorderPercentage:(float)leftBorderPercentage
+{
+    ((THSignalSource *)self.simulableObject).leftBorderPercentage = leftBorderPercentage;
+}
+
+- (void)setRightBorderPercentage:(float)rightBorderPercentage
+{
+    ((THSignalSource *)self.simulableObject).rightBorderPercentage = rightBorderPercentage;
+}
+
+- (float)leftBorderPercentage
+{
+    return ((THSignalSource *)self.simulableObject).leftBorderPercentage;
+}
+
+- (float)rightBorderPercentage
+{
+    return ((THSignalSource *)self.simulableObject).rightBorderPercentage;
+}
+
 - (void)switchSourceFile:(NSString *)filename
 {
     THSignalSource *source = (THSignalSource *)self.simulableObject;
     [source switchSourceFile:filename];
+
 }
 
 #pragma mark - Property Controller
@@ -71,17 +97,19 @@
     NSArray *controllers = [super propertyControllers];
     THSignalSourceProperties *properties = [THSignalSourceProperties properties];
     //add property-controllers here
-    
+
     return [controllers arrayByAddingObject:properties];
 }
 
 
 #pragma mark - Archiving
 
-- (id)initWithCoder:(NSCoder *)decoder {
+- (id)initWithCoder:(NSCoder *)decoder
+{
     self = [super initWithCoder:decoder];
     if(self){
         [self load];
+      
     }
     return self;
 }

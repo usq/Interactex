@@ -1275,6 +1275,26 @@
 		A39B4BCE18C7BF26004016B2 /* THSignalSourcePopoverContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A39B4BCC18C7BF26004016B2 /* THSignalSourcePopoverContentViewController.m */; };
 		A39B4BCF18C7BF26004016B2 /* THSignalSourcePopoverContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A39B4BCD18C7BF26004016B2 /* THSignalSourcePopoverContentViewController.xib */; };
 		A39B4BD218C7C376004016B2 /* THSignalSourcePopoverContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = A39B4BD118C7C376004016B2 /* THSignalSourcePopoverContentView.m */; };
+		A3C949DA18D244BB0022C928 /* filter.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C949D618D244BB0022C928 /* filter.png */; };
+		A3C949DB18D244BB0022C928 /* filter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C949D718D244BB0022C928 /* filter@2x.png */; };
+		A3C949DC18D244BB0022C928 /* palette_filter.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C949D818D244BB0022C928 /* palette_filter.png */; };
+		A3C949DD18D244BB0022C928 /* palette_filter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C949D918D244BB0022C928 /* palette_filter@2x.png */; };
+		A3C94A1B18D2451F0022C928 /* THFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C94A1A18D2451F0022C928 /* THFilter.m */; };
+		A3C94A1E18D2453C0022C928 /* THFilterEditable.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C94A1D18D2453C0022C928 /* THFilterEditable.m */; };
+		A3C94A2118D245660022C928 /* THFilterPaletteItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C94A2018D245660022C928 /* THFilterPaletteItem.m */; };
+		A3C94A2418D245A10022C928 /* THFilterProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C94A2318D245A10022C928 /* THFilterProperties.m */; };
+		A3C94A2618D250190022C928 /* singletick_error.txt in Resources */ = {isa = PBXBuildFile; fileRef = A3C94A2518D250190022C928 /* singletick_error.txt */; };
+		A3C94A2B18D2694E0022C928 /* gesture.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C94A2718D2694E0022C928 /* gesture.png */; };
+		A3C94A2C18D2694E0022C928 /* gesture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C94A2818D2694E0022C928 /* gesture@2x.png */; };
+		A3C94A2D18D2694E0022C928 /* palette_gesture.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C94A2918D2694E0022C928 /* palette_gesture.png */; };
+		A3C94A2E18D2694E0022C928 /* palette_gesture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C94A2A18D2694E0022C928 /* palette_gesture@2x.png */; };
+		A3C94A3C18D26A010022C928 /* THGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C94A3918D26A010022C928 /* THGesture.m */; };
+		A3C94A3D18D26A010022C928 /* THGestureEditable.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C94A3B18D26A010022C928 /* THGestureEditable.m */; };
+		A3C94A4018D26A170022C928 /* THGesturePaletteItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C94A3F18D26A170022C928 /* THGesturePaletteItem.m */; };
+		A3C94A4318D26A290022C928 /* THGestureProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C94A4218D26A290022C928 /* THGestureProperties.m */; };
+		A3C94A4518D28DEF0022C928 /* doubletick_long.txt in Resources */ = {isa = PBXBuildFile; fileRef = A3C94A4418D28DEF0022C928 /* doubletick_long.txt */; };
+		A3C94A4718D292E80022C928 /* THGestureProperties.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3C94A4618D292E80022C928 /* THGestureProperties.xib */; };
+		A3C94A4918D325E60022C928 /* THFilterProperties.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3C94A4818D325E60022C928 /* THFilterProperties.xib */; };
 		A3CBF54018BFFA1C00537127 /* THSignalSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CBF53F18BFFA1C00537127 /* THSignalSource.m */; };
 		A3CBF54318BFFE3400537127 /* THSignalSourceEditable.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CBF54218BFFE3400537127 /* THSignalSourceEditable.m */; };
 		A3CBF54618C000ED00537127 /* THSignalSourcePaletteItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CBF54518C000ED00537127 /* THSignalSourcePaletteItem.m */; };
@@ -2687,6 +2707,34 @@
 		A39B4BCD18C7BF26004016B2 /* THSignalSourcePopoverContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = THSignalSourcePopoverContentViewController.xib; path = "TangoHapps/classes/palette items/THSignalSourcePopoverContentViewController.xib"; sourceTree = SOURCE_ROOT; };
 		A39B4BD018C7C376004016B2 /* THSignalSourcePopoverContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THSignalSourcePopoverContentView.h; sourceTree = "<group>"; };
 		A39B4BD118C7C376004016B2 /* THSignalSourcePopoverContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THSignalSourcePopoverContentView.m; sourceTree = "<group>"; };
+		A3C949D618D244BB0022C928 /* filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filter.png; sourceTree = "<group>"; };
+		A3C949D718D244BB0022C928 /* filter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter@2x.png"; sourceTree = "<group>"; };
+		A3C949D818D244BB0022C928 /* palette_filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = palette_filter.png; sourceTree = "<group>"; };
+		A3C949D918D244BB0022C928 /* palette_filter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "palette_filter@2x.png"; sourceTree = "<group>"; };
+		A3C94A1918D2451F0022C928 /* THFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THFilter.h; path = conditions/THFilter.h; sourceTree = "<group>"; };
+		A3C94A1A18D2451F0022C928 /* THFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THFilter.m; path = conditions/THFilter.m; sourceTree = "<group>"; };
+		A3C94A1C18D2453C0022C928 /* THFilterEditable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THFilterEditable.h; path = conditions/THFilterEditable.h; sourceTree = "<group>"; };
+		A3C94A1D18D2453C0022C928 /* THFilterEditable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THFilterEditable.m; path = conditions/THFilterEditable.m; sourceTree = "<group>"; };
+		A3C94A1F18D245660022C928 /* THFilterPaletteItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THFilterPaletteItem.h; path = "TangoHapps/classes/palette items/THFilterPaletteItem.h"; sourceTree = SOURCE_ROOT; };
+		A3C94A2018D245660022C928 /* THFilterPaletteItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THFilterPaletteItem.m; path = "TangoHapps/classes/palette items/THFilterPaletteItem.m"; sourceTree = SOURCE_ROOT; };
+		A3C94A2218D245A10022C928 /* THFilterProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THFilterProperties.h; path = "TangoHapps/classes/palette properties/THFilterProperties.h"; sourceTree = SOURCE_ROOT; };
+		A3C94A2318D245A10022C928 /* THFilterProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THFilterProperties.m; path = "TangoHapps/classes/palette properties/THFilterProperties.m"; sourceTree = SOURCE_ROOT; };
+		A3C94A2518D250190022C928 /* singletick_error.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = singletick_error.txt; sourceTree = "<group>"; };
+		A3C94A2718D2694E0022C928 /* gesture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gesture.png; sourceTree = "<group>"; };
+		A3C94A2818D2694E0022C928 /* gesture@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gesture@2x.png"; sourceTree = "<group>"; };
+		A3C94A2918D2694E0022C928 /* palette_gesture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = palette_gesture.png; sourceTree = "<group>"; };
+		A3C94A2A18D2694E0022C928 /* palette_gesture@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "palette_gesture@2x.png"; sourceTree = "<group>"; };
+		A3C94A3818D26A010022C928 /* THGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THGesture.h; path = conditions/THGesture.h; sourceTree = "<group>"; };
+		A3C94A3918D26A010022C928 /* THGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THGesture.m; path = conditions/THGesture.m; sourceTree = "<group>"; };
+		A3C94A3A18D26A010022C928 /* THGestureEditable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THGestureEditable.h; path = conditions/THGestureEditable.h; sourceTree = "<group>"; };
+		A3C94A3B18D26A010022C928 /* THGestureEditable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THGestureEditable.m; path = conditions/THGestureEditable.m; sourceTree = "<group>"; };
+		A3C94A3E18D26A170022C928 /* THGesturePaletteItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THGesturePaletteItem.h; path = "TangoHapps/classes/palette items/THGesturePaletteItem.h"; sourceTree = SOURCE_ROOT; };
+		A3C94A3F18D26A170022C928 /* THGesturePaletteItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THGesturePaletteItem.m; path = "TangoHapps/classes/palette items/THGesturePaletteItem.m"; sourceTree = SOURCE_ROOT; };
+		A3C94A4118D26A290022C928 /* THGestureProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THGestureProperties.h; path = "TangoHapps/classes/palette properties/THGestureProperties.h"; sourceTree = SOURCE_ROOT; };
+		A3C94A4218D26A290022C928 /* THGestureProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THGestureProperties.m; path = "TangoHapps/classes/palette properties/THGestureProperties.m"; sourceTree = SOURCE_ROOT; };
+		A3C94A4418D28DEF0022C928 /* doubletick_long.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = doubletick_long.txt; sourceTree = "<group>"; };
+		A3C94A4618D292E80022C928 /* THGestureProperties.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = THGestureProperties.xib; path = TangoHapps/resources/gui/properties/THGestureProperties.xib; sourceTree = SOURCE_ROOT; };
+		A3C94A4818D325E60022C928 /* THFilterProperties.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = THFilterProperties.xib; path = TangoHapps/resources/gui/properties/THFilterProperties.xib; sourceTree = SOURCE_ROOT; };
 		A3CBF53E18BFFA1C00537127 /* THSignalSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THSignalSource.h; sourceTree = "<group>"; };
 		A3CBF53F18BFFA1C00537127 /* THSignalSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THSignalSource.m; sourceTree = "<group>"; };
 		A3CBF54118BFFE3400537127 /* THSignalSourceEditable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THSignalSourceEditable.h; sourceTree = "<group>"; };
@@ -2918,6 +2966,14 @@
 		9A4144B517DE7A060061EDF8 /* palette */ = {
 			isa = PBXGroup;
 			children = (
+				A3C94A2718D2694E0022C928 /* gesture.png */,
+				A3C94A2818D2694E0022C928 /* gesture@2x.png */,
+				A3C94A2918D2694E0022C928 /* palette_gesture.png */,
+				A3C94A2A18D2694E0022C928 /* palette_gesture@2x.png */,
+				A3C949D618D244BB0022C928 /* filter.png */,
+				A3C949D718D244BB0022C928 /* filter@2x.png */,
+				A3C949D818D244BB0022C928 /* palette_filter.png */,
+				A3C949D918D244BB0022C928 /* palette_filter@2x.png */,
 				A3CBF54F18C003D100537127 /* palette_signalsource.png */,
 				A3CBF55018C003D100537127 /* palette_signalsource@2x.png */,
 				A3CBF55118C003D100537127 /* signalsource.png */,
@@ -4261,6 +4317,8 @@
 		A39B4BC618C7BE53004016B2 /* newObjects */ = {
 			isa = PBXGroup;
 			children = (
+				A3C94A2F18D2695C0022C928 /* gesture */,
+				A3C94A1618D244D30022C928 /* filter */,
 				A39B4BC518C7BDFB004016B2 /* signalSource */,
 			);
 			name = newObjects;
@@ -4302,9 +4360,75 @@
 			name = popover;
 			sourceTree = "<group>";
 		};
+		A3C94A1618D244D30022C928 /* filter */ = {
+			isa = PBXGroup;
+			children = (
+				A3C94A1718D244DD0022C928 /* model */,
+				A3C94A1818D244E40022C928 /* UI */,
+			);
+			name = filter;
+			sourceTree = "<group>";
+		};
+		A3C94A1718D244DD0022C928 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				A3C94A1918D2451F0022C928 /* THFilter.h */,
+				A3C94A1A18D2451F0022C928 /* THFilter.m */,
+				A3C94A1C18D2453C0022C928 /* THFilterEditable.h */,
+				A3C94A1D18D2453C0022C928 /* THFilterEditable.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		A3C94A1818D244E40022C928 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				A3C94A1F18D245660022C928 /* THFilterPaletteItem.h */,
+				A3C94A2018D245660022C928 /* THFilterPaletteItem.m */,
+				A3C94A2218D245A10022C928 /* THFilterProperties.h */,
+				A3C94A2318D245A10022C928 /* THFilterProperties.m */,
+				A3C94A4818D325E60022C928 /* THFilterProperties.xib */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		A3C94A2F18D2695C0022C928 /* gesture */ = {
+			isa = PBXGroup;
+			children = (
+				A3C94A3018D269640022C928 /* model */,
+				A3C94A3118D2696A0022C928 /* UI */,
+			);
+			name = gesture;
+			sourceTree = "<group>";
+		};
+		A3C94A3018D269640022C928 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				A3C94A3818D26A010022C928 /* THGesture.h */,
+				A3C94A3918D26A010022C928 /* THGesture.m */,
+				A3C94A3A18D26A010022C928 /* THGestureEditable.h */,
+				A3C94A3B18D26A010022C928 /* THGestureEditable.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		A3C94A3118D2696A0022C928 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				A3C94A3E18D26A170022C928 /* THGesturePaletteItem.h */,
+				A3C94A3F18D26A170022C928 /* THGesturePaletteItem.m */,
+				A3C94A4118D26A290022C928 /* THGestureProperties.h */,
+				A3C94A4218D26A290022C928 /* THGestureProperties.m */,
+				A3C94A4618D292E80022C928 /* THGestureProperties.xib */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		A3CBF55B18C07F4900537127 /* flex */ = {
 			isa = PBXGroup;
 			children = (
+				A3C94A4418D28DEF0022C928 /* doubletick_long.txt */,
+				A3C94A2518D250190022C928 /* singletick_error.txt */,
 				A3CBF5AA18C0C57300537127 /* testinput.txt */,
 				A3CBF5A818C0C1BB00537127 /* doubletick.txt */,
 				A3CBF55C18C07F5200537127 /* singletick.txt */,
@@ -4895,6 +5019,7 @@
 				9ABC27291809526C00B39D72 /* lilypadComplex.png in Resources */,
 				9A94F3EC16A00EA400AF52AB /* removeButton.png in Resources */,
 				9A94F3EE16A00EA400AF52AB /* removeButton@2x.png in Resources */,
+				A3C949DB18D244BB0022C928 /* filter@2x.png in Resources */,
 				9ABC27791809985900B39D72 /* palette_lilypadSmall.png in Resources */,
 				9A94F41616A0192700AF52AB /* THButtonProperties.xib in Resources */,
 				9A94F41816A0192700AF52AB /* THBuzzerProperties.xib in Resources */,
@@ -4926,6 +5051,7 @@
 				9A94F43E16A0192700AF52AB /* THValueProperties.xib in Resources */,
 				9AF60BBF16A04BDB00178439 /* connectionMade.mp3 in Resources */,
 				9AF60BC616A04D9F00178439 /* THTabbar.xib in Resources */,
+				A3C94A2E18D2694E0022C928 /* palette_gesture@2x.png in Resources */,
 				9AF60BC816A04D9F00178439 /* THTabbarViewSection.xib in Resources */,
 				9ABC279E1809B46C00B39D72 /* accelerometer@2x.png in Resources */,
 				9A5BD7411860C52E00842833 /* circleEmpty@2x.png in Resources */,
@@ -5009,6 +5135,7 @@
 				9A4145A917DE7A060061EDF8 /* palette_comparator@2x.png in Resources */,
 				9ABC27921809B2A500B39D72 /* temperatureSensor.png in Resources */,
 				9A4145AF17DE7A060061EDF8 /* palette_condition.png in Resources */,
+				A3C94A2B18D2694E0022C928 /* gesture.png in Resources */,
 				9A4145B117DE7A060061EDF8 /* palette_condition@2x.png in Resources */,
 				9A4145B317DE7A060061EDF8 /* palette_contactBook.png in Resources */,
 				9A4145B517DE7A060061EDF8 /* palette_contactBook@2x.png in Resources */,
@@ -5038,6 +5165,7 @@
 				9A4145D917DE7A060061EDF8 /* palette_mapper@2x.png in Resources */,
 				9AA4D6EF18AE169100A43433 /* palette_lipoBattery.png in Resources */,
 				9AA4D76218AE1DDA00A43433 /* THBLELilyPadProperties.xib in Resources */,
+				A3C949DA18D244BB0022C928 /* filter.png in Resources */,
 				9A6B284518AA0874009AAE31 /* palette_puredata@2x.png in Resources */,
 				A3747F3A18B6976C00BAEAB7 /* flexsensor@2x.png in Resources */,
 				9A6B285418AA08A0009AAE31 /* synthesis.pd in Resources */,
@@ -5060,11 +5188,13 @@
 				A3CBF55518C003D100537127 /* signalsource.png in Resources */,
 				9A4145F117DE7A060061EDF8 /* palette_switch@2x.png in Resources */,
 				9A4145F317DE7A060061EDF8 /* palette_threeColorLed.png in Resources */,
+				A3C94A2D18D2694E0022C928 /* palette_gesture.png in Resources */,
 				9A4145F517DE7A060061EDF8 /* palette_threeColorLed@2x.png in Resources */,
 				9A4145F717DE7A060061EDF8 /* palette_timer.png in Resources */,
 				9A4145F917DE7A060061EDF8 /* palette_timer@2x.png in Resources */,
 				9A4145FB17DE7A060061EDF8 /* palette_touchpad.png in Resources */,
 				9A4145FD17DE7A060061EDF8 /* palette_touchpad@2x.png in Resources */,
+				A3C94A4518D28DEF0022C928 /* doubletick_long.txt in Resources */,
 				9A4145FF17DE7A060061EDF8 /* palette_tshirt.png in Resources */,
 				9A41460117DE7A060061EDF8 /* palette_tshirt@2x.png in Resources */,
 				9A5BD74D1860C52E00842833 /* triangleEmpty@2x.png in Resources */,
@@ -5076,12 +5206,15 @@
 				9A41460B17DE7A060061EDF8 /* potentiometer.png in Resources */,
 				9A41460D17DE7A060061EDF8 /* potentiometer@2x.png in Resources */,
 				9A41460F17DE7A060061EDF8 /* sewed.png in Resources */,
+				A3C94A2C18D2694E0022C928 /* gesture@2x.png in Resources */,
 				9ABC27751809985900B39D72 /* palette_lilypadBig.png in Resources */,
 				9A41461117DE7A060061EDF8 /* sewed@2x.png in Resources */,
 				9A41461317DE7A060061EDF8 /* sound.png in Resources */,
 				9A41461517DE7A060061EDF8 /* sound@2x.png in Resources */,
 				9A6B284918AA0874009AAE31 /* puredata@2x.png in Resources */,
+				A3C94A2618D250190022C928 /* singletick_error.txt in Resources */,
 				9A6B284318AA0874009AAE31 /* palette_puredata.png in Resources */,
+				A3C949DC18D244BB0022C928 /* palette_filter.png in Resources */,
 				9A3165A81827989D00CB3E59 /* palette_monitor.png in Resources */,
 				9A5BD74B1860C52E00842833 /* starFilled@2x.png in Resources */,
 				9A41461717DE7A060061EDF8 /* switch.png in Resources */,
@@ -5091,6 +5224,7 @@
 				9A41461F17DE7A060061EDF8 /* threeColorLed.png in Resources */,
 				9A41462117DE7A060061EDF8 /* threeColorLed@2x.png in Resources */,
 				9A5BD7491860C52E00842833 /* starEmpty@2x.png in Resources */,
+				A3C94A4918D325E60022C928 /* THFilterProperties.xib in Resources */,
 				9A41462317DE7A060061EDF8 /* timer.png in Resources */,
 				9A41462517DE7A060061EDF8 /* timer@2x.png in Resources */,
 				9ABC272B1809526C00B39D72 /* lilypadComplex@2x.png in Resources */,
@@ -5109,6 +5243,7 @@
 				9A41463D17DE7A060061EDF8 /* delete@2x.png in Resources */,
 				9A41463F17DE7A060061EDF8 /* duplicate.png in Resources */,
 				9A41464117DE7A060061EDF8 /* duplicate@2x.png in Resources */,
+				A3C949DD18D244BB0022C928 /* palette_filter@2x.png in Resources */,
 				9A41464317DE7A060061EDF8 /* editormode.png in Resources */,
 				9A8942AB1836241C00B8CA0E /* palette_jennic@2x.png in Resources */,
 				9A41464517DE7A060061EDF8 /* editormode@2x.png in Resources */,
@@ -5137,6 +5272,7 @@
 				9AA4D6EB18AE169100A43433 /* lipoBattery.png in Resources */,
 				9A5BD74F1860C52E00842833 /* triangleFilled@2x.png in Resources */,
 				9A5931D417E5CD4500B20D99 /* propertiesIcon@2x.png in Resources */,
+				A3C94A4718D292E80022C928 /* THGestureProperties.xib in Resources */,
 				9A5931D617E5CD4500B20D99 /* propertiesIconSelected.png in Resources */,
 				9A5931D817E5CD4500B20D99 /* propertiesIconSelected@2x.png in Resources */,
 				9AB7784817E66B3300F82424 /* THInvocationConnectionProperties.xib in Resources */,
@@ -5612,6 +5748,7 @@
 				9AF503B3167B84B40020241C /* THValuePaletteItem.m in Sources */,
 				9A9C419218B13EDD002C2BC9 /* THBoardPropertiesPinCell.m in Sources */,
 				9AF503B4167B84B40020241C /* THButtonProperties.m in Sources */,
+				A3C94A2418D245A10022C928 /* THFilterProperties.m in Sources */,
 				9AF503B5167B84B40020241C /* THBuzzerProperties.m in Sources */,
 				9AF503B6167B84B40020241C /* THClotheObjectProperties.m in Sources */,
 				9AF503B7167B84B40020241C /* THClotheProperties.m in Sources */,
@@ -5626,6 +5763,7 @@
 				9AF503BE167B84B40020241C /* THLabelProperties.m in Sources */,
 				9A1FBE08187F208400699B61 /* THI2CMessage.m in Sources */,
 				A39B4BCE18C7BF26004016B2 /* THSignalSourcePopoverContentViewController.m in Sources */,
+				A3C94A4318D26A290022C928 /* THGestureProperties.m in Sources */,
 				9AF503BF167B84B40020241C /* THLedProperties.m in Sources */,
 				9A31659D1827955200CB3E59 /* THMonitorEditable.m in Sources */,
 				9AF503C1167B84B40020241C /* THLilypadPropertiesPinView.m in Sources */,
@@ -5644,6 +5782,7 @@
 				9AF503CE167B84B40020241C /* THToneGenerator.m in Sources */,
 				9AF503CF167B84B40020241C /* THUtils.m in Sources */,
 				9A8BB9A2167C815D00FBABFB /* THPinsController.m in Sources */,
+				A3C94A2118D245660022C928 /* THFilterPaletteItem.m in Sources */,
 				9A8BB9A4167C815D00FBABFB /* THPinsControllerContainer.m in Sources */,
 				9AB29B40167F4B5D00F5AF62 /* THImageViewPaletteItem.m in Sources */,
 				9AB29B43167F4CF300F5AF62 /* THImageView.m in Sources */,
@@ -5680,7 +5819,9 @@
 				9A0F687B1886B9AC00B589DC /* THCompassMPU6050.m in Sources */,
 				9A5F8E2A16A2C6EE000DF472 /* THContactBookPaletteItem.m in Sources */,
 				9A93841A16D651D700A41BD2 /* THTimer.m in Sources */,
+				A3C94A3D18D26A010022C928 /* THGestureEditable.m in Sources */,
 				9A93846116D652EC00A41BD2 /* THTimerEditable.m in Sources */,
+				A3C94A1B18D2451F0022C928 /* THFilter.m in Sources */,
 				9A93846716D6534500A41BD2 /* THTimerProperties.m in Sources */,
 				9A93846F16D6723600A41BD2 /* THTimerPaletteItem.m in Sources */,
 				9A93847516D6746200A41BD2 /* THTrigger.m in Sources */,
@@ -5716,6 +5857,7 @@
 				9A8426C417564A80009495AB /* TFPropertyInvocation.m in Sources */,
 				9A8426C717564A80009495AB /* TFEditableObject.m in Sources */,
 				9A8426CD17564A80009495AB /* TFLayer.m in Sources */,
+				A3C94A4018D26A170022C928 /* THGesturePaletteItem.m in Sources */,
 				9A7B65131834D809009D0103 /* THCompassProperties.m in Sources */,
 				9ABC275718098F2400B39D72 /* THBoard.m in Sources */,
 				9A8426D317564A80009495AB /* TFSimulableObject.m in Sources */,
@@ -5739,6 +5881,7 @@
 				9A56D19617DBDAA9001021B2 /* THDirector.m in Sources */,
 				9A41443317DE63A70061EDF8 /* THClientConstants.m in Sources */,
 				9A41471A17E1D3A10061EDF8 /* THProjectViewController.m in Sources */,
+				A3C94A1E18D2453C0022C928 /* THFilterEditable.m in Sources */,
 				9AA4D73E18AE174C00A43433 /* THBLELilyPadPaletteItem.m in Sources */,
 				9A41472217E255700061EDF8 /* THTableProjectCell.m in Sources */,
 				9A59314317E50DA200B20D99 /* THWire.m in Sources */,
@@ -5747,6 +5890,7 @@
 				9A59323C17E5D58300B20D99 /* THPaletteItemProperties.m in Sources */,
 				9A59323E17E5D58300B20D99 /* THTriggerableProperties.m in Sources */,
 				9A59324017E5D58300B20D99 /* THViewableProperties.m in Sources */,
+				A3C94A3C18D26A010022C928 /* THGesture.m in Sources */,
 				9A59324217E5D58300B20D99 /* THImagePickerController.m in Sources */,
 				9A59324417E5D58300B20D99 /* THCustomPaletteItem.m in Sources */,
 				9A59324617E5D58300B20D99 /* THDraggedPaletteItem.m in Sources */,
@@ -6272,7 +6416,7 @@
 					/Users/michaelconrads/Desktop/42/Frameworks/AudiAppFramework/AAFUtility,
 					/Users/michaelconrads/Desktop/42/Frameworks/ThirdParty,
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "TangoHapps/TangoHapps-Prefix.pch";
 				INFOPLIST_FILE = "TangoHapps/TangoHapps-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
@@ -6299,7 +6443,7 @@
 					/Users/michaelconrads/Desktop/42/Frameworks/AudiAppFramework/AAFUtility,
 					/Users/michaelconrads/Desktop/42/Frameworks/ThirdParty,
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "TangoHapps/TangoHapps-Prefix.pch";
 				INFOPLIST_FILE = "TangoHapps/TangoHapps-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
@@ -6353,7 +6497,7 @@
 					/Users/michaelconrads/Desktop/42/Frameworks/AudiAppFramework/AAFUtility,
 					/Users/michaelconrads/Desktop/42/Frameworks/ThirdParty,
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "TangoHapps/TangoHapps-Prefix.pch";
 				INFOPLIST_FILE = "TangoHapps/TangoHapps-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;

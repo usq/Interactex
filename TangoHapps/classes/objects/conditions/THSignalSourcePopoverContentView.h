@@ -11,5 +11,6 @@
 @interface THSignalSourcePopoverContentView : UIView
 - (id)initWithFrame:(CGRect)frame
      leftPercentage:(float)leftPercentage
-    rightPercentage:(float)rightPercentage;
+    rightPercentage:(float)rightPercentage
+                 of:(float)graphSpacing;
 @end

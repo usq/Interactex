@@ -11,6 +11,9 @@
 @interface THSignalSource : TFSimulableObject
 @property (nonatomic, assign, readonly) NSInteger currentOutputValue;
 @property (nonatomic, strong, readonly) NSArray *data;
+@property (nonatomic, assign, readonly) float leftBorderPercentage;
+@property (nonatomic, assign, readonly) float rightBorderPercentage;
+
 - (void)updatedSimulation;
 - (void)start;
 - (void)stop;

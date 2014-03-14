@@ -14,8 +14,6 @@
 @property (nonatomic, assign, readwrite) CGRect rightHandle;
 @property (nonatomic, assign, readwrite) BOOL draggingLeft;
 @property (nonatomic, assign, readwrite) BOOL draggingRight;
-
-
 @end
 
 @implementation THSignalSourcePopoverContentView
@@ -24,14 +22,26 @@
 - (id)initWithFrame:(CGRect)frame
          leftPercentage:(float)leftPercentage
     rightPercentage:(float)rightPercentage
+                 of:(float)graphSpacing
 {
     self = [super initWithFrame:frame];
     if (self)
     {
         self.opaque = NO;
-        //TODO: add percentage
-        self.leftHandle = CGRectMake(0, 0, BAR_WIDTH, frame.size.height);
-        self.rightHandle = CGRectMake(frame.size.width-BAR_WIDTH, 0, 20, frame.size.height);
+
+        
+        if(rightPercentage == 0)
+        {
+            rightPercentage = 1;
+        }
+        float wLeft = 42.0;
+        
+        float leftPos = graphSpacing * leftPercentage + wLeft - BAR_WIDTH;
+        float rightPos = graphSpacing * rightPercentage + wLeft;
+        
+        self.leftHandle = CGRectMake(leftPos, 0, BAR_WIDTH, frame.size.height);
+        self.rightHandle = CGRectMake(rightPos, 0, 20, frame.size.height);
+        
         
         UIPanGestureRecognizer *pangestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                                                action:@selector(panned:)];

@@ -71,12 +71,22 @@ float const kGraphViewLeftAxisWidth = 42.0;
 
 - (void)addX:(float)value{
     
-	[self.groupX addValue:value];
+    [self addValue1:value];
 }
 
-- (void)addY:(float)value{
-    
-	[self.groupY addValue:value];
+- (void)addValue1:(float)valueToAdd
+{
+    [self.groupX addValue:valueToAdd];
+}
+
+- (void)addY:(float)value
+{
+    [self addValue2:value];
+}
+
+- (void)addValue2:(float)valueToAdd
+{
+    [self.groupY addValue:valueToAdd];
 }
 
 - (void)drawRect:(CGRect)rect {

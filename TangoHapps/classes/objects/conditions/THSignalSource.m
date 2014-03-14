@@ -9,11 +9,26 @@
 #import "THSignalSource.h"
 
 @interface THSignalSource ()
+
+
 @property (nonatomic, assign, readwrite) NSInteger currentOutputValue;
 @property (nonatomic, strong, readwrite) NSArray *data;
 @property (nonatomic, assign, readwrite) BOOL sendingData;
+
 @property (nonatomic, assign, readwrite) NSUInteger index;
+@property (nonatomic, assign, readwrite) NSUInteger leftIndex;
+@property (nonatomic, assign, readwrite) NSUInteger rightIndex;
+
+
+@property (nonatomic, assign, readwrite) float leftBorderPercentage;
+@property (nonatomic, assign, readwrite) float rightBorderPercentage;
+@property (nonatomic, copy, readwrite) NSString *currentFilePath;
 @end
+
+
+NSString * const kSignalSourceEditableLeftPercentage = @"kSignalSourceEditableLeftPercentage";
+NSString * const kSignalSourceEditableRightPercentage = @"kSignalSourceEditableRightPercentage";
+NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
 
 @implementation THSignalSource
 
@@ -35,13 +50,48 @@
                                                          target:self];
     self.events = [NSMutableArray arrayWithObject:event];
     
-    NSData *d = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"singletick" ofType:@"txt"]];
-    assert(d != nil);
+
     
-    NSString *content = [[NSString alloc] initWithData:d encoding:NSUTF8StringEncoding];
-    self.data = [content componentsSeparatedByString:@"\n"];
+    if(self.currentFilePath == nil)
+    {
+        self.currentFilePath = @"singletick";
+    }
+    if(self.data == nil)
+    {
+        [self switchSourceFile:self.currentFilePath];
+    }
+    
+
+    
 }
 
+- (void)updateIndizes
+{
+//    NSAssert(self.data != nil, @"no data loaded..." );
+    //NSAssert(self.leftBorderPercentage <= 1 && self.leftBorderPercentage >= 0 , @"%%error");
+   // NSAssert(self.rightBorderPercentage <= 1 && self.rightBorderPercentage >= 0,@"%%error");
+    
+    
+    self.leftIndex = floor((float)([self.data count] -1) * self.leftBorderPercentage) - 1;
+    self.rightIndex = floor((float)([self.data count] -1) * self.rightBorderPercentage);
+    if (self.rightIndex == 0)
+    {
+        self.rightIndex = [self.data count]-1;
+    }
+    self.index = self.leftIndex;
+}
+
+- (void)setLeftBorderPercentage:(float)leftBorderPercentage
+{
+    _leftBorderPercentage = leftBorderPercentage;
+    [self updateIndizes];
+}
+
+- (void)setRightBorderPercentage:(float)rightBorderPercentage
+{
+    _rightBorderPercentage = rightBorderPercentage;
+    [self updateIndizes];
+}
 
 #pragma mark - Methods
 
@@ -58,7 +108,8 @@
 
 - (void)start
 {
-    self.index = 0;
+
+    self.index = self.leftIndex;
     self.sendingData = YES;
 }
 
@@ -76,9 +127,21 @@
 {
     if(self.sendingData)
     {
+        if(self.index > [self.data count] -1)
+        {
+            self.index = 0;
+        }
+        
         self.currentOutputValue = [self.data[self.index] integerValue];
         [self triggerEventNamed:kEventValueChanged];
-        self.index = (self.index + 1) % self.data.count;
+        [self triggerEventNamed:kEventValueChanged];
+//        NSLog(@"sending... %i",self.currentOutputValue);
+        self.index ++;
+        if(self.index > self.rightIndex)
+        {
+
+            self.index = self.leftIndex;
+        }
     }
 }
 
@@ -96,29 +159,43 @@
 
 -(id)initWithCoder:(NSCoder *)decoder {
     self = [super initWithCoder:decoder];
+
+    self.currentFilePath = [decoder decodeObjectForKey:kSignalSourceCurrentFilePath];
     
+    _leftBorderPercentage = fmin([decoder decodeFloatForKey:kSignalSourceEditableLeftPercentage],1);
+    _rightBorderPercentage = fmin([decoder decodeFloatForKey:kSignalSourceEditableRightPercentage],1);
+
     [self load];
+    
+    
     
     return self;
 }
 
 -(void)encodeWithCoder:(NSCoder *)coder {
     [super encodeWithCoder:coder];
+    [coder encodeFloat:self.leftBorderPercentage forKey:kSignalSourceEditableLeftPercentage];
+    [coder encodeFloat:self.rightBorderPercentage forKey:kSignalSourceEditableRightPercentage];
+    [coder encodeObject:self.currentFilePath forKey:kSignalSourceCurrentFilePath];
 }
 
 -(id)copyWithZone:(NSZone *)zone
 {
     THSignalSource *copy = [super copyWithZone:zone];
+    
     return copy;
 }
 
 - (void)switchSourceFile:(NSString *)filename
 {
-    NSData *d = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:filename ofType:@"txt"]];
+    self.currentFilePath = filename;
+    NSData *d = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:self.currentFilePath ofType:@"txt"]];
     assert(d != nil);
     
     NSString *content = [[NSString alloc] initWithData:d encoding:NSUTF8StringEncoding];
+    //self.data = [[[content componentsSeparatedByString:@"\n"] reverseObjectEnumerator] allObjects];
     self.data = [content componentsSeparatedByString:@"\n"];
+    [self updateIndizes];
 
 }
 @end

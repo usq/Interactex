@@ -39,7 +39,7 @@
 //    self.view.backgroundColor = [UIColor colorWithWhite:0.333 alpha:1.000];
     
     
-    THGraphView *graphView = [[THGraphView alloc] initWithFrame:self.view.frame maxAxisY:200 minAxisY:0];
+    THGraphView *graphView = [[THGraphView alloc] initWithFrame:self.view.frame maxAxisY:400 minAxisY:0];
     [self.view addSubview:graphView];
     
     
@@ -59,9 +59,7 @@
     
     
     
-    //TODO: this assumes the number of samples is smaller than the monitor with, so it does a linear interpolation
-    //TODO: maybe switch to splines...
-    
+    //TODO: this assumes the number of samples is smaller than the monitor with, so it does a linear interpolation, maybe switch to splines...
     NSMutableArray *normalizedArray = [NSMutableArray arrayWithCapacity:data.count];
     
     for (NSString *oneDataString in data)
@@ -69,42 +67,43 @@
         float normalizedValue = [oneDataString floatValue]/largest;
         float h = graphView.frame.size.height *0.9;
         
-        [normalizedArray addObject:@(graphView.frame.size.height - normalizedValue * h)];
+        [normalizedArray addObject:@(normalizedValue * h)];
     }
+    NSArray *reversedArray = [[normalizedArray reverseObjectEnumerator] allObjects];
+    
+    
     //288
     float wLeft = 42.0;
     float spaceForDisplaying = graphView.frame.size.width - 2*wLeft;
     self.graphSize = spaceForDisplaying;
-    float f = (float)spaceForDisplaying/(float)normalizedArray.count;
+    float f = (float)spaceForDisplaying/(float)[reversedArray count];
     
-    for (int i = 0; i < normalizedArray.count -1 ; i++)
+    for (int i = 0; i < reversedArray.count -1 ; i++)
     {
-        float left = [normalizedArray[i] floatValue];
-        float right = [normalizedArray[i+1] floatValue];
+        float left = [reversedArray[i] floatValue];
+        float right = [reversedArray[i+1] floatValue];
         
         float dY = right - left;
         float dSegY = dY/f;
         
-        
-        //[graphView addX:left];
-
+    
         float acc = left;
         for (int k = 0; k < f;  k++)
         {
             acc = left + k * dSegY;
-            [graphView addX:acc];
+            [graphView addValue1:acc];
         }
     }
-    [graphView addX:[[normalizedArray lastObject] floatValue]];
+    [graphView addValue1:[[reversedArray lastObject] floatValue]];
     
-//    for (int i = 0; i < 163 -wLeft; i++)
-//    {
-//        [graphView addX:90];
-//    }
+
     [graphView start];
     
     
-    THSignalSourcePopoverContentView *contentView = [[THSignalSourcePopoverContentView alloc] initWithFrame:self.view.frame signalData:data];
+    THSignalSourcePopoverContentView *contentView = [[THSignalSourcePopoverContentView alloc] initWithFrame:self.view.frame
+                                                                                             leftPercentage:self.signalSourceEditable.leftBorderPercentage
+                                                                                            rightPercentage:self.signalSourceEditable.rightBorderPercentage
+                                                                                                         of:self.graphSize];
     [self.view addSubview:contentView];
 
     
@@ -126,24 +125,19 @@
     float right = [notification.userInfo[@"right"] floatValue];
     
     float wLeft = 42.0;
-    if(left > wLeft)
-    {
-        float l = left - wLeft;
-        
-        float leftpercent =  l/self.graphSize;
-//        NSLog(@"%f",percent);
-    }
+    float l = left - wLeft;
     
-    if(right < wLeft + self.graphSize)
-    {
-        
-        float rightPercent = (right - wLeft)/self.graphSize;
-        
-        NSLog(@"%f",rightPercent);
-    }
+    float leftpercent =  fmax(l/self.graphSize,0);
+    self.signalSourceEditable.leftBorderPercentage = leftpercent;
+    
+    
+    float rightPercent = fmax((right - wLeft)/self.graphSize,0);
+    self.signalSourceEditable.rightBorderPercentage = rightPercent;
 }
 
-- (IBAction)okButtonPressed:(id)sender {
+- (IBAction)okButtonPressed:(id)sender
+{
+    [self.currentPopoverController dismissPopoverAnimated:YES];
 }
 
 - (CGSize)contentSizeForViewInPopover

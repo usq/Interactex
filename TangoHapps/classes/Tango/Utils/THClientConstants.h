@@ -197,6 +197,10 @@ extern NSString * const kEventLongPressed;
 extern NSString * const kEventColorChanged;
 extern NSString * const kEventTriggered;
 
+extern NSString * const kEventRecognized;
+extern NSString * const kEventNotRecognized;
+
+
 //methods
 extern NSString * const kMethodTurnOn;
 extern NSString * const kMethodTurnOff;
