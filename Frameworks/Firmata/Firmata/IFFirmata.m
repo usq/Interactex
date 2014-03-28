@@ -399,21 +399,9 @@ www.interactex.org
     *originalLength = length;
 }
 
--(void) didReceiveData:(uint8_t *)buffer lenght:(NSInteger)originalLength{
-    
-    printf("before:\n");
-    for (int i = 0 ; i < originalLength; i++) {
-        int value = buffer[i];
-        printf("%d ",value);
-    }
-    printf("\n");
-    
-    UInt16 k = buffer[14];
-    k<<=8;
-    k = k | buffer[15];
-    
-    
-    printf("endnr: %i\n",k);
+- (void)didReceiveData:(uint8_t *)buffer
+                lenght:(NSInteger)originalLength
+{
     
     if(self.communicationModule.usesFillBytes){
         [self cleanAddedBytes:buffer lenght:&originalLength];
@@ -456,6 +444,11 @@ www.interactex.org
             parseCommandLength = 0;
 		}
 	}
+}
+
+- (void)registerInput:(uint16_t)input
+{
+    NSLog(@"received: %i", input);
 }
 
 @end

@@ -752,6 +752,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = armv7;
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/libpd.dst;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -762,6 +763,7 @@
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = "pd-ios";
 				SDKROOT = iphoneos;
+				VALID_ARCHS = armv7;
 			};
 			name = Debug;
 		};
@@ -769,6 +771,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = armv7;
 				DSTROOT = /tmp/libpd.dst;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -776,6 +779,7 @@
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = "pd-ios";
 				SDKROOT = iphoneos;
+				VALID_ARCHS = armv7;
 			};
 			name = Release;
 		};

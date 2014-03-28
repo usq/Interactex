@@ -197,6 +197,7 @@
 		9A1735A517B11D87001DD4A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = armv7;
 				DSTROOT = /tmp/Firmata.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Firmata/Firmata-Prefix.pch";
@@ -210,6 +211,7 @@
 		9A1735A617B11D87001DD4A4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = armv7;
 				DSTROOT = /tmp/Firmata.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Firmata/Firmata-Prefix.pch";

@@ -1309,6 +1309,7 @@
 		A3CBF5A718C0BBF600537127 /* THSignalSourceProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CBF5A618C0BBF600537127 /* THSignalSourceProperties.m */; };
 		A3CBF5A918C0C1BB00537127 /* doubletick.txt in Resources */ = {isa = PBXBuildFile; fileRef = A3CBF5A818C0C1BB00537127 /* doubletick.txt */; };
 		A3CBF5AB18C0C57300537127 /* testinput.txt in Resources */ = {isa = PBXBuildFile; fileRef = A3CBF5AA18C0C57300537127 /* testinput.txt */; };
+		A3EBD42018E23C71002B16DD /* THSlimConnectionClientController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EBD41F18E23C71002B16DD /* THSlimConnectionClientController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2753,6 +2754,8 @@
 		A3CBF5A618C0BBF600537127 /* THSignalSourceProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THSignalSourceProperties.m; path = "../../palette properties/THSignalSourceProperties.m"; sourceTree = "<group>"; };
 		A3CBF5A818C0C1BB00537127 /* doubletick.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = doubletick.txt; sourceTree = "<group>"; };
 		A3CBF5AA18C0C57300537127 /* testinput.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testinput.txt; sourceTree = "<group>"; };
+		A3EBD41E18E23C71002B16DD /* THSlimConnectionClientController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THSlimConnectionClientController.h; sourceTree = "<group>"; };
+		A3EBD41F18E23C71002B16DD /* THSlimConnectionClientController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THSlimConnectionClientController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3623,6 +3626,8 @@
 				9AFB7DCB1832AAD100694CCE /* THClientProjectDraggableCell.m */,
 				9AFB7DD01832AE2600694CCE /* THClientTableProjectCell.h */,
 				9AFB7DD11832AE2600694CCE /* THClientTableProjectCell.m */,
+				A3EBD41E18E23C71002B16DD /* THSlimConnectionClientController.h */,
+				A3EBD41F18E23C71002B16DD /* THSlimConnectionClientController.m */,
 			);
 			path = classes;
 			sourceTree = "<group>";
@@ -4509,9 +4514,6 @@
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Technische Universität München";
 				TargetAttributes = {
-					9A351188167B7A6800C7484B = {
-						DevelopmentTeam = WCM2L8RG39;
-					};
 					9AF5FFF0167B82F70020241C = {
 						DevelopmentTeam = 539EN4TCFT;
 					};
@@ -6207,6 +6209,7 @@
 				9AF50453167B84F50020241C /* THBuzzer.m in Sources */,
 				9AF50455167B84F50020241C /* THCompassLSM303.m in Sources */,
 				9AF50456167B84F50020241C /* THLed.m in Sources */,
+				A3EBD42018E23C71002B16DD /* THSlimConnectionClientController.m in Sources */,
 				9AF50457167B84F50020241C /* THLightSensor.m in Sources */,
 				9AF50459167B84F50020241C /* THPotentiometer.m in Sources */,
 				9AFB7DD61832B0B100694CCE /* THClientProjectProxy.m in Sources */,
@@ -6352,7 +6355,6 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -6368,7 +6370,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = "$(TARGET_BUILD_DIR)";
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				VALID_ARCHS = armv7;
@@ -6384,7 +6385,6 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Technische Universitat Munchen";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -6393,7 +6393,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = "$(TARGET_BUILD_DIR)";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
@@ -6406,7 +6405,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = TangoHappsIcons;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = TangoHappsLaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Juan Haladjian (SUQV2CYVSH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/michaelconrads/Desktop/42/__opentabs-rhmi/OpenTabs/OpenTabs/Frameworks",
@@ -6434,6 +6433,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = TangoHappsIcons;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = TangoHappsLaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/michaelconrads/Desktop/42/__opentabs-rhmi/OpenTabs/OpenTabs/Frameworks",
@@ -6465,7 +6465,6 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Technische Universitat Munchen";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -6475,7 +6474,6 @@
 				LIBRARY_SEARCH_PATHS = "$(TARGET_BUILD_DIR)";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
@@ -6488,6 +6486,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = TangoHappsIcons;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = TangoHappsLaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/michaelconrads/Desktop/42/__opentabs-rhmi/OpenTabs/OpenTabs/Frameworks",
@@ -6513,7 +6512,10 @@
 		9A94F27A169EEEE100AF52AB /* AddHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = (
+					armv7,
+					armv7s,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = ClientIcons;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = ClientLaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -6525,11 +6527,11 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "Interactex Client";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
 				USER_HEADER_SEARCH_PATHS = "Frameworks/libpd/** ./Frameworks/BLE/BLE/** ./Frameworks/Firmata/Firmata/**";
-				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = AddHoc;
@@ -6557,7 +6559,10 @@
 		9AF50008167B82F70020241C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = (
+					armv7,
+					armv7s,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = ClientIcons;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = ClientLaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -6569,12 +6574,12 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "Interactex Client";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
 				USER_HEADER_SEARCH_PATHS = "Frameworks/libpd/** ./Frameworks/BLE/BLE/** ./Frameworks/Firmata/Firmata/**";
 				VALIDATE_PRODUCT = NO;
-				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -6582,7 +6587,10 @@
 		9AF50009167B82F70020241C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = (
+					armv7,
+					armv7s,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = ClientIcons;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = ClientLaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -6594,11 +6602,11 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "Interactex Client";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
 				USER_HEADER_SEARCH_PATHS = "Frameworks/libpd/** ./Frameworks/BLE/BLE/** ./Frameworks/Firmata/Firmata/**";
-				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

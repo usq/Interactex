@@ -44,7 +44,11 @@ You should have received a copy of the GNU General Public License along with thi
 #import "THClientScene.h"
 #import "THClientProjectProxy.h"
 #import "THClientConnectionController.h"
+#import "THSlimConnectionClientController.h"
 
+@interface THClientAppDelegate ()
+@property (nonatomic, strong, readwrite) THSlimConnectionClientController *slimConnectionController;
+@end
 @implementation THClientAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -62,6 +66,8 @@ You should have received a copy of the GNU General Public License along with thi
     }
     
     self.connectionController = [[THClientConnectionController alloc] init];
+    self.slimConnectionController = [[THSlimConnectionClientController alloc] init];
+    [self.slimConnectionController startConnection];
     
     //[self generateRandomScenes];
     

@@ -76,24 +76,34 @@
 - (void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    
     NSString *fileName = self.gestures[indexPath.row];
     THSignalSourceEditable *signalSourceEditable = (THSignalSourceEditable *)self.editableObject;
     [signalSourceEditable switchSourceFile:fileName];
     [self updateHeadlineWithFileName:fileName];
+    
+    
     THSignalSourcePopoverContentViewController *contentViewController = [[THSignalSourcePopoverContentViewController alloc] initWithNibName:@"THSignalSourcePopoverContentViewController"
                                                                                                                                      bundle:[NSBundle mainBundle]
                                                                                                                        signalSourceEditable:signalSourceEditable];
-    
-    
-    self.popoverViewController = [[UIPopoverController alloc] initWithContentViewController:contentViewController];
-    self.popoverViewController.backgroundColor = [UIColor colorWithRed:0.321 green:0.402 blue:0.341 alpha:1.000];
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-
     CCDirector *director = [CCDirector sharedDirector];
     
-    CGRect rect = [cell convertRect:cell.contentView.frame toView:director.view];
+    CGRect rect = [cell.contentView convertRect:cell.contentView.frame toView:director.view];
+    [self presentPopoverWithConcentViewController:contentViewController
+                                         fromRect:rect];
+}
+
+- (void)presentPopoverWithConcentViewController:(THSignalSourcePopoverContentViewController *)contentViewController
+                                       fromRect:(CGRect)rect
+{
+    self.popoverViewController = [[UIPopoverController alloc] initWithContentViewController:contentViewController];
+    self.popoverViewController.backgroundColor = [UIColor colorWithRed:0.321 green:0.402 blue:0.341 alpha:1.000];
+    
+    CCDirector *director = [CCDirector sharedDirector];
+    
     contentViewController.currentPopoverController = self.popoverViewController;
+    
     
     [self.popoverViewController presentPopoverFromRect:rect
                                                 inView:director.view
@@ -101,10 +111,26 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                                               animated:YES];
     
 }
+
+
 - (IBAction)addRecordingPressed:(UIButton *)sender
 {
+    THSignalSourceEditable *signalSourceEditable = (THSignalSourceEditable *)self.editableObject;
+    [signalSourceEditable recordeNewGesture];
+    THSignalSourcePopoverContentViewController *contentViewController = [[THSignalSourcePopoverContentViewController alloc] initWithNibName:@"THSignalSourcePopoverContentViewController"
+                                                                                                                                     bundle:[NSBundle mainBundle]
+                                                                                                                       signalSourceEditable:signalSourceEditable];
     
+    
+    CCDirector *director = [CCDirector sharedDirector];
+    CGRect rect = [sender convertRect:sender.bounds
+                               toView:director.view];
+    
+    
+    [self presentPopoverWithConcentViewController:contentViewController
+                                         fromRect:rect];
 }
+
 
 - (void)updateHeadlineWithFileName:(NSString *)fileName
 {

@@ -12,5 +12,8 @@
 @property (nonatomic, assign, readwrite) NSInteger currentOutputValue;
 @property (nonatomic, assign, readwrite) float leftBorderPercentage;
 @property (nonatomic, assign, readwrite) float rightBorderPercentage;
+@property (nonatomic, assign, readonly) BOOL recording;
 - (void)switchSourceFile:(NSString *)filename;
+- (void)recordeNewGesture;
+- (void)stopRecording;
 @end

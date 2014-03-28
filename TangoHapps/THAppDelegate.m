@@ -56,8 +56,7 @@ You should have received a copy of the GNU General Public License along with thi
     [[CCFileUtils sharedFileUtils] setiPadRetinaDisplaySuffix:@""];
     [[CCFileUtils sharedFileUtils] setiPadSuffix:@""];
     
-    THDirector * director = [THDirector sharedDirector];
-    [director.serverController startServer];
+    [THDirector sharedDirector];
     
     
     self.motionManager = [[CMMotionManager alloc] init];

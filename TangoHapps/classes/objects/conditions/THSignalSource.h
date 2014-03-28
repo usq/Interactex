@@ -19,4 +19,8 @@
 - (void)stop;
 - (void)toggle;
 - (void)switchSourceFile:(NSString *)filename;
+- (void)startRecording;
+- (void)stopRecording;
+- (void)recordValue:(uint16_t)value;
+- (void)cropDataToPercentages;
 @end

@@ -16,6 +16,7 @@
 @property (nonatomic, strong, readwrite) THSignalSourceEditable *signalSourceEditable;
 @property (nonatomic, strong, readwrite) NSArray *currentData;
 @property (nonatomic, assign, readwrite) float graphSize;
+@property (nonatomic, strong, readwrite) THGraphView *graphView;
 @end
 
 @implementation THSignalSourcePopoverContentViewController
@@ -34,88 +35,111 @@
     return self;
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    NSNumber *n = change[NSKeyValueChangeNewKey];
+    float num = [n floatValue];
+    num -= 100; //correcting offset 130 to 282 -> 30 to 182
+    float normalized = num/180.f;
+    
+    [self.graphView addValue1:normalized * 182.f * 0.9];
+}
+
 - (void)viewDidLoad
 {
-//    self.view.backgroundColor = [UIColor colorWithWhite:0.333 alpha:1.000];
+    self.graphView = [[THGraphView alloc] initWithFrame:self.view.frame maxAxisY:400 minAxisY:0];
+    [self.view addSubview:self.graphView];
     
-    
-    THGraphView *graphView = [[THGraphView alloc] initWithFrame:self.view.frame maxAxisY:400 minAxisY:0];
-    [self.view addSubview:graphView];
-    
+    float wLeft = 42.0;
+    float spaceForDisplaying = self.graphView.frame.size.width - 2*wLeft;
+    self.graphSize = spaceForDisplaying;
     
     THSignalSource *signalSource = (THSignalSource *)self.signalSourceEditable.simulableObject;
-    NSArray *data = signalSource.data;
     
-    __block float largest = 0;
-    
-    [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+    if(self.signalSourceEditable.recording)
     {
-        if([obj floatValue] > largest)
-        {
-            largest = [obj floatValue];
-        }
-        
-    }];
-    
-    
-    
-    //TODO: this assumes the number of samples is smaller than the monitor with, so it does a linear interpolation, maybe switch to splines...
-    NSMutableArray *normalizedArray = [NSMutableArray arrayWithCapacity:data.count];
-    
-    for (NSString *oneDataString in data)
-    {
-        float normalizedValue = [oneDataString floatValue]/largest;
-        float h = graphView.frame.size.height *0.9;
-        
-        [normalizedArray addObject:@(normalizedValue * h)];
+        [signalSource addObserver:self
+                       forKeyPath:@"currentOutputValue"
+                          options:NSKeyValueObservingOptionNew
+                          context:nil];
     }
-    NSArray *reversedArray = [[normalizedArray reverseObjectEnumerator] allObjects];
-    
-    
-    //288
-    float wLeft = 42.0;
-    float spaceForDisplaying = graphView.frame.size.width - 2*wLeft;
-    self.graphSize = spaceForDisplaying;
-    float f = (float)spaceForDisplaying/(float)[reversedArray count];
-    
-    for (int i = 0; i < reversedArray.count -1 ; i++)
+    else
     {
-        float left = [reversedArray[i] floatValue];
-        float right = [reversedArray[i+1] floatValue];
+        NSArray *data = signalSource.data;
         
-        float dY = right - left;
-        float dSegY = dY/f;
+        __block float largest = 0;
         
-    
-        float acc = left;
-        for (int k = 0; k < f;  k++)
+        [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+         {
+             if([obj floatValue] > largest)
+             {
+                 largest = [obj floatValue];
+             }
+         }];
+        
+        //TODO: this assumes the number of samples is smaller than the monitor with, so it does a linear interpolation, maybe switch to splines...
+        NSMutableArray *normalizedArray = [NSMutableArray arrayWithCapacity:data.count];
+        
+        for (NSString *oneDataString in data)
         {
-            acc = left + k * dSegY;
-            [graphView addValue1:acc];
+            float normalizedValue = [oneDataString floatValue]/largest;
+            float h = self.graphView.frame.size.height *0.9;
+            
+            [normalizedArray addObject:@(normalizedValue * h)];
         }
+        NSArray *reversedArray = [[normalizedArray reverseObjectEnumerator] allObjects];
+        
+        
+        //288
+        float f = (float)spaceForDisplaying/(float)[reversedArray count];
+        
+        for (int i = 0; i < reversedArray.count -1 ; i++)
+        {
+            float left = [reversedArray[i] floatValue];
+            float right = [reversedArray[i+1] floatValue];
+            
+            float dY = right - left;
+            float dSegY = dY/f;
+            
+            
+            float acc = left;
+            for (int k = 0; k < f;  k++)
+            {
+                acc = left + k * dSegY;
+                [self.graphView addValue1:acc];
+            }
+        }
+        [self.graphView addValue1:[[reversedArray lastObject] floatValue]];
     }
-    [graphView addValue1:[[reversedArray lastObject] floatValue]];
     
-
-    [graphView start];
-    
-    
+    [self.graphView start];
     THSignalSourcePopoverContentView *contentView = [[THSignalSourcePopoverContentView alloc] initWithFrame:self.view.frame
                                                                                              leftPercentage:self.signalSourceEditable.leftBorderPercentage
                                                                                             rightPercentage:self.signalSourceEditable.rightBorderPercentage
                                                                                                          of:self.graphSize];
     [self.view addSubview:contentView];
-
+    
     
     self.okButton.backgroundColor = [UIColor colorWithWhite:0.200 alpha:1.000];
     [self.view bringSubviewToFront:self.okButton];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movedBar:) name:@"movedBar" object:nil];
-
 }
+
+
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"movedBar" object:nil];
+    if(self.signalSourceEditable.recording)
+    {
+        THSignalSource *signalSource = (THSignalSource *)self.signalSourceEditable.simulableObject;
+        [signalSource removeObserver:self
+                          forKeyPath:@"currentOutputValue"];
+        [self.signalSourceEditable stopRecording];
+    }
 }
 
 

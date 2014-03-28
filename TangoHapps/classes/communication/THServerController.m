@@ -169,6 +169,7 @@ You should have received a copy of the GNU General Public License along with thi
 }
 
 -(void)session:(GKSession *)aSession peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state {
+    NSLog(@"session changed state %@",aSession);
     if(state == GKPeerStateDisconnected){
 
         [_peers removeObjectForKey:peerID];
@@ -192,6 +193,7 @@ You should have received a copy of the GNU General Public License along with thi
         [_agents setObject:agent forKey:peerID];
         
         [_delegate server:self peerConnected:peerName];
+        NSLog(@"peer connected: %@",peerName);
         //[_delegate server:self isReadyForSceneTransfer:([_agents count] > 0)];
     }
     [self updateBusyState];

@@ -8,12 +8,19 @@
 #import "THSignalSourceProperties.h"
 #import "THSignalSourceEditable.h"
 #import "THSignalSource.h"
-
+#import <GameKit/GameKit.h>
 
 @interface THSignalSource ()
 @property (nonatomic, assign, readwrite) float leftBorderPercentage;
 @property (nonatomic, assign, readwrite) float rightBorderPercentage;
 @end
+
+
+@interface THSignalSourceEditable ()<GKSessionDelegate>
+@property (nonatomic, strong, readwrite) GKSession *session;
+@property (nonatomic, assign, readwrite) BOOL recording;
+@end
+
 
 @implementation THSignalSourceEditable
 
@@ -89,6 +96,61 @@
     [source switchSourceFile:filename];
 
 }
+
+
+- (void)recordeNewGesture
+{
+    self.recording = YES;
+    THSignalSource *source = (THSignalSource *)self.simulableObject;
+    [source startRecording];
+    [self establishConnection];
+}
+
+- (void)stopRecording
+{
+    self.recording = NO;
+   THSignalSource *source = (THSignalSource *)self.simulableObject;
+    [source stopRecording];
+    [self.session disconnectFromAllPeers];
+}
+
+- (void)establishConnection
+{
+    self.session = [[GKSession alloc] initWithSessionID:@"flexSession"
+                                            displayName:nil
+                                            sessionMode:GKSessionModeServer];
+    self.session.delegate = self;
+    self.session.available = YES;
+}
+
+
+
+-(void)session:(GKSession *)aSession
+didReceiveConnectionRequestFromPeer:(NSString *)peerID
+{
+    NSError *error;
+    [self.session setDataReceiveHandler:self withContext:nil];
+    [self.session acceptConnectionFromPeer:peerID error:&error];
+}
+
+
+- (void)session:(GKSession *)session
+           peer:(NSString *)peerID
+ didChangeState:(GKPeerConnectionState)state
+{
+    NSLog(@"%i",state);
+}
+
+- (void)receiveData:(NSData *)data
+           fromPeer:(NSString *)peer
+          inSession:(GKSession *)session
+            context:(void *)context
+{
+    uint16_t signalValue = *(uint16_t *)[data bytes];
+    THSignalSource *source = (THSignalSource *)self.simulableObject;
+    [source recordValue:signalValue];
+}
+
 
 #pragma mark - Property Controller
 

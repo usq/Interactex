@@ -66,6 +66,7 @@ You should have received a copy of the GNU General Public License along with thi
 }
 
 -(void)startClient {
+        NSLog(@"%s",__PRETTY_FUNCTION__);
     if(session){
         [self stopClient];
     }
@@ -76,6 +77,7 @@ You should have received a copy of the GNU General Public License along with thi
 }
 
 -(void)stopClient {
+    NSLog(@"%s",__PRETTY_FUNCTION__);
     if(session){
         [session disconnectFromAllPeers];
         [session setAvailable:NO];
@@ -87,6 +89,7 @@ You should have received a copy of the GNU General Public License along with thi
 }
 
 -(void)disconnectFromServer {
+    NSLog(@"%s",__PRETTY_FUNCTION__);
     if(self.isConnectedToServer){
         [session cancelConnectToPeer:self.connectedPeerID];
         [session disconnectFromAllPeers];
@@ -96,7 +99,7 @@ You should have received a copy of the GNU General Public License along with thi
 }
 
 -(void)connectToServerWithPeerID:(NSString*)peerID {
-    
+    NSLog(@"%s",__PRETTY_FUNCTION__);
     if(!self.isConnectedToServer){
         [session connectToPeer:peerID withTimeout:10];
     }
@@ -107,7 +110,7 @@ You should have received a copy of the GNU General Public License along with thi
 -(void)session:(GKSession *)aSession
           peer:(NSString *)peerID
 didChangeState:(GKPeerConnectionState)state {
-    
+    NSLog(@"%s",__PRETTY_FUNCTION__);
     switch (state) {
         case GKPeerStateUnavailable:{
 
@@ -154,7 +157,8 @@ didChangeState:(GKPeerConnectionState)state {
            fromPeer:(NSString *)peer
           inSession:(GKSession *)session
             context:(void *)context {
-    
+    NSLog(@"received data: %@",data);
+
     if(transferAgent)
         [transferAgent receiveData:data];
 }
