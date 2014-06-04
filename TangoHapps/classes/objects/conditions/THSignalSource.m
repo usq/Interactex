@@ -7,6 +7,7 @@
 //
 
 #import "THSignalSource.h"
+#import "THGestureRecognizer.h"
 
 #define RECORDED_MAXCOUNT 500
 
@@ -32,6 +33,7 @@ NSString * const kSignalSourceEditableRightPercentage = @"kSignalSourceEditableR
 NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
 
 @implementation THSignalSource
+
 
 - (void)load
 {
@@ -91,7 +93,25 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
 {
     //TODO: saveRecorded data
     self.data = [self.recordedData copy];
+    
 }
+
+- (void)saveRecording
+{
+    
+    NSMutableArray *a = [NSMutableArray array];
+    
+    int i = [self.data count] *_rightBorderPercentage;
+    int m = [self.data count] * fmin(fmax((1 - _leftBorderPercentage),0),1);
+    
+    for ( ; i < m; i++)
+    {
+        [a addObject:self.data[i]];
+    }
+    
+    [[THGestureRecognizer sharedRecognizer] printFeaturesForWindow:self.data];
+}
+
 
 - (void)recordValue:(uint16_t)value
 {
@@ -100,6 +120,8 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
         [self.recordedData removeObjectAtIndex:0];
     }
     [self.recordedData addObject:[NSNumber numberWithUnsignedShort:value]];
+    
+    [[THGestureRecognizer sharedRecognizer] observeSignal:value];
     
     self.currentOutputValue = value;
     [self triggerEventNamed:kEventValueChanged];
@@ -171,6 +193,7 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
 
 
 
+
 #pragma mark - Archiving
 
 - (id)init
@@ -220,10 +243,13 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
 - (void)switchSourceFile:(NSString *)filename
 {
     self.currentFilePath = filename;
-    NSData *d = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:self.currentFilePath ofType:@"txt"]];
+    NSData *d = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:self.currentFilePath
+                                                                               ofType:@"txt"]];
     assert(d != nil);
     
-    NSString *content = [[NSString alloc] initWithData:d encoding:NSUTF8StringEncoding];
+    NSString *content = [[NSString alloc] initWithData:d
+                                              encoding:NSUTF8StringEncoding];
+    
     self.data = [content componentsSeparatedByString:@"\n"];
     [self updateIndizes];
 

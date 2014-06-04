@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 Technische Universität München. All rights reserved.
 //
 
-#import "THGestureEditable.h"
-#import "THGesture.h"
-#import "THGestureProperties.h"
+#import "THGestureClassifierEditable.h"
+#import "THGestureClassifier.h"
+#import "THGestureClassifierProperties.h"
 
-@implementation THGestureEditable
+@implementation THGestureClassifierEditable
 - (void)load
 {
     
@@ -24,8 +24,9 @@
 - (id)init
 {
     self = [super init];
-    if(self){
-        self.simulableObject = [[THGesture alloc] init];
+    if(self)
+    {
+        self.simulableObject = [[THGestureClassifier alloc] init];
         [self load];
     }
     return self;
@@ -39,7 +40,7 @@
 
 - (void)addSignal:(float)signal
 {
-    [((THGesture *)self.simulableObject) addSignal:signal];
+    [((THGestureClassifier *)self.simulableObject) addSignal:signal];
 }
 
 
@@ -47,24 +48,24 @@
 - (void)setNumberOfTicksToDetect:(int)numberOfTicksToDetect
 {
     NSLog(@"settingL %i", numberOfTicksToDetect);
-    ((THGesture *)self.simulableObject).numberOfTicksToDetect = numberOfTicksToDetect;
+    ((THGestureClassifier *)self.simulableObject).numberOfTicksToDetect = numberOfTicksToDetect;
 }
 
 - (int)numberOfTicksToDetect
 {
-    int n = ((THGesture *)self.simulableObject).numberOfTicksToDetect;
+    int n = ((THGestureClassifier *)self.simulableObject).numberOfTicksToDetect;
             NSLog(@"returning %i", n);
     return n;
 }
 
 - (NSUInteger)halfWindowSize
 {
-    return ((THGesture *)self.simulableObject).halfWindowSize;
+    return ((THGestureClassifier *)self.simulableObject).halfWindowSize;
 }
 
 - (void)setHalfWindowSize:(NSUInteger)halfWindowSize
 {
-    ((THGesture *)self.simulableObject).halfWindowSize = halfWindowSize;
+    ((THGestureClassifier *)self.simulableObject).halfWindowSize = halfWindowSize;
 }
 
 #pragma mark - Property Controller
@@ -72,7 +73,7 @@
 - (NSArray *)propertyControllers
 {
     NSArray *controllers = [super propertyControllers];
-    THGestureProperties *properties = [THGestureProperties properties];
+    THGestureClassifierProperties *properties = [THGestureClassifierProperties properties];
     properties.editableObject = self;
     //add property-controllers here
   return [controllers arrayByAddingObject:properties];
@@ -99,7 +100,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    THGestureEditable * copy = [super copyWithZone:zone];
+    THGestureClassifierEditable * copy = [super copyWithZone:zone];
     return copy;
 }
 

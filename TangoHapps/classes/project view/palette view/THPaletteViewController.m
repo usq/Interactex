@@ -92,7 +92,7 @@ You should have received a copy of the GNU General Public License along with thi
 #import "THFlexSensorPaletteItem.h"
 #import "THSignalSourcePaletteItem.h"
 #import "THFilterPaletteItem.h"
-#import "THGesturePaletteItem.h"
+#import "THGestureClassifierPaletteItem.h"
 
 @implementation THPaletteViewController
 
@@ -451,7 +451,7 @@ You should have received a copy of the GNU General Public License along with thi
                                      [[THPureDataPaletteItem alloc] initWithName:@"puredata"],
                                      [[THSignalSourcePaletteItem alloc] initWithName:@"signalsource"],
                                      [[THFilterPaletteItem alloc] initWithName:@"filter"],
-                                     [[THGesturePaletteItem alloc] initWithName:@"gesture"],
+                                     [[THGestureClassifierPaletteItem alloc] initWithName:@"gesture"],
                                      nil];
     
     self.otherHardwareSectionArray  = [NSMutableArray arrayWithObjects:

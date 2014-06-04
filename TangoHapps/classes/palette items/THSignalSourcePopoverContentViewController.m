@@ -17,6 +17,8 @@
 @property (nonatomic, strong, readwrite) NSArray *currentData;
 @property (nonatomic, assign, readwrite) float graphSize;
 @property (nonatomic, strong, readwrite) THGraphView *graphView;
+@property (nonatomic, assign, readwrite) BOOL savePressed;
+@property (nonatomic, assign, readwrite) BOOL KVOregistered;
 @end
 
 @implementation THSignalSourcePopoverContentViewController
@@ -48,8 +50,11 @@
     [self.graphView addValue1:normalized * 182.f * 0.9];
 }
 
+
+
 - (void)viewDidLoad
 {
+    self.savePressed = NO;
     self.graphView = [[THGraphView alloc] initWithFrame:self.view.frame maxAxisY:400 minAxisY:0];
     [self.view addSubview:self.graphView];
     
@@ -61,6 +66,7 @@
     
     if(self.signalSourceEditable.recording)
     {
+        self.KVOregistered = YES;
         [signalSource addObserver:self
                        forKeyPath:@"currentOutputValue"
                           options:NSKeyValueObservingOptionNew
@@ -70,15 +76,7 @@
     {
         NSArray *data = signalSource.data;
         
-        __block float largest = 0;
-        
-        [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-         {
-             if([obj floatValue] > largest)
-             {
-                 largest = [obj floatValue];
-             }
-         }];
+        float largest = [[data valueForKeyPath:@"@max.floatValue"] floatValue];
         
         //TODO: this assumes the number of samples is smaller than the monitor with, so it does a linear interpolation, maybe switch to splines...
         NSMutableArray *normalizedArray = [NSMutableArray arrayWithCapacity:data.count];
@@ -125,20 +123,24 @@
     
     self.okButton.backgroundColor = [UIColor colorWithWhite:0.200 alpha:1.000];
     [self.view bringSubviewToFront:self.okButton];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movedBar:) name:@"movedBar" object:nil];
 }
+
+
 
 
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"movedBar" object:nil];
-    if(self.signalSourceEditable.recording)
+    if(self.KVOregistered)
     {
+        self.KVOregistered = NO;
         THSignalSource *signalSource = (THSignalSource *)self.signalSourceEditable.simulableObject;
         [signalSource removeObserver:self
                           forKeyPath:@"currentOutputValue"];
-        [self.signalSourceEditable stopRecording];
+
     }
 }
 
@@ -159,9 +161,25 @@
     self.signalSourceEditable.rightBorderPercentage = rightPercent;
 }
 
+
+
 - (IBAction)okButtonPressed:(id)sender
 {
-    [self.currentPopoverController dismissPopoverAnimated:YES];
+    if(self.savePressed == NO)
+    {
+        self.savePressed = YES;
+        [self.signalSourceProperties didPressStop];
+        [self.signalSourceEditable stopRecording];
+        
+    }
+    else
+    {
+            [self.signalSourceProperties didPressSave];
+                    [self.signalSourceEditable saveRecording];
+            [self.currentPopoverController dismissPopoverAnimated:YES];
+    }
+
+
 }
 
 - (CGSize)contentSizeForViewInPopover

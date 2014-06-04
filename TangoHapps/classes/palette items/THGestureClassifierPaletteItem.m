@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 Technische Universität München. All rights reserved.
 //
 
-#import "THGesturePaletteItem.h"
-#import "THGestureEditable.h"
+#import "THGestureClassifierPaletteItem.h"
+#import "THGestureClassifierEditable.h"
 
-@implementation THGesturePaletteItem
+@implementation THGestureClassifierPaletteItem
 
 - (void)dropAt:(CGPoint)location
 {
-    THGestureEditable *editableSignalSource = [[THGestureEditable alloc] init];
+    THGestureClassifierEditable *editableSignalSource = [[THGestureClassifierEditable alloc] init];
     editableSignalSource.position = location;
     
     THProject *project = [THDirector sharedDirector].currentProject;

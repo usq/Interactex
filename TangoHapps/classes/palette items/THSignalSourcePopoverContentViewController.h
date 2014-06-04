@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "THSignalSourceEditable.h"
-
+#import "THSignalSourceProperties.h"
 
 @interface THSignalSourcePopoverContentViewController : UIViewController
 
 @property (nonatomic, assign, readwrite) UIPopoverController *currentPopoverController;
+@property (nonatomic, strong, readwrite) THSignalSourceProperties *signalSourceProperties;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil
                bundle:(NSBundle *)nibBundleOrNil

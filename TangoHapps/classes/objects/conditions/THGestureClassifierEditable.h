@@ -8,7 +8,7 @@
 
 #import "THProgrammingElementEditable.h"
 
-@interface THGestureEditable : THProgrammingElementEditable
+@interface THGestureClassifierEditable : THProgrammingElementEditable
 @property (nonatomic, assign, readwrite) int numberOfTicksToDetect;
 @property (nonatomic, assign, readwrite) NSUInteger halfWindowSize;
 - (void)addSignal:(float)signal;

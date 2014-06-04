@@ -6,17 +6,17 @@
 //  Copyright (c) 2014 Technische Universität München. All rights reserved.
 //
 
-#import "THGestureProperties.h"
-#import "THGestureEditable.h"
+#import "THGestureClassifierProperties.h"
+#import "THGestureClassifierEditable.h"
 
-@interface THGestureProperties ()
+@interface THGestureClassifierProperties ()
 @property (weak, nonatomic) IBOutlet UISegmentedControl *tickControll;
 @property (weak, nonatomic) IBOutlet UISlider *slider;
 @property (weak, nonatomic) IBOutlet UILabel *windowLabel;
 
 @end
 
-@implementation THGestureProperties
+@implementation THGestureClassifierProperties
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,7 +31,7 @@
 {
     [super viewDidLoad];
     
-    THGestureEditable *editable = (THGestureEditable *)self.editableObject;
+    THGestureClassifierEditable *editable = (THGestureClassifierEditable *)self.editableObject;
     [self.slider setValue:editable.halfWindowSize];
     self.windowLabel.text = [NSString stringWithFormat:@"%i",editable.halfWindowSize];
     
@@ -47,13 +47,13 @@
 
 - (IBAction)detectTickChanged:(UISegmentedControl *)sender
 {
-    THGestureEditable *editable = (THGestureEditable *)self.editableObject;
+    THGestureClassifierEditable *editable = (THGestureClassifierEditable *)self.editableObject;
     editable.numberOfTicksToDetect = sender.selectedSegmentIndex +1;
 }
 
 - (IBAction)sliderChanged:(UISlider *)sender
 {
-    THGestureEditable *editable = (THGestureEditable *)self.editableObject;
+    THGestureClassifierEditable *editable = (THGestureClassifierEditable *)self.editableObject;
     editable.halfWindowSize = sender.value;
     self.windowLabel.text = [NSString stringWithFormat:@"%i",(NSUInteger)sender.value];
 }

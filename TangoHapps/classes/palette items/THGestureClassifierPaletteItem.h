@@ -1,13 +1,13 @@
 //
-//  THGestureProperties.h
+//  THGesturePaletteItem.h
 //  TangoHapps
 //
 //  Created by Michael Conrads on 13/03/14.
 //  Copyright (c) 2014 Technische Universität München. All rights reserved.
 //
 
-#import "THEditableObjectProperties.h"
+#import <Foundation/Foundation.h>
 
-@interface THGestureProperties : THEditableObjectProperties
+@interface THGestureClassifierPaletteItem : THPaletteItem
 
 @end

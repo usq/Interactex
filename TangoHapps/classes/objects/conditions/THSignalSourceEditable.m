@@ -94,7 +94,6 @@
 {
     THSignalSource *source = (THSignalSource *)self.simulableObject;
     [source switchSourceFile:filename];
-
 }
 
 
@@ -114,6 +113,12 @@
     [self.session disconnectFromAllPeers];
 }
 
+- (void)saveRecording
+{
+    THSignalSource *source = (THSignalSource *)self.simulableObject;
+    [source saveRecording];
+}
+
 - (void)establishConnection
 {
     self.session = [[GKSession alloc] initWithSessionID:@"flexSession"
@@ -123,7 +128,11 @@
     self.session.available = YES;
 }
 
-
+- (NSArray *)recordedData
+{
+    THSignalSource *source = (THSignalSource *)self.simulableObject;
+    return source.data;
+}
 
 -(void)session:(GKSession *)aSession
 didReceiveConnectionRequestFromPeer:(NSString *)peerID
@@ -146,9 +155,14 @@ didReceiveConnectionRequestFromPeer:(NSString *)peerID
           inSession:(GKSession *)session
             context:(void *)context
 {
-    uint16_t signalValue = *(uint16_t *)[data bytes];
-    THSignalSource *source = (THSignalSource *)self.simulableObject;
-    [source recordValue:signalValue];
+    if(self.recording)
+    {
+        
+        
+        uint16_t signalValue = *(uint16_t *)[data bytes];
+        THSignalSource *source = (THSignalSource *)self.simulableObject;
+        [source recordValue:signalValue];
+    }
 }
 
 

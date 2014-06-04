@@ -13,7 +13,10 @@
 @property (nonatomic, assign, readwrite) float leftBorderPercentage;
 @property (nonatomic, assign, readwrite) float rightBorderPercentage;
 @property (nonatomic, assign, readonly) BOOL recording;
+@property (nonatomic, strong, readonly) NSArray *recordedData;
+
 - (void)switchSourceFile:(NSString *)filename;
 - (void)recordeNewGesture;
 - (void)stopRecording;
+- (void)saveRecording;
 @end

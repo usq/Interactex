@@ -37,7 +37,8 @@ uint8_t const kBleCrcStart = 170;
 NSString * const kBleSupportedServices[kBleNumSupportedServices] = {@"F9266FD7-EF07-45D6-8EB6-BD74F13620F9"};
 
 NSString * const kBleCharacteristics[kBleNumSupportedServices][2] = {
-    {@"4585C102-7784-40B4-88E1-3CB5C4FD37A3",@"E788D73B-E793-4D9E-A608-2F2BAFC59A00"}};*/
+    {@"4585C102-7784-40B4-88E1-3CB5C4FD37A3",@"E788D73B-E793-4D9E-A608-2F2BAFC59A00"}};
+ */
 
 NSString * const kBleSupportedServices[kBleNumSupportedServices] = {@"F9266FD7-EF07-45D6-8EB6-BD74F13620F9",@"ffe0",@"713D0000-503E-4C75-BA94-3148F18D941E"};//Dr. Kroll Shield, Jennic Module, RedBearLab Shield
 

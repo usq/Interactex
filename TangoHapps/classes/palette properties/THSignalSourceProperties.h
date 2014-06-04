@@ -9,5 +9,6 @@
 #import "THEditableObjectProperties.h"
 
 @interface THSignalSourceProperties : THEditableObjectProperties
-
+- (void)didPressSave;
+- (void)didPressStop;
 @end

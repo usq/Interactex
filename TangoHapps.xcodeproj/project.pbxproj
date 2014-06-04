@@ -1263,6 +1263,9 @@
 		9AFB7E6A1833DE6400694CCE /* THBLECommunicationModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AFB7E661833DE6400694CCE /* THBLECommunicationModule.m */; };
 		9AFB7E6B1833DE6400694CCE /* THClientPresetsGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AFB7E681833DE6400694CCE /* THClientPresetsGenerator.m */; };
 		9AFB7E6C1833DE6400694CCE /* THClientPresetsGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AFB7E681833DE6400694CCE /* THClientPresetsGenerator.m */; };
+		A31B8CD519150CF10096F3EB /* THGestureSample.m in Sources */ = {isa = PBXBuildFile; fileRef = A31B8CD419150CF10096F3EB /* THGestureSample.m */; };
+		A31B8CD919150E9F0096F3EB /* THGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = A31B8CD819150E9F0096F3EB /* THGesture.m */; };
+		A31B8CDC19150FB10096F3EB /* THGestureSet.m in Sources */ = {isa = PBXBuildFile; fileRef = A31B8CDB19150FB10096F3EB /* THGestureSet.m */; };
 		A33442BD18B6280100AFB366 /* THFlexSensor.m in Sources */ = {isa = PBXBuildFile; fileRef = A33442BC18B6280100AFB366 /* THFlexSensor.m */; };
 		A33442C018B6355200AFB366 /* THFlexSensorEditable.m in Sources */ = {isa = PBXBuildFile; fileRef = A33442BF18B6355200AFB366 /* THFlexSensorEditable.m */; };
 		A3747F3918B6976C00BAEAB7 /* flexsensor.png in Resources */ = {isa = PBXBuildFile; fileRef = A3747F3718B6976C00BAEAB7 /* flexsensor.png */; };
@@ -1272,9 +1275,17 @@
 		A3747F4118B697F300BAEAB7 /* palette_flexsensor.png in Resources */ = {isa = PBXBuildFile; fileRef = A3747F3F18B697F300BAEAB7 /* palette_flexsensor.png */; };
 		A3747F4218B697F300BAEAB7 /* palette_flexsensor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3747F4018B697F300BAEAB7 /* palette_flexsensor@2x.png */; };
 		A382F91E18B6428F000C1108 /* THFlexSensorPaletteItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A382F91D18B6428F000C1108 /* THFlexSensorPaletteItem.m */; };
+		A39AEBE2191562E100F882A0 /* THSignalSourceGestureSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A39AEBE0191562E100F882A0 /* THSignalSourceGestureSetViewController.m */; };
+		A39AEBE3191562E100F882A0 /* THSignalSourceGestureSetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A39AEBE1191562E100F882A0 /* THSignalSourceGestureSetViewController.xib */; };
 		A39B4BCE18C7BF26004016B2 /* THSignalSourcePopoverContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A39B4BCC18C7BF26004016B2 /* THSignalSourcePopoverContentViewController.m */; };
 		A39B4BCF18C7BF26004016B2 /* THSignalSourcePopoverContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A39B4BCD18C7BF26004016B2 /* THSignalSourcePopoverContentViewController.xib */; };
 		A39B4BD218C7C376004016B2 /* THSignalSourcePopoverContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = A39B4BD118C7C376004016B2 /* THSignalSourcePopoverContentView.m */; };
+		A3AEF64219125FFF0093E3CB /* Classifier.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AEF64119125FFF0093E3CB /* Classifier.m */; };
+		A3AEF647191260100093E3CB /* FeatureExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AEF644191260100093E3CB /* FeatureExtractor.m */; };
+		A3AEF648191260100093E3CB /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AEF646191260100093E3CB /* Helper.m */; };
+		A3AEF64B191264590093E3CB /* eye.txt in Resources */ = {isa = PBXBuildFile; fileRef = A3AEF64A191264590093E3CB /* eye.txt */; };
+		A3AEF64E191281E10093E3CB /* THGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AEF64D191281E10093E3CB /* THGestureRecognizer.m */; };
+		A3AEF651191285720093E3CB /* THTrainingsSet.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AEF650191285720093E3CB /* THTrainingsSet.m */; };
 		A3C949DA18D244BB0022C928 /* filter.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C949D618D244BB0022C928 /* filter.png */; };
 		A3C949DB18D244BB0022C928 /* filter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C949D718D244BB0022C928 /* filter@2x.png */; };
 		A3C949DC18D244BB0022C928 /* palette_filter.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C949D818D244BB0022C928 /* palette_filter.png */; };
@@ -1288,12 +1299,12 @@
 		A3C94A2C18D2694E0022C928 /* gesture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C94A2818D2694E0022C928 /* gesture@2x.png */; };
 		A3C94A2D18D2694E0022C928 /* palette_gesture.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C94A2918D2694E0022C928 /* palette_gesture.png */; };
 		A3C94A2E18D2694E0022C928 /* palette_gesture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C94A2A18D2694E0022C928 /* palette_gesture@2x.png */; };
-		A3C94A3C18D26A010022C928 /* THGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C94A3918D26A010022C928 /* THGesture.m */; };
-		A3C94A3D18D26A010022C928 /* THGestureEditable.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C94A3B18D26A010022C928 /* THGestureEditable.m */; };
-		A3C94A4018D26A170022C928 /* THGesturePaletteItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C94A3F18D26A170022C928 /* THGesturePaletteItem.m */; };
-		A3C94A4318D26A290022C928 /* THGestureProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C94A4218D26A290022C928 /* THGestureProperties.m */; };
+		A3C94A3C18D26A010022C928 /* THGestureClassifier.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C94A3918D26A010022C928 /* THGestureClassifier.m */; };
+		A3C94A3D18D26A010022C928 /* THGestureClassifierEditable.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C94A3B18D26A010022C928 /* THGestureClassifierEditable.m */; };
+		A3C94A4018D26A170022C928 /* THGestureClassifierPaletteItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C94A3F18D26A170022C928 /* THGestureClassifierPaletteItem.m */; };
+		A3C94A4318D26A290022C928 /* THGestureClassifierProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C94A4218D26A290022C928 /* THGestureClassifierProperties.m */; };
 		A3C94A4518D28DEF0022C928 /* doubletick_long.txt in Resources */ = {isa = PBXBuildFile; fileRef = A3C94A4418D28DEF0022C928 /* doubletick_long.txt */; };
-		A3C94A4718D292E80022C928 /* THGestureProperties.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3C94A4618D292E80022C928 /* THGestureProperties.xib */; };
+		A3C94A4718D292E80022C928 /* THGestureClassifierProperties.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3C94A4618D292E80022C928 /* THGestureClassifierProperties.xib */; };
 		A3C94A4918D325E60022C928 /* THFilterProperties.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3C94A4818D325E60022C928 /* THFilterProperties.xib */; };
 		A3CBF54018BFFA1C00537127 /* THSignalSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CBF53F18BFFA1C00537127 /* THSignalSource.m */; };
 		A3CBF54318BFFE3400537127 /* THSignalSourceEditable.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CBF54218BFFE3400537127 /* THSignalSourceEditable.m */; };
@@ -2691,6 +2702,12 @@
 		9AFB7E661833DE6400694CCE /* THBLECommunicationModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THBLECommunicationModule.m; sourceTree = "<group>"; };
 		9AFB7E671833DE6400694CCE /* THClientPresetsGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THClientPresetsGenerator.h; sourceTree = "<group>"; };
 		9AFB7E681833DE6400694CCE /* THClientPresetsGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THClientPresetsGenerator.m; sourceTree = "<group>"; };
+		A31B8CD319150CF10096F3EB /* THGestureSample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THGestureSample.h; path = TangoHapps/classes/gesturerecognition/THGestureSample.h; sourceTree = SOURCE_ROOT; };
+		A31B8CD419150CF10096F3EB /* THGestureSample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THGestureSample.m; path = TangoHapps/classes/gesturerecognition/THGestureSample.m; sourceTree = SOURCE_ROOT; };
+		A31B8CD719150E9F0096F3EB /* THGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THGesture.h; path = TangoHapps/classes/gesturerecognition/THGesture.h; sourceTree = SOURCE_ROOT; };
+		A31B8CD819150E9F0096F3EB /* THGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THGesture.m; path = TangoHapps/classes/gesturerecognition/THGesture.m; sourceTree = SOURCE_ROOT; };
+		A31B8CDA19150FB10096F3EB /* THGestureSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THGestureSet.h; path = TangoHapps/classes/gesturerecognition/THGestureSet.h; sourceTree = SOURCE_ROOT; };
+		A31B8CDB19150FB10096F3EB /* THGestureSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THGestureSet.m; path = TangoHapps/classes/gesturerecognition/THGestureSet.m; sourceTree = SOURCE_ROOT; };
 		A33442BB18B6280100AFB366 /* THFlexSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THFlexSensor.h; sourceTree = "<group>"; };
 		A33442BC18B6280100AFB366 /* THFlexSensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THFlexSensor.m; sourceTree = "<group>"; };
 		A33442BE18B6355200AFB366 /* THFlexSensorEditable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THFlexSensorEditable.h; sourceTree = "<group>"; };
@@ -2703,11 +2720,25 @@
 		A3747F4018B697F300BAEAB7 /* palette_flexsensor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "palette_flexsensor@2x.png"; sourceTree = "<group>"; };
 		A382F91C18B6428F000C1108 /* THFlexSensorPaletteItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THFlexSensorPaletteItem.h; sourceTree = "<group>"; };
 		A382F91D18B6428F000C1108 /* THFlexSensorPaletteItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THFlexSensorPaletteItem.m; sourceTree = "<group>"; };
+		A39AEBDF191562E100F882A0 /* THSignalSourceGestureSetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THSignalSourceGestureSetViewController.h; path = "TangoHapps/classes/palette properties/THSignalSourceGestureSetViewController.h"; sourceTree = SOURCE_ROOT; };
+		A39AEBE0191562E100F882A0 /* THSignalSourceGestureSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THSignalSourceGestureSetViewController.m; path = "TangoHapps/classes/palette properties/THSignalSourceGestureSetViewController.m"; sourceTree = SOURCE_ROOT; };
+		A39AEBE1191562E100F882A0 /* THSignalSourceGestureSetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = THSignalSourceGestureSetViewController.xib; path = "TangoHapps/classes/palette properties/THSignalSourceGestureSetViewController.xib"; sourceTree = SOURCE_ROOT; };
 		A39B4BCB18C7BF26004016B2 /* THSignalSourcePopoverContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THSignalSourcePopoverContentViewController.h; path = "TangoHapps/classes/palette items/THSignalSourcePopoverContentViewController.h"; sourceTree = SOURCE_ROOT; };
 		A39B4BCC18C7BF26004016B2 /* THSignalSourcePopoverContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THSignalSourcePopoverContentViewController.m; path = "TangoHapps/classes/palette items/THSignalSourcePopoverContentViewController.m"; sourceTree = SOURCE_ROOT; };
 		A39B4BCD18C7BF26004016B2 /* THSignalSourcePopoverContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = THSignalSourcePopoverContentViewController.xib; path = "TangoHapps/classes/palette items/THSignalSourcePopoverContentViewController.xib"; sourceTree = SOURCE_ROOT; };
 		A39B4BD018C7C376004016B2 /* THSignalSourcePopoverContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THSignalSourcePopoverContentView.h; sourceTree = "<group>"; };
 		A39B4BD118C7C376004016B2 /* THSignalSourcePopoverContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THSignalSourcePopoverContentView.m; sourceTree = "<group>"; };
+		A3AEF64019125FFF0093E3CB /* Classifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Classifier.h; sourceTree = "<group>"; };
+		A3AEF64119125FFF0093E3CB /* Classifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Classifier.m; sourceTree = "<group>"; };
+		A3AEF643191260100093E3CB /* FeatureExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeatureExtractor.h; sourceTree = "<group>"; };
+		A3AEF644191260100093E3CB /* FeatureExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeatureExtractor.m; sourceTree = "<group>"; };
+		A3AEF645191260100093E3CB /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
+		A3AEF646191260100093E3CB /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
+		A3AEF64A191264590093E3CB /* eye.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = eye.txt; path = "../../../../../../../Desktop/BA - Michael/NCA Objective C/eye/eye.txt"; sourceTree = "<group>"; };
+		A3AEF64C191281E10093E3CB /* THGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THGestureRecognizer.h; sourceTree = "<group>"; };
+		A3AEF64D191281E10093E3CB /* THGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THGestureRecognizer.m; sourceTree = "<group>"; };
+		A3AEF64F191285720093E3CB /* THTrainingsSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THTrainingsSet.h; sourceTree = "<group>"; };
+		A3AEF650191285720093E3CB /* THTrainingsSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THTrainingsSet.m; sourceTree = "<group>"; };
 		A3C949D618D244BB0022C928 /* filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filter.png; sourceTree = "<group>"; };
 		A3C949D718D244BB0022C928 /* filter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter@2x.png"; sourceTree = "<group>"; };
 		A3C949D818D244BB0022C928 /* palette_filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = palette_filter.png; sourceTree = "<group>"; };
@@ -2725,16 +2756,16 @@
 		A3C94A2818D2694E0022C928 /* gesture@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gesture@2x.png"; sourceTree = "<group>"; };
 		A3C94A2918D2694E0022C928 /* palette_gesture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = palette_gesture.png; sourceTree = "<group>"; };
 		A3C94A2A18D2694E0022C928 /* palette_gesture@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "palette_gesture@2x.png"; sourceTree = "<group>"; };
-		A3C94A3818D26A010022C928 /* THGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THGesture.h; path = conditions/THGesture.h; sourceTree = "<group>"; };
-		A3C94A3918D26A010022C928 /* THGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THGesture.m; path = conditions/THGesture.m; sourceTree = "<group>"; };
-		A3C94A3A18D26A010022C928 /* THGestureEditable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THGestureEditable.h; path = conditions/THGestureEditable.h; sourceTree = "<group>"; };
-		A3C94A3B18D26A010022C928 /* THGestureEditable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THGestureEditable.m; path = conditions/THGestureEditable.m; sourceTree = "<group>"; };
-		A3C94A3E18D26A170022C928 /* THGesturePaletteItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THGesturePaletteItem.h; path = "TangoHapps/classes/palette items/THGesturePaletteItem.h"; sourceTree = SOURCE_ROOT; };
-		A3C94A3F18D26A170022C928 /* THGesturePaletteItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THGesturePaletteItem.m; path = "TangoHapps/classes/palette items/THGesturePaletteItem.m"; sourceTree = SOURCE_ROOT; };
-		A3C94A4118D26A290022C928 /* THGestureProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THGestureProperties.h; path = "TangoHapps/classes/palette properties/THGestureProperties.h"; sourceTree = SOURCE_ROOT; };
-		A3C94A4218D26A290022C928 /* THGestureProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THGestureProperties.m; path = "TangoHapps/classes/palette properties/THGestureProperties.m"; sourceTree = SOURCE_ROOT; };
+		A3C94A3818D26A010022C928 /* THGestureClassifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THGestureClassifier.h; path = conditions/THGestureClassifier.h; sourceTree = "<group>"; };
+		A3C94A3918D26A010022C928 /* THGestureClassifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THGestureClassifier.m; path = conditions/THGestureClassifier.m; sourceTree = "<group>"; };
+		A3C94A3A18D26A010022C928 /* THGestureClassifierEditable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THGestureClassifierEditable.h; path = conditions/THGestureClassifierEditable.h; sourceTree = "<group>"; };
+		A3C94A3B18D26A010022C928 /* THGestureClassifierEditable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THGestureClassifierEditable.m; path = conditions/THGestureClassifierEditable.m; sourceTree = "<group>"; };
+		A3C94A3E18D26A170022C928 /* THGestureClassifierPaletteItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THGestureClassifierPaletteItem.h; path = "TangoHapps/classes/palette items/THGestureClassifierPaletteItem.h"; sourceTree = SOURCE_ROOT; };
+		A3C94A3F18D26A170022C928 /* THGestureClassifierPaletteItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THGestureClassifierPaletteItem.m; path = "TangoHapps/classes/palette items/THGestureClassifierPaletteItem.m"; sourceTree = SOURCE_ROOT; };
+		A3C94A4118D26A290022C928 /* THGestureClassifierProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THGestureClassifierProperties.h; path = "TangoHapps/classes/palette properties/THGestureClassifierProperties.h"; sourceTree = SOURCE_ROOT; };
+		A3C94A4218D26A290022C928 /* THGestureClassifierProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THGestureClassifierProperties.m; path = "TangoHapps/classes/palette properties/THGestureClassifierProperties.m"; sourceTree = SOURCE_ROOT; };
 		A3C94A4418D28DEF0022C928 /* doubletick_long.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = doubletick_long.txt; sourceTree = "<group>"; };
-		A3C94A4618D292E80022C928 /* THGestureProperties.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = THGestureProperties.xib; path = TangoHapps/resources/gui/properties/THGestureProperties.xib; sourceTree = SOURCE_ROOT; };
+		A3C94A4618D292E80022C928 /* THGestureClassifierProperties.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = THGestureClassifierProperties.xib; path = TangoHapps/resources/gui/properties/THGestureClassifierProperties.xib; sourceTree = SOURCE_ROOT; };
 		A3C94A4818D325E60022C928 /* THFilterProperties.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = THFilterProperties.xib; path = TangoHapps/resources/gui/properties/THFilterProperties.xib; sourceTree = SOURCE_ROOT; };
 		A3CBF53E18BFFA1C00537127 /* THSignalSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THSignalSource.h; sourceTree = "<group>"; };
 		A3CBF53F18BFFA1C00537127 /* THSignalSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THSignalSource.m; sourceTree = "<group>"; };
@@ -4309,6 +4340,25 @@
 			path = util;
 			sourceTree = "<group>";
 		};
+		A31B8C9A19150B780096F3EB /* item */ = {
+			isa = PBXGroup;
+			children = (
+				A3CBF54418C000ED00537127 /* THSignalSourcePaletteItem.h */,
+				A3CBF54518C000ED00537127 /* THSignalSourcePaletteItem.m */,
+			);
+			name = item;
+			sourceTree = "<group>";
+		};
+		A31B8CDD1915190F0096F3EB /* GestureSetTable */ = {
+			isa = PBXGroup;
+			children = (
+				A39AEBDF191562E100F882A0 /* THSignalSourceGestureSetViewController.h */,
+				A39AEBE0191562E100F882A0 /* THSignalSourceGestureSetViewController.m */,
+				A39AEBE1191562E100F882A0 /* THSignalSourceGestureSetViewController.xib */,
+			);
+			name = GestureSetTable;
+			sourceTree = "<group>";
+		};
 		A39B4BC518C7BDFB004016B2 /* signalSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -4322,7 +4372,7 @@
 		A39B4BC618C7BE53004016B2 /* newObjects */ = {
 			isa = PBXGroup;
 			children = (
-				A3C94A2F18D2695C0022C928 /* gesture */,
+				A3C94A2F18D2695C0022C928 /* gesture classifier */,
 				A3C94A1618D244D30022C928 /* filter */,
 				A39B4BC518C7BDFB004016B2 /* signalSource */,
 			);
@@ -4344,10 +4394,10 @@
 			isa = PBXGroup;
 			children = (
 				A39B4BC918C7BECD004016B2 /* popover */,
-				A3CBF54418C000ED00537127 /* THSignalSourcePaletteItem.h */,
-				A3CBF54518C000ED00537127 /* THSignalSourcePaletteItem.m */,
+				A31B8C9A19150B780096F3EB /* item */,
 				A3CBF5A518C0BBF600537127 /* THSignalSourceProperties.h */,
 				A3CBF5A618C0BBF600537127 /* THSignalSourceProperties.m */,
+				A31B8CDD1915190F0096F3EB /* GestureSetTable */,
 				A3CBF56B18C0BAA100537127 /* THSignalSourceProperties.xib */,
 			);
 			name = UI;
@@ -4363,6 +4413,38 @@
 				A39B4BD118C7C376004016B2 /* THSignalSourcePopoverContentView.m */,
 			);
 			name = popover;
+			sourceTree = "<group>";
+		};
+		A3AEF60719125FF20093E3CB /* Recognizer Juan */ = {
+			isa = PBXGroup;
+			children = (
+				A3AEF64A191264590093E3CB /* eye.txt */,
+				A3AEF643191260100093E3CB /* FeatureExtractor.h */,
+				A3AEF644191260100093E3CB /* FeatureExtractor.m */,
+				A3AEF645191260100093E3CB /* Helper.h */,
+				A3AEF646191260100093E3CB /* Helper.m */,
+				A3AEF64019125FFF0093E3CB /* Classifier.h */,
+				A3AEF64119125FFF0093E3CB /* Classifier.m */,
+			);
+			name = "Recognizer Juan";
+			sourceTree = "<group>";
+		};
+		A3AEF649191260160093E3CB /* Recognizer */ = {
+			isa = PBXGroup;
+			children = (
+				A31B8CD319150CF10096F3EB /* THGestureSample.h */,
+				A31B8CD419150CF10096F3EB /* THGestureSample.m */,
+				A31B8CD719150E9F0096F3EB /* THGesture.h */,
+				A31B8CD819150E9F0096F3EB /* THGesture.m */,
+				A31B8CDA19150FB10096F3EB /* THGestureSet.h */,
+				A31B8CDB19150FB10096F3EB /* THGestureSet.m */,
+				A3AEF60719125FF20093E3CB /* Recognizer Juan */,
+				A3AEF64C191281E10093E3CB /* THGestureRecognizer.h */,
+				A3AEF64D191281E10093E3CB /* THGestureRecognizer.m */,
+				A3AEF64F191285720093E3CB /* THTrainingsSet.h */,
+				A3AEF650191285720093E3CB /* THTrainingsSet.m */,
+			);
+			name = Recognizer;
 			sourceTree = "<group>";
 		};
 		A3C94A1618D244D30022C928 /* filter */ = {
@@ -4397,22 +4479,23 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
-		A3C94A2F18D2695C0022C928 /* gesture */ = {
+		A3C94A2F18D2695C0022C928 /* gesture classifier */ = {
 			isa = PBXGroup;
 			children = (
 				A3C94A3018D269640022C928 /* model */,
 				A3C94A3118D2696A0022C928 /* UI */,
 			);
-			name = gesture;
+			name = "gesture classifier";
 			sourceTree = "<group>";
 		};
 		A3C94A3018D269640022C928 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				A3C94A3818D26A010022C928 /* THGesture.h */,
-				A3C94A3918D26A010022C928 /* THGesture.m */,
-				A3C94A3A18D26A010022C928 /* THGestureEditable.h */,
-				A3C94A3B18D26A010022C928 /* THGestureEditable.m */,
+				A3AEF649191260160093E3CB /* Recognizer */,
+				A3C94A3818D26A010022C928 /* THGestureClassifier.h */,
+				A3C94A3918D26A010022C928 /* THGestureClassifier.m */,
+				A3C94A3A18D26A010022C928 /* THGestureClassifierEditable.h */,
+				A3C94A3B18D26A010022C928 /* THGestureClassifierEditable.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -4420,11 +4503,11 @@
 		A3C94A3118D2696A0022C928 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				A3C94A3E18D26A170022C928 /* THGesturePaletteItem.h */,
-				A3C94A3F18D26A170022C928 /* THGesturePaletteItem.m */,
-				A3C94A4118D26A290022C928 /* THGestureProperties.h */,
-				A3C94A4218D26A290022C928 /* THGestureProperties.m */,
-				A3C94A4618D292E80022C928 /* THGestureProperties.xib */,
+				A3C94A3E18D26A170022C928 /* THGestureClassifierPaletteItem.h */,
+				A3C94A3F18D26A170022C928 /* THGestureClassifierPaletteItem.m */,
+				A3C94A4118D26A290022C928 /* THGestureClassifierProperties.h */,
+				A3C94A4218D26A290022C928 /* THGestureClassifierProperties.m */,
+				A3C94A4618D292E80022C928 /* THGestureClassifierProperties.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -5081,6 +5164,7 @@
 				9A41454717DE7A060061EDF8 /* musicPlay.png in Resources */,
 				9A41454917DE7A060061EDF8 /* musicPlay@2x.png in Resources */,
 				9A41454B17DE7A060061EDF8 /* pause.png in Resources */,
+				A39AEBE3191562E100F882A0 /* THSignalSourceGestureSetViewController.xib in Resources */,
 				A3CBF56C18C0BAA100537127 /* THSignalSourceProperties.xib in Resources */,
 				9A41454D17DE7A060061EDF8 /* pause@2x.png in Resources */,
 				9A41454F17DE7A060061EDF8 /* accelerometerArrow.png in Resources */,
@@ -5153,6 +5237,7 @@
 				9A4145C117DE7A060061EDF8 /* palette_imageview@2x.png in Resources */,
 				9A4145C317DE7A060061EDF8 /* palette_iphone.png in Resources */,
 				9A4145C517DE7A060061EDF8 /* palette_iphone@2x.png in Resources */,
+				A3AEF64B191264590093E3CB /* eye.txt in Resources */,
 				9A4145C717DE7A060061EDF8 /* palette_iswitch.png in Resources */,
 				9A4145C917DE7A060061EDF8 /* palette_iswitch@2x.png in Resources */,
 				9A4145CB17DE7A060061EDF8 /* palette_label.png in Resources */,
@@ -5274,7 +5359,7 @@
 				9AA4D6EB18AE169100A43433 /* lipoBattery.png in Resources */,
 				9A5BD74F1860C52E00842833 /* triangleFilled@2x.png in Resources */,
 				9A5931D417E5CD4500B20D99 /* propertiesIcon@2x.png in Resources */,
-				A3C94A4718D292E80022C928 /* THGestureProperties.xib in Resources */,
+				A3C94A4718D292E80022C928 /* THGestureClassifierProperties.xib in Resources */,
 				9A5931D617E5CD4500B20D99 /* propertiesIconSelected.png in Resources */,
 				9A5931D817E5CD4500B20D99 /* propertiesIconSelected@2x.png in Resources */,
 				9AB7784817E66B3300F82424 /* THInvocationConnectionProperties.xib in Resources */,
@@ -5684,6 +5769,7 @@
 				9AF5037A167B84B40020241C /* THBuzzerEditableObject.m in Sources */,
 				9AF5037B167B84B40020241C /* THClothe.m in Sources */,
 				9AF5037C167B84B40020241C /* THHardwareComponent.m in Sources */,
+				A31B8CD519150CF10096F3EB /* THGestureSample.m in Sources */,
 				9AF5037D167B84B40020241C /* THHardwareComponentEditableObject.m in Sources */,
 				9AF50380167B84B40020241C /* THCompassLSM303.m in Sources */,
 				9A89429E1836213100B8CA0E /* THJennicProperties.m in Sources */,
@@ -5707,6 +5793,7 @@
 				9AF5038F167B84B40020241C /* THEditor.m in Sources */,
 				9AF50390167B84B40020241C /* THProject.m in Sources */,
 				9AF50391167B84B40020241C /* THSimulableWorldController.m in Sources */,
+				A39AEBE2191562E100F882A0 /* THSignalSourceGestureSetViewController.m in Sources */,
 				9ABC276F180996C200B39D72 /* THLilypadPaletteItem.m in Sources */,
 				9A0F68801886BB2B00B589DC /* THCompassMPU6050Editable.m in Sources */,
 				9AF50392167B84B40020241C /* THiPhone.m in Sources */,
@@ -5714,6 +5801,7 @@
 				9A3165A5182796A200CB3E59 /* THMonitorPaletteItem.m in Sources */,
 				9AF50394167B84B40020241C /* THiPhoneButtonEditableObject.m in Sources */,
 				9AF50395167B84B40020241C /* THiPhoneControl.m in Sources */,
+				A3AEF651191285720093E3CB /* THTrainingsSet.m in Sources */,
 				9AF50396167B84B40020241C /* THiPhoneControlEditableObject.m in Sources */,
 				9AF50397167B84B40020241C /* THiPhoneEditableObject.m in Sources */,
 				9AF50398167B84B40020241C /* THiSwitch.m in Sources */,
@@ -5765,8 +5853,9 @@
 				9AF503BE167B84B40020241C /* THLabelProperties.m in Sources */,
 				9A1FBE08187F208400699B61 /* THI2CMessage.m in Sources */,
 				A39B4BCE18C7BF26004016B2 /* THSignalSourcePopoverContentViewController.m in Sources */,
-				A3C94A4318D26A290022C928 /* THGestureProperties.m in Sources */,
+				A3C94A4318D26A290022C928 /* THGestureClassifierProperties.m in Sources */,
 				9AF503BF167B84B40020241C /* THLedProperties.m in Sources */,
+				A31B8CD919150E9F0096F3EB /* THGesture.m in Sources */,
 				9A31659D1827955200CB3E59 /* THMonitorEditable.m in Sources */,
 				9AF503C1167B84B40020241C /* THLilypadPropertiesPinView.m in Sources */,
 				9AF503C2167B84B40020241C /* THMusicPlayerProperties.m in Sources */,
@@ -5775,6 +5864,7 @@
 				9AF503C4167B84B40020241C /* THTouchpadProperties.m in Sources */,
 				9AF503C5167B84B40020241C /* THValueProperties.m in Sources */,
 				9AA4D72D18AE16E600A43433 /* THBLELilyPad.m in Sources */,
+				A3AEF648191260100093E3CB /* Helper.m in Sources */,
 				9AD7046C18AA98F00080CD2E /* THGraphTextView.m in Sources */,
 				9AF503CA167B84B40020241C /* THColorPicker.m in Sources */,
 				9AF503CC167B84B40020241C /* THClientHelper.m in Sources */,
@@ -5791,6 +5881,7 @@
 				9A894299183620BD00B8CA0E /* THJennicPaletteItem.m in Sources */,
 				9ABC27B81809B6EC00B39D72 /* THAccelerometerPaletteItem.m in Sources */,
 				9AB29B46167F4DF800F5AF62 /* THImageViewEditable.m in Sources */,
+				A3AEF647191260100093E3CB /* FeatureExtractor.m in Sources */,
 				9AB29B4A167F4F2600F5AF62 /* THImageViewProperties.m in Sources */,
 				9AB29B59167F78C300F5AF62 /* THHelper.m in Sources */,
 				9A3165A1182795D000CB3E59 /* THMonitor.m in Sources */,
@@ -5816,12 +5907,13 @@
 				9AFB7DDE1833BB5300694CCE /* THMonitorProperties.m in Sources */,
 				9ABC276018098F2400B39D72 /* THLilypadEditable.m in Sources */,
 				9A5F8D8316A2C46E000DF472 /* THContactBook.m in Sources */,
+				A3AEF64219125FFF0093E3CB /* Classifier.m in Sources */,
 				9A5F8D8516A2C46E000DF472 /* THContactBookEditable.m in Sources */,
 				9A5F8D8A16A2C4E4000DF472 /* THContactBookProperties.m in Sources */,
 				9A0F687B1886B9AC00B589DC /* THCompassMPU6050.m in Sources */,
 				9A5F8E2A16A2C6EE000DF472 /* THContactBookPaletteItem.m in Sources */,
 				9A93841A16D651D700A41BD2 /* THTimer.m in Sources */,
-				A3C94A3D18D26A010022C928 /* THGestureEditable.m in Sources */,
+				A3C94A3D18D26A010022C928 /* THGestureClassifierEditable.m in Sources */,
 				9A93846116D652EC00A41BD2 /* THTimerEditable.m in Sources */,
 				A3C94A1B18D2451F0022C928 /* THFilter.m in Sources */,
 				9A93846716D6534500A41BD2 /* THTimerProperties.m in Sources */,
@@ -5842,6 +5934,7 @@
 				9A097781172693E60028A6B4 /* THSoundPaletteItem.m in Sources */,
 				9A5D047118844B50006E9348 /* THSoundEffect.m in Sources */,
 				9A85721C172804B600510D23 /* THSoundPicker.m in Sources */,
+				A31B8CDC19150FB10096F3EB /* THGestureSet.m in Sources */,
 				9A8572B7172AD64C00510D23 /* THAsset.m in Sources */,
 				A3CBF5A718C0BBF600537127 /* THSignalSourceProperties.m in Sources */,
 				9A8572BC172AD6D900510D23 /* THSoundAsset.m in Sources */,
@@ -5859,7 +5952,7 @@
 				9A8426C417564A80009495AB /* TFPropertyInvocation.m in Sources */,
 				9A8426C717564A80009495AB /* TFEditableObject.m in Sources */,
 				9A8426CD17564A80009495AB /* TFLayer.m in Sources */,
-				A3C94A4018D26A170022C928 /* THGesturePaletteItem.m in Sources */,
+				A3C94A4018D26A170022C928 /* THGestureClassifierPaletteItem.m in Sources */,
 				9A7B65131834D809009D0103 /* THCompassProperties.m in Sources */,
 				9ABC275718098F2400B39D72 /* THBoard.m in Sources */,
 				9A8426D317564A80009495AB /* TFSimulableObject.m in Sources */,
@@ -5892,7 +5985,7 @@
 				9A59323C17E5D58300B20D99 /* THPaletteItemProperties.m in Sources */,
 				9A59323E17E5D58300B20D99 /* THTriggerableProperties.m in Sources */,
 				9A59324017E5D58300B20D99 /* THViewableProperties.m in Sources */,
-				A3C94A3C18D26A010022C928 /* THGesture.m in Sources */,
+				A3C94A3C18D26A010022C928 /* THGestureClassifier.m in Sources */,
 				9A59324217E5D58300B20D99 /* THImagePickerController.m in Sources */,
 				9A59324417E5D58300B20D99 /* THCustomPaletteItem.m in Sources */,
 				9A59324617E5D58300B20D99 /* THDraggedPaletteItem.m in Sources */,
@@ -5909,6 +6002,7 @@
 				9AA4D73718AE171D00A43433 /* THLipoBatteryEditable.m in Sources */,
 				9A59325017E5D58300B20D99 /* THTabbarSection.m in Sources */,
 				9A59325217E5D58300B20D99 /* THTabbarView.m in Sources */,
+				A3AEF64E191281E10093E3CB /* THGestureRecognizer.m in Sources */,
 				9AD704AB18AA9AF70080CD2E /* THGraphViewHelper.m in Sources */,
 				9A59325417E5D58300B20D99 /* THTabbarViewController.m in Sources */,
 				9AB777F417E5FF4100F82424 /* THInvocationConnectionLine.m in Sources */,
