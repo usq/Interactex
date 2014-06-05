@@ -19,8 +19,8 @@
 {
     [BLEDiscovery sharedInstance].discoveryDelegate = self;
     [BLEDiscovery sharedInstance].peripheralDelegate = self;
-    
-    [[BLEDiscovery sharedInstance] startScanningForSupportedUUIDs];
+
+
     
     self.session = [[GKSession alloc] initWithSessionID:@"flexSession"
                                                   displayName:nil
@@ -40,6 +40,7 @@
     }
     if(state == GKPeerStateConnected)
     {
+            [[BLEDiscovery sharedInstance] startScanningForUUIDString:@"713d0000-503e-4c75-ba94-3148f18d941e"];
         self.connectedPeer = peerID;
         self.sessionReady = YES;
     }
@@ -85,13 +86,10 @@
 - (void)didReceiveData:(uint8_t *)buffer
                 lenght:(NSInteger)originalLength
 {
-    
-    uint16_t k = buffer[14];
-    k<<=8;
-    k = k | buffer[15];
     if(self.sessionReady)
     {
-        NSData *dataToSend = [NSData dataWithBytes:&k length:sizeof(uint16_t)];
+        NSData *dataToSend = [NSData dataWithBytes:buffer
+                                            length:originalLength];
         NSError *e;
         [self.session sendData:dataToSend
                        toPeers:@[self.connectedPeer]

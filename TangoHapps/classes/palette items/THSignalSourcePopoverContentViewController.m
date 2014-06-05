@@ -43,11 +43,42 @@
                        context:(void *)context
 {
     NSNumber *n = change[NSKeyValueChangeNewKey];
-    float num = [n floatValue];
-    num -= 100; //correcting offset 130 to 282 -> 30 to 182
-    float normalized = num/180.f;
+    uint32_t d = [n unsignedIntValue];
+
+    unsigned char *data = &d;
+
+    uint16_t value1 = data[0];
+    value1 <<= 8;
+    value1 |= data[1];
     
-    [self.graphView addValue1:normalized * 182.f * 0.9];
+    uint16_t value2 = data[2];
+    value2 <<= 8;
+    value2 |= data[3];
+    
+    
+    
+    /*
+    unsigned char *data = (unsigned char *)[characteristic.value bytes];
+    uint16_t value = data[0];
+    value <<= 8;
+    value |= data[1];
+    
+    uint16_t value2 = data[2];
+    value2 <<= 8;
+    value2 |= data[3];
+    */
+    
+    float n1 = value1;
+    float n2 = value2;
+    
+    
+    
+    n1 -= 100; //correcting offset 130 to 282 -> 30 to 182
+    n2 -= 100; //correcting offset 130 to 282 -> 30 to 182
+    float normalized1 = n1/180.f;
+    float normalized2 = n2/180.f;
+    [self.graphView addValue1:normalized1 * 182.f * 0.9];
+    [self.graphView addValue2:normalized2 * 182.f * 0.9];
 }
 
 

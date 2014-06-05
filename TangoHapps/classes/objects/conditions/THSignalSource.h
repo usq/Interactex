@@ -22,6 +22,6 @@
 - (void)startRecording;
 - (void)stopRecording;
 - (void)saveRecording;
-- (void)recordValue:(uint16_t)value;
+- (void)recordValue:(uint32_t)value;
 - (void)cropDataToPercentages;
 @end

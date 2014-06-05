@@ -162,41 +162,41 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     THGestureSet *newGestureSet = [[THGestureSet alloc] init];
     [self.gestureSets addObject:newGestureSet];
 
-    THSignalSourceGestureSetViewController *viewController = [[THSignalSourceGestureSetViewController alloc]
-                                                              initWithGestureSet:newGestureSet];
+//    THSignalSourceGestureSetViewController *viewController = [[THSignalSourceGestureSetViewController alloc]
+//                                                              initWithGestureSet:newGestureSet];
     
 //    [self.navController pushViewController:viewController
 //                                  animated:YES];
     
-    [self presentViewController:viewController
-                       animated:YES completion:nil];
-//    
+//    [self presentViewController:viewController
+//                       animated:YES completion:nil];
+//
 //    
 //    
 //    UIPopoverController *p = [[UIPopoverController alloc] initWithContentViewController:namingViewController];
+//
 //    
 //    
 //    
 //    
-//    
-//    CCDirector *director = [CCDirector sharedDirector];
-//    CGRect rect = [sender convertRect:sender.bounds
-//                               toView:director.view];
-//    
-//    
+    CCDirector *director = [CCDirector sharedDirector];
+    CGRect rect = [sender convertRect:sender.bounds
+                               toView:director.view];
+    
+    
 //    [self presentPopoverWithConcentViewController:namingViewController
 //                                         fromRect:rect];
-//    
+    
 //    //get new name
     //create new empty sample
-    /*
-    while([[NSFileManager defaultManager] fileExistsAtPath:[self filePathWithIndex:self.lastSampleIndex]])
-    {
-        self.lastSampleIndex ++;
-    }
-    NSString *newFile = [self filePathWithIndex:self.lastSampleIndex];
-    NSString *fileName = [[newFile componentsSeparatedByString:@"/"] lastObject];
-    self.gestures = [@[fileName] arrayByAddingObjectsFromArray:self.gestures];
+
+//    while([[NSFileManager defaultManager] fileExistsAtPath:[self filePathWithIndex:self.lastSampleIndex]])
+//    {
+//        self.lastSampleIndex ++;
+//    }
+//    NSString *newFile = [self filePathWithIndex:self.lastSampleIndex];
+//    NSString *fileName = [[newFile componentsSeparatedByString:@"/"] lastObject];
+//    self.gestures = [@[fileName] arrayByAddingObjectsFromArray:self.gestures];
     [self.tableView reloadData];
     
     THSignalSourceEditable *signalSourceEditable = (THSignalSourceEditable *)self.editableObject;
@@ -205,8 +205,9 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                                                                                                                                      bundle:[NSBundle mainBundle]
                                                                                                                        signalSourceEditable:signalSourceEditable];
     
-   
-     */
+   [self presentPopoverWithConcentViewController:contentViewController
+                                        fromRect:self.addRecordingButton.frame];
+
 }
 
 

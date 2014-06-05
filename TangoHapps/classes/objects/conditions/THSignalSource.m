@@ -113,7 +113,7 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
 }
 
 
-- (void)recordValue:(uint16_t)value
+- (void)recordValue:(uint32_t)value
 {
     while([self.recordedData count] > RECORDED_MAXCOUNT)
     {

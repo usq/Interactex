@@ -157,10 +157,25 @@ didReceiveConnectionRequestFromPeer:(NSString *)peerID
 {
     if(self.recording)
     {
+
+        uint32_t signalValue = *(uint32_t *)[data bytes];
+        
+        uint32_t backup = signalValue;
+        uint16_t value2 = (uint16_t)backup;
+        backup >>= 8;
+        uint16_t value1 = (uint16_t)backup;
+        
+        NSLog(@"value1: %i   value2:  %i", value1, value2);
+        
+        //const uint8_t *data = ((uint8_t *)[data bytes]);
         
         
-        uint16_t signalValue = *(uint16_t *)[data bytes];
+        
+//        uint16_t signalValue = *(uint16_t *)[data bytes];
         THSignalSource *source = (THSignalSource *)self.simulableObject;
+        
+        
+        
         [source recordValue:signalValue];
     }
 }
