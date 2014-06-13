@@ -1263,6 +1263,7 @@
 		9AFB7E6A1833DE6400694CCE /* THBLECommunicationModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AFB7E661833DE6400694CCE /* THBLECommunicationModule.m */; };
 		9AFB7E6B1833DE6400694CCE /* THClientPresetsGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AFB7E681833DE6400694CCE /* THClientPresetsGenerator.m */; };
 		9AFB7E6C1833DE6400694CCE /* THClientPresetsGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AFB7E681833DE6400694CCE /* THClientPresetsGenerator.m */; };
+		A30DEA07194B3104007B38EF /* THMRecordedSignal.m in Sources */ = {isa = PBXBuildFile; fileRef = A30DEA06194B3104007B38EF /* THMRecordedSignal.m */; };
 		A31B8CD519150CF10096F3EB /* THGestureSample.m in Sources */ = {isa = PBXBuildFile; fileRef = A31B8CD419150CF10096F3EB /* THGestureSample.m */; };
 		A31B8CD919150E9F0096F3EB /* THGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = A31B8CD819150E9F0096F3EB /* THGesture.m */; };
 		A31B8CDC19150FB10096F3EB /* THGestureSet.m in Sources */ = {isa = PBXBuildFile; fileRef = A31B8CDB19150FB10096F3EB /* THGestureSet.m */; };
@@ -1306,6 +1307,10 @@
 		A3C94A4518D28DEF0022C928 /* doubletick_long.txt in Resources */ = {isa = PBXBuildFile; fileRef = A3C94A4418D28DEF0022C928 /* doubletick_long.txt */; };
 		A3C94A4718D292E80022C928 /* THGestureClassifierProperties.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3C94A4618D292E80022C928 /* THGestureClassifierProperties.xib */; };
 		A3C94A4918D325E60022C928 /* THFilterProperties.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3C94A4818D325E60022C928 /* THFilterProperties.xib */; };
+		A3CBA61C194B2AAA00F44D48 /* THMSignalSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CBA61B194B2AAA00F44D48 /* THMSignalSource.m */; };
+		A3CBA61D194B2AAA00F44D48 /* THMSignalSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CBA61B194B2AAA00F44D48 /* THMSignalSource.m */; };
+		A3CBA626194B2F5700F44D48 /* THMSignalRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CBA625194B2F5700F44D48 /* THMSignalRecorder.m */; };
+		A3CBA627194B2F5700F44D48 /* THMSignalRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CBA625194B2F5700F44D48 /* THMSignalRecorder.m */; };
 		A3CBF54018BFFA1C00537127 /* THSignalSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CBF53F18BFFA1C00537127 /* THSignalSource.m */; };
 		A3CBF54318BFFE3400537127 /* THSignalSourceEditable.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CBF54218BFFE3400537127 /* THSignalSourceEditable.m */; };
 		A3CBF54618C000ED00537127 /* THSignalSourcePaletteItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CBF54518C000ED00537127 /* THSignalSourcePaletteItem.m */; };
@@ -2702,6 +2707,8 @@
 		9AFB7E661833DE6400694CCE /* THBLECommunicationModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THBLECommunicationModule.m; sourceTree = "<group>"; };
 		9AFB7E671833DE6400694CCE /* THClientPresetsGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THClientPresetsGenerator.h; sourceTree = "<group>"; };
 		9AFB7E681833DE6400694CCE /* THClientPresetsGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THClientPresetsGenerator.m; sourceTree = "<group>"; };
+		A30DEA05194B3104007B38EF /* THMRecordedSignal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THMRecordedSignal.h; path = gesture/THMRecordedSignal.h; sourceTree = "<group>"; };
+		A30DEA06194B3104007B38EF /* THMRecordedSignal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THMRecordedSignal.m; path = gesture/THMRecordedSignal.m; sourceTree = "<group>"; };
 		A31B8CD319150CF10096F3EB /* THGestureSample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THGestureSample.h; path = TangoHapps/classes/gesturerecognition/THGestureSample.h; sourceTree = SOURCE_ROOT; };
 		A31B8CD419150CF10096F3EB /* THGestureSample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THGestureSample.m; path = TangoHapps/classes/gesturerecognition/THGestureSample.m; sourceTree = SOURCE_ROOT; };
 		A31B8CD719150E9F0096F3EB /* THGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THGesture.h; path = TangoHapps/classes/gesturerecognition/THGesture.h; sourceTree = SOURCE_ROOT; };
@@ -2767,6 +2774,10 @@
 		A3C94A4418D28DEF0022C928 /* doubletick_long.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = doubletick_long.txt; sourceTree = "<group>"; };
 		A3C94A4618D292E80022C928 /* THGestureClassifierProperties.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = THGestureClassifierProperties.xib; path = TangoHapps/resources/gui/properties/THGestureClassifierProperties.xib; sourceTree = SOURCE_ROOT; };
 		A3C94A4818D325E60022C928 /* THFilterProperties.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = THFilterProperties.xib; path = TangoHapps/resources/gui/properties/THFilterProperties.xib; sourceTree = SOURCE_ROOT; };
+		A3CBA61A194B2AAA00F44D48 /* THMSignalSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THMSignalSource.h; path = gesture/THMSignalSource.h; sourceTree = "<group>"; };
+		A3CBA61B194B2AAA00F44D48 /* THMSignalSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THMSignalSource.m; path = gesture/THMSignalSource.m; sourceTree = "<group>"; };
+		A3CBA624194B2F5700F44D48 /* THMSignalRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THMSignalRecorder.h; path = gesture/THMSignalRecorder.h; sourceTree = "<group>"; };
+		A3CBA625194B2F5700F44D48 /* THMSignalRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THMSignalRecorder.m; path = gesture/THMSignalRecorder.m; sourceTree = "<group>"; };
 		A3CBF53E18BFFA1C00537127 /* THSignalSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THSignalSource.h; sourceTree = "<group>"; };
 		A3CBF53F18BFFA1C00537127 /* THSignalSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THSignalSource.m; sourceTree = "<group>"; };
 		A3CBF54118BFFE3400537127 /* THSignalSourceEditable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THSignalSourceEditable.h; sourceTree = "<group>"; };
@@ -3716,7 +3727,8 @@
 		9AF50205167B84B40020241C /* objects */ = {
 			isa = PBXGroup;
 			children = (
-				A39B4BC618C7BE53004016B2 /* newObjects */,
+				A3CBA617194B2A2700F44D48 /* gesture objects */,
+				A39B4BC618C7BE53004016B2 /* gesture_old */,
 				9AF50206167B84B40020241C /* programming */,
 				9AF50264167B84B40020241C /* software */,
 				9AF50218167B84B40020241C /* hardware */,
@@ -4369,14 +4381,14 @@
 			path = conditions;
 			sourceTree = "<group>";
 		};
-		A39B4BC618C7BE53004016B2 /* newObjects */ = {
+		A39B4BC618C7BE53004016B2 /* gesture_old */ = {
 			isa = PBXGroup;
 			children = (
 				A3C94A2F18D2695C0022C928 /* gesture classifier */,
 				A3C94A1618D244D30022C928 /* filter */,
 				A39B4BC518C7BDFB004016B2 /* signalSource */,
 			);
-			name = newObjects;
+			name = gesture_old;
 			sourceTree = "<group>";
 		};
 		A39B4BC718C7BEAF004016B2 /* model */ = {
@@ -4510,6 +4522,75 @@
 				A3C94A4618D292E80022C928 /* THGestureClassifierProperties.xib */,
 			);
 			name = UI;
+			sourceTree = "<group>";
+		};
+		A3CBA617194B2A2700F44D48 /* gesture objects */ = {
+			isa = PBXGroup;
+			children = (
+				A3CBA623194B2EBB00F44D48 /* recorder */,
+				A3CBA622194B2DA200F44D48 /* classifier */,
+				A3CBA621194B2D9000F44D48 /* recognizer */,
+				A3CBA620194B2D1600F44D48 /* gesture */,
+				A3CBA61F194B2D0E00F44D48 /* filter */,
+				A3CBA618194B2A3300F44D48 /* signalSource */,
+			);
+			name = "gesture objects";
+			sourceTree = "<group>";
+		};
+		A3CBA618194B2A3300F44D48 /* signalSource */ = {
+			isa = PBXGroup;
+			children = (
+				A3CBA619194B2A7700F44D48 /* model */,
+			);
+			name = signalSource;
+			sourceTree = "<group>";
+		};
+		A3CBA619194B2A7700F44D48 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				A3CBA61A194B2AAA00F44D48 /* THMSignalSource.h */,
+				A3CBA61B194B2AAA00F44D48 /* THMSignalSource.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		A3CBA61F194B2D0E00F44D48 /* filter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = filter;
+			sourceTree = "<group>";
+		};
+		A3CBA620194B2D1600F44D48 /* gesture */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = gesture;
+			sourceTree = "<group>";
+		};
+		A3CBA621194B2D9000F44D48 /* recognizer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = recognizer;
+			sourceTree = "<group>";
+		};
+		A3CBA622194B2DA200F44D48 /* classifier */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = classifier;
+			sourceTree = "<group>";
+		};
+		A3CBA623194B2EBB00F44D48 /* recorder */ = {
+			isa = PBXGroup;
+			children = (
+				A3CBA624194B2F5700F44D48 /* THMSignalRecorder.h */,
+				A3CBA625194B2F5700F44D48 /* THMSignalRecorder.m */,
+				A30DEA05194B3104007B38EF /* THMRecordedSignal.h */,
+				A30DEA06194B3104007B38EF /* THMRecordedSignal.m */,
+			);
+			name = recorder;
 			sourceTree = "<group>";
 		};
 		A3CBF55B18C07F4900537127 /* flex */ = {
@@ -5832,6 +5913,7 @@
 				9AF503AE167B84B40020241C /* THLightSensorPaletteItem.m in Sources */,
 				9AF503AF167B84B40020241C /* THMusicPlayerPaletteItem.m in Sources */,
 				9AF503B0167B84B40020241C /* THPotentiometerPaletteItem.m in Sources */,
+				A30DEA07194B3104007B38EF /* THMRecordedSignal.m in Sources */,
 				9ABC275A18098F2400B39D72 /* THBoardEditable.m in Sources */,
 				9AF503B1167B84B40020241C /* THSwitchPaletteItem.m in Sources */,
 				9AF503B2167B84B40020241C /* THTouchpadPaletteItem.m in Sources */,
@@ -5956,6 +6038,7 @@
 				9A7B65131834D809009D0103 /* THCompassProperties.m in Sources */,
 				9ABC275718098F2400B39D72 /* THBoard.m in Sources */,
 				9A8426D317564A80009495AB /* TFSimulableObject.m in Sources */,
+				A3CBA626194B2F5700F44D48 /* THMSignalRecorder.m in Sources */,
 				9ABC276B1809960D00B39D72 /* THSimpleLilypadPaletteItem.m in Sources */,
 				9A84270C17564A80009495AB /* TFConstants.m in Sources */,
 				9A84270F17564A80009495AB /* TFFileUtils.m in Sources */,
@@ -5971,6 +6054,7 @@
 				9A56CDC617D8F357001021B2 /* THStringValuePaletteItem.m in Sources */,
 				9A56D05317D9C4DB001021B2 /* THCollectionProjectCell.m in Sources */,
 				A3CBF54018BFFA1C00537127 /* THSignalSource.m in Sources */,
+				A3CBA61C194B2AAA00F44D48 /* THMSignalSource.m in Sources */,
 				9A56D05B17D9CD39001021B2 /* THProjectDraggableCell.m in Sources */,
 				9AA4D74818AE17A400A43433 /* THSimpleLilypadProperties.m in Sources */,
 				9A56D19617DBDAA9001021B2 /* THDirector.m in Sources */,
@@ -6328,6 +6412,7 @@
 				9AF5046D167B85710020241C /* THUtils.m in Sources */,
 				9AF5046E167B85A00020241C /* THHardwareComponent.m in Sources */,
 				9AF5046F167B85C30020241C /* THConditionObject.m in Sources */,
+				A3CBA627194B2F5700F44D48 /* THMSignalRecorder.m in Sources */,
 				9A3165A2182795D000CB3E59 /* THMonitor.m in Sources */,
 				9AF50473167B860E0020241C /* main.m in Sources */,
 				9AB29C04167F89C100F5AF62 /* THProgrammingElement.m in Sources */,
@@ -6345,6 +6430,7 @@
 				9A09772F17267CFC0028A6B4 /* THSound.m in Sources */,
 				9AFB7DCE1832AAD100694CCE /* THClientProjectDraggableCell.m in Sources */,
 				9A7E4D7318361A5000657B72 /* THJennic.m in Sources */,
+				A3CBA61D194B2AAA00F44D48 /* THMSignalSource.m in Sources */,
 				9A8572B8172AD64C00510D23 /* THAsset.m in Sources */,
 				9A8572BD172AD6D900510D23 /* THSoundAsset.m in Sources */,
 				9A8572C2172AD7F500510D23 /* THAssetCollection.m in Sources */,
