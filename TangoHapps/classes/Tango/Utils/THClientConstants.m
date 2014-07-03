@@ -107,6 +107,7 @@ NSString * const kEventTriggered = @"triggered";
 
 NSString * const kEventRecognized = @"recognized";
 NSString * const kEventNotRecognized = @"norRecognized";
+NSString * const kEventInitialized = @"initialized";
 
 //methods
 NSString * const kMethodTurnOn = @"turnOn";
