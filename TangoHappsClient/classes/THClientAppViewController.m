@@ -65,6 +65,10 @@ You should have received a copy of the GNU General Public License along with thi
 float const kScanningTimeout = 3.0f;
 float const kConnectingTimeout = 100.0f;
 
+@interface THClientAppViewController ()<BLEServiceDataDelegate>
+
+@end
+
 @implementation THClientAppViewController
 /*
 -(void) pushLilypadStateToAllVirtualClients{
@@ -247,7 +251,11 @@ float const kConnectingTimeout = 100.0f;
     }
 }
 
--(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+-(void) observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
     
     if([keyPath isEqualToString:@"value"]){
         
@@ -275,24 +283,34 @@ float const kConnectingTimeout = 100.0f;
 -(void) startScanningDevices{
     
     [self updateStartButtonToScanning];
-    [[BLEDiscovery sharedInstance] startScanningForSupportedUUIDs];
-    scanningTimer = [NSTimer scheduledTimerWithTimeInterval:kScanningTimeout target:self selector:@selector(scanningTimedOut) userInfo:nil repeats:NO];
+    [[BLEDiscovery sharedInstance] startScanningForUUIDString:@"713d0000-503e-4c75-ba94-3148f18d941e"];
+    scanningTimer = [NSTimer scheduledTimerWithTimeInterval:kScanningTimeout
+                                                     target:self
+                                                   selector:@selector(scanningTimedOut)
+                                                   userInfo:nil
+                                                    repeats:NO];
 }
 
 #pragma mark Ble Interaction
 
--(void) connectToBle{
+- (void)connectToBle
+{
     if([BLEDiscovery sharedInstance].foundPeripherals.count > 0){
         CBPeripheral * peripheral = [[BLEDiscovery sharedInstance].foundPeripherals objectAtIndex:0];
         [[BLEDiscovery sharedInstance] connectPeripheral:peripheral];
         isConnecting = YES;
         
         NSTimeInterval interval = kConnectingTimeout;
-        connectingTimer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(connectingTimedOut) userInfo:nil repeats:NO];
+        connectingTimer = [NSTimer scheduledTimerWithTimeInterval:interval 
+                                                           target:self
+                                                         selector:@selector(connectingTimedOut)
+                                                         userInfo:nil
+                                                          repeats:NO];
     }
 }
 
--(void) connectingTimedOut{
+- (void)connectingTimedOut
+{
     
     [connectingTimer invalidate];
     connectingTimer = nil;
@@ -300,7 +318,8 @@ float const kConnectingTimeout = 100.0f;
     NSLog(@"stopping connection");
     isConnecting = NO;
     
-    if([BLEDiscovery sharedInstance].currentPeripheral){
+    if([BLEDiscovery sharedInstance].currentPeripheral)
+    {
         [[BLEDiscovery sharedInstance] disconnectCurrentPeripheral];
     }
     
@@ -318,15 +337,17 @@ float const kConnectingTimeout = 100.0f;
 
 #pragma mark LeDiscoveryDelegate
 
-- (void) discoveryDidRefresh {
+- (void)discoveryDidRefresh
+{
     //[self updateModeButton];
     
-    if([BLEDiscovery sharedInstance].foundPeripherals == 0){
+    if([BLEDiscovery sharedInstance].foundPeripherals == 0)
+    {
         [self updateStartButtonToScan];
     }
 }
 
-- (void) peripheralDiscovered:(CBPeripheral*) peripheral {
+- (void)peripheralDiscovered:(CBPeripheral*) peripheral {
     NSLog(@"peripheral discovered");
     
     [scanningTimer invalidate];
@@ -339,7 +360,8 @@ float const kConnectingTimeout = 100.0f;
     //[[LeDiscovery sharedInstance] connectPeripheral:peripheral];
 }
 
-- (void) discoveryStatePoweredOff {
+- (void)discoveryStatePoweredOff
+{
     //[self updateStartButton];
     
     NSLog(@"Powered Off");
@@ -348,7 +370,8 @@ float const kConnectingTimeout = 100.0f;
 
 #pragma mark BleServiceProtocol
 
--(void) updateStartButtonToScan{
+-(void) updateStartButtonToScan
+{
     
     self.startButton.tintColor = nil;
     self.startButton.title = @"Scan";
@@ -428,27 +451,27 @@ float const kConnectingTimeout = 100.0f;
     
     isConnecting = NO;
     
-    THBLECommunicationModule * bleCommunicationModule = [[THBLECommunicationModule alloc] init];
-    bleCommunicationModule.bleService = service;
-    bleCommunicationModule.firmataController = self.firmataController;
-    
-    service.dataDelegate = bleCommunicationModule;
-    
-    self.firmataController.communicationModule = bleCommunicationModule;
-    
+    service.dataDelegate = self;
     self.isRunningProject = YES;
     
     [self.currentProject startSimulating];
-    [self.firmataController sendFirmwareRequest];
 }
 
--(void) bleServiceDidReset {
+- (void)didReceiveData:(uint8_t *)buffer
+                lenght:(NSInteger)originalLength
+{
+    NSLog(@"got data from device");
+}
+
+- (void)bleServiceDidReset
+{
     //_bleService = nil;
 }
 
 #pragma mark Sending
 
--(NSMutableArray*) digitalPinsForBoard:(THBoard*) board{
+- (NSMutableArray*)digitalPinsForBoard:(THBoard*)board
+{
     NSMutableArray * array = [NSMutableArray array];
     for (THBoardPin * pin in board.pins) {
         if(pin.type == kPintypeDigital){
@@ -458,7 +481,8 @@ float const kConnectingTimeout = 100.0f;
     return array;
 }
 
--(void) sendDigitalOutputForPin:(THBoardPin*) pin{
+- (void)sendDigitalOutputForPin:(THBoardPin*)pin
+{
     
     THBoard * board = [self.currentProject.boards objectAtIndex:0];
     NSMutableArray * digitalPins = [self digitalPinsForBoard:board];
@@ -468,7 +492,8 @@ float const kConnectingTimeout = 100.0f;
     
     int port = pin.number / 8;
     int value = 0;
-    for (int i=0; i < 8; i++) {
+    for (int i=0; i < 8; i++)
+    {
         int pinIdx = port * 8 + i - firstPinIdx;
 
         if(pinIdx >= (int)digitalPins.count){

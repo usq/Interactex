@@ -1286,6 +1286,14 @@
 		A3AEF64B191264590093E3CB /* eye.txt in Resources */ = {isa = PBXBuildFile; fileRef = A3AEF64A191264590093E3CB /* eye.txt */; };
 		A3AEF64E191281E10093E3CB /* THGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AEF64D191281E10093E3CB /* THGestureRecognizer.m */; };
 		A3AEF651191285720093E3CB /* THTrainingsSet.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AEF650191285720093E3CB /* THTrainingsSet.m */; };
+		A3BCF5331966AE0C00DBEA2F /* THSignalSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CBF53F18BFFA1C00537127 /* THSignalSource.m */; };
+		A3BCF56C1966AE1B00DBEA2F /* THGestureClassifier.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C94A3918D26A010022C928 /* THGestureClassifier.m */; };
+		A3BCF56F1966AEF300DBEA2F /* THGloveBLEConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BCF56E1966AEF300DBEA2F /* THGloveBLEConnector.m */; };
+		A3BCF5701966AEF300DBEA2F /* THGloveBLEConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BCF56E1966AEF300DBEA2F /* THGloveBLEConnector.m */; };
+		A3BCF5721966B06200DBEA2F /* THGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AEF64D191281E10093E3CB /* THGestureRecognizer.m */; };
+		A3BCF5731966B06B00DBEA2F /* FeatureExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AEF644191260100093E3CB /* FeatureExtractor.m */; };
+		A3BCF5741966B07000DBEA2F /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AEF646191260100093E3CB /* Helper.m */; };
+		A3BCF5751966B07200DBEA2F /* Classifier.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AEF64119125FFF0093E3CB /* Classifier.m */; };
 		A3C949DA18D244BB0022C928 /* filter.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C949D618D244BB0022C928 /* filter.png */; };
 		A3C949DB18D244BB0022C928 /* filter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C949D718D244BB0022C928 /* filter@2x.png */; };
 		A3C949DC18D244BB0022C928 /* palette_filter.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C949D818D244BB0022C928 /* palette_filter.png */; };
@@ -2739,6 +2747,8 @@
 		A3AEF64D191281E10093E3CB /* THGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THGestureRecognizer.m; sourceTree = "<group>"; };
 		A3AEF64F191285720093E3CB /* THTrainingsSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THTrainingsSet.h; sourceTree = "<group>"; };
 		A3AEF650191285720093E3CB /* THTrainingsSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THTrainingsSet.m; sourceTree = "<group>"; };
+		A3BCF56D1966AEF300DBEA2F /* THGloveBLEConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THGloveBLEConnector.h; sourceTree = "<group>"; };
+		A3BCF56E1966AEF300DBEA2F /* THGloveBLEConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THGloveBLEConnector.m; sourceTree = "<group>"; };
 		A3C949D618D244BB0022C928 /* filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filter.png; sourceTree = "<group>"; };
 		A3C949D718D244BB0022C928 /* filter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter@2x.png"; sourceTree = "<group>"; };
 		A3C949D818D244BB0022C928 /* palette_filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = palette_filter.png; sourceTree = "<group>"; };
@@ -3659,6 +3669,7 @@
 				9AFB7DD11832AE2600694CCE /* THClientTableProjectCell.m */,
 				A3EBD41E18E23C71002B16DD /* THSlimConnectionClientController.h */,
 				A3EBD41F18E23C71002B16DD /* THSlimConnectionClientController.m */,
+				A3BCF5711966AEF800DBEA2F /* glove ble connector */,
 			);
 			path = classes;
 			sourceTree = "<group>";
@@ -4445,6 +4456,15 @@
 				A3AEF650191285720093E3CB /* THTrainingsSet.m */,
 			);
 			name = Recognizer;
+			sourceTree = "<group>";
+		};
+		A3BCF5711966AEF800DBEA2F /* glove ble connector */ = {
+			isa = PBXGroup;
+			children = (
+				A3BCF56D1966AEF300DBEA2F /* THGloveBLEConnector.h */,
+				A3BCF56E1966AEF300DBEA2F /* THGloveBLEConnector.m */,
+			);
+			name = "glove ble connector";
 			sourceTree = "<group>";
 		};
 		A3C94A1618D244D30022C928 /* filter */ = {
@@ -5941,6 +5961,7 @@
 				9A8572C1172AD7F500510D23 /* THAssetCollection.m in Sources */,
 				9A8426A617564A80009495AB /* TFConnectionLine.m in Sources */,
 				9A8426AC17564A80009495AB /* TFMethodSelectionPopup.m in Sources */,
+				A3BCF56F1966AEF300DBEA2F /* THGloveBLEConnector.m in Sources */,
 				9A8426B217564A80009495AB /* TFAction.m in Sources */,
 				9A8426B517564A80009495AB /* TFEvent.m in Sources */,
 				9A8426B817564A80009495AB /* TFEventActionPair.m in Sources */,
@@ -6299,6 +6320,7 @@
 				9AF50450167B84D90020241C /* THPin.m in Sources */,
 				9AF50451167B84D90020241C /* THPinValue.m in Sources */,
 				9AF50452167B84F50020241C /* THButton.m in Sources */,
+				A3BCF5751966B07200DBEA2F /* Classifier.m in Sources */,
 				9A39645C18AE5A080061E44B /* THGraphViewSegmentGroup.m in Sources */,
 				9AF50453167B84F50020241C /* THBuzzer.m in Sources */,
 				9AF50455167B84F50020241C /* THCompassLSM303.m in Sources */,
@@ -6328,10 +6350,14 @@
 				9AF5046D167B85710020241C /* THUtils.m in Sources */,
 				9AF5046E167B85A00020241C /* THHardwareComponent.m in Sources */,
 				9AF5046F167B85C30020241C /* THConditionObject.m in Sources */,
+				A3BCF5701966AEF300DBEA2F /* THGloveBLEConnector.m in Sources */,
 				9A3165A2182795D000CB3E59 /* THMonitor.m in Sources */,
 				9AF50473167B860E0020241C /* main.m in Sources */,
+				A3BCF56C1966AE1B00DBEA2F /* THGestureClassifier.m in Sources */,
 				9AB29C04167F89C100F5AF62 /* THProgrammingElement.m in Sources */,
 				9A7DBF6A169AC49900F86D71 /* THThreeColorLed.m in Sources */,
+				A3BCF5731966B06B00DBEA2F /* FeatureExtractor.m in Sources */,
+				A3BCF5741966B07000DBEA2F /* Helper.m in Sources */,
 				9A06EE96169AD8B600B88519 /* THSlider.m in Sources */,
 				9A94F1E3169ED5CB00AF52AB /* THMapper.m in Sources */,
 				9A94F1E8169ED5E600AF52AB /* THImageView.m in Sources */,
@@ -6351,6 +6377,7 @@
 				9A8426B317564A80009495AB /* TFAction.m in Sources */,
 				9A8426B617564A80009495AB /* TFEvent.m in Sources */,
 				9A8426B917564A80009495AB /* TFEventActionPair.m in Sources */,
+				A3BCF5721966B06200DBEA2F /* THGestureRecognizer.m in Sources */,
 				9A6B28AE18AA701A009AAE31 /* THGraphView.m in Sources */,
 				9A8426BC17564A80009495AB /* TFMethod.m in Sources */,
 				9A8426BF17564A80009495AB /* TFMethodInvokeAction.m in Sources */,
@@ -6359,6 +6386,7 @@
 				9A5D047218844B50006E9348 /* THSoundEffect.m in Sources */,
 				9A8426C217564A80009495AB /* TFProperty.m in Sources */,
 				9A8426C517564A80009495AB /* TFPropertyInvocation.m in Sources */,
+				A3BCF5331966AE0C00DBEA2F /* THSignalSource.m in Sources */,
 				9AD704B018AA9E220080CD2E /* THGraphViewSegment.m in Sources */,
 				9AFB7E241833D60300694CCE /* THI2CComponent.m in Sources */,
 				9A8426D417564A80009495AB /* TFSimulableObject.m in Sources */,

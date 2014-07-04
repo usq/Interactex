@@ -49,8 +49,6 @@
     {
         [self.recognizer observeSignal:signal];
     }
-
-    
 }
 
 - (void)setHalfWindowSize:(NSUInteger)halfWindowSize

@@ -10,7 +10,6 @@
 #import <GameKit/GameKit.h>
 @interface THSlimConnectionClientController()<GKSessionDelegate, BLEDiscoveryDelegate, BLEServiceDelegate, BLEServiceDataDelegate>
 @property (nonatomic, strong, readwrite) GKSession *session;
-@property (nonatomic, strong, readwrite) IFFirmata *firmataController;
 @property (nonatomic, assign, readwrite) BOOL sessionReady;
 @property (nonatomic, assign, readwrite) NSString *connectedPeer;
 @end

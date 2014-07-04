@@ -71,8 +71,13 @@ You should have received a copy of the GNU General Public License along with thi
 #pragma mark - Server Control
 
 -(void)startServer {
-    if(session) 
+        NSLog(@"%s",__PRETTY_FUNCTION__);
+    if(session)
+    {
+        NSLog(@"stopping serer");
         [self stopServer];
+    }
+
     session = [[GKSession alloc] initWithSessionID:kGameKitSessionId displayName:nil sessionMode:GKSessionModeServer];
     [session setDelegate:self];
     session.available = YES;

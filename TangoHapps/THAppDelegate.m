@@ -61,6 +61,9 @@ You should have received a copy of the GNU General Public License along with thi
     
     self.motionManager = [[CMMotionManager alloc] init];
     
+    THDirector * director = [THDirector sharedDirector];
+    [director.serverController startServer];
+    
     return YES;
 }
 
@@ -88,8 +91,8 @@ You should have received a copy of the GNU General Public License along with thi
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     
-    THDirector * director = [THDirector sharedDirector];
-    [director.serverController startServer];
+//    THDirector * director = [THDirector sharedDirector];
+//    [director.serverController startServer];
     
 }
 
