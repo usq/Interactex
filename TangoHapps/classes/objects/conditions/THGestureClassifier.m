@@ -8,14 +8,14 @@
 
 #import "THGestureClassifier.h"
 #import "THGestureRecognizer.h"
-
+#import "THSignalSource.h"
 
 
 
 //#define WINDOW_SIZE (HALF_WINDOW_SIZE*2)
 
 @interface THGestureClassifier()
-@property (nonatomic, assign, readwrite) float *signalWindow;
+@property (nonatomic, assign, readwrite) Signal *signalWindow;
 @property (nonatomic, assign, readwrite) NSUInteger index;
 @property (nonatomic, assign, readwrite) BOOL gestureIsAlreadyRecognized;
 @property (nonatomic, strong, readwrite) THGestureRecognizer *recognizer;
@@ -42,12 +42,13 @@
     self.index = 0;
 }
 
-- (void)addSignal:(float)signal
+- (void)addSignal:(uint32_t)signal
 {
-    signal = 300 -signal;
+    Signal s = THDecodeSignal(signal);
+    //signal = 300 -signal;
     if(self.relaysInput)
     {
-        [self.recognizer observeSignal:signal];
+        [self.recognizer observeSignal:s];
     }
 }
 
@@ -67,7 +68,6 @@
     {
         self.numberOfTicksToDetect = 1;
         self.recognizer.halfWindowSize = HALF_WINDOW_SIZE_DEFAULT;
-        NSLog(@"!!!!!!!!!!!!!!!!!! numberOfTicksToDetect is 1");
         [self load];
     }
     return self;

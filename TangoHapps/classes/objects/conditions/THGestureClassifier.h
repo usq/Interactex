@@ -11,5 +11,5 @@
 @interface THGestureClassifier : TFSimulableObject
 @property (nonatomic, assign, readwrite) int numberOfTicksToDetect;
 @property (nonatomic, assign, readwrite) NSUInteger halfWindowSize;
-- (void)addSignal:(float)signal;
+- (void)addSignal:(uint32_t)signal;
 @end

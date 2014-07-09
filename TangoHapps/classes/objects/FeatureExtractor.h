@@ -7,16 +7,25 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "THSignalSource.h"
 
 @interface FeatureExtractor : NSObject
 
 -(double) computeMagnitudeAveragesFromWindow:(const float*) window count:(int) count;
 
--(void) computeMeansFromWindow:(const float*) window count:(int) count means:(double*) means;
+- (void)computeMeansFromWindow:(Signal *)window
+                         count:(int)count
+                         means:(double*)means;
 
--(void) computeDeviationsFromWindow:(const float*) window count:(int) count usingMeans:(double*) means deviations:(double*) deviations ;
+- (void)computeDeviationsFromWindow:(Signal *)window
+                              count:(int)count
+                         usingMeans:(double *)means
+                         deviations:(double *)deviations;
 
--(void) computeCorrelationsFromWindow:(const float*) window count:(int) count correlations:(double*) correlations;
+
+- (void)computeCorrelationsFromWindow:(Signal *)window
+                                count:(int)count
+                         correlations:(double *)correlations;
 
 
 -(void) computeMinMaxsFromWindow:(const float*) window count:(int) count peaks:(double*) minMaxs;
@@ -25,7 +34,9 @@
 
 -(int) computeNumPeaksFromWindow:(const float*) window count:(int) count tolerance:(float) tolerance;
 
--(void) computeAllFeaturesFromWindow:(const float*) window count:(int) count features:(double*) features;
+-(void) computeAllFeaturesFromWindow:(Signal*)window
+                               count:(int) count
+                            features:(double *)features;
 
 @property (nonatomic) float peakDetectionTolerance;
 

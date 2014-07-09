@@ -11,6 +11,20 @@
 
 #define RECORDED_MAXCOUNT 500
 
+
+Signal THDecodeSignal(uint32_t input)
+{
+    uint16_t value1 = ntohs((uint16_t)input);
+    input >>= 16;
+    uint16_t value2 = ntohs((uint16_t)input);
+
+    Signal s = {};
+    s.value1 = value1;
+    s.value2 = value2;
+    
+    return s;
+}
+
 @interface THSignalSource ()
 
 @property (nonatomic, assign, readwrite) NSInteger currentOutputValue;
@@ -34,6 +48,15 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
 
 @implementation THSignalSource
 
++ (instancetype)sharedSignalSource
+{
+    static id instance;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = self;
+    });
+    return instance;
+}
 
 - (void)load
 {
@@ -46,7 +69,7 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
     
     self.methods = [NSMutableArray arrayWithObjects:startMethod, stopMethod, toggleMethod, nil];
     
-    TFEvent * event = [TFEvent eventNamed:kEventValueChanged];
+    TFEvent *event = [TFEvent eventNamed:kEventValueChanged];
     event.param1 = [TFPropertyInvocation invocationWithProperty:property
                                                          target:self];
     self.events = [NSMutableArray arrayWithObject:event];
@@ -93,7 +116,6 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
 {
     //TODO: saveRecorded data
     self.data = [self.recordedData copy];
-    
 }
 
 - (void)saveRecording
@@ -157,6 +179,11 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
 
 - (void)updatedSimulation
 {
+    [self sendSignalValues];
+}
+
+- (void)sendSignalValues
+{
     if(self.sendingData)
     {
         if(self.index > [self.data count] -1)
@@ -166,12 +193,12 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
         
         self.currentOutputValue = [self.data[self.index] integerValue];
         [self triggerEventNamed:kEventValueChanged];
-        [self triggerEventNamed:kEventValueChanged];
-
+//        [self triggerEventNamed:kEventValueChanged];
+        
         self.index ++;
         if(self.index > self.rightIndex)
         {
-
+            
             self.index = self.leftIndex;
         }
     }
@@ -180,7 +207,6 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
 
 - (void)cropDataToPercentages
 {
-    
 //    NSParameterAssert(indexRange.location >= 0 && [self.data count] <= indexRange.location + indexRange.length);
     
 //    self.data = [self.data objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:indexRange]];
@@ -189,8 +215,6 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
     
     [self updateIndizes];
 }
-
-
 
 
 
@@ -253,5 +277,10 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
     self.data = [content componentsSeparatedByString:@"\n"];
     [self updateIndizes];
 
+}
+
+- (void)addDataFromGlove:(uint32_t)data
+{
+    self.currentOutputValue = data;
 }
 @end

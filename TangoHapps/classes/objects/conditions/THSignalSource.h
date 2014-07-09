@@ -8,12 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
+typedef struct {
+    uint8_t value1;
+    uint8_t value2;
+} Signal;
+
+extern Signal THDecodeSignal(uint32_t signal);
+
+
 @interface THSignalSource : TFSimulableObject
 @property (nonatomic, assign, readonly) NSInteger currentOutputValue;
 @property (nonatomic, strong, readonly) NSArray *data;
 @property (nonatomic, assign, readonly) float leftBorderPercentage;
 @property (nonatomic, assign, readonly) float rightBorderPercentage;
 
++ (instancetype)sharedSignalSource;
 - (void)updatedSimulation;
 - (void)start;
 - (void)stop;
@@ -24,4 +33,5 @@
 - (void)saveRecording;
 - (void)recordValue:(uint32_t)value;
 - (void)cropDataToPercentages;
+- (void)addDataFromGlove:(uint32_t)data;
 @end

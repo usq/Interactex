@@ -61,6 +61,7 @@ You should have received a copy of the GNU General Public License along with thi
 #import "THJennic.h"
 #import "IFFirmata.h"
 #import "THI2CMessage.h"
+#import "THSignalSource.h"
 
 float const kScanningTimeout = 3.0f;
 float const kConnectingTimeout = 100.0f;
@@ -461,6 +462,8 @@ float const kConnectingTimeout = 100.0f;
                 lenght:(NSInteger)originalLength
 {
     NSLog(@"got data from device");
+    assert(originalLength == 4);
+    [[THSignalSource sharedSignalSource] addDataFromGlove:*(uint32_t *)buffer];
 }
 
 - (void)bleServiceDidReset

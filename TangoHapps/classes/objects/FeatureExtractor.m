@@ -24,52 +24,123 @@
     return magnitudeAvg / count ;
 }
 
--(void) computeMeansFromWindow:(const float*) window count:(int) count means:(double*) means{
-    
-    double mean1 = 0;
-    double mean2 = 0;
-    double mean3 = 0;
+- (void)computeMeansFromWindow:(Signal *)window
+                         count:(int)count
+                         means:(double *)means
+{
+    double mean1_1 = 0;
+    double mean2_1 = 0;
+    double mean3_1 = 0;
     
     for(int i = 0 ; i < count * 3 ; i+=3){
-        mean1 += window[i];
-        mean2 += window[i+1];
-        mean3 += window[i+2];
+        mean1_1 += window[i].value1;
+        mean2_1 += window[i+1].value1;
+        mean3_1 += window[i+2].value1;
     }
     
-    means[0] = mean1 / (float) count;
-    means[1] = mean2 / (float) count;
-    means[2] = mean3 / (float) count;
+    means[0] = mean1_1 / (float)count;
+    means[1] = mean2_1 / (float)count;
+    means[2] = mean3_1 / (float)count;
+    
+    
+    double mean1_2 = 0;
+    double mean2_2 = 0;
+    double mean3_2 = 0;
+    
+    for(int i = 0 ; i < count * 3 ; i+=3){
+        mean1_2 += window[i].value2;
+        mean2_2 += window[i+1].value2;
+        mean3_2 += window[i+2].value2;
+    }
+    
+    means[3] = mean1_2 / (float)count;
+    means[4] = mean2_2 / (float)count;
+    means[5] = mean3_2 / (float)count;
 }
 
--(void) computeDeviationsFromWindow:(const float*) window count:(int) count usingMeans:(double*) means deviations:(double*) deviations {
-    
-    double deviation1 = 0;
-    double deviation2 = 0;
-    double deviation3 = 0;
+- (void)computeDeviationsFromWindow:(Signal *)window
+                              count:(int)count
+                         usingMeans:(double *)means
+                         deviations:(double *)deviations
+{
+    double deviation1_1 = 0;
+    double deviation2_1 = 0;
+    double deviation3_1 = 0;
     
     for(int i = 0 ; i < count * 3 ; i+=3){
         
-        double diff1 = window[i] - means[0];
-        double diff2 = window[i+1] - means[1];
-        double diff3 = window[i+2] - means[2];
+        double diff1 = window[i].value1 - means[0];
+        double diff2 = window[i+1].value1 - means[1];
+        double diff3 = window[i+2].value1 - means[2];
         
-        deviation1 += diff1 * diff1;
-        deviation2 += diff2 * diff2;
-        deviation3 += diff3 * diff3;
+        deviation1_1 += diff1 * diff1;
+        deviation2_1 += diff2 * diff2;
+        deviation3_1 += diff3 * diff3;
     }
     
-    deviations[0] = sqrt(deviation1 / (count-1));
-    deviations[1] = sqrt(deviation2 / (count-1));
-    deviations[2] = sqrt(deviation3 / (count-1));
+    deviations[0] = sqrt(deviation1_1 / (count-1));
+    deviations[1] = sqrt(deviation2_1 / (count-1));
+    deviations[2] = sqrt(deviation3_1 / (count-1));
+    
+    double deviation1_2 = 0;
+    double deviation2_2 = 0;
+    double deviation3_2 = 0;
+    
+    for(int i = 0 ; i < count * 3 ; i+=3){
+        
+        double diff1 = window[i].value2 - means[3];
+        double diff2 = window[i+1].value2 - means[4];
+        double diff3 = window[i+2].value2 - means[5];
+        
+        deviation1_2 += diff1 * diff1;
+        deviation2_2 += diff2 * diff2;
+        deviation3_2 += diff3 * diff3;
+    }
+    
+    deviations[3] = sqrt(deviation1_2 / (count-1));
+    deviations[4] = sqrt(deviation2_2 / (count-1));
+    deviations[5] = sqrt(deviation3_2 / (count-1));
 }
 
--(void) computeCorrelationsFromWindow:(const float*) window count:(int) count correlations:(double*) correlations{
+- (void)computeCorrelationsFromWindow:(Signal *)window
+                                count:(int)count
+                         correlations:(double *)correlations
+{
     
-    double means[3];
-    double deviations[3];
+    double means[6];
+    double deviations[6];
     
-    [self computeMeansFromWindow:window count:count means:means];
-    [self computeDeviationsFromWindow:window count:count usingMeans:means deviations:deviations];
+    [self computeMeansFromWindow:window
+                           count:count
+                           means:means];
+    [self computeDeviationsFromWindow:window
+                                count:count
+                           usingMeans:means
+                           deviations:deviations];
+    
+    double corr1 = 0;
+    double corr2 = 0;
+    double corr3 = 0;
+    
+    for(int i = 0 ; i < count * 3 ; i+=3){
+        
+        double x = window[i].value1;
+        double y = window[i+1].value1;
+        double z = window[i+2].value1;
+        
+        corr1 += (x - means[0]) * (y - means[1]);
+        corr2 += (y - means[1]) * (z - means[2]);
+        corr3 += (x - means[0]) * (z - means[2]);
+    }
+    
+    double cov1 = corr1 / (count - 1);
+    double cov2 = corr2 / (count - 1);
+    double cov3 = corr3 / (count - 1);
+    
+    correlations[0] = cov1 / (deviations[0] * deviations[1]);
+    correlations[1] = cov2 / (deviations[1] * deviations[2]);
+    correlations[2] = cov3 / (deviations[0] * deviations[2]);
+    
     
     double corr1 = 0;
     double corr2 = 0;
@@ -183,17 +254,26 @@
     return peakCount;
 }
 
--(void) computeAllFeaturesFromWindow:(const float*) window count:(int) count features:(double*) features{
+- (void)computeAllFeaturesFromWindow:(Signal*)window
+                               count:(int)count
+                            features:(double *)features{
+    double means[6];
+    double deviations[6];
     
-    double means[3];
-    double deviations[3];
     double minMaxDiffs[3];
     double correlations[3];
     NSInteger numPeaks;
     double magnitude;
     
-    [self computeMeansFromWindow:window count:count means:means];
-    [self computeDeviationsFromWindow:window count:count usingMeans:means deviations:deviations];
+    [self computeMeansFromWindow:window
+                           count:count
+                           means:means];
+    
+    [self computeDeviationsFromWindow:window
+                                count:count
+                           usingMeans:means
+                           deviations:deviations];
+    
     [self computeMinMaxDiffsFromWindow:window count:count diffs:minMaxDiffs];
     numPeaks = [self computeNumPeaksFromWindow:window count:count  tolerance:self.peakDetectionTolerance];
     [self computeCorrelationsFromWindow:window count:count correlations:correlations];

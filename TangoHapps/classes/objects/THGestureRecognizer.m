@@ -13,7 +13,7 @@
 
 
 @interface THGestureRecognizer ()
-@property (nonatomic, assign, readwrite) float *signalWindow;
+@property (nonatomic, assign, readwrite) Signal *signalWindow;
 @property (nonatomic, strong, readwrite) NSMutableArray *registeredGestures;
 @property (nonatomic, strong, readwrite) Classifier *classifier;
 @property (nonatomic, strong, readwrite) FeatureExtractor *featureExtractor;
@@ -71,8 +71,10 @@
     [self.classifier loadTrainingDataFromTrainingsSet:trainingsSet];
 }
 
-- (void)observeSignal:(CGFloat)signal
+- (void)observeSignal:(Signal)signal
 {
+    //correctSignal
+    
     if(self.index == self.halfWindowSize)
     {
         for (int i = self.halfWindowSize; i < self.halfWindowSize * 2; i++)
