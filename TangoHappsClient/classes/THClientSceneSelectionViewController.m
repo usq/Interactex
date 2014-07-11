@@ -51,6 +51,7 @@ You should have received a copy of the GNU General Public License along with thi
 #import "THClientAppViewController.h"
 #import "THClientPresetsGenerator.h"
 #import "THClientScene.h"
+#import "THSlimConnectionClientController.h"
 
 @implementation THClientSceneSelectionViewController
 
@@ -134,6 +135,8 @@ You should have received a copy of the GNU General Public License along with thi
 #pragma mark - Private
 
 - (void)proceedToProjectAtIndex:(NSInteger) index{
+    
+    [[THSlimConnectionClientController sharedSlimConnectionController] stopConnection];
     
     THClientProjectProxy * proxy = [self.currentProxiesArray objectAtIndex:index];
     

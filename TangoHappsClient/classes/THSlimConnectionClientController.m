@@ -12,10 +12,33 @@
 @property (nonatomic, strong, readwrite) GKSession *session;
 @property (nonatomic, assign, readwrite) BOOL sessionReady;
 @property (nonatomic, assign, readwrite) NSString *connectedPeer;
+@property (nonatomic, assign, readwrite) BOOL shouldConnect;
 @end
 @implementation THSlimConnectionClientController
+
++ (instancetype)sharedSlimConnectionController
+{
+    static id instance;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [[THSlimConnectionClientController alloc] init];
+    });
+    return instance;
+}
+
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.shouldConnect = YES;
+    }
+    return self;
+}
+
 - (void)startConnection
 {
+    self.shouldConnect = YES;
     [BLEDiscovery sharedInstance].discoveryDelegate = self;
     [BLEDiscovery sharedInstance].peripheralDelegate = self;
 
@@ -29,6 +52,13 @@
     self.session.available = YES;
 }
 
+- (void)stopConnection
+{
+    self.shouldConnect = NO;
+    [self.session disconnectFromAllPeers];
+    [[BLEDiscovery sharedInstance] disconnectCurrentPeripheral];
+}
+
 - (void)session:(GKSession *)session
            peer:(NSString *)peerID
  didChangeState:(GKPeerConnectionState)state
@@ -39,6 +69,7 @@
     }
     if(state == GKPeerStateConnected)
     {
+        NSLog(@"connected gamekit session, scanning for ble...");
             [[BLEDiscovery sharedInstance] startScanningForUUIDString:@"713d0000-503e-4c75-ba94-3148f18d941e"];
         self.connectedPeer = peerID;
         self.sessionReady = YES;
@@ -56,7 +87,11 @@
 
 - (void)bleServiceDidDisconnect:(BLEService *)service
 {
-    [[BLEDiscovery sharedInstance] startScanningForSupportedUUIDs];
+    NSLog(@"%s",__PRETTY_FUNCTION__);
+    if(self.shouldConnect)
+    {
+        [[BLEDiscovery sharedInstance] startScanningForSupportedUUIDs];
+    }
 }
 
 - (void)discoveryStatePoweredOff

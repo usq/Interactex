@@ -8,11 +8,14 @@
 
 #import "THGestureClassifierProperties.h"
 #import "THGestureClassifierEditable.h"
+#import "THGestureClassifierPopoverContentViewController.h"
+#import "THSignalSourceEditable.h"
 
-@interface THGestureClassifierProperties ()
+@interface THGestureClassifierProperties ()<UIPopoverControllerDelegate>
 @property (weak, nonatomic) IBOutlet UISegmentedControl *tickControll;
 @property (weak, nonatomic) IBOutlet UISlider *slider;
 @property (weak, nonatomic) IBOutlet UILabel *windowLabel;
+@property (nonatomic, strong, readwrite) UIPopoverController *recordingPopoverController;
 
 @end
 
@@ -35,7 +38,7 @@
     [self.slider setValue:editable.halfWindowSize];
     self.windowLabel.text = [NSString stringWithFormat:@"%i",editable.halfWindowSize];
     
-    [self.tickControll setSelectedSegmentIndex:fmax(editable.numberOfTicksToDetect-1,0)];
+//    [self.tickControll setSelectedSegmentIndex:fmax(editable.numberOfTicksToDetect-1,0)];
     // Do any additional setup after loading the view.
 }
 
@@ -47,8 +50,8 @@
 
 - (IBAction)detectTickChanged:(UISegmentedControl *)sender
 {
-    THGestureClassifierEditable *editable = (THGestureClassifierEditable *)self.editableObject;
-    editable.numberOfTicksToDetect = sender.selectedSegmentIndex +1;
+//    THGestureClassifierEditable *editable = (THGestureClassifierEditable *)self.editableObject;
+//    editable.numberOfTicksToDetect = sender.selectedSegmentIndex +1;
 }
 
 - (IBAction)sliderChanged:(UISlider *)sender
@@ -57,5 +60,68 @@
     editable.halfWindowSize = sender.value;
     self.windowLabel.text = [NSString stringWithFormat:@"%i",(NSUInteger)sender.value];
 }
+
+
+- (IBAction)recordGesturePressed:(UIButton *)sender
+{
+    
+    //
+    CCDirector *director = [CCDirector sharedDirector];
+    CGRect rect = [sender convertRect:sender.bounds
+                               toView:director.view];
+    
+    
+    THGestureClassifierPopoverContentViewController *contentViewController =
+    [[THGestureClassifierPopoverContentViewController alloc] initWithNibName:@"THGestureClassifierPopoverContentViewController"
+                                                                      bundle:[NSBundle mainBundle]
+                                                 gestureClassifierProperties:self];
+    
+    
+    
+    self.recordingPopoverController = [[UIPopoverController alloc] initWithContentViewController:contentViewController];
+    
+    self.recordingPopoverController.backgroundColor = [UIColor colorWithRed:0.321 green:0.402 blue:0.341 alpha:1.000];
+    self.recordingPopoverController.delegate = self;
+    
+    contentViewController.currentPopoverController = self.recordingPopoverController;
+
+    NSLog(@"start recording");
+    [[THSignalSourceEditable sharedSignalSourceEditable] recordeNewGesture];
+    
+    [self.recordingPopoverController presentPopoverFromRect:rect
+                                                     inView:director.view
+                                   permittedArrowDirections:UIPopoverArrowDirectionLeft
+                                                   animated:YES];
+    
+    
+    //    [self presentPopoverWithConcentViewController:namingViewController
+    //                                         fromRect:rect];
+    
+    //    //get new name
+    //create new empty sample
+    
+    //    while([[NSFileManager defaultManager] fileExistsAtPath:[self filePathWithIndex:self.lastSampleIndex]])
+    //    {
+    //        self.lastSampleIndex ++;
+    //    }
+    //    NSString *newFile = [self filePathWithIndex:self.lastSampleIndex];
+    //    NSString *fileName = [[newFile componentsSeparatedByString:@"/"] lastObject];
+    //    self.gestures = [@[fileName] arrayByAddingObjectsFromArray:self.gestures];
+    /*
+     THSignalSourceEditable *signalSourceEditable = (THSignalSourceEditable *)self.editableObject;
+     [signalSourceEditable recordeNewGesture];
+     THSignalSourcePopoverContentViewController *contentViewController = [[THSignalSourcePopoverContentViewController alloc] initWithNibName:@"THSignalSourcePopoverContentViewController"
+     bundle:[NSBundle mainBundle]
+     signalSourceEditable:signalSourceEditable];
+     
+     [self presentPopoverWithConcentViewController:contentViewController
+     fromRect:self.addRecordingButton.frame];
+     */
+    
+    
+    
+}
+
+
 
 @end

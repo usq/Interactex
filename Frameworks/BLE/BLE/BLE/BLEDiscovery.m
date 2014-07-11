@@ -189,7 +189,11 @@ static BLEDiscovery * sharedInstance;
 }
 
 -(void) disconnectCurrentPeripheral {
-	[centralManager cancelPeripheralConnection:self.currentPeripheral];
+    if(self.currentPeripheral)
+    {
+        [centralManager cancelPeripheralConnection:self.currentPeripheral];
+    }
+
 }
 
 -(void) centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {

@@ -15,6 +15,7 @@
 @property (nonatomic, assign, readonly) BOOL recording;
 @property (nonatomic, strong, readonly) NSArray *recordedData;
 
++ (instancetype)sharedSignalSourceEditable;
 - (void)switchSourceFile:(NSString *)filename;
 - (void)recordeNewGesture;
 - (void)stopRecording;

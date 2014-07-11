@@ -9,5 +9,5 @@
 #import "THEditableObjectProperties.h"
 
 @interface THGestureClassifierProperties : THEditableObjectProperties
-
+- (void)stopProvidingSignals;
 @end

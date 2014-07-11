@@ -115,6 +115,7 @@
 
 - (void)checkWindow
 {
+    /*
     NSLog(@"--", self.halfWindowSize);
 
     double features[8];
@@ -142,14 +143,53 @@
     
     [self.history appendString:txt];
 
-    
-    /*
+
+
     int numPeaks = [self computeNumPeaksFromWindow:self.signalWindow
                                              count:self.halfWindowSize * 2
                                          tolerance:100];
+    */
+    
+    int numPeaks =[self.featureExtractor computeNumPeaksFromWindow:self.signalWindow
+                                                             count:self.halfWindowSize *2 / 3
+                                                         tolerance:20];
+    for (THGestureClassifier *oneGesture in self.registeredGestures)
+    {
+        if(oneGesture.hasAlreadyBeenRecognized)
+        {
+            oneGesture.hasAlreadyBeenRecognized = NO;
+        }
+        else
+        {
+            if(oneGesture.numberOfTicksToDetect == numPeaks)
+            {
+                oneGesture.hasAlreadyBeenRecognized = YES;
+                [oneGesture recognized];
+            }
+        }
+    }
+    NSLog(@"-----numpeaks: %i",numPeaks);
+}
+
+- (NSUInteger)peaksInWindow:(NSArray *)data
+{
+    self.featureExtractor.peakDetectionTolerance = 20;
+    self.halfWindowSize = [data count]/2;
+    
+    for (int i = 0; i < self.halfWindowSize*2; i++)
+    {
+        uint32_t value = [data[i] unsignedIntegerValue];
+        Signal s = THDecodeSignal(value);
+        self.signalWindow[i] = s;
+    }
+    
+    int numPeaks =[self.featureExtractor computeNumPeaksFromWindow:self.signalWindow
+                                                             count:self.halfWindowSize *2 / 3
+                                                         tolerance:20];
     
     NSLog(@"number of peaks: %i",numPeaks);
-    if(numPeaks == self.numberOfTicksToDetect)
+    /*
+    if(numPeaks == 2)
     {
         if(self.gestureIsAlreadyRecognized == NO)
         {
@@ -163,13 +203,18 @@
     {
         self.gestureIsAlreadyRecognized = NO;
         [self triggerEventNamed:kEventNotRecognized];
-    }
-     */
+    }*/
+    return numPeaks;
+
 }
-
-
 - (void)printFeaturesForWindow:(NSArray *)data
 {
+    NSLog(@"%s",__PRETTY_FUNCTION__);
+    
+    [self peaksInWindow:data];
+    //MC_TODO:implement
+    
+    /*
     self.halfWindowSize = [data count]/2;
     
     for (int i = 0; i < self.halfWindowSize*2; i++)
@@ -201,6 +246,7 @@
     NSString *txt = [NSString stringWithFormat:@"%.3f,%.3f,%.3f,%.3f\n",means, numPeaks, minMaxDiffs, deviations];
     
     [self.history appendString:txt];
+     */
 }
 
 @end

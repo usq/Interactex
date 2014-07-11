@@ -1263,11 +1263,15 @@
 		9AFB7E6A1833DE6400694CCE /* THBLECommunicationModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AFB7E661833DE6400694CCE /* THBLECommunicationModule.m */; };
 		9AFB7E6B1833DE6400694CCE /* THClientPresetsGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AFB7E681833DE6400694CCE /* THClientPresetsGenerator.m */; };
 		9AFB7E6C1833DE6400694CCE /* THClientPresetsGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AFB7E681833DE6400694CCE /* THClientPresetsGenerator.m */; };
+		A3112BB5196F23BD00426605 /* THGestureClassifierPopoverContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3112BB3196F23BD00426605 /* THGestureClassifierPopoverContentViewController.m */; };
+		A3112BB6196F23BD00426605 /* THGestureClassifierPopoverContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3112BB4196F23BD00426605 /* THGestureClassifierPopoverContentViewController.xib */; };
+		A3112BB9196F2C9100426605 /* THGestureClassifierPopoverGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3112BB8196F2C9100426605 /* THGestureClassifierPopoverGraphView.m */; };
 		A31B8CD519150CF10096F3EB /* THGestureSample.m in Sources */ = {isa = PBXBuildFile; fileRef = A31B8CD419150CF10096F3EB /* THGestureSample.m */; };
 		A31B8CD919150E9F0096F3EB /* THGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = A31B8CD819150E9F0096F3EB /* THGesture.m */; };
 		A31B8CDC19150FB10096F3EB /* THGestureSet.m in Sources */ = {isa = PBXBuildFile; fileRef = A31B8CDB19150FB10096F3EB /* THGestureSet.m */; };
 		A33442BD18B6280100AFB366 /* THFlexSensor.m in Sources */ = {isa = PBXBuildFile; fileRef = A33442BC18B6280100AFB366 /* THFlexSensor.m */; };
 		A33442C018B6355200AFB366 /* THFlexSensorEditable.m in Sources */ = {isa = PBXBuildFile; fileRef = A33442BF18B6355200AFB366 /* THFlexSensorEditable.m */; };
+		A353ACCA196F1BAF007B49AE /* eye.txt in Resources */ = {isa = PBXBuildFile; fileRef = A353ACC9196F1BAF007B49AE /* eye.txt */; };
 		A3747F3918B6976C00BAEAB7 /* flexsensor.png in Resources */ = {isa = PBXBuildFile; fileRef = A3747F3718B6976C00BAEAB7 /* flexsensor.png */; };
 		A3747F3A18B6976C00BAEAB7 /* flexsensor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3747F3818B6976C00BAEAB7 /* flexsensor@2x.png */; };
 		A3747F3D18B6978000BAEAB7 /* flexsensor.png in Resources */ = {isa = PBXBuildFile; fileRef = A3747F3B18B6978000BAEAB7 /* flexsensor.png */; };
@@ -1283,9 +1287,15 @@
 		A3AEF64219125FFF0093E3CB /* Classifier.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AEF64119125FFF0093E3CB /* Classifier.m */; };
 		A3AEF647191260100093E3CB /* FeatureExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AEF644191260100093E3CB /* FeatureExtractor.m */; };
 		A3AEF648191260100093E3CB /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AEF646191260100093E3CB /* Helper.m */; };
-		A3AEF64B191264590093E3CB /* eye.txt in Resources */ = {isa = PBXBuildFile; fileRef = A3AEF64A191264590093E3CB /* eye.txt */; };
 		A3AEF64E191281E10093E3CB /* THGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AEF64D191281E10093E3CB /* THGestureRecognizer.m */; };
 		A3AEF651191285720093E3CB /* THTrainingsSet.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AEF650191285720093E3CB /* THTrainingsSet.m */; };
+		A3B04894196FD0EB0028B800 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B04893196FD0EB0028B800 /* GCDAsyncSocket.m */; };
+		A3B04895196FD0EB0028B800 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B04893196FD0EB0028B800 /* GCDAsyncSocket.m */; };
+		A3B048D0196FD1180028B800 /* THAsyncConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B048CF196FD1180028B800 /* THAsyncConnection.m */; };
+		A3B048D1196FD1180028B800 /* THAsyncConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B048CF196FD1180028B800 /* THAsyncConnection.m */; };
+		A3B048D3196FD5240028B800 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3B048D2196FD5240028B800 /* Security.framework */; };
+		A3B048D4196FD52B0028B800 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3B048D2196FD5240028B800 /* Security.framework */; };
+		A3B048D6196FD5510028B800 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3B048D5196FD5510028B800 /* CFNetwork.framework */; };
 		A3BCF5331966AE0C00DBEA2F /* THSignalSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CBF53F18BFFA1C00537127 /* THSignalSource.m */; };
 		A3BCF56C1966AE1B00DBEA2F /* THGestureClassifier.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C94A3918D26A010022C928 /* THGestureClassifier.m */; };
 		A3BCF56F1966AEF300DBEA2F /* THGloveBLEConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BCF56E1966AEF300DBEA2F /* THGloveBLEConnector.m */; };
@@ -2710,6 +2720,11 @@
 		9AFB7E661833DE6400694CCE /* THBLECommunicationModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THBLECommunicationModule.m; sourceTree = "<group>"; };
 		9AFB7E671833DE6400694CCE /* THClientPresetsGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THClientPresetsGenerator.h; sourceTree = "<group>"; };
 		9AFB7E681833DE6400694CCE /* THClientPresetsGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THClientPresetsGenerator.m; sourceTree = "<group>"; };
+		A3112BB2196F23BD00426605 /* THGestureClassifierPopoverContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THGestureClassifierPopoverContentViewController.h; path = TangoHapps/classes/gesturerecognition/THGestureClassifierPopoverContentViewController.h; sourceTree = SOURCE_ROOT; };
+		A3112BB3196F23BD00426605 /* THGestureClassifierPopoverContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THGestureClassifierPopoverContentViewController.m; path = TangoHapps/classes/gesturerecognition/THGestureClassifierPopoverContentViewController.m; sourceTree = SOURCE_ROOT; };
+		A3112BB4196F23BD00426605 /* THGestureClassifierPopoverContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = THGestureClassifierPopoverContentViewController.xib; path = TangoHapps/classes/gesturerecognition/THGestureClassifierPopoverContentViewController.xib; sourceTree = SOURCE_ROOT; };
+		A3112BB7196F2C9100426605 /* THGestureClassifierPopoverGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THGestureClassifierPopoverGraphView.h; sourceTree = "<group>"; };
+		A3112BB8196F2C9100426605 /* THGestureClassifierPopoverGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THGestureClassifierPopoverGraphView.m; sourceTree = "<group>"; };
 		A31B8CD319150CF10096F3EB /* THGestureSample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THGestureSample.h; path = TangoHapps/classes/gesturerecognition/THGestureSample.h; sourceTree = SOURCE_ROOT; };
 		A31B8CD419150CF10096F3EB /* THGestureSample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THGestureSample.m; path = TangoHapps/classes/gesturerecognition/THGestureSample.m; sourceTree = SOURCE_ROOT; };
 		A31B8CD719150E9F0096F3EB /* THGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THGesture.h; path = TangoHapps/classes/gesturerecognition/THGesture.h; sourceTree = SOURCE_ROOT; };
@@ -2720,6 +2735,7 @@
 		A33442BC18B6280100AFB366 /* THFlexSensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THFlexSensor.m; sourceTree = "<group>"; };
 		A33442BE18B6355200AFB366 /* THFlexSensorEditable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THFlexSensorEditable.h; sourceTree = "<group>"; };
 		A33442BF18B6355200AFB366 /* THFlexSensorEditable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THFlexSensorEditable.m; sourceTree = "<group>"; };
+		A353ACC9196F1BAF007B49AE /* eye.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = eye.txt; sourceTree = "<group>"; };
 		A3747F3718B6976C00BAEAB7 /* flexsensor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flexsensor.png; sourceTree = "<group>"; };
 		A3747F3818B6976C00BAEAB7 /* flexsensor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flexsensor@2x.png"; sourceTree = "<group>"; };
 		A3747F3B18B6978000BAEAB7 /* flexsensor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flexsensor.png; sourceTree = "<group>"; };
@@ -2742,11 +2758,16 @@
 		A3AEF644191260100093E3CB /* FeatureExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeatureExtractor.m; sourceTree = "<group>"; };
 		A3AEF645191260100093E3CB /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
 		A3AEF646191260100093E3CB /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
-		A3AEF64A191264590093E3CB /* eye.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = eye.txt; path = "../../../../../../../Desktop/BA - Michael/NCA Objective C/eye/eye.txt"; sourceTree = "<group>"; };
 		A3AEF64C191281E10093E3CB /* THGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THGestureRecognizer.h; sourceTree = "<group>"; };
 		A3AEF64D191281E10093E3CB /* THGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THGestureRecognizer.m; sourceTree = "<group>"; };
 		A3AEF64F191285720093E3CB /* THTrainingsSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THTrainingsSet.h; sourceTree = "<group>"; };
 		A3AEF650191285720093E3CB /* THTrainingsSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THTrainingsSet.m; sourceTree = "<group>"; };
+		A3B04892196FD0EB0028B800 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		A3B04893196FD0EB0028B800 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		A3B048CE196FD1180028B800 /* THAsyncConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THAsyncConnection.h; sourceTree = "<group>"; };
+		A3B048CF196FD1180028B800 /* THAsyncConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THAsyncConnection.m; sourceTree = "<group>"; };
+		A3B048D2196FD5240028B800 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		A3B048D5196FD5510028B800 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		A3BCF56D1966AEF300DBEA2F /* THGloveBLEConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THGloveBLEConnector.h; sourceTree = "<group>"; };
 		A3BCF56E1966AEF300DBEA2F /* THGloveBLEConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THGloveBLEConnector.m; sourceTree = "<group>"; };
 		A3C949D618D244BB0022C928 /* filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filter.png; sourceTree = "<group>"; };
@@ -2804,6 +2825,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3B048D3196FD5240028B800 /* Security.framework in Frameworks */,
 				9A9C425118B1F2BF002C2BC9 /* libpd-ios.a in Frameworks */,
 				9A5110151837D23A00EB25FA /* CoreMotion.framework in Frameworks */,
 				9AFA65ED18296E070082990F /* libcocos2d.a in Frameworks */,
@@ -2855,6 +2877,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3B048D6196FD5510028B800 /* CFNetwork.framework in Frameworks */,
+				A3B048D4196FD52B0028B800 /* Security.framework in Frameworks */,
 				9A6B28F218AA709A009AAE31 /* libpd-ios.a in Frameworks */,
 				9A1FBDAD187ED75400699B61 /* libFirmata.a in Frameworks */,
 				9AAF2845182B8B0600531E3A /* libBLE.a in Frameworks */,
@@ -2912,6 +2936,10 @@
 		9A35118C167B7A6800C7484B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A3B048D5196FD5510028B800 /* CFNetwork.framework */,
+				A3B048D2196FD5240028B800 /* Security.framework */,
+				A3B04892196FD0EB0028B800 /* GCDAsyncSocket.h */,
+				A3B04893196FD0EB0028B800 /* GCDAsyncSocket.m */,
 				9A6B28E718AA708F009AAE31 /* libpd.xcodeproj */,
 				9AAF283A182B88EF00531E3A /* BLE.xcodeproj */,
 				9A1FBD6A187ED71900699B61 /* Firmata.xcodeproj */,
@@ -4351,6 +4379,18 @@
 			path = util;
 			sourceTree = "<group>";
 		};
+		A3112B79196F234600426605 /* popover */ = {
+			isa = PBXGroup;
+			children = (
+				A3112BB2196F23BD00426605 /* THGestureClassifierPopoverContentViewController.h */,
+				A3112BB3196F23BD00426605 /* THGestureClassifierPopoverContentViewController.m */,
+				A3112BB4196F23BD00426605 /* THGestureClassifierPopoverContentViewController.xib */,
+				A3112BB7196F2C9100426605 /* THGestureClassifierPopoverGraphView.h */,
+				A3112BB8196F2C9100426605 /* THGestureClassifierPopoverGraphView.m */,
+			);
+			name = popover;
+			sourceTree = "<group>";
+		};
 		A31B8C9A19150B780096F3EB /* item */ = {
 			isa = PBXGroup;
 			children = (
@@ -4429,7 +4469,7 @@
 		A3AEF60719125FF20093E3CB /* Recognizer Juan */ = {
 			isa = PBXGroup;
 			children = (
-				A3AEF64A191264590093E3CB /* eye.txt */,
+				A353ACC9196F1BAF007B49AE /* eye.txt */,
 				A3AEF643191260100093E3CB /* FeatureExtractor.h */,
 				A3AEF644191260100093E3CB /* FeatureExtractor.m */,
 				A3AEF645191260100093E3CB /* Helper.h */,
@@ -4463,6 +4503,8 @@
 			children = (
 				A3BCF56D1966AEF300DBEA2F /* THGloveBLEConnector.h */,
 				A3BCF56E1966AEF300DBEA2F /* THGloveBLEConnector.m */,
+				A3B048CE196FD1180028B800 /* THAsyncConnection.h */,
+				A3B048CF196FD1180028B800 /* THAsyncConnection.m */,
 			);
 			name = "glove ble connector";
 			sourceTree = "<group>";
@@ -4523,6 +4565,7 @@
 		A3C94A3118D2696A0022C928 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A3112B79196F234600426605 /* popover */,
 				A3C94A3E18D26A170022C928 /* THGestureClassifierPaletteItem.h */,
 				A3C94A3F18D26A170022C928 /* THGestureClassifierPaletteItem.m */,
 				A3C94A4118D26A290022C928 /* THGestureClassifierProperties.h */,
@@ -5137,6 +5180,7 @@
 				9A94F42016A0192700AF52AB /* THImageViewProperties.xib in Resources */,
 				9A94F42216A0192700AF52AB /* THiPhoneButtonProperties.xib in Resources */,
 				9A94F42416A0192700AF52AB /* THiPhoneProperties.xib in Resources */,
+				A3112BB6196F23BD00426605 /* THGestureClassifierPopoverContentViewController.xib in Resources */,
 				9A94F42616A0192700AF52AB /* THiPhoneViewProperties.xib in Resources */,
 				9A94F42816A0192700AF52AB /* THiSwitchEditableProperties.xib in Resources */,
 				9A7B65181834D830009D0103 /* THCompassProperties.xib in Resources */,
@@ -5176,6 +5220,7 @@
 				9A56D03B17D946FF001021B2 /* Storyboard.storyboard in Resources */,
 				9A41453B17DE7A060061EDF8 /* add.png in Resources */,
 				9A41453D17DE7A060061EDF8 /* add@2x.png in Resources */,
+				A353ACCA196F1BAF007B49AE /* eye.txt in Resources */,
 				9A41453F17DE7A060061EDF8 /* backwards.png in Resources */,
 				9A41454117DE7A060061EDF8 /* backwards@2x.png in Resources */,
 				9A41454317DE7A060061EDF8 /* forward.png in Resources */,
@@ -5257,7 +5302,6 @@
 				9A4145C117DE7A060061EDF8 /* palette_imageview@2x.png in Resources */,
 				9A4145C317DE7A060061EDF8 /* palette_iphone.png in Resources */,
 				9A4145C517DE7A060061EDF8 /* palette_iphone@2x.png in Resources */,
-				A3AEF64B191264590093E3CB /* eye.txt in Resources */,
 				9A4145C717DE7A060061EDF8 /* palette_iswitch.png in Resources */,
 				9A4145C917DE7A060061EDF8 /* palette_iswitch@2x.png in Resources */,
 				9A4145CB17DE7A060061EDF8 /* palette_label.png in Resources */,
@@ -5788,11 +5832,13 @@
 				9AF50379167B84B40020241C /* THBuzzer.m in Sources */,
 				9AF5037A167B84B40020241C /* THBuzzerEditableObject.m in Sources */,
 				9AF5037B167B84B40020241C /* THClothe.m in Sources */,
+				A3B048D0196FD1180028B800 /* THAsyncConnection.m in Sources */,
 				9AF5037C167B84B40020241C /* THHardwareComponent.m in Sources */,
 				A31B8CD519150CF10096F3EB /* THGestureSample.m in Sources */,
 				9AF5037D167B84B40020241C /* THHardwareComponentEditableObject.m in Sources */,
 				9AF50380167B84B40020241C /* THCompassLSM303.m in Sources */,
 				9A89429E1836213100B8CA0E /* THJennicProperties.m in Sources */,
+				A3B04894196FD0EB0028B800 /* GCDAsyncSocket.m in Sources */,
 				9AF50381167B84B40020241C /* THCompassLSM303EditableObject.m in Sources */,
 				9AF50382167B84B40020241C /* THLed.m in Sources */,
 				9AF50383167B84B40020241C /* THLedEditableObject.m in Sources */,
@@ -5887,6 +5933,7 @@
 				A3AEF648191260100093E3CB /* Helper.m in Sources */,
 				9AD7046C18AA98F00080CD2E /* THGraphTextView.m in Sources */,
 				9AF503CA167B84B40020241C /* THColorPicker.m in Sources */,
+				A3112BB9196F2C9100426605 /* THGestureClassifierPopoverGraphView.m in Sources */,
 				9AF503CC167B84B40020241C /* THClientHelper.m in Sources */,
 				9AF503CD167B84B40020241C /* THConstants.m in Sources */,
 				9A6B283A18AA07BD009AAE31 /* THPureDataPaletteItem.m in Sources */,
@@ -5948,6 +5995,7 @@
 				9ABC276618098F2400B39D72 /* THSimpleLilypadEditable.m in Sources */,
 				9A09772E17267CFC0028A6B4 /* THSound.m in Sources */,
 				9A09777517268C2E0028A6B4 /* THSoundEditable.m in Sources */,
+				A3112BB5196F23BD00426605 /* THGestureClassifierPopoverContentViewController.m in Sources */,
 				9ABC27881809B1E500B39D72 /* THTemperatureSensorPaletteItem.m in Sources */,
 				9AD7050318AC1EF40080CD2E /* THGraphViewSegmentGroup.m in Sources */,
 				9A09777A17268CDF0028A6B4 /* THSoundProperties.m in Sources */,
@@ -6302,6 +6350,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3B048D1196FD1180028B800 /* THAsyncConnection.m in Sources */,
 				9AF50029167B83140020241C /* THClientAppDelegate.m in Sources */,
 				9AF5002A167B83140020241C /* THClientAppViewController.m in Sources */,
 				9AF5002D167B83140020241C /* THClientScene.m in Sources */,
@@ -6344,6 +6393,7 @@
 				9AF50462167B852F0020241C /* THLabel.m in Sources */,
 				9AF50463167B852F0020241C /* THMusicPlayer.m in Sources */,
 				9AFB7DC61832A91500694CCE /* THClientSceneSelectionViewController.m in Sources */,
+				A3B04895196FD0EB0028B800 /* GCDAsyncSocket.m in Sources */,
 				9AF50464167B852F0020241C /* THTouchpad.m in Sources */,
 				9AF50465167B852F0020241C /* THView.m in Sources */,
 				9AF5046B167B85710020241C /* THClientHelper.m in Sources */,

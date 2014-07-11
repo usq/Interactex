@@ -12,8 +12,7 @@
 
 @implementation THGestureClassifierEditable
 - (void)load
-{
-    
+{   
     self.sprite = [CCSprite spriteWithFile:@"gesture.png"];
     [self addChild:self.sprite];
     
@@ -45,11 +44,11 @@
 
 
 
-- (void)setNumberOfTicksToDetect:(int)numberOfTicksToDetect
-{
-    NSLog(@"settingL %i", numberOfTicksToDetect);
-    ((THGestureClassifier *)self.simulableObject).numberOfTicksToDetect = numberOfTicksToDetect;
-}
+//- (void)setNumberOfTicksToDetect:(int)numberOfTicksToDetect
+//{
+//    NSLog(@"settingL %i", numberOfTicksToDetect);
+//    ((THGestureClassifier *)self.simulableObject).numberOfTicksToDetect = numberOfTicksToDetect;
+//}
 
 - (int)numberOfTicksToDetect
 {
@@ -67,6 +66,16 @@
 {
     ((THGestureClassifier *)self.simulableObject).halfWindowSize = halfWindowSize;
 }
+
+
+
+
+
+
+
+
+
+
 
 #pragma mark - Property Controller
 

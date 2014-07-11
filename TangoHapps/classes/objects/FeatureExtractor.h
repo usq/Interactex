@@ -32,7 +32,7 @@
 
 -(void) computeMinMaxDiffsFromWindow:(const float*) window count:(int) count diffs:(double*) diffs;
 
--(int) computeNumPeaksFromWindow:(const float*) window count:(int) count tolerance:(float) tolerance;
+-(int) computeNumPeaksFromWindow:(Signal *) window count:(int) count tolerance:(float) tolerance;
 
 -(void) computeAllFeaturesFromWindow:(Signal*)window
                                count:(int) count

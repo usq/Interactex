@@ -79,6 +79,9 @@ You should have received a copy of the GNU General Public License along with thi
 #import "THInvocationConnectionLine.h"
 #import "THBoard.h"
 #import "THElementPinEditable.h"
+#import "THGestureClassifierEditable.h"
+#import "THSignalSourceEditable.h"
+#import "THSignalSource.h"
 
 @implementation THProject
 
@@ -945,7 +948,17 @@ enum zPositions{
     } else if ([editable isKindOfClass:[THActionEditable class]]){
         NSInteger idx = [self idxOfEditable:editable inArray:self.actions];
         return [project.actions objectAtIndex:idx];
-    } else {
+    }
+    else if ([editable isKindOfClass:[THGestureClassifierEditable class]]){
+        NSInteger idx = [self idxOfEditable:editable inArray:self.values];
+        return [project.values objectAtIndex:idx];
+    }
+    else if ([editable isKindOfClass:[THSignalSourceEditable class]])
+    {
+        NSInteger idx = [self idxOfEditable:editable inArray:self.values];
+        return [project.values objectAtIndex:idx];
+    }
+    else {
         NSAssert(NO, @"returning nil in simulableForEditable for %@",editable);
         return nil;
     }
@@ -967,10 +980,16 @@ enum zPositions{
     } else if ([simulable isKindOfClass:[THTrigger class]]){
         NSInteger idx = [self idxOfSimulable:simulable inArray:self.triggers];
         return [project.triggers objectAtIndex:idx];
-    } else if ([simulable isKindOfClass:[TFAction class]]){
+    }
+    else if ([simulable isKindOfClass:[TFAction class]]){
         NSInteger idx = [self idxOfSimulable:simulable inArray:self.actions];
         return [project.triggers objectAtIndex:idx];
-    } else {
+    }
+    else if ([simulable isKindOfClass:[THSignalSource class]]){
+        NSInteger idx = [self idxOfSimulable:simulable inArray:self.values];
+        return [project.values objectAtIndex:idx];
+    }
+    else {
         NSAssert(NO, @"returning nil for %@ in simulableForSimulable",simulable);
         return nil;
     }

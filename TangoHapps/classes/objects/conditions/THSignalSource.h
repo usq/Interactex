@@ -9,15 +9,15 @@
 #import <Foundation/Foundation.h>
 
 typedef struct {
-    uint8_t value1;
-    uint8_t value2;
+    uint16_t value1;
+    uint16_t value2;
 } Signal;
 
 extern Signal THDecodeSignal(uint32_t signal);
 
 
 @interface THSignalSource : TFSimulableObject
-@property (nonatomic, assign, readonly) NSInteger currentOutputValue;
+@property (nonatomic, assign, readonly) uint32_t currentOutputValue;
 @property (nonatomic, strong, readonly) NSArray *data;
 @property (nonatomic, assign, readonly) float leftBorderPercentage;
 @property (nonatomic, assign, readonly) float rightBorderPercentage;

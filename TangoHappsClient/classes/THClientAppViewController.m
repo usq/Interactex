@@ -461,7 +461,6 @@ float const kConnectingTimeout = 100.0f;
 - (void)didReceiveData:(uint8_t *)buffer
                 lenght:(NSInteger)originalLength
 {
-    NSLog(@"got data from device");
     assert(originalLength == 4);
     [[THSignalSource sharedSignalSource] addDataFromGlove:*(uint32_t *)buffer];
 }

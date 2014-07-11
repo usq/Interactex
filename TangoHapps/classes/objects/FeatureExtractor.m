@@ -141,7 +141,7 @@
     correlations[1] = cov2 / (deviations[1] * deviations[2]);
     correlations[2] = cov3 / (deviations[0] * deviations[2]);
     
-    
+    /*
     double corr1 = 0;
     double corr2 = 0;
     double corr3 = 0;
@@ -164,7 +164,8 @@
     correlations[0] = cov1 / (deviations[0] * deviations[1]);
     correlations[1] = cov2 / (deviations[1] * deviations[2]);
     correlations[2] = cov3 / (deviations[0] * deviations[2]);
-    
+    */
+    //MC_TODO implement
 }
 
 -(void) computeMinMaxsFromWindow:(const float*) window count:(int) count peaks:(double*) minMaxs{
@@ -217,7 +218,10 @@
     diffs[2] = fabs(peaks[5] - peaks[4]);
 }
 
--(int) computeNumPeaksFromWindow:(const float*) window count:(int) count tolerance:(float) tolerance{
+- (int)computeNumPeaksFromWindow:(Signal *)window
+                           count:(int)count
+                       tolerance:(float)tolerance
+{
     
     float min = 1000;
     float max = -1000;
@@ -227,7 +231,44 @@
     
     for(int i = 0 ; i < count * 3 ; i+=3){
         
-        double value = window[i+1];
+        uint16_t val1 = window[i+1].value1;
+        printf("%i ",val1);
+        double value = 300 - val1;
+        
+        if(value > max){
+            max = value;
+        }
+        
+        if(value < min){
+            min = value;
+        }
+        
+        if(lookForMax)
+        {
+            if(value < max - tolerance){
+                min = value;
+                lookForMax = 0;
+                peakCount++;
+                printf(" |detected peak finger 1!| ");
+            }
+        } else
+        {
+            if(value > min + tolerance){
+                max = value;
+                lookForMax = 1;
+            }
+        }
+    }
+    
+    //TODO: change to {peaks1,peaks2}
+    min = 1000;
+    max = -1000;
+    
+    lookForMax = YES;
+    
+    for(int i = 0 ; i < count * 3 ; i+=3){
+        
+        double value = 300 - window[i+1].value2;
         
         if(value > max){
             max = value;
@@ -242,6 +283,7 @@
                 min = value;
                 lookForMax = 0;
                 peakCount++;
+                printf(" |detected peak finger 2!| ");
             }
         } else{
             if(value > min + tolerance){
@@ -273,7 +315,8 @@
                                 count:count
                            usingMeans:means
                            deviations:deviations];
-    
+    //MC_TODO: implement
+    /*
     [self computeMinMaxDiffsFromWindow:window count:count diffs:minMaxDiffs];
     numPeaks = [self computeNumPeaksFromWindow:window count:count  tolerance:self.peakDetectionTolerance];
     [self computeCorrelationsFromWindow:window count:count correlations:correlations];
@@ -287,6 +330,7 @@
     features[5] = correlations[0];
     features[6] = correlations[1];
     features[7] = correlations[2];
+     */
 }
 
 @end

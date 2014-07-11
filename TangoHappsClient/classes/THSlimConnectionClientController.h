@@ -9,5 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface THSlimConnectionClientController : NSObject
++ (instancetype)sharedSlimConnectionController;
 - (void)startConnection;
+- (void)stopConnection;
 @end

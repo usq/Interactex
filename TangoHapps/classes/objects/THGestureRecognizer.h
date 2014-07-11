@@ -11,7 +11,7 @@
 #import "THTrainingsSet.h"
 #import "THSignalSource.h"
 
-#define HALF_WINDOW_SIZE_DEFAULT 40
+#define HALF_WINDOW_SIZE_DEFAULT 20
 
 @interface THGestureRecognizer : NSObject
 
@@ -20,6 +20,8 @@
 - (void)trainRecognizerWithTrainingSet:(THTrainingsSet *)trainingsSet;
 - (void)observeSignal:(Signal)signal;
 - (void)printFeaturesForWindow:(NSArray *)data;
+- (NSUInteger)peaksInWindow:(NSArray *)data;
+
 @property (nonatomic, assign, readwrite) NSUInteger halfWindowSize;
 
 @end

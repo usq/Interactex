@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.21" systemVersion="14A261i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="dCN-sI-2fp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.7" systemVersion="14A283o" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="dCN-sI-2fp">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.13"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6181.2"/>
     </dependencies>
     <scenes>
-        <!--Client Scene Selection View Controller - Projects-->
+        <!--Projects-->
         <scene sceneID="JpO-s2-ae6">
             <objects>
                 <viewController id="25J-C7-ccO" customClass="THClientSceneSelectionViewController" sceneMemberID="viewController">
@@ -183,7 +183,7 @@
             </objects>
             <point key="canvasLocation" x="-1148" y="228"/>
         </scene>
-        <!--Client Download View Controller - Download Project-->
+        <!--Download Project-->
         <scene sceneID="eK9-VL-3ef">
             <objects>
                 <viewController id="PGp-Lq-9E8" customClass="THClientDownloadViewController" sceneMemberID="viewController">
@@ -266,7 +266,7 @@
             </objects>
             <point key="canvasLocation" x="-222" y="-26"/>
         </scene>
-        <!--Client App View Controller - First-->
+        <!--First-->
         <scene sceneID="X7L-oF-nqh">
             <objects>
                 <viewController title="First" id="ooT-9x-Q8c" customClass="THClientAppViewController" sceneMemberID="viewController">
@@ -295,6 +295,9 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination"/>
+        <simulatedScreenMetrics key="destination">
+            <size key="portraitSize" width="320" height="480"/>
+            <size key="landscapeSize" width="480" height="320"/>
+        </simulatedScreenMetrics>
     </simulatedMetricsContainer>
 </document>

@@ -205,9 +205,9 @@
     }
     else
     {
-            [self.signalSourceProperties didPressSave];
-                    [self.signalSourceEditable saveRecording];
-            [self.currentPopoverController dismissPopoverAnimated:YES];
+        [self.signalSourceProperties didPressSave];
+        [self.signalSourceEditable saveRecording];
+        [self.currentPopoverController dismissPopoverAnimated:YES];
     }
 
 

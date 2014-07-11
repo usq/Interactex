@@ -13,12 +13,12 @@
 
 - (void)dropAt:(CGPoint)location
 {
-    THGestureClassifierEditable *editableSignalSource = [[THGestureClassifierEditable alloc] init];
-    editableSignalSource.position = location;
+    THGestureClassifierEditable *gestureClassifierEditable = [[THGestureClassifierEditable alloc] init];
+    gestureClassifierEditable.position = location;
     
     THProject *project = [THDirector sharedDirector].currentProject;
     
-    [project addValue:editableSignalSource];
+    [project addValue:gestureClassifierEditable];
 }
 
 @end

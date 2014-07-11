@@ -17,7 +17,7 @@ Signal THDecodeSignal(uint32_t input)
     uint16_t value1 = ntohs((uint16_t)input);
     input >>= 16;
     uint16_t value2 = ntohs((uint16_t)input);
-
+    //NSLog(@"value1: %i",value1);
     Signal s = {};
     s.value1 = value1;
     s.value2 = value2;
@@ -27,7 +27,7 @@ Signal THDecodeSignal(uint32_t input)
 
 @interface THSignalSource ()
 
-@property (nonatomic, assign, readwrite) NSInteger currentOutputValue;
+@property (nonatomic, assign, readwrite) uint32_t currentOutputValue;
 @property (nonatomic, strong, readwrite) NSArray *data;
 @property (nonatomic, strong, readwrite) NSMutableArray *recordedData;
 @property (nonatomic, assign, readwrite) BOOL sendingData;
@@ -45,21 +45,19 @@ Signal THDecodeSignal(uint32_t input)
 NSString * const kSignalSourceEditableLeftPercentage = @"kSignalSourceEditableLeftPercentage";
 NSString * const kSignalSourceEditableRightPercentage = @"kSignalSourceEditableRightPercentage";
 NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
-
+    static id instance;
 @implementation THSignalSource
 
 + (instancetype)sharedSignalSource
 {
-    static id instance;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        instance = self;
-    });
+    assert(instance != nil);
     return instance;
 }
 
 - (void)load
 {
+
+    instance = self;
     TFProperty * property = [TFProperty propertyWithName:@"currentOutputValue" andType:kDataTypeInteger];
     self.properties = [NSMutableArray arrayWithObject:property];
     
@@ -80,7 +78,11 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
     }
     if(self.data == nil)
     {
-        [self switchSourceFile:self.currentFilePath];
+       // [self switchSourceFile:self.currentFilePath];
+    }
+    if(self.simulating)
+    {
+        
     }
 }
 
@@ -141,9 +143,10 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
     {
         [self.recordedData removeObjectAtIndex:0];
     }
-    [self.recordedData addObject:[NSNumber numberWithUnsignedShort:value]];
+    [self.recordedData addObject:@(value)];
     
-    [[THGestureRecognizer sharedRecognizer] observeSignal:value];
+    Signal signal = THDecodeSignal(value);
+    [[THGestureRecognizer sharedRecognizer] observeSignal:signal];
     
     self.currentOutputValue = value;
     [self triggerEventNamed:kEventValueChanged];
@@ -281,6 +284,11 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
 
 - (void)addDataFromGlove:(uint32_t)data
 {
+    TFEvent * event = [self.events firstObject];
     self.currentOutputValue = data;
+    [[NSNotificationCenter defaultCenter] postNotificationName:event.name
+                                                        object:self];
+
+//    [self triggerEventNamed:kEventValueChanged];
 }
 @end
