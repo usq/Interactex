@@ -1296,6 +1296,14 @@
 		A3B048D3196FD5240028B800 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3B048D2196FD5240028B800 /* Security.framework */; };
 		A3B048D4196FD52B0028B800 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3B048D2196FD5240028B800 /* Security.framework */; };
 		A3B048D6196FD5510028B800 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3B048D5196FD5510028B800 /* CFNetwork.framework */; };
+		A3B048DA196FDCA20028B800 /* THMacbook.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B048D9196FDCA20028B800 /* THMacbook.m */; };
+		A3B048DB196FDCA20028B800 /* THMacbook.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B048D9196FDCA20028B800 /* THMacbook.m */; };
+		A3B048DF196FDCC20028B800 /* THMacbookEditable.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B048DE196FDCC20028B800 /* THMacbookEditable.m */; };
+		A3B048E0196FDCC20028B800 /* THMacbookEditable.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B048DE196FDCC20028B800 /* THMacbookEditable.m */; };
+		A3B048E5196FE6140028B800 /* THMacbookProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B048E3196FE6140028B800 /* THMacbookProperties.m */; };
+		A3B048E6196FE6140028B800 /* THMacbookProperties.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3B048E4196FE6140028B800 /* THMacbookProperties.xib */; };
+		A3B048E9196FE66E0028B800 /* THMacbookPaletteItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B048E8196FE66E0028B800 /* THMacbookPaletteItem.m */; };
+		A3B048EA196FE66E0028B800 /* THMacbookPaletteItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B048E8196FE66E0028B800 /* THMacbookPaletteItem.m */; };
 		A3BCF5331966AE0C00DBEA2F /* THSignalSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CBF53F18BFFA1C00537127 /* THSignalSource.m */; };
 		A3BCF56C1966AE1B00DBEA2F /* THGestureClassifier.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C94A3918D26A010022C928 /* THGestureClassifier.m */; };
 		A3BCF56F1966AEF300DBEA2F /* THGloveBLEConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BCF56E1966AEF300DBEA2F /* THGloveBLEConnector.m */; };
@@ -2768,6 +2776,15 @@
 		A3B048CF196FD1180028B800 /* THAsyncConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THAsyncConnection.m; sourceTree = "<group>"; };
 		A3B048D2196FD5240028B800 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A3B048D5196FD5510028B800 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		A3B048D8196FDCA20028B800 /* THMacbook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THMacbook.h; sourceTree = "<group>"; };
+		A3B048D9196FDCA20028B800 /* THMacbook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THMacbook.m; sourceTree = "<group>"; };
+		A3B048DD196FDCC20028B800 /* THMacbookEditable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THMacbookEditable.h; sourceTree = "<group>"; };
+		A3B048DE196FDCC20028B800 /* THMacbookEditable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THMacbookEditable.m; sourceTree = "<group>"; };
+		A3B048E2196FE6140028B800 /* THMacbookProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THMacbookProperties.h; sourceTree = "<group>"; };
+		A3B048E3196FE6140028B800 /* THMacbookProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THMacbookProperties.m; sourceTree = "<group>"; };
+		A3B048E4196FE6140028B800 /* THMacbookProperties.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THMacbookProperties.xib; sourceTree = "<group>"; };
+		A3B048E7196FE66E0028B800 /* THMacbookPaletteItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THMacbookPaletteItem.h; path = TangoHapps/classes/gesturerecognition/THMacbookPaletteItem.h; sourceTree = SOURCE_ROOT; };
+		A3B048E8196FE66E0028B800 /* THMacbookPaletteItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THMacbookPaletteItem.m; path = TangoHapps/classes/gesturerecognition/THMacbookPaletteItem.m; sourceTree = SOURCE_ROOT; };
 		A3BCF56D1966AEF300DBEA2F /* THGloveBLEConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THGloveBLEConnector.h; sourceTree = "<group>"; };
 		A3BCF56E1966AEF300DBEA2F /* THGloveBLEConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THGloveBLEConnector.m; sourceTree = "<group>"; };
 		A3C949D618D244BB0022C928 /* filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filter.png; sourceTree = "<group>"; };
@@ -4423,6 +4440,7 @@
 		A39B4BC618C7BE53004016B2 /* gesture objects */ = {
 			isa = PBXGroup;
 			children = (
+				A3B048D7196FDC6B0028B800 /* macbook */,
 				A3C94A1618D244D30022C928 /* filter */,
 				A3C94A2F18D2695C0022C928 /* gesture classifier */,
 				A39B4BC518C7BDFB004016B2 /* signalSource */,
@@ -4496,6 +4514,38 @@
 				A3AEF650191285720093E3CB /* THTrainingsSet.m */,
 			);
 			name = Recognizer;
+			sourceTree = "<group>";
+		};
+		A3B048D7196FDC6B0028B800 /* macbook */ = {
+			isa = PBXGroup;
+			children = (
+				A3B048E1196FE5C90028B800 /* ui */,
+				A3B048DC196FDCAF0028B800 /* model */,
+			);
+			name = macbook;
+			sourceTree = "<group>";
+		};
+		A3B048DC196FDCAF0028B800 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				A3B048D8196FDCA20028B800 /* THMacbook.h */,
+				A3B048D9196FDCA20028B800 /* THMacbook.m */,
+				A3B048DD196FDCC20028B800 /* THMacbookEditable.h */,
+				A3B048DE196FDCC20028B800 /* THMacbookEditable.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		A3B048E1196FE5C90028B800 /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				A3B048E2196FE6140028B800 /* THMacbookProperties.h */,
+				A3B048E3196FE6140028B800 /* THMacbookProperties.m */,
+				A3B048E4196FE6140028B800 /* THMacbookProperties.xib */,
+				A3B048E7196FE66E0028B800 /* THMacbookPaletteItem.h */,
+				A3B048E8196FE66E0028B800 /* THMacbookPaletteItem.m */,
+			);
+			name = ui;
 			sourceTree = "<group>";
 		};
 		A3BCF5711966AEF800DBEA2F /* glove ble connector */ = {
@@ -5343,6 +5393,7 @@
 				9A4145F517DE7A060061EDF8 /* palette_threeColorLed@2x.png in Resources */,
 				9A4145F717DE7A060061EDF8 /* palette_timer.png in Resources */,
 				9A4145F917DE7A060061EDF8 /* palette_timer@2x.png in Resources */,
+				A3B048E6196FE6140028B800 /* THMacbookProperties.xib in Resources */,
 				9A4145FB17DE7A060061EDF8 /* palette_touchpad.png in Resources */,
 				9A4145FD17DE7A060061EDF8 /* palette_touchpad@2x.png in Resources */,
 				A3C94A4518D28DEF0022C928 /* doubletick_long.txt in Resources */,
@@ -5832,6 +5883,7 @@
 				9AF50379167B84B40020241C /* THBuzzer.m in Sources */,
 				9AF5037A167B84B40020241C /* THBuzzerEditableObject.m in Sources */,
 				9AF5037B167B84B40020241C /* THClothe.m in Sources */,
+				A3B048DF196FDCC20028B800 /* THMacbookEditable.m in Sources */,
 				A3B048D0196FD1180028B800 /* THAsyncConnection.m in Sources */,
 				9AF5037C167B84B40020241C /* THHardwareComponent.m in Sources */,
 				A31B8CD519150CF10096F3EB /* THGestureSample.m in Sources */,
@@ -5856,6 +5908,7 @@
 				9AA4D75D18AE1DA100A43433 /* THBLELilyPadProperties.m in Sources */,
 				A33442C018B6355200AFB366 /* THFlexSensorEditable.m in Sources */,
 				9AF5038E167B84B40020241C /* THClientProject.m in Sources */,
+				A3B048E9196FE66E0028B800 /* THMacbookPaletteItem.m in Sources */,
 				9AF5038F167B84B40020241C /* THEditor.m in Sources */,
 				9AF50390167B84B40020241C /* THProject.m in Sources */,
 				9AF50391167B84B40020241C /* THSimulableWorldController.m in Sources */,
@@ -6013,6 +6066,7 @@
 				9A8426B217564A80009495AB /* TFAction.m in Sources */,
 				9A8426B517564A80009495AB /* TFEvent.m in Sources */,
 				9A8426B817564A80009495AB /* TFEventActionPair.m in Sources */,
+				A3B048E5196FE6140028B800 /* THMacbookProperties.m in Sources */,
 				9A8426BB17564A80009495AB /* TFMethod.m in Sources */,
 				9AA4D74018AE174C00A43433 /* THLipoBatteryPaletteItem.m in Sources */,
 				9A8426BE17564A80009495AB /* TFMethodInvokeAction.m in Sources */,
@@ -6041,6 +6095,7 @@
 				9A56D05317D9C4DB001021B2 /* THCollectionProjectCell.m in Sources */,
 				A3CBF54018BFFA1C00537127 /* THSignalSource.m in Sources */,
 				9A56D05B17D9CD39001021B2 /* THProjectDraggableCell.m in Sources */,
+				A3B048DA196FDCA20028B800 /* THMacbook.m in Sources */,
 				9AA4D74818AE17A400A43433 /* THSimpleLilypadProperties.m in Sources */,
 				9A56D19617DBDAA9001021B2 /* THDirector.m in Sources */,
 				9A41443317DE63A70061EDF8 /* THClientConstants.m in Sources */,
@@ -6379,6 +6434,7 @@
 				9AF50459167B84F50020241C /* THPotentiometer.m in Sources */,
 				9AFB7DD61832B0B100694CCE /* THClientProjectProxy.m in Sources */,
 				9AF5045A167B84F50020241C /* THSlideSwitch.m in Sources */,
+				A3B048DB196FDCA20028B800 /* THMacbook.m in Sources */,
 				9AF5045B167B84F50020241C /* THSwitch.m in Sources */,
 				9A6B283318AA0768009AAE31 /* THPureData.m in Sources */,
 				9AF5045C167B850D0020241C /* THClientProject.m in Sources */,
@@ -6413,6 +6469,7 @@
 				9A94F1E8169ED5E600AF52AB /* THImageView.m in Sources */,
 				9A39649818AE61FE0061E44B /* THLipoBattery.m in Sources */,
 				9A5F8D8716A2C473000DF472 /* THContactBook.m in Sources */,
+				A3B048E0196FDCC20028B800 /* THMacbookEditable.m in Sources */,
 				9AFB7E271833D60300694CCE /* THI2CRegister.m in Sources */,
 				9ABC275818098F2400B39D72 /* THBoard.m in Sources */,
 				9A93841B16D651D700A41BD2 /* THTimer.m in Sources */,
@@ -6443,6 +6500,7 @@
 				9A7F673C175658F500E04BC8 /* TFFileUtils.m in Sources */,
 				9ABC27B01809B48500B39D72 /* THAccelerometer.m in Sources */,
 				9AD7046D18AA98F00080CD2E /* THGraphTextView.m in Sources */,
+				A3B048EA196FE66E0028B800 /* THMacbookPaletteItem.m in Sources */,
 				9A9FEB7117BE54B3004AB8CF /* THClientDownloadViewController.m in Sources */,
 				9AFB7DCC1832AAD100694CCE /* THClientCollectionProjectCell.m in Sources */,
 				9A06CA6817C14DD300E195FB /* THClientSceneDraggableCell.m in Sources */,

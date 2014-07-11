@@ -142,7 +142,7 @@ float const kMonitorNewValueX = 75.0f;
     value = [self mapValueToGraphRange:value];
     
     THGraphView * view = (THGraphView*)self.view;
-    [view addX:value];
+    [view addValue1:value];
     
 }
 
@@ -150,7 +150,7 @@ float const kMonitorNewValueX = 75.0f;
     value = [self mapValueToGraphRange:value];
     
     THGraphView * view = (THGraphView*)self.view;
-    [view addY:value];
+    [view addValue2:value];
 }
 
 -(void) setMaxValue:(NSInteger)maxValue{
