@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "THProgrammingElementEditable"
+#import "THProgrammingElementEditable.h"
 
 @interface THMacbookEditable : THProgrammingElementEditable
 

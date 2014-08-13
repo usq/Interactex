@@ -10,29 +10,29 @@
 	<string>TangoHapps</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>01A42CCD-BF5D-42A6-AF91-C39DBB0CC680</key>
+		<key>84410F66CAD3859283F4388870B4C7B8079BC454</key>
 		<string>https://github.com/usq/Interactex.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>TangoHapps.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>01A42CCD-BF5D-42A6-AF91-C39DBB0CC680</key>
+		<key>84410F66CAD3859283F4388870B4C7B8079BC454</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/usq/Interactex.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>01A42CCD-BF5D-42A6-AF91-C39DBB0CC680</string>
+	<string>84410F66CAD3859283F4388870B4C7B8079BC454</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>01A42CCD-BF5D-42A6-AF91-C39DBB0CC680</string>
+			<string>84410F66CAD3859283F4388870B4C7B8079BC454</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Interactex</string>
 		</dict>
