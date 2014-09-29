@@ -461,8 +461,8 @@ float const kConnectingTimeout = 100.0f;
 - (void)didReceiveData:(uint8_t *)buffer
                 lenght:(NSInteger)originalLength
 {
-    assert(originalLength == 4);
-    [[THSignalSource sharedSignalSource] addDataFromGlove:*(uint32_t *)buffer];
+    [[THSignalSource sharedSignalSource] addDataFromGlove:buffer
+                                                   length:originalLength];
 }
 
 - (void)bleServiceDidReset

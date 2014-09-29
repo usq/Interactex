@@ -37,7 +37,7 @@
     return @"Gesture";
 }
 
-- (void)addSignal:(float)signal
+- (void)addSignal:(Signal)signal
 {
     [((THGestureClassifier *)self.simulableObject) addSignal:signal];
 }

@@ -28,9 +28,9 @@
 {
     [super viewDidLoad];
     
-    THMacbook *editable = (THGestureClassifierEditable *)self.editableObject;
-    [self.slider setValue:editable.halfWindowSize];
-    self.windowLabel.text = [NSString stringWithFormat:@"%i",editable.halfWindowSize];
+//    THMacbookEditable *editable = (THMacbookEditable *)self.editableObject;
+//    [self.slider setValue:editable.halfWindowSize];
+//    self.windowLabel.text = [NSString stringWithFormat:@"%i",editable.halfWindowSize];
     
     //    [self.tickControll setSelectedSegmentIndex:fmax(editable.numberOfTicksToDetect-1,0)];
     // Do any additional setup after loading the view.

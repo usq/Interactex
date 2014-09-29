@@ -76,29 +76,39 @@
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-    NSNumber *n = change[NSKeyValueChangeNewKey];
+    NSValue *n = change[NSKeyValueChangeNewKey];
+    
+    
     [self.visibleValues addObject:n];
     while([self.visibleValues count] > 300)
     {
         [self.visibleValues removeLastObject];
     }
     
-    uint32_t d = [n unsignedIntValue];
+    Signal s;
+    [n getValue:&s];
     
-    Signal s = THDecodeSignal(d);
+    float n1 = s.finger1;
+    float n2 = s.finger2;
+    float accX = s.accX;
     
-    float n1 = s.value1;
-    float n2 = s.value2;
-    NSLog(@"value1:%i value2: %i",s.value1,s.value2);
+    accX = fmaxf(accX, -15000);
+    accX = fminf(accX, 15000);
+    
+    float faccx = (accX + 15000)/30000;
+    
+    NSLog(@"value1:%i value2: %i",s.finger1,s.finger2);
     n1 -= 100; //correcting offset 130 to 282 -> 30 to 182
     n2 -= 100; //correcting offset 130 to 282 -> 30 to 182
+    faccx *= 200;
+    
     float normalized1 = n1/180.f;
     float normalized2 = n2/180.f;
     
     //holds ca 300
     [self.graphView addValue1:normalized1 * 182.f * 0.9];
-    [self.graphView addValue2:normalized2 * 182.f * 0.9];
-
+//    [self.graphView addValue2:normalized2 * 182.f * 0.9];
+    [self.graphView addValue2:faccx];
 }
 
 
@@ -147,7 +157,9 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"gestureMovedBar" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"gestureMovedBar"
+                                                  object:nil];
     [self removeKVO];
 }
 

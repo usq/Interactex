@@ -169,10 +169,10 @@ didReceiveConnectionRequestFromPeer:(NSString *)peerID
     if(self.recording)
     {
 
-        
-        uint32_t signalValue = *(uint32_t *)[data bytes];
+        assert(data.length == 10);
+        Signal s = THDecodeSignal((uint8_t *)[data bytes]);
         THSignalSource *source = (THSignalSource *)self.simulableObject;
-        [source recordValue:signalValue];
+        [source recordValue:s];
     }
 }
 

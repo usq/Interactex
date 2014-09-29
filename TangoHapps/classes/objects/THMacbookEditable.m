@@ -7,6 +7,7 @@
 //
 
 #import "THMacbookEditable.h"
+#import "THMacbookProperties.h"
 
 @implementation THMacbookEditable
 
@@ -16,7 +17,7 @@
 - (NSArray *)propertyControllers
 {
     NSArray *controllers = [super propertyControllers];
-    THGestureClassifierProperties *properties = [THGestureClassifierProperties properties];
+    THMacbookProperties *properties = [THMacbookProperties properties];
     properties.editableObject = self;
     //add property-controllers here
     return [controllers arrayByAddingObject:properties];
@@ -30,7 +31,7 @@
 {
     self = [super initWithCoder:decoder];
     if(self){
-        [self load];
+//        [self load];
         
     }
     return self;
@@ -43,7 +44,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    THGestureClassifierEditable * copy = [super copyWithZone:zone];
+    THMacbookEditable * copy = [super copyWithZone:zone];
     return copy;
 }
 

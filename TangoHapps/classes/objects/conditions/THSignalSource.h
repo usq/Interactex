@@ -9,15 +9,18 @@
 #import <Foundation/Foundation.h>
 
 typedef struct {
-    uint16_t value1;
-    uint16_t value2;
+    uint16_t finger1;
+    uint16_t finger2;
+    int16_t accX;
+    int16_t accY;
+    int16_t accZ;
 } Signal;
 
-extern Signal THDecodeSignal(uint32_t signal);
+extern Signal THDecodeSignal(uint8_t *signal);
 
 
 @interface THSignalSource : TFSimulableObject
-@property (nonatomic, assign, readonly) uint32_t currentOutputValue;
+@property (nonatomic, assign, readonly) Signal currentOutputValue;
 @property (nonatomic, strong, readonly) NSArray *data;
 @property (nonatomic, assign, readonly) float leftBorderPercentage;
 @property (nonatomic, assign, readonly) float rightBorderPercentage;
@@ -31,7 +34,8 @@ extern Signal THDecodeSignal(uint32_t signal);
 - (void)startRecording;
 - (void)stopRecording;
 - (void)saveRecording;
-- (void)recordValue:(uint32_t)value;
+- (void)recordValue:(Signal)value;
 - (void)cropDataToPercentages;
-- (void)addDataFromGlove:(uint32_t)data;
+- (void)addDataFromGlove:(uint8_t *)data
+                  length:(uint8_t)length;
 @end

@@ -1269,6 +1269,7 @@
 		A31B8CD519150CF10096F3EB /* THGestureSample.m in Sources */ = {isa = PBXBuildFile; fileRef = A31B8CD419150CF10096F3EB /* THGestureSample.m */; };
 		A31B8CD919150E9F0096F3EB /* THGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = A31B8CD819150E9F0096F3EB /* THGesture.m */; };
 		A31B8CDC19150FB10096F3EB /* THGestureSet.m in Sources */ = {isa = PBXBuildFile; fileRef = A31B8CDB19150FB10096F3EB /* THGestureSet.m */; };
+		A32B61A119D9F54B0083829E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3B048D5196FD5510028B800 /* CFNetwork.framework */; };
 		A33442BD18B6280100AFB366 /* THFlexSensor.m in Sources */ = {isa = PBXBuildFile; fileRef = A33442BC18B6280100AFB366 /* THFlexSensor.m */; };
 		A33442C018B6355200AFB366 /* THFlexSensorEditable.m in Sources */ = {isa = PBXBuildFile; fileRef = A33442BF18B6355200AFB366 /* THFlexSensorEditable.m */; };
 		A353ACCA196F1BAF007B49AE /* eye.txt in Resources */ = {isa = PBXBuildFile; fileRef = A353ACC9196F1BAF007B49AE /* eye.txt */; };
@@ -1299,11 +1300,9 @@
 		A3B048DA196FDCA20028B800 /* THMacbook.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B048D9196FDCA20028B800 /* THMacbook.m */; };
 		A3B048DB196FDCA20028B800 /* THMacbook.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B048D9196FDCA20028B800 /* THMacbook.m */; };
 		A3B048DF196FDCC20028B800 /* THMacbookEditable.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B048DE196FDCC20028B800 /* THMacbookEditable.m */; };
-		A3B048E0196FDCC20028B800 /* THMacbookEditable.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B048DE196FDCC20028B800 /* THMacbookEditable.m */; };
 		A3B048E5196FE6140028B800 /* THMacbookProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B048E3196FE6140028B800 /* THMacbookProperties.m */; };
 		A3B048E6196FE6140028B800 /* THMacbookProperties.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3B048E4196FE6140028B800 /* THMacbookProperties.xib */; };
 		A3B048E9196FE66E0028B800 /* THMacbookPaletteItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B048E8196FE66E0028B800 /* THMacbookPaletteItem.m */; };
-		A3B048EA196FE66E0028B800 /* THMacbookPaletteItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B048E8196FE66E0028B800 /* THMacbookPaletteItem.m */; };
 		A3BCF5331966AE0C00DBEA2F /* THSignalSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CBF53F18BFFA1C00537127 /* THSignalSource.m */; };
 		A3BCF56C1966AE1B00DBEA2F /* THGestureClassifier.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C94A3918D26A010022C928 /* THGestureClassifier.m */; };
 		A3BCF56F1966AEF300DBEA2F /* THGloveBLEConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BCF56E1966AEF300DBEA2F /* THGloveBLEConnector.m */; };
@@ -2842,6 +2841,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A32B61A119D9F54B0083829E /* CFNetwork.framework in Frameworks */,
 				A3B048D3196FD5240028B800 /* Security.framework in Frameworks */,
 				9A9C425118B1F2BF002C2BC9 /* libpd-ios.a in Frameworks */,
 				9A5110151837D23A00EB25FA /* CoreMotion.framework in Frameworks */,
@@ -6469,7 +6469,6 @@
 				9A94F1E8169ED5E600AF52AB /* THImageView.m in Sources */,
 				9A39649818AE61FE0061E44B /* THLipoBattery.m in Sources */,
 				9A5F8D8716A2C473000DF472 /* THContactBook.m in Sources */,
-				A3B048E0196FDCC20028B800 /* THMacbookEditable.m in Sources */,
 				9AFB7E271833D60300694CCE /* THI2CRegister.m in Sources */,
 				9ABC275818098F2400B39D72 /* THBoard.m in Sources */,
 				9A93841B16D651D700A41BD2 /* THTimer.m in Sources */,
@@ -6500,7 +6499,6 @@
 				9A7F673C175658F500E04BC8 /* TFFileUtils.m in Sources */,
 				9ABC27B01809B48500B39D72 /* THAccelerometer.m in Sources */,
 				9AD7046D18AA98F00080CD2E /* THGraphTextView.m in Sources */,
-				A3B048EA196FE66E0028B800 /* THMacbookPaletteItem.m in Sources */,
 				9A9FEB7117BE54B3004AB8CF /* THClientDownloadViewController.m in Sources */,
 				9AFB7DCC1832AAD100694CCE /* THClientCollectionProjectCell.m in Sources */,
 				9A06CA6817C14DD300E195FB /* THClientSceneDraggableCell.m in Sources */,
@@ -6633,6 +6631,7 @@
 		9A3511A8167B7A6800C7484B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = TangoHappsIcons;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = TangoHappsLaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -6661,6 +6660,7 @@
 		9A3511A9167B7A6800C7484B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = TangoHappsIcons;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = TangoHappsLaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -6714,6 +6714,7 @@
 		9A94F279169EEEE100AF52AB /* AddHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = TangoHappsIcons;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = TangoHappsLaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

@@ -64,22 +64,17 @@
 
 - (IBAction)recordGesturePressed:(UIButton *)sender
 {
-    
-    //
     CCDirector *director = [CCDirector sharedDirector];
     CGRect rect = [sender convertRect:sender.bounds
                                toView:director.view];
-    
     
     THGestureClassifierPopoverContentViewController *contentViewController =
     [[THGestureClassifierPopoverContentViewController alloc] initWithNibName:@"THGestureClassifierPopoverContentViewController"
                                                                       bundle:[NSBundle mainBundle]
                                                  gestureClassifierProperties:self];
     
-    
-    
     self.recordingPopoverController = [[UIPopoverController alloc] initWithContentViewController:contentViewController];
-    
+    self.recordingPopoverController.delegate = self;
     self.recordingPopoverController.backgroundColor = [UIColor colorWithRed:0.321 green:0.402 blue:0.341 alpha:1.000];
     self.recordingPopoverController.delegate = self;
     

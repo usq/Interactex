@@ -33,9 +33,9 @@
     double mean3_1 = 0;
     
     for(int i = 0 ; i < count * 3 ; i+=3){
-        mean1_1 += window[i].value1;
-        mean2_1 += window[i+1].value1;
-        mean3_1 += window[i+2].value1;
+        mean1_1 += window[i].finger1;
+        mean2_1 += window[i+1].finger1;
+        mean3_1 += window[i+2].finger1;
     }
     
     means[0] = mean1_1 / (float)count;
@@ -48,9 +48,9 @@
     double mean3_2 = 0;
     
     for(int i = 0 ; i < count * 3 ; i+=3){
-        mean1_2 += window[i].value2;
-        mean2_2 += window[i+1].value2;
-        mean3_2 += window[i+2].value2;
+        mean1_2 += window[i].finger2;
+        mean2_2 += window[i+1].finger2;
+        mean3_2 += window[i+2].finger2;
     }
     
     means[3] = mean1_2 / (float)count;
@@ -69,9 +69,9 @@
     
     for(int i = 0 ; i < count * 3 ; i+=3){
         
-        double diff1 = window[i].value1 - means[0];
-        double diff2 = window[i+1].value1 - means[1];
-        double diff3 = window[i+2].value1 - means[2];
+        double diff1 = window[i].finger1 - means[0];
+        double diff2 = window[i+1].finger1 - means[1];
+        double diff3 = window[i+2].finger1 - means[2];
         
         deviation1_1 += diff1 * diff1;
         deviation2_1 += diff2 * diff2;
@@ -88,9 +88,9 @@
     
     for(int i = 0 ; i < count * 3 ; i+=3){
         
-        double diff1 = window[i].value2 - means[3];
-        double diff2 = window[i+1].value2 - means[4];
-        double diff3 = window[i+2].value2 - means[5];
+        double diff1 = window[i].finger2 - means[3];
+        double diff2 = window[i+1].finger2 - means[4];
+        double diff3 = window[i+2].finger2 - means[5];
         
         deviation1_2 += diff1 * diff1;
         deviation2_2 += diff2 * diff2;
@@ -124,9 +124,9 @@
     
     for(int i = 0 ; i < count * 3 ; i+=3){
         
-        double x = window[i].value1;
-        double y = window[i+1].value1;
-        double z = window[i+2].value1;
+        double x = window[i].finger1;
+        double y = window[i+1].finger1;
+        double z = window[i+2].finger1;
         
         corr1 += (x - means[0]) * (y - means[1]);
         corr2 += (y - means[1]) * (z - means[2]);
@@ -229,9 +229,10 @@
     BOOL lookForMax = YES;
     int peakCount = 0;
     
-    for(int i = 0 ; i < count * 3 ; i+=3){
+    for(int i = 0 ; i < count * 3 ; i+=3)
+    {
         
-        uint16_t val1 = window[i+1].value1;
+        uint16_t val1 = window[i+1].finger1;
         printf("%i ",val1);
         double value = 300 - val1;
         
@@ -268,7 +269,7 @@
     
     for(int i = 0 ; i < count * 3 ; i+=3){
         
-        double value = 300 - window[i+1].value2;
+        double value = 300 - window[i+1].finger2;
         
         if(value > max){
             max = value;

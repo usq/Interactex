@@ -38,6 +38,7 @@
 
 - (void)startConnection
 {
+    NSLog(@"initializing GKSession");
     self.shouldConnect = YES;
     [BLEDiscovery sharedInstance].discoveryDelegate = self;
     [BLEDiscovery sharedInstance].peripheralDelegate = self;

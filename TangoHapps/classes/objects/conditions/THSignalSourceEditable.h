@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "THProgrammingElementEditable.h"
+#import "THSignalSource.h"
 @interface THSignalSourceEditable : THProgrammingElementEditable
-@property (nonatomic, assign, readwrite) NSInteger currentOutputValue;
+@property (nonatomic, assign, readwrite) Signal currentOutputValue;
 @property (nonatomic, assign, readwrite) float leftBorderPercentage;
 @property (nonatomic, assign, readwrite) float rightBorderPercentage;
 @property (nonatomic, assign, readonly) BOOL recording;

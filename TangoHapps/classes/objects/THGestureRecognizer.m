@@ -46,7 +46,7 @@
         self.featureExtractor = [[FeatureExtractor alloc] init];
         self.registeredGestures = [NSMutableArray array];
         
-        self.signalWindow = calloc(self.halfWindowSize * 2, sizeof(float));
+        self.signalWindow = calloc(self.halfWindowSize * 2, sizeof(Signal));
         self.halfWindowSize = HALF_WINDOW_SIZE_DEFAULT;
         self.history = [NSMutableString string];
     }
@@ -108,7 +108,7 @@
          free(self.signalWindow);
      }
      
-     self.signalWindow = calloc(_halfWindowSize * 2, sizeof(float));
+     self.signalWindow = calloc(_halfWindowSize * 2, sizeof(Signal));
      self.index = 0;
  
 }
@@ -178,8 +178,9 @@
     
     for (int i = 0; i < self.halfWindowSize*2; i++)
     {
-        uint32_t value = [data[i] unsignedIntegerValue];
-        Signal s = THDecodeSignal(value);
+        NSValue *v = data[i];
+        Signal s;
+        [v getValue:&s];
         self.signalWindow[i] = s;
     }
     

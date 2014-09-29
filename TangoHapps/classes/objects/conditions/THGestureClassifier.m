@@ -63,14 +63,12 @@
     [self addSignal:src.currentOutputValue];
 }
 
-- (void)addSignal:(uint32_t)signal
+- (void)addSignal:(Signal)signal
 {
-    uint32_t signal2 = signal;
-    self.currentSignal = signal2;
+    self.currentSignal = signal;
     if(self.relaysInput || TRUE)
     {
-        Signal s = THDecodeSignal(signal2);
-        [self.recognizer observeSignal:s];
+        [self.recognizer observeSignal:signal];
     }
 }
 
@@ -137,7 +135,7 @@
     {
         uint32_t value = [n unsignedIntegerValue];
         Signal s = THDecodeSignal(value);
-        printf("%i ",s.value1);
+        printf("%i ",s.finger1);
     }
     printf("\n");
     NSLog(@"--------------------");

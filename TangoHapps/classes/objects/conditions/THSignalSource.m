@@ -12,22 +12,39 @@
 #define RECORDED_MAXCOUNT 500
 
 
-Signal THDecodeSignal(uint32_t input)
+uint16_t uint16FromBytes(uint8_t high, uint8_t low)
 {
-    uint16_t value1 = ntohs((uint16_t)input);
-    input >>= 16;
-    uint16_t value2 = ntohs((uint16_t)input);
-    //NSLog(@"value1: %i",value1);
+    uint16_t s = high;
+    s <<= 8;
+    s |= low;
+    return s;
+}
+
+int16_t int16FromBytes(uint8_t high, uint8_t low)
+{
+    int16_t s = high;
+    s <<= 8;
+    s |= low;
+    return s;
+}
+
+
+Signal THDecodeSignal(uint8_t *input)
+{
     Signal s = {};
-    s.value1 = value1;
-    s.value2 = value2;
+    s.finger1 = uint16FromBytes(input[0], input[1]);
+    s.finger2 = uint16FromBytes(input[2], input[3]);
+    s.accX = int16FromBytes(input[4], input[5]);
+    s.accY = int16FromBytes(input[6], input[7]);
+    s.accZ = int16FromBytes(input[8], input[9]);
     
     return s;
 }
 
+
 @interface THSignalSource ()
 
-@property (nonatomic, assign, readwrite) uint32_t currentOutputValue;
+@property (nonatomic, assign, readwrite) Signal currentOutputValue;
 @property (nonatomic, strong, readwrite) NSArray *data;
 @property (nonatomic, strong, readwrite) NSMutableArray *recordedData;
 @property (nonatomic, assign, readwrite) BOOL sendingData;
@@ -58,6 +75,7 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
 {
 
     instance = self;
+    
     TFProperty * property = [TFProperty propertyWithName:@"currentOutputValue" andType:kDataTypeInteger];
     self.properties = [NSMutableArray arrayWithObject:property];
     
@@ -137,16 +155,21 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
 }
 
 
-- (void)recordValue:(uint32_t)value
+- (void)recordValue:(Signal)value
 {
     while([self.recordedData count] > RECORDED_MAXCOUNT)
     {
         [self.recordedData removeObjectAtIndex:0];
     }
-    [self.recordedData addObject:@(value)];
     
-    Signal signal = THDecodeSignal(value);
-    [[THGestureRecognizer sharedRecognizer] observeSignal:signal];
+    NSData *v = [NSData dataWithBytes:&value length:sizeof(Signal)];
+    [self.recordedData addObject:v];
+    
+    
+    THGestureRecognizer *r = [THGestureRecognizer sharedRecognizer];
+    assert(r);
+    assert([r isKindOfClass:[THGestureRecognizer class]]);
+    [r observeSignal:value];
     
     self.currentOutputValue = value;
     [self triggerEventNamed:kEventValueChanged];
@@ -194,9 +217,12 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
             self.index = 0;
         }
         
-        self.currentOutputValue = [self.data[self.index] integerValue];
+        Signal s;
+        NSValue *wrappedSignal = self.data[self.index];
+        
+        [wrappedSignal getValue:&s];
+        self.currentOutputValue = s;
         [self triggerEventNamed:kEventValueChanged];
-//        [self triggerEventNamed:kEventValueChanged];
         
         self.index ++;
         if(self.index > self.rightIndex)
@@ -282,10 +308,16 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
 
 }
 
-- (void)addDataFromGlove:(uint32_t)data
+- (void)addDataFromGlove:(uint8_t *)data
+                  length:(uint8_t)length
 {
     TFEvent * event = [self.events firstObject];
-    self.currentOutputValue = data;
+    
+    Signal s = THDecodeSignal(data);
+    self.currentOutputValue = s;
+
+    
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:event.name
                                                         object:self];
 
