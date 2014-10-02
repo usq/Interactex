@@ -13,7 +13,14 @@
 @property (nonatomic, assign, readwrite) NSUInteger halfWindowSize;
 @property (nonatomic, assign, readwrite) Signal currentSignal;
 @property (nonatomic, assign, readwrite) BOOL hasAlreadyBeenRecognized;
+
+@property (nonatomic, strong, readonly) NSMutableArray *trainedFeatureSets;
+
+@property (nonatomic, assign, readonly) short label;
+
 - (void)addSignal:(Signal)signal;
 - (void)finishedGesture:(NSArray *)gestureData;
 - (void)recognized;
+
+
 @end

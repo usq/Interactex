@@ -23,6 +23,9 @@
 @property (nonatomic, assign, readwrite) BOOL *relaysInput;
 @property (nonatomic, strong, readwrite) NSArray *recordedValues;
 @property (nonatomic, strong, readwrite) THAsyncConnection *connection;
+
+@property (nonatomic, strong, readwrite) NSMutableArray *trainedFeatureSets;
+@property (nonatomic, assign, readwrite) short label;
 @end
 
 @implementation THGestureClassifier
@@ -30,6 +33,8 @@
 - (void)load
 {
     self.hasAlreadyBeenRecognized = YES;
+    self.trainedFeatureSets = [NSMutableArray array];
+    
     TFMethod *inputMethod = [TFMethod methodWithName:@"addSignal"];
     inputMethod.numParams = 1;
     inputMethod.firstParamType = kDataTypeFloat;
@@ -40,7 +45,10 @@
 
     self.events = [NSMutableArray arrayWithObjects:eventRecongnized, eventNotRecognized,nil];
     
-    self.relaysInput = [[THGestureRecognizer sharedRecognizer] registerGesture:self];
+    
+    self.label = [[THGestureRecognizer sharedRecognizer] registerGesture:self];
+    self.relaysInput =  self.label == 1;
+    
     self.recognizer = [THGestureRecognizer sharedRecognizer];
     self.index = 0;
     self.connection = [THAsyncConnection sharedConnection];
@@ -77,11 +85,24 @@
     self.recognizer.halfWindowSize = halfWindowSize;
 }
 
+
+
+//extract features and save in gesture
 - (void)finishedGesture:(NSArray *)gestureData
 {
-    self.recordedValues = gestureData;
-    self.numberOfTicksToDetect = [self.recognizer peaksInWindow:self.recordedValues];
-    NSLog(@"Number of Peaks: %i",self.numberOfTicksToDetect);
+    //extract features
+    THFeatureSet *featureSet = [self.recognizer featureSetFromSignals:gestureData];
+    
+    //add feature set to saved features
+    [self.trainedFeatureSets addObject:featureSet];
+    
+    //retrain kNN
+    [self.recognizer trainRecognizerWithGesture:self];
+    
+//    self.recordedValues = gestureData;
+  
+    //self.numberOfTicksToDetect = [self.recognizer peaksInWindow:self.recordedValues];
+//    NSLog(@"Number of Peaks: %i",self.numberOfTicksToDetect);
 }
 
 #pragma mark - Archiving

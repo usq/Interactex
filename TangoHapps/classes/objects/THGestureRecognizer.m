@@ -21,6 +21,9 @@
 @property (nonatomic, assign, readwrite) NSUInteger index;
 
 @property (nonatomic, strong, readwrite) NSMutableString *history;
+
+
+@property (nonatomic, assign, readwrite) BOOL trainedGesture;
 @end
 
 @implementation THGestureRecognizer
@@ -49,6 +52,7 @@
         self.signalWindow = calloc(self.halfWindowSize * 2, sizeof(Signal));
         self.halfWindowSize = HALF_WINDOW_SIZE_DEFAULT;
         self.history = [NSMutableString string];
+        self.trainedGesture = NO;
     }
     return self;
 }
@@ -60,16 +64,16 @@
     {
         [self.registeredGestures addObject:gesture];
     }
-    BOOL relaysInput = [self.registeredGestures count] == 1;
-    return relaysInput;
+
+    return [self.registeredGestures count];
 }
 
 
-- (void)trainRecognizerWithTrainingSet:(THTrainingsSet *)trainingsSet
-{
-    NSLog(@"training new set");
-    [self.classifier loadTrainingDataFromTrainingsSet:trainingsSet];
-}
+//- (void)trainRecognizerWithTrainingSet:(THTrainingsSet *)trainingsSet
+//{
+//    NSLog(@"training new set");
+//    [self.classifier loadTrainingDataFromTrainingsSet:trainingsSet];
+//}
 
 - (void)observeSignal:(Signal)signal
 {
@@ -89,7 +93,11 @@
         self.signalWindow[self.index] = signal;
         self.index = self.halfWindowSize;
         
-        [self checkWindow];
+        if(self.trainedGesture)
+        {
+            [self checkWindow];
+        }
+
     }
     else
     {
@@ -113,8 +121,85 @@
  
 }
 
+- (void)trainRecognizerWithGesture:(THGestureClassifier *)gesture
+{
+    NSLog(@"%s",__PRETTY_FUNCTION__);
+    
+    NSArray *gestureFeatureSets = gesture.trainedFeatureSets;
+    
+    if(self.trainedGesture == NO)
+    {
+        [self.classifier appendFeatureSets:@[[gestureFeatureSets lastObject]]
+                                  forLabel:9999];
+        NSLog(@"inserted 0 vector");
+    }
+    else
+    {
+        [self.classifier appendFeatureSets:@[[gestureFeatureSets lastObject]]
+                                  forLabel:gesture.label];
+        
+    }
+    
+    self.trainedGesture = YES;
+    
+
+    
+//    - (void)fillPrimitivesFeatures:(double ***)features
+//labels:(short **)labels
+//nSamples:(int *)nSamples
+//nFeatures:(int *)nFeatures
+//    {
+//        NSParameterAssert([self.allInputs count] > 0);                      //we have at lease one input
+//        NSParameterAssert([self.labels count] == [self.allInputs count]);   //every input has a label
+//        NSParameterAssert([[self.allInputs firstObject] count] > 0);        //we have at least one feature per input
+//        
+//        NSInteger inputCount = [self.allInputs count];
+//        NSInteger featuresCount = [[self.allInputs firstObject] count];
+//        
+//        *nSamples = inputCount;
+//        *nFeatures = featuresCount;
+//        
+//        *features = [Helper emptyMatrixWithN:inputCount m:featuresCount];
+//        *labels = malloc(inputCount * sizeof(short));
+//        
+//        
+//        for (int n = 0; n < [self.allInputs count]; n++)
+//        {
+//            NSArray *inputVector = self.allInputs[n];
+//            
+//            NSParameterAssert([inputVector count] == featuresCount);           //every input has same number of features
+//            
+//            for (int i = 0; i < [inputVector count]; i++)
+//            {
+//                (*features)[n][i] = [inputVector[i] doubleValue];
+//            }
+//            
+//            (*labels)[n] = [self.labels[n] integerValue];
+//        }
+//    }
+
+    
+}
+
+
 - (void)checkWindow
 {
+    NSLog(@"%s",__PRETTY_FUNCTION__);
+    
+    double features[8];
+    int featureCount;
+    [self.featureExtractor computeAllFeaturesFromWindow:self.signalWindow
+                                                  count:self.halfWindowSize *2
+                                               features:features
+                                           featureCount:&featureCount];
+    
+    
+    short label = [self.classifier classifyInputVector:features
+                                                ignore:-1];
+    
+    
+    NSLog(@"--------------- i think its label %i",label);
+    
     /*
     NSLog(@"--", self.halfWindowSize);
 
@@ -150,9 +235,17 @@
                                          tolerance:100];
     */
     
-    int numPeaks =[self.featureExtractor computeNumPeaksFromWindow:self.signalWindow
-                                                             count:self.halfWindowSize *2 / 3
-                                                         tolerance:20];
+    
+    
+//    int numPeaks =[self.featureExtractor computeNumPeaksFromWindow:self.signalWindow
+//                                                             count:self.halfWindowSize *2 / 3
+//                                                         tolerance:20];
+    
+    
+
+    
+    
+    int numPeaks = 0;
     for (THGestureClassifier *oneGesture in self.registeredGestures)
     {
         if(oneGesture.hasAlreadyBeenRecognized)
@@ -168,51 +261,79 @@
             }
         }
     }
-    NSLog(@"-----numpeaks: %i",numPeaks);
+//    NSLog(@"-----numpeaks: %i",numPeaks);
 }
+//
+//- (NSUInteger)peaksInWindow:(NSArray *)data
+//{
+//    self.featureExtractor.peakDetectionTolerance = 20;
+//    self.halfWindowSize = [data count]/2;
+//    
+//    for (int i = 0; i < self.halfWindowSize*2; i++)
+//    {
+//        NSValue *v = data[i];
+//        Signal s;
+//        [v getValue:&s];
+//        self.signalWindow[i] = s;
+//    }
+//    
+//    int numPeaks =[self.featureExtractor computeNumPeaksFromWindow:self.signalWindow
+//                                                             count:self.halfWindowSize *2 / 3
+//                                                         tolerance:20];
+//    
+//    NSLog(@"number of peaks: %i",numPeaks);
+//    /*
+//    if(numPeaks == 2)
+//    {
+//        if(self.gestureIsAlreadyRecognized == NO)
+//        {
+//            self.gestureIsAlreadyRecognized = YES;
+//            
+//            [self triggerEventNamed:kEventRecognized];
+//            
+//        }
+//    }
+//    else
+//    {
+//        self.gestureIsAlreadyRecognized = NO;
+//        [self triggerEventNamed:kEventNotRecognized];
+//    }*/
+//    return numPeaks;
+//    
+//}
 
-- (NSUInteger)peaksInWindow:(NSArray *)data
+- (THFeatureSet *)featureSetFromSignals:(NSArray *)signals
 {
-    self.featureExtractor.peakDetectionTolerance = 20;
-    self.halfWindowSize = [data count]/2;
+    Signal recordedSignals[[signals count]];
     
-    for (int i = 0; i < self.halfWindowSize*2; i++)
+    for (int i = 0; i < [signals count]; i++)
     {
-        NSValue *v = data[i];
         Signal s;
-        [v getValue:&s];
-        self.signalWindow[i] = s;
+        [signals[i] getValue:&s];
+        recordedSignals[i] = s;
     }
     
-    int numPeaks =[self.featureExtractor computeNumPeaksFromWindow:self.signalWindow
-                                                             count:self.halfWindowSize *2 / 3
-                                                         tolerance:20];
     
-    NSLog(@"number of peaks: %i",numPeaks);
-    /*
-    if(numPeaks == 2)
+    double features[25];
+    int featureCount;
+    [self.featureExtractor computeAllFeaturesFromWindow:recordedSignals
+                                                  count:[signals count]
+                                               features:features
+                                           featureCount:&featureCount];
+    NSMutableArray *featureArray = [NSMutableArray array];
+    for (int i = 0; i < featureCount; i++)
     {
-        if(self.gestureIsAlreadyRecognized == NO)
-        {
-            self.gestureIsAlreadyRecognized = YES;
-            
-            [self triggerEventNamed:kEventRecognized];
-            
-        }
+        [featureArray addObject:@(features[i])];
     }
-    else
-    {
-        self.gestureIsAlreadyRecognized = NO;
-        [self triggerEventNamed:kEventNotRecognized];
-    }*/
-    return numPeaks;
-
+    THFeatureSet *featureSet = [[THFeatureSet alloc] initWithFeatures:featureArray];
+    return featureSet;
 }
+
 - (void)printFeaturesForWindow:(NSArray *)data
 {
     NSLog(@"%s",__PRETTY_FUNCTION__);
     
-    [self peaksInWindow:data];
+   
     //MC_TODO:implement
     
     /*

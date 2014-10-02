@@ -71,6 +71,12 @@
 }
 
 
+
+float constrain(float input, float min, float max)
+{
+    return fminf(fmaxf(input,min),max);
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary *)change
@@ -91,24 +97,41 @@
     float n1 = s.finger1;
     float n2 = s.finger2;
     float accX = s.accX;
+    float accY = s.accY;
+    float accZ = s.accZ;
     
-    accX = fmaxf(accX, -15000);
-    accX = fminf(accX, 15000);
     
-    float faccx = (accX + 15000)/30000;
+    float accMin = -15000;
+    float accMax = 15000;
+    accX = (constrain(accX,accMin,accMax) + 15000)/30000;
+    accY = (constrain(accY,accMin,accMax) + 15000)/30000;
+    accZ = (constrain(accZ,accMin,accMax) + 15000)/30000;
+
     
     NSLog(@"value1:%i value2: %i",s.finger1,s.finger2);
     n1 -= 100; //correcting offset 130 to 282 -> 30 to 182
     n2 -= 100; //correcting offset 130 to 282 -> 30 to 182
-    faccx *= 200;
+    accX *= 200;
+    accY *= 200;
+    accZ *= 200;
     
     float normalized1 = n1/180.f;
     float normalized2 = n2/180.f;
     
+    normalized1 = normalized1 * 182.f * 0.9;
+    normalized2 = normalized2 * 182.f * 0.9;
+    
+    
+    [self.graphView addValues:@[
+                                @(normalized1),
+                                @(normalized2),
+                                @(accX),
+                                @(accY),
+                                @(accZ),
+                                ]];
+    
+    
     //holds ca 300
-    [self.graphView addValue1:normalized1 * 182.f * 0.9];
-//    [self.graphView addValue2:normalized2 * 182.f * 0.9];
-    [self.graphView addValue2:faccx];
 }
 
 

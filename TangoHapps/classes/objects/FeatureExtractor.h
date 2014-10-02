@@ -28,15 +28,23 @@
                          correlations:(double *)correlations;
 
 
--(void) computeMinMaxsFromWindow:(const float*) window count:(int) count peaks:(double*) minMaxs;
+- (void)computeMinMaxsFromWindow:(const float*) window count:(int) count peaks:(double*) minMaxs;
 
--(void) computeMinMaxDiffsFromWindow:(const float*) window count:(int) count diffs:(double*) diffs;
+- (void)computeMinMaxDiffsFromWindow:(const float*) window count:(int) count diffs:(double*) diffs;
 
--(int) computeNumPeaksFromWindow:(Signal *) window count:(int) count tolerance:(float) tolerance;
+- (void)computeNumPeaksFromWindow:(Signal *)window
+                            count:(int)count
+                        tolerance:(float)tolerance
+                         numPeaks:(NSInteger *)numPeaks;
 
--(void) computeAllFeaturesFromWindow:(Signal*)window
-                               count:(int) count
-                            features:(double *)features;
+
+
+- (void)computeAllFeaturesFromWindow:(Signal*)window
+                               count:(int)count
+                            features:(double *)features
+                        featureCount:(int *)featureCount;
+
+
 
 @property (nonatomic) float peakDetectionTolerance;
 

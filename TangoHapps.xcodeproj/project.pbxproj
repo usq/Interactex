@@ -1280,6 +1280,7 @@
 		A3747F4118B697F300BAEAB7 /* palette_flexsensor.png in Resources */ = {isa = PBXBuildFile; fileRef = A3747F3F18B697F300BAEAB7 /* palette_flexsensor.png */; };
 		A3747F4218B697F300BAEAB7 /* palette_flexsensor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3747F4018B697F300BAEAB7 /* palette_flexsensor@2x.png */; };
 		A382F91E18B6428F000C1108 /* THFlexSensorPaletteItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A382F91D18B6428F000C1108 /* THFlexSensorPaletteItem.m */; };
+		A384F39819DDA23A003868F0 /* THFeatureSet.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B945EA19DD6FD400B39B5A /* THFeatureSet.m */; };
 		A39AEBE2191562E100F882A0 /* THSignalSourceGestureSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A39AEBE0191562E100F882A0 /* THSignalSourceGestureSetViewController.m */; };
 		A39AEBE3191562E100F882A0 /* THSignalSourceGestureSetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A39AEBE1191562E100F882A0 /* THSignalSourceGestureSetViewController.xib */; };
 		A39B4BCE18C7BF26004016B2 /* THSignalSourcePopoverContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A39B4BCC18C7BF26004016B2 /* THSignalSourcePopoverContentViewController.m */; };
@@ -1289,7 +1290,6 @@
 		A3AEF647191260100093E3CB /* FeatureExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AEF644191260100093E3CB /* FeatureExtractor.m */; };
 		A3AEF648191260100093E3CB /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AEF646191260100093E3CB /* Helper.m */; };
 		A3AEF64E191281E10093E3CB /* THGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AEF64D191281E10093E3CB /* THGestureRecognizer.m */; };
-		A3AEF651191285720093E3CB /* THTrainingsSet.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AEF650191285720093E3CB /* THTrainingsSet.m */; };
 		A3B04894196FD0EB0028B800 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B04893196FD0EB0028B800 /* GCDAsyncSocket.m */; };
 		A3B04895196FD0EB0028B800 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B04893196FD0EB0028B800 /* GCDAsyncSocket.m */; };
 		A3B048D0196FD1180028B800 /* THAsyncConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B048CF196FD1180028B800 /* THAsyncConnection.m */; };
@@ -1303,6 +1303,7 @@
 		A3B048E5196FE6140028B800 /* THMacbookProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B048E3196FE6140028B800 /* THMacbookProperties.m */; };
 		A3B048E6196FE6140028B800 /* THMacbookProperties.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3B048E4196FE6140028B800 /* THMacbookProperties.xib */; };
 		A3B048E9196FE66E0028B800 /* THMacbookPaletteItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B048E8196FE66E0028B800 /* THMacbookPaletteItem.m */; };
+		A3B945EB19DD6FD400B39B5A /* THFeatureSet.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B945EA19DD6FD400B39B5A /* THFeatureSet.m */; };
 		A3BCF5331966AE0C00DBEA2F /* THSignalSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CBF53F18BFFA1C00537127 /* THSignalSource.m */; };
 		A3BCF56C1966AE1B00DBEA2F /* THGestureClassifier.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C94A3918D26A010022C928 /* THGestureClassifier.m */; };
 		A3BCF56F1966AEF300DBEA2F /* THGloveBLEConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BCF56E1966AEF300DBEA2F /* THGloveBLEConnector.m */; };
@@ -2767,8 +2768,6 @@
 		A3AEF646191260100093E3CB /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
 		A3AEF64C191281E10093E3CB /* THGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THGestureRecognizer.h; sourceTree = "<group>"; };
 		A3AEF64D191281E10093E3CB /* THGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THGestureRecognizer.m; sourceTree = "<group>"; };
-		A3AEF64F191285720093E3CB /* THTrainingsSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THTrainingsSet.h; sourceTree = "<group>"; };
-		A3AEF650191285720093E3CB /* THTrainingsSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THTrainingsSet.m; sourceTree = "<group>"; };
 		A3B04892196FD0EB0028B800 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
 		A3B04893196FD0EB0028B800 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		A3B048CE196FD1180028B800 /* THAsyncConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THAsyncConnection.h; sourceTree = "<group>"; };
@@ -2784,6 +2783,8 @@
 		A3B048E4196FE6140028B800 /* THMacbookProperties.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THMacbookProperties.xib; sourceTree = "<group>"; };
 		A3B048E7196FE66E0028B800 /* THMacbookPaletteItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THMacbookPaletteItem.h; path = TangoHapps/classes/gesturerecognition/THMacbookPaletteItem.h; sourceTree = SOURCE_ROOT; };
 		A3B048E8196FE66E0028B800 /* THMacbookPaletteItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THMacbookPaletteItem.m; path = TangoHapps/classes/gesturerecognition/THMacbookPaletteItem.m; sourceTree = SOURCE_ROOT; };
+		A3B945E919DD6FD400B39B5A /* THFeatureSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THFeatureSet.h; sourceTree = "<group>"; };
+		A3B945EA19DD6FD400B39B5A /* THFeatureSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THFeatureSet.m; sourceTree = "<group>"; };
 		A3BCF56D1966AEF300DBEA2F /* THGloveBLEConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THGloveBLEConnector.h; sourceTree = "<group>"; };
 		A3BCF56E1966AEF300DBEA2F /* THGloveBLEConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THGloveBLEConnector.m; sourceTree = "<group>"; };
 		A3C949D618D244BB0022C928 /* filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filter.png; sourceTree = "<group>"; };
@@ -4501,17 +4502,12 @@
 		A3AEF649191260160093E3CB /* Recognizer */ = {
 			isa = PBXGroup;
 			children = (
-				A31B8CD319150CF10096F3EB /* THGestureSample.h */,
-				A31B8CD419150CF10096F3EB /* THGestureSample.m */,
-				A31B8CD719150E9F0096F3EB /* THGesture.h */,
-				A31B8CD819150E9F0096F3EB /* THGesture.m */,
-				A31B8CDA19150FB10096F3EB /* THGestureSet.h */,
-				A31B8CDB19150FB10096F3EB /* THGestureSet.m */,
+				A3B945B019DD6D9500B39B5A /* not implemented */,
 				A3AEF60719125FF20093E3CB /* Recognizer Juan */,
 				A3AEF64C191281E10093E3CB /* THGestureRecognizer.h */,
 				A3AEF64D191281E10093E3CB /* THGestureRecognizer.m */,
-				A3AEF64F191285720093E3CB /* THTrainingsSet.h */,
-				A3AEF650191285720093E3CB /* THTrainingsSet.m */,
+				A3B945E919DD6FD400B39B5A /* THFeatureSet.h */,
+				A3B945EA19DD6FD400B39B5A /* THFeatureSet.m */,
 			);
 			name = Recognizer;
 			sourceTree = "<group>";
@@ -4546,6 +4542,19 @@
 				A3B048E8196FE66E0028B800 /* THMacbookPaletteItem.m */,
 			);
 			name = ui;
+			sourceTree = "<group>";
+		};
+		A3B945B019DD6D9500B39B5A /* not implemented */ = {
+			isa = PBXGroup;
+			children = (
+				A31B8CD319150CF10096F3EB /* THGestureSample.h */,
+				A31B8CD419150CF10096F3EB /* THGestureSample.m */,
+				A31B8CD719150E9F0096F3EB /* THGesture.h */,
+				A31B8CD819150E9F0096F3EB /* THGesture.m */,
+				A31B8CDA19150FB10096F3EB /* THGestureSet.h */,
+				A31B8CDB19150FB10096F3EB /* THGestureSet.m */,
+			);
+			name = "not implemented";
 			sourceTree = "<group>";
 		};
 		A3BCF5711966AEF800DBEA2F /* glove ble connector */ = {
@@ -5920,7 +5929,6 @@
 				9A3165A5182796A200CB3E59 /* THMonitorPaletteItem.m in Sources */,
 				9AF50394167B84B40020241C /* THiPhoneButtonEditableObject.m in Sources */,
 				9AF50395167B84B40020241C /* THiPhoneControl.m in Sources */,
-				A3AEF651191285720093E3CB /* THTrainingsSet.m in Sources */,
 				9AF50396167B84B40020241C /* THiPhoneControlEditableObject.m in Sources */,
 				9AF50397167B84B40020241C /* THiPhoneEditableObject.m in Sources */,
 				9AF50398167B84B40020241C /* THiSwitch.m in Sources */,
@@ -5937,6 +5945,7 @@
 				9AA4D74618AE17A400A43433 /* THBoardProperties.m in Sources */,
 				9ABC27B41809B57900B39D72 /* THAccelerometerEditable.m in Sources */,
 				9AF503A3167B84B40020241C /* THButtonPaletteItem.m in Sources */,
+				A3B945EB19DD6FD400B39B5A /* THFeatureSet.m in Sources */,
 				9AF503A4167B84B40020241C /* THBuzzerPaletteItem.m in Sources */,
 				9AF503A5167B84B40020241C /* THClothePaletteItem.m in Sources */,
 				9AF503A6167B84B40020241C /* THComparatorPaletteItem.m in Sources */,
@@ -6424,6 +6433,7 @@
 				9AF50450167B84D90020241C /* THPin.m in Sources */,
 				9AF50451167B84D90020241C /* THPinValue.m in Sources */,
 				9AF50452167B84F50020241C /* THButton.m in Sources */,
+				A384F39819DDA23A003868F0 /* THFeatureSet.m in Sources */,
 				A3BCF5751966B07200DBEA2F /* Classifier.m in Sources */,
 				9A39645C18AE5A080061E44B /* THGraphViewSegmentGroup.m in Sources */,
 				9AF50453167B84F50020241C /* THBuzzer.m in Sources */,

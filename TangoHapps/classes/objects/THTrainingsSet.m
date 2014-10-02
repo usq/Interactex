@@ -22,6 +22,11 @@
     
 }
 
+- (void)addFeatureSet:(THFeatureSet *)featureSet
+{
+    self.
+}
+
 - (void)fillPrimitivesFeatures:(double ***)features
                         labels:(short **)labels
                       nSamples:(int *)nSamples

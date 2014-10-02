@@ -13,8 +13,7 @@
 
 @property (nonatomic) float maxAxisY;
 @property (nonatomic) float minAxisY;
-@property (nonatomic, strong) THGraphViewSegmentGroup * groupX;
-@property (nonatomic, strong) THGraphViewSegmentGroup * groupY;
+
 @property (nonatomic) THGraphTextView * textView;
 
 -(id) initWithFrame:(CGRect)frame maxAxisY:(float) maxAxisY minAxisY:(float) minAxisY;
@@ -52,6 +51,8 @@
  */
 -(void) addY:(float)y DEPRECATED_MSG_ATTRIBUTE("use -addValue2: instead");
 
+
+- (void)addValues:(NSArray *)values;
 
 -(void) start;
 -(void) stop;

@@ -9,10 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "THTrainingsSet.h"
 
-@interface Classifier : NSObject {
-    double ** input;
-    double ** scaleMatrix;
-    short * inputLabels;
+@interface Classifier : NSObject
+{
+    double **input;
+    double **scaleMatrix;
+    short *inputLabels;
 }
 
 @property (nonatomic) NSInteger inputCount;
@@ -20,18 +21,22 @@
 @property (nonatomic) NSInteger numberIterations;
 @property (nonatomic) double learningRate;
 
--(void) loadScalingMatrixFromFile:(NSString*) file;
+- (void)loadScalingMatrixFromFile:(NSString*) file;
 
--(void) loadTrainingDataFromFile:(NSString*) fileName;
 
-- (void)loadTrainingDataFromTrainingsSet:(THTrainingsSet *)trainingsSet;
+- (void)appendFeatureSets:(NSArray *)featureSets
+                 forLabel:(short)label;
+//-(void) loadTrainingDataFromFile:(NSString*) fileName;
 
--(short) classifyInputVector:(double*) input ignore:(int) ignore;
+//- (void)loadTrainingDataFromTrainingsSet:(THTrainingsSet *)trainingsSet;
 
--(void) scaleInput;
+- (short)classifyInputVector:(double *)input
+                      ignore:(int)ignore;
 
--(void) testFile:(NSString*) fileName;
+- (void)scaleInput;
 
--(void) calculateScaleMatrix;
+- (void)testFile:(NSString *)fileName;
+
+- (void)calculateScaleMatrix;
 
 @end

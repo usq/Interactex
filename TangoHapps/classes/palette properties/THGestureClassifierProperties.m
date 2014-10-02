@@ -61,6 +61,10 @@
     self.windowLabel.text = [NSString stringWithFormat:@"%i",(NSUInteger)sender.value];
 }
 
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+        [[THSignalSourceEditable sharedSignalSourceEditable] stopRecording];
+}
 
 - (IBAction)recordGesturePressed:(UIButton *)sender
 {

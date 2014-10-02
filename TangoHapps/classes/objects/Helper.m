@@ -21,6 +21,56 @@
     return A;
 }
 
++ (double **)appendMatrix:(double **)matrixToAppend
+             withRowCount:(int)rowCountToAppend
+                 toMatrix:(double **)matrix
+             withRowCount:(int)rowCount
+              columnCount:(int)columnCount
+{
+    double **newLargerMatrx = [self emptyMatrixWithN:rowCount + rowCountToAppend
+                                                   m:columnCount];
+    
+    //copy old matrix
+    for (int i = 0; i < rowCount; i++)
+    {
+        for (int k = 0; k < columnCount; k++)
+        {
+            newLargerMatrx[i][k] = matrix[i][k];
+        }
+    }
+    //copy new matrix
+    for (int i = rowCount; i < rowCount + rowCountToAppend; i++)
+    {
+        for (int k = 0; k < columnCount; k++)
+        {
+            newLargerMatrx[i][k] = matrixToAppend[i-rowCount][k];
+        }
+    }
+    
+    return newLargerMatrx;
+}
+
+
++ (short *)appendVector:(short *)vectorToAppend
+               withCount:(int)countToAppend
+                toVector:(short *)vector
+               withCount:(int)count
+{    
+    short *newVector = malloc(sizeof(short) * (countToAppend + count));
+    //copy old vector
+    for (int i = 0; i < count; i++)
+    {
+        newVector[i] = vector[i];
+    }
+    
+    //copy new vector
+    for (int i = count; i < count + countToAppend; i++)
+    {
+        newVector[i] = vectorToAppend[i - count];
+    }
+    return newVector;
+}
+
 +(double) squaredNorm:(double*) v count:(unsigned int) N{
     
     double norm = 0;
@@ -270,22 +320,24 @@
 }
 
 
+
+
 /*
-+(void) saveMatrix:(double**) input n:(int) n m:(int) m toFile:(NSString*) fileName{
-    NSString * content = @"";
-    
-    for (int i = 0 ; i < n; i++) {
-        for (int j = 0 ; j < m; j++) {
-            NSString * newStr = [NSString stringWithFormat:@"%f ",input[i][j]];
-            content = [content stringByAppendingString: newStr];
-        }
-        content = [content stringByAppendingString:@"\n"];
-    }
-    
-    NSString* path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"txt"];
-    
-    [content writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
-}*/
+ +(void) saveMatrix:(double**) input n:(int) n m:(int) m toFile:(NSString*) fileName{
+ NSString * content = @"";
+ 
+ for (int i = 0 ; i < n; i++) {
+ for (int j = 0 ; j < m; j++) {
+ NSString * newStr = [NSString stringWithFormat:@"%f ",input[i][j]];
+ content = [content stringByAppendingString: newStr];
+ }
+ content = [content stringByAppendingString:@"\n"];
+ }
+ 
+ NSString* path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"txt"];
+ 
+ [content writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
+ }*/
 
 +(NSInteger) loadAccelerometerDataFromFile:(NSString*) fileName accelerometerValues:(float*) accelerometerValues{
     

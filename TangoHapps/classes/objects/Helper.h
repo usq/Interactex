@@ -13,6 +13,30 @@
 
 +(double**) emptyMatrixWithN:(int) n m:(int) m;
 
+/**
+ *  creates a new combined matrix, you have to free the matrices yourself!
+ *
+ *  @param matrixToAppend   the matrix which will be pastet after matrix
+ *  @param rowCountToAppend the number of rows in the new matrix
+ *
+ *  @param matrix           the original matrix, the new matrix will start with a copy of this matrix
+ *  @param rowCount         the original rowCount
+ *  @param columnCount      the original comumncount
+ *
+ *  @return the newly created combined matrix
+ */
++ (double **)appendMatrix:(double **)matrixToAppend
+             withRowCount:(int)rowCountToAppend
+                 toMatrix:(double **)matrix
+             withRowCount:(int)rowCount
+              columnCount:(int)columnCount;
+
++ (short *)appendVector:(short *)vectorToAppend
+              withCount:(int)countToAppend
+               toVector:(short *)vector
+              withCount:(int)count;
+
+
 +(double) squaredNorm:(double*) v count:(unsigned int) N;
 
 +(double) norm:(double*) v count:(int) N;

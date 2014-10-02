@@ -142,29 +142,29 @@
     correlations[2] = cov3 / (deviations[0] * deviations[2]);
     
     /*
-    double corr1 = 0;
-    double corr2 = 0;
-    double corr3 = 0;
-    
-    for(int i = 0 ; i < count * 3 ; i+=3){
-        
-        double x = window[i];
-        double y = window[i+1];
-        double z = window[i+2];
-        
-        corr1 += (x - means[0]) * (y - means[1]);
-        corr2 += (y - means[1]) * (z - means[2]);
-        corr3 += (x - means[0]) * (z - means[2]);
-    }
-    
-    double cov1 = corr1 / (count - 1);
-    double cov2 = corr2 / (count - 1);
-    double cov3 = corr3 / (count - 1);
-    
-    correlations[0] = cov1 / (deviations[0] * deviations[1]);
-    correlations[1] = cov2 / (deviations[1] * deviations[2]);
-    correlations[2] = cov3 / (deviations[0] * deviations[2]);
-    */
+     double corr1 = 0;
+     double corr2 = 0;
+     double corr3 = 0;
+     
+     for(int i = 0 ; i < count * 3 ; i+=3){
+     
+     double x = window[i];
+     double y = window[i+1];
+     double z = window[i+2];
+     
+     corr1 += (x - means[0]) * (y - means[1]);
+     corr2 += (y - means[1]) * (z - means[2]);
+     corr3 += (x - means[0]) * (z - means[2]);
+     }
+     
+     double cov1 = corr1 / (count - 1);
+     double cov2 = corr2 / (count - 1);
+     double cov3 = corr3 / (count - 1);
+     
+     correlations[0] = cov1 / (deviations[0] * deviations[1]);
+     correlations[1] = cov2 / (deviations[1] * deviations[2]);
+     correlations[2] = cov3 / (deviations[0] * deviations[2]);
+     */
     //MC_TODO implement
 }
 
@@ -218,22 +218,22 @@
     diffs[2] = fabs(peaks[5] - peaks[4]);
 }
 
-- (int)computeNumPeaksFromWindow:(Signal *)window
-                           count:(int)count
-                       tolerance:(float)tolerance
+
+- (NSInteger)numberOfPeaksInValues:(float *)values
+                        count:(int)count
+                    tolerance:(float)tolerance
 {
-    
-    float min = 1000;
-    float max = -1000;
+    float min = 100000;
+    float max = -100000;
     
     BOOL lookForMax = YES;
     int peakCount = 0;
     
-    for(int i = 0 ; i < count * 3 ; i+=3)
+    for(int i = 0 ; i < count; i++)
     {
+        uint16_t val1 = values[i];
         
-        uint16_t val1 = window[i+1].finger1;
-        printf("%i ",val1);
+        //this one is fishy
         double value = 300 - val1;
         
         if(value > max){
@@ -248,89 +248,217 @@
         {
             if(value < max - tolerance){
                 min = value;
-                lookForMax = 0;
+                lookForMax = NO;
                 peakCount++;
-                printf(" |detected peak finger 1!| ");
             }
         } else
         {
             if(value > min + tolerance){
                 max = value;
-                lookForMax = 1;
+                lookForMax = YES;
             }
         }
     }
-    
-    //TODO: change to {peaks1,peaks2}
-    min = 1000;
-    max = -1000;
-    
-    lookForMax = YES;
-    
-    for(int i = 0 ; i < count * 3 ; i+=3){
-        
-        double value = 300 - window[i+1].finger2;
-        
-        if(value > max){
-            max = value;
-        }
-        
-        if(value < min){
-            min = value;
-        }
-        
-        if(lookForMax){
-            if(value < max - tolerance){
-                min = value;
-                lookForMax = 0;
-                peakCount++;
-                printf(" |detected peak finger 2!| ");
-            }
-        } else{
-            if(value > min + tolerance){
-                max = value;
-                lookForMax = 1;
-            }
-        }
-    }
-    
     return peakCount;
+}
+
+- (void)computeNumPeaksFromWindow:(Signal *)window
+                            count:(int)count
+                        tolerance:(float)tolerance
+                         numPeaks:(NSInteger *)numPeaks
+{
+    
+    float finger1Window[count];
+    float finger2Window[count];
+    float accXWindow[count];
+    float accYWindow[count];
+    float accZWindow[count];
+    
+    
+    for (int i = 0; i < count; i++)
+    {
+        Signal s = window[i];
+        finger1Window[i] = s.finger1;
+        finger2Window[i] = s.finger2;
+        accXWindow[i] = s.accX;
+        accYWindow[i] = s.accY;
+        accZWindow[i] = s.accZ;
+    }
+    
+    numPeaks[0] = [self numberOfPeaksInValues:finger1Window
+                                        count:count
+                                    tolerance:tolerance];
+    
+    numPeaks[1] = [self numberOfPeaksInValues:finger2Window
+                                        count:count
+                                    tolerance:tolerance];
+    
+    numPeaks[2] = [self numberOfPeaksInValues:accXWindow
+                                        count:count
+                                    tolerance:tolerance * 100];
+    
+    numPeaks[3] = [self numberOfPeaksInValues:accYWindow
+                                        count:count
+                                    tolerance:tolerance * 100];
+
+    numPeaks[4] = [self numberOfPeaksInValues:accZWindow
+                                        count:count
+                                    tolerance:tolerance * 100];
+
+    
+    
+//    float min = 100000;
+//    float max = -100000;
+//    
+//    BOOL lookForMax = YES;
+//    int peakCount = 0;
+//    
+//    
+//    
+//    
+//    for(int i = 0 ; i < count * 3 ; i+=3)
+//    {
+//        uint16_t val1 = window[i+1].finger1;
+//        printf("%i ",val1);
+//        double value = 300 - val1;
+//        
+//        if(value > max){
+//            max = value;
+//        }
+//        
+//        if(value < min){
+//            min = value;
+//        }
+//        
+//        if(lookForMax)
+//        {
+//            if(value < max - tolerance){
+//                min = value;
+//                lookForMax = 0;
+//                peakCount++;
+//                printf(" |detected peak finger 1!| ");
+//            }
+//        } else
+//        {
+//            if(value > min + tolerance){
+//                max = value;
+//                lookForMax = 1;
+//            }
+//        }
+//    }
+//    
+//    
+//    
+//    
+//    
+//    //TODO: change to {peaks1,peaks2}
+//    min = 1000;
+//    max = -1000;
+//    
+//    lookForMax = YES;
+//    
+//    for(int i = 0 ; i < count * 3 ; i+=3){
+//        
+//        double value = 300 - window[i+1].finger2;
+//        
+//        if(value > max){
+//            max = value;
+//        }
+//        
+//        if(value < min){
+//            min = value;
+//        }
+//        
+//        if(lookForMax){
+//            if(value < max - tolerance){
+//                min = value;
+//                lookForMax = 0;
+//                peakCount++;
+//                printf(" |detected peak finger 2!| ");
+//            }
+//        } else{
+//            if(value > min + tolerance){
+//                max = value;
+//                lookForMax = 1;
+//            }
+//        }
+//    }
+//    
+//    return peakCount;
 }
 
 - (void)computeAllFeaturesFromWindow:(Signal*)window
                                count:(int)count
-                            features:(double *)features{
-    double means[6];
-    double deviations[6];
+                            features:(double *)features
+                        featureCount:(int *)featureCount
+
+{
     
-    double minMaxDiffs[3];
-    double correlations[3];
-    NSInteger numPeaks;
-    double magnitude;
+//    double means[6];
+//    double deviations[6];
+//    
+//    double minMaxDiffs[3];
+//    double correlations[3];
+//    double magnitude;
     
-    [self computeMeansFromWindow:window
-                           count:count
-                           means:means];
+    NSInteger numpeaks[5];
+    [self computeNumPeaksFromWindow:window
+                              count:count
+                          tolerance:20
+                           numPeaks:numpeaks];
+    NSLog(@"------------------- i just found %i peaks in finger 1",numpeaks[0]);
     
-    [self computeDeviationsFromWindow:window
-                                count:count
-                           usingMeans:means
-                           deviations:deviations];
+
+    
+    
+    features[0] = numpeaks[0]; //feature 1 contains numPeak finger 1
+    features[1] = numpeaks[1]; //feature 2 contains numPeak finger 2
+    features[2] = numpeaks[2]; //feature 3 contains numPeak accX
+    features[3] = numpeaks[3]; //feature 4 contains numPeak accY
+    features[4] = numpeaks[4]; //feature 5 contains numPeak accZ
+    
+    
+    
+    *featureCount = 5;
+    
+    
+
+    //
+    //    [self computeMeansFromWindow:window
+    //                           count:count
+    //                           means:means];
+    //
+    //    [self computeDeviationsFromWindow:window
+    //                                count:count
+    //                           usingMeans:means
+    //                           deviations:deviations];
+    //
+    //
+    //    features[0] = means[1];
+    ////    features[1] = magnitude;
+    //    features[2] = deviations[1];
+    //    features[3] = minMaxDiffs[1];
+    ////    features[4] = numPeaks;
+    //    features[5] = correlations[0];
+    //    features[6] = correlations[1];
+    //    features[7] = correlations[2];
+    
+    
     //MC_TODO: implement
     /*
-    [self computeMinMaxDiffsFromWindow:window count:count diffs:minMaxDiffs];
-    numPeaks = [self computeNumPeaksFromWindow:window count:count  tolerance:self.peakDetectionTolerance];
-    [self computeCorrelationsFromWindow:window count:count correlations:correlations];
-    magnitude = [self computeMagnitudeAveragesFromWindow:window count:count];
-    
-    features[0] = means[1];
-    features[1] = magnitude;
-    features[2] = deviations[1];
-    features[3] = minMaxDiffs[1];
-    features[4] = numPeaks;
-    features[5] = correlations[0];
-    features[6] = correlations[1];
-    features[7] = correlations[2];
+     [self computeMinMaxDiffsFromWindow:window count:count diffs:minMaxDiffs];
+     numPeaks = [self computeNumPeaksFromWindow:window count:count  tolerance:self.peakDetectionTolerance];
+     [self computeCorrelationsFromWindow:window count:count correlations:correlations];
+     magnitude = [self computeMagnitudeAveragesFromWindow:window count:count];
+     
+     features[0] = means[1];
+     features[1] = magnitude;
+     features[2] = deviations[1];
+     features[3] = minMaxDiffs[1];
+     features[4] = numPeaks;
+     features[5] = correlations[0];
+     features[6] = correlations[1];
+     features[7] = correlations[2];
      */
 }
 

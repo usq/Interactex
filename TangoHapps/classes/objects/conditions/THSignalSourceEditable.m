@@ -118,10 +118,12 @@ static id instance;
 
 - (void)stopRecording
 {
+    NSLog(@"%s",__PRETTY_FUNCTION__);
     self.recording = NO;
    THSignalSource *source = (THSignalSource *)self.simulableObject;
     [source stopRecording];
     [self.session disconnectFromAllPeers];
+    self.session.available = NO;
 }
 
 - (void)saveRecording
@@ -132,6 +134,7 @@ static id instance;
 
 - (void)establishConnection
 {
+    NSLog(@"%s",__PRETTY_FUNCTION__);
     self.session = [[GKSession alloc] initWithSessionID:@"flexSession"
                                             displayName:nil
                                             sessionMode:GKSessionModeServer];
@@ -148,6 +151,7 @@ static id instance;
 -(void)session:(GKSession *)aSession
 didReceiveConnectionRequestFromPeer:(NSString *)peerID
 {
+    NSLog(@"%s",__PRETTY_FUNCTION__);
     NSError *error;
     [self.session setDataReceiveHandler:self withContext:nil];
     [self.session acceptConnectionFromPeer:peerID error:&error];

@@ -169,6 +169,7 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
     THGestureRecognizer *r = [THGestureRecognizer sharedRecognizer];
     assert(r);
     assert([r isKindOfClass:[THGestureRecognizer class]]);
+    
     [r observeSignal:value];
     
     self.currentOutputValue = value;
