@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "THSignalSource.h"
 
+#define FEATURE_COUNT 20
+
 @interface FeatureExtractor : NSObject
 
 -(double) computeMagnitudeAveragesFromWindow:(const float*) window count:(int) count;
@@ -28,15 +30,22 @@
                          correlations:(double *)correlations;
 
 
-- (void)computeMinMaxsFromWindow:(const float*) window count:(int) count peaks:(double*) minMaxs;
 
 - (void)computeMinMaxDiffsFromWindow:(const float*) window count:(int) count diffs:(double*) diffs;
+
+
+
+
+- (void)computeMinMaxsFromWindow:(Signal *)window
+                           count:(int)count
+                           peaks:(double [5][2])minMaxs;
+
+
 
 - (void)computeNumPeaksFromWindow:(Signal *)window
                             count:(int)count
                         tolerance:(float)tolerance
                          numPeaks:(NSInteger *)numPeaks;
-
 
 
 - (void)computeAllFeaturesFromWindow:(Signal*)window

@@ -42,12 +42,12 @@
     self.shouldConnect = YES;
     [BLEDiscovery sharedInstance].discoveryDelegate = self;
     [BLEDiscovery sharedInstance].peripheralDelegate = self;
-
-
+    
+    
     
     self.session = [[GKSession alloc] initWithSessionID:@"flexSession"
-                                                  displayName:nil
-                                                  sessionMode:GKSessionModeClient];
+                                            displayName:nil
+                                            sessionMode:GKSessionModeClient];
     
     self.session.delegate = self;
     self.session.available = YES;
@@ -57,6 +57,7 @@
 {
     self.shouldConnect = NO;
     [self.session disconnectFromAllPeers];
+    self.session.available = NO;
     [[BLEDiscovery sharedInstance] disconnectCurrentPeripheral];
 }
 
@@ -64,22 +65,49 @@
            peer:(NSString *)peerID
  didChangeState:(GKPeerConnectionState)state
 {
-    if(state == GKPeerStateAvailable)
+    
+    
+    //    GKPeerStateAvailable,    // not connected to session, but available for connectToPeer:withTimeout:
+    //    GKPeerStateUnavailable,  // no longer available
+    //    GKPeerStateConnected,    // connected to the session
+    //    GKPeerStateDisconnected, // disconnected from the session
+    //    GKPeerStateConnecting,   // waiting for accept, or deny response
+    
+    switch (state)
     {
-        [self.session connectToPeer:peerID withTimeout:10];
-    }
-    if(state == GKPeerStateConnected)
-    {
-        NSLog(@"connected gamekit session, scanning for ble...");
+        case GKPeerStateAvailable:
+        {
+            [self.session connectToPeer:peerID
+                            withTimeout:4];
+        }
+            
+            break;
+            
+        case GKPeerStateConnected:
+        {
+            
+            [[BLEDiscovery sharedInstance] disconnectCurrentPeripheral];
+            NSLog(@"connected gamekit session, scanning for ble...");
             [[BLEDiscovery sharedInstance] startScanningForUUIDString:@"713d0000-503e-4c75-ba94-3148f18d941e"];
-        self.connectedPeer = peerID;
-        self.sessionReady = YES;
+            self.connectedPeer = peerID;
+            self.sessionReady = YES;
+            
+        }
+            break;
+            
+        default:
+            self.sessionReady = NO;
+            break;
     }
-    else
-    {
-        
-        self.sessionReady = NO;
-    }
+}
+
+
+
+- (void)session:(GKSession *)session
+didFailWithError:(NSError *)error
+{
+    NSLog(@"%@",error);
+    session.available = YES;
 }
 
 - (void)discoveryDidRefresh
@@ -98,7 +126,7 @@
 
 - (void)discoveryStatePoweredOff
 {
-        NSLog(@"%s",__PRETTY_FUNCTION__);
+    NSLog(@"%s",__PRETTY_FUNCTION__);
 }
 
 - (void)peripheralDiscovered:(CBPeripheral *)peripheral
@@ -107,7 +135,7 @@
 }
 - (void)bleServiceDidConnect:(BLEService *)service
 {
-        NSLog(@"%s",__PRETTY_FUNCTION__);
+    NSLog(@"%s",__PRETTY_FUNCTION__);
     
     service.delegate = self;
     service.shouldUseCRC = NO;

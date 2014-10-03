@@ -132,6 +132,20 @@ static id instance;
     [source saveRecording];
 }
 
+
+
+- (NSArray *)recordedData
+{
+    THSignalSource *source = (THSignalSource *)self.simulableObject;
+    return source.data;
+}
+
+
+
+
+
+
+
 - (void)establishConnection
 {
     NSLog(@"%s",__PRETTY_FUNCTION__);
@@ -142,18 +156,14 @@ static id instance;
     self.session.available = YES;
 }
 
-- (NSArray *)recordedData
-{
-    THSignalSource *source = (THSignalSource *)self.simulableObject;
-    return source.data;
-}
 
 -(void)session:(GKSession *)aSession
 didReceiveConnectionRequestFromPeer:(NSString *)peerID
 {
     NSLog(@"%s",__PRETTY_FUNCTION__);
     NSError *error;
-    [self.session setDataReceiveHandler:self withContext:nil];
+    [self.session setDataReceiveHandler:self
+                            withContext:nil];
     [self.session acceptConnectionFromPeer:peerID error:&error];
 }
 
@@ -162,7 +172,21 @@ didReceiveConnectionRequestFromPeer:(NSString *)peerID
            peer:(NSString *)peerID
  didChangeState:(GKPeerConnectionState)state
 {
-    NSLog(@"%i",state);
+    switch (state)
+    {
+        case GKPeerStateAvailable:
+            NSLog(@"peer available");
+            break;
+        case GKPeerStateDisconnected:
+            session.available = YES;
+            break;
+        case GKPeerStateConnected:
+            session.available = NO;
+            break;
+            
+        default:
+            break;
+    }
 }
 
 - (void)receiveData:(NSData *)data
@@ -172,13 +196,33 @@ didReceiveConnectionRequestFromPeer:(NSString *)peerID
 {
     if(self.recording)
     {
-
         assert(data.length == 10);
         Signal s = THDecodeSignal((uint8_t *)[data bytes]);
+        if(abs(s.accX) < 2000)
+        {
+            s.accX = 0;
+        }
+        if(abs(s.accY) < 2000)
+        {
+            s.accY = 0;
+        }
+        if(abs(s.accZ) < 2000)
+        {
+            s.accZ = 0;
+        }
         THSignalSource *source = (THSignalSource *)self.simulableObject;
         [source recordValue:s];
     }
 }
+
+
+- (void)session:(GKSession *)session
+didFailWithError:(NSError *)error
+{
+    NSLog(@"%@",error);
+    session.available = YES;
+}
+
 
 
 #pragma mark - Property Controller

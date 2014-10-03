@@ -56,6 +56,9 @@ Signal THDecodeSignal(uint8_t *input)
 @property (nonatomic, assign, readwrite) float leftBorderPercentage;
 @property (nonatomic, assign, readwrite) float rightBorderPercentage;
 @property (nonatomic, copy, readwrite) NSString *currentFilePath;
+@property (nonatomic, assign, readwrite) int16_t lastX;
+@property (nonatomic, assign, readwrite) int16_t lastY;
+@property (nonatomic, assign, readwrite) int16_t lastZ;
 @end
 
 
@@ -75,6 +78,7 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
 {
 
     instance = self;
+    self.lastX = self.lastY = self.lastZ = 0;
     
     TFProperty * property = [TFProperty propertyWithName:@"currentOutputValue" andType:kDataTypeInteger];
     self.properties = [NSMutableArray arrayWithObject:property];
@@ -161,6 +165,17 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
     {
         [self.recordedData removeObjectAtIndex:0];
     }
+    
+    float f = 0.3;
+
+    value.accX = value.accX * f + self.lastX * (1-f);
+    value.accY = value.accY * f + self.lastY * (1-f);
+    value.accZ = value.accZ * f + self.lastZ * (1-f);
+    
+    self.lastX = value.accX;
+    self.lastY = value.accY;
+    self.lastZ = value.accZ;
+    
     
     NSData *v = [NSData dataWithBytes:&value length:sizeof(Signal)];
     [self.recordedData addObject:v];

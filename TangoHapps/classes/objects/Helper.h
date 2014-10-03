@@ -52,7 +52,11 @@
 +(void) printMatrix:(double**) A n:(int) n m:(int) m;
 
 +(void) printMatrix:(double**) A n:(int) n m:(int) m labels:(short*) labels;
-    
+
++ (void)printVector:(double *)vector
+              count:(int)count;
+
+
 +(void) identityMatrix:(double**) A n:(int) n;
 
 +(void) addToMatrix:(double**) A matrix:(const double**) B n:(int) n m:(int) m;
@@ -77,4 +81,12 @@
 
 +(void) loadMatrixFromFile:(NSString*) fileName matrix:(double***) A n:(int*) n m:(int*) m;
 
++ (void)checkMatrix:(double **)matrix
+                  n:(int)n
+                  m:(int)m;
+
++ (void)checkVector:(double *)vector
+                  n:(int)n;
+
++ (void)scaleFeatures:(double *)features;
 @end

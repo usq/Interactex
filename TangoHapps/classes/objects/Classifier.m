@@ -60,40 +60,42 @@ const double kDefaultLearningRate = 0.01;
     NSLog(@"Got %d correct out of %d ",correct,self.inputCount);
 }
 
--(double**) scalingMatrix {
-    
+- (double **)scalingMatrix
+{
     if(self.inputCount == 0) return nil;
     
     double ** A = [Helper emptyMatrixWithN:self.featuresCount m:self.featuresCount];
-    
-    
-    double minmaxs[self.inputCount][2];
-    for (int i = 0 ; i < self.inputCount; i++) {
+    double minmaxs[self.featuresCount][2];
+    for (int i = 0 ; i < self.featuresCount; i++) {
         minmaxs[i][0] = MAXFLOAT;
         minmaxs[i][1] = -MAXFLOAT;
     }
     
-    NSLog(@"min %f",minmaxs[0][0]);
-    NSLog(@"max %f",minmaxs[0][1]);
-    
     for(int i = 0 ; i < self.inputCount; i++)
     {
-    
+        
         for(int j = 0; j < self.featuresCount; j++)
         {
             
             double val = input[i][j];
             
-            if(val < minmaxs[i][0])
+            if(val < minmaxs[j][0])
             {
-                minmaxs[i][0] = val;
+                minmaxs[j][0] = val;
             }
             
-            if(val > minmaxs[i][1]) {
-                minmaxs[i][1] = val;
+            if(val > minmaxs[j][1]) {
+                minmaxs[j][1] = val;
             }
+            
+            NSLog(@"feature %i min %f",j,minmaxs[j][0]);
+            NSLog(@"max %f",minmaxs[j][1]);
+            NSLog(@"");
         }
     }
+    
+    
+    NSLog(@"-------------------------------");
     
     [Helper identityMatrix:A n:self.featuresCount];
     
@@ -106,11 +108,13 @@ const double kDefaultLearningRate = 0.01;
         }
         else
         {
-            A[i][i] = 1.0/f;
+            A[i][i] = f; //was 1.0 /f
         }
+        assert(fabsf(f) < 100000);
         NSLog(@"-------------- %f",f);
-
+        
     }
+  
     
     return A;
 }
@@ -143,19 +147,14 @@ const double kDefaultLearningRate = 0.01;
     int D = self.featuresCount;
     
     double ** A = [Helper emptyMatrixWithN:D m:D];
-    
+    [Helper checkMatrix:A n:D m:D];
     [Helper copyToMatrix:A matrix:initialMatrix n:D m:D];
+    [Helper checkMatrix:A n:D m:D];
     
+    double ** firstTerm = [Helper emptyMatrixWithN:D m:D];
+    double ** secondTerm = [Helper emptyMatrixWithN:D m:D];
+    double ** term = [Helper emptyMatrixWithN:D m:D];
     
-    double ** firstTerm = malloc(D * sizeof(double*));
-    double ** secondTerm = malloc(D * sizeof(double*));
-    double ** term = malloc(D * sizeof(double*));
-    
-    for (int i = 0; i < D ; ++i) {
-        firstTerm[i] = malloc(D * sizeof(double));
-        secondTerm[i] = malloc(D * sizeof(double));
-        term[i] = malloc(D * sizeof(double));
-    }
     
     for(unsigned int it = 0; it < self.numberIterations; ++it) {
         unsigned int i = it % N;
@@ -166,10 +165,13 @@ const double kDefaultLearningRate = 0.01;
             
             double vector1[D];
             double vector2[D];
-            
+            [Helper checkMatrix:A n:D m:D];
             [Helper multiplyMatrix:(const double**)A withVector:input[i] n:D m:D result:vector1];
+            [Helper checkMatrix:A n:D m:D];
             [Helper multiplyMatrix:(const double**)A withVector:input[k] n:D m:D result:vector2];
+            [Helper checkMatrix:A n:D m:D];
             [Helper subtractToVector:vector1 vector:vector2 count:D];
+            
             double squaredNorm = [Helper squaredNorm:vector1 count:D];
             
             softmaxNormalization += exp(-squaredNorm);
@@ -189,11 +191,19 @@ const double kDefaultLearningRate = 0.01;
                 double vector1[D];
                 double vector2[D];
                 
+                [Helper checkMatrix:A n:D m:D];
                 [Helper multiplyMatrix:(const double**)A withVector:input[i] n:D m:D result:vector1];
+                [Helper checkMatrix:A n:D m:D];
                 [Helper multiplyMatrix:(const double**)A withVector:input[k] n:D m:D result:vector2];
+                [Helper checkMatrix:A n:D m:D];
                 [Helper subtractToVector:vector1 vector:vector2 count:D];
                 double squaredNorm = [Helper squaredNorm:vector1 count:D];
-
+                
+                if(softmaxNormalization == 0)
+                {
+                    softmaxNormalization = 0.0000001;
+                }
+                
                 softmax[k] = exp(-squaredNorm) / softmaxNormalization;
             }
         }
@@ -210,6 +220,8 @@ const double kDefaultLearningRate = 0.01;
         
         [Helper initializeMatrixToZeros:firstTerm n:D m:D];
         [Helper initializeMatrixToZeros:secondTerm n:D m:D];
+        [Helper checkMatrix:secondTerm n:D m:D];
+        [Helper checkMatrix:firstTerm n:D m:D];
         
         for(unsigned int k = 0; k < N; ++k) {
             if(k == i) continue;
@@ -218,25 +230,45 @@ const double kDefaultLearningRate = 0.01;
             [Helper subtractVector:input[i] fromVector:input[k] count:D result:xik];
             
             [Helper initializeMatrixToZeros:term n:D m:D];
-            
+            [Helper checkMatrix:term n:D m:D];
             [Helper multiplyVectorWithItselfTransposed:xik n:D result:term];
-            [Helper multiplyMatrix:term withScalar:softmax[k] n:D m:D];
             
+            
+            [Helper checkVector:softmax n:N];
+            [Helper checkMatrix:term n:D m:D];
+            [Helper multiplyMatrix:term withScalar:softmax[k] n:D m:D];
+            [Helper checkMatrix:term n:D m:D];
+            
+            [Helper checkMatrix:firstTerm n:D m:D];
             [Helper addToMatrix:firstTerm matrix:(const double**)term n:D m:D];
+            [Helper checkMatrix:firstTerm n:D m:D];
             
             if(inputLabels[k] == inputLabels[i]){
+                [Helper checkMatrix:secondTerm n:D m:D];
                 [Helper addToMatrix:secondTerm matrix:(const double**)term n:D m:D];
+                [Helper checkMatrix:secondTerm n:D m:D];
             }
         }
         
+        [Helper checkMatrix:firstTerm n:D m:D];
         [Helper multiplyMatrix:firstTerm withScalar:p n:D m:D];
+        [Helper checkMatrix:firstTerm n:D m:D];
+        [Helper checkMatrix:secondTerm n:D m:D];
         
         [Helper subtractToMatrix:firstTerm matrix:(const double**)secondTerm n:D m:D];
         [Helper multiplyMatrix:(const double**)A withMatrix:(const double**)firstTerm n:D result:term];
         [Helper multiplyMatrix:term withScalar:self.learningRate n:D m:D];
+
+        [Helper checkMatrix:A n:D m:D];
+            [Helper checkMatrix:firstTerm n:D m:D];
+                    [Helper checkMatrix:term n:D m:D];
         [Helper addToMatrix:A matrix:(const double**)term n:D m:D];
     }
     
+    
+    free(term);
+    free(firstTerm);
+    free(secondTerm);
     return A;
 }
 
@@ -247,7 +279,16 @@ const double kDefaultLearningRate = 0.01;
     
     double inputScaled[self.featuresCount];
     
+//    NSLog(@"------------------------------------------------------------------------------------");
+    NSLog(@"before:");
+    [Helper printVector:inputVector
+                  count:self.featuresCount];
     [Helper multiplyMatrix:(const double**)scaleMatrix withVector:inputVector n:self.featuresCount m:self.featuresCount result:inputScaled];
+    
+    NSLog(@"after:");
+    [Helper printVector:inputScaled
+                  count:self.featuresCount];
+    
     
     double minNorm = FLT_MAX;
     
@@ -262,18 +303,25 @@ const double kDefaultLearningRate = 0.01;
         [Helper subtractVector:inputScaled fromVector:input[j] count:self.featuresCount result:diff];
         
         double norm = [Helper norm:diff count:self.featuresCount];
+
+        NSLog(@"label: %i \t\t norm: %f", inputLabels[j],norm);
         
-        if(norm < minNorm) {
+        if(norm < minNorm)
+        {
             minNorm = norm;
             minNormLabel = inputLabels[j];
+//            NSLog(@"minnorm: %f", minNorm);
+//            NSLog(@"found smaller norm for label: %i",inputLabels[j]);
         }
     }
     
+    NSLog(@"");
+//    NSLog(@"------------------------------------------------------------------------------------");
     return minNormLabel;
 }
 
 - (void)loadTrainingDataFromFile:(NSString*) fileName{
-
+    
     int inputCount,featuresCount;
     
     [Helper loadFeaturesFromFile:fileName features:&input labels:&inputLabels nSamples:&inputCount nFeatures:&featuresCount];
@@ -281,6 +329,8 @@ const double kDefaultLearningRate = 0.01;
     self.inputCount = inputCount;
     self.featuresCount = featuresCount;
 }
+
+
 
 - (void)appendFeatureSets:(NSArray *)featureSets
                  forLabel:(short)label
@@ -291,13 +341,13 @@ const double kDefaultLearningRate = 0.01;
     THFeatureSet *featureSet1 = [featureSets firstObject];
     if(self.featuresCount == 0)
     {
-        self.featuresCount = [featureSet1.features count];
+        self.featuresCount = [featureSet1.scaledFeatures count];
     }
     else
     {
-        NSParameterAssert(self.featuresCount == [featureSet1.features count]);
+        NSParameterAssert(self.featuresCount == [featureSet1.scaledFeatures count]);
     }
-
+    
     
     double **newFeatures = [Helper emptyMatrixWithN:[featureSets count]
                                                   m:self.featuresCount];
@@ -305,9 +355,9 @@ const double kDefaultLearningRate = 0.01;
     for (int i = 0; i < [featureSets count]; i++)
     {
         THFeatureSet *oneFeatureSet = featureSets[i];
-        for (int k = 0; k < [oneFeatureSet.features count]; k++)
+        for (int k = 0; k < [oneFeatureSet.scaledFeatures count]; k++)
         {
-            float feature = [oneFeatureSet.features[k] floatValue];
+            float feature = [oneFeatureSet.scaledFeatures[k] floatValue];
             newFeatures[i][k] = feature;
         }
     }
@@ -323,7 +373,7 @@ const double kDefaultLearningRate = 0.01;
     if(self.inputCount == 0) //first time, no feature rows
     {
         self.inputCount = [featureSets count];
-
+        
         input = newFeatures;
         inputLabels = newLabels;
         
@@ -336,7 +386,7 @@ const double kDefaultLearningRate = 0.01;
                                     withRowCount:self.inputCount
                                      columnCount:self.featuresCount];
         
-
+        
         
         
         //cleanup
@@ -362,133 +412,33 @@ const double kDefaultLearningRate = 0.01;
                       n:self.inputCount
                       m:self.featuresCount
                  labels:inputLabels];
-
-    [self calculateScaleMatrix];
-    
-    //f1 0
-    //f2 0
-    //f3 0
-    
-    
-    /*
-    [self loadTrainingDataFromFile:fileName];
     
     [self calculateScaleMatrix];
     
-    [Helper printMatrix:scaleMatrix n:self.featuresCount m:self.featuresCount];
-    
-    double ** ncaInputTest = [self scaleInputVector];
-    
-    [Helper printMatrix:ncaInputTest n:self.inputCount m:self.featuresCount labels:inputLabels];
-    
-    
-    NSLog(@"NN on raw data: ");
-    [self nearestNeighbors];
-    */
-    
-    
-    
-    
-    
-    //self.inputCount = inputCount;
-
-    
-    
-    //- (void)fillPrimitivesFeatures:(double ***)features
-    //labels:(short **)labels
-    //nSamples:(int *)nSamples
-    //nFeatures:(int *)nFeatures
-    //    {
-    //        NSParameterAssert([self.allInputs count] > 0);                      //we have at lease one input
-    //        NSParameterAssert([self.labels count] == [self.allInputs count]);   //every input has a label
-    //        NSParameterAssert([[self.allInputs firstObject] count] > 0);        //we have at least one feature per input
-    //
-    //        NSInteger inputCount = [self.allInputs count];
-    //        NSInteger featuresCount = [[self.allInputs firstObject] count];
-    //
-    //        *nSamples = inputCount;
-    //        *nFeatures = featuresCount;
-    //
-    //        *features = [Helper emptyMatrixWithN:inputCount m:featuresCount];
-    //        *labels = malloc(inputCount * sizeof(short));
-    //
-    //
-    //        for (int n = 0; n < [self.allInputs count]; n++)
-    //        {
-    //            NSArray *inputVector = self.allInputs[n];
-    //
-    //            NSParameterAssert([inputVector count] == featuresCount);           //every input has same number of features
-    //
-    //            for (int i = 0; i < [inputVector count]; i++)
-    //            {
-    //                (*features)[n][i] = [inputVector[i] doubleValue];
-    //            }
-    //            
-    //            (*labels)[n] = [self.labels[n] integerValue];
-    //        }
-    //    }
-    
-
+  
 }
 
-
-//- (void)loadTrainingDataFromTrainingsSet:(THTrainingsSet *)trainingsSet
-//{
-//    int inputCount,featuresCount;
-//    
-//    [trainingsSet fillPrimitivesFeatures:&input
-//                                  labels:&inputLabels
-//                                nSamples:&inputCount
-//                               nFeatures:&featuresCount];
-//    
-//    self.inputCount = inputCount;
-//    self.featuresCount = featuresCount;
-//}
-
-
--(void) loadScalingMatrixFromFile:(NSString*) fileName{
-    
-    NSString* path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"txt"];
-    NSString* content = [NSString stringWithContentsOfFile:path
-                                                  encoding:NSUTF8StringEncoding
-                                                     error:NULL];
-    
-    NSCharacterSet * endLineCharacter = [NSCharacterSet characterSetWithCharactersInString:@"\n"];
-    NSCharacterSet * separatorsCharacter = [NSCharacterSet characterSetWithCharactersInString:@" "];
-    
-    NSArray * lines = [content componentsSeparatedByCharactersInSet:endLineCharacter];
-    
-    self.featuresCount = lines.count ;
-    scaleMatrix = [Helper emptyMatrixWithN:self.featuresCount m:self.featuresCount];
-    
-    NSInteger n = 0;
-    for (NSString * line in lines) {
-        
-        NSArray* lineStrings = [line componentsSeparatedByCharactersInSet:separatorsCharacter];
-        
-        for(int i = 0; i < lineStrings.count; i++){
-            NSString * valueString = [lineStrings objectAtIndex:i];
-            double f = [valueString doubleValue];
-            scaleMatrix[n][i] = f;
-        }
-        n++;
-    }
-}
 
 -(void) calculateScaleMatrix{
     
     double ** scalingMatrixTest = [self scalingMatrix];
+    [Helper printMatrix:scalingMatrixTest
+                      n:self.featuresCount
+                      m:self.featuresCount];
     if(scaleMatrix)
     {
         free(scaleMatrix);
     }
     scaleMatrix = [self neighborhoodComponentsAnalysisWithInitialMatrix:(const double**)scalingMatrixTest];
+    [Helper printMatrix:scaleMatrix
+                      n:self.featuresCount
+                      m:self.featuresCount];
 }
 
 -(void) testFile:(NSString*) fileName{
-
+    
     [self loadTrainingDataFromFile:fileName];
-        
+    
     [self calculateScaleMatrix];
     
     [Helper printMatrix:scaleMatrix n:self.featuresCount m:self.featuresCount];

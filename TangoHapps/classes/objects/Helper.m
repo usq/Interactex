@@ -14,8 +14,13 @@
     
     double ** A = malloc(n * sizeof(double*));
     
-    for (int i = 0; i < n ; ++i) {
+    for (int i = 0; i < n ; ++i)
+    {
         A[i] = malloc(m * sizeof(double));
+        for (int k = 0; k < m ; k++)
+        {
+            A[i][k] = 0;
+        }
     }
     
     return A;
@@ -126,10 +131,10 @@
     
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m-1; j++) {
-            printf("%.6f, ",A[i][j]);
+            printf("%.4f, ",A[i][j]);
         }
         
-        printf("%.6f\n",A[i][m-1]);
+        printf("%.4f\n",A[i][m-1]);
     }
     
     printf("\n");
@@ -139,13 +144,24 @@
     
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
-            printf("%.6f, ",A[i][j]);
+            printf("%.4f, ",A[i][j]);
         }
         short s = labels[i];
         printf("%d\n",s);
     }
     
     printf("\n");
+}
+
+
++ (void)printVector:(double *)vector
+              count:(int)count
+{
+    for (int j = 0; j < count-1; j++)
+    {
+        printf("%.4f, ",vector[j]);
+    }
+    printf("%.4f\n",vector[count -1]);
 }
 
 +(void) identityMatrix:(double**) A n:(int) n{
@@ -198,6 +214,7 @@
         for (int j = 0 ; j < m ; j++){
             c[i] += A[i][j] * v[j];
         }
+        assert(!isnan(c[i]));
     }
 }
 
@@ -376,5 +393,38 @@
      }
      printf("\n");*/
 }
+
++ (void)checkMatrix:(double **)matrix
+                  n:(int)n
+                  m:(int)m
+{
+//    return;
+//    for (int i = 0; i < n; i++)
+//    {
+//        for (int k = 0; k < m; k++)
+//        {
+//            assert(!isnan(matrix[i][k]));
+//        }
+//    }
+}
+
++ (void)checkVector:(double *)vector
+                  n:(int)n
+{
+//    for (int i = 0; i < n; i++)
+//    {
+//        
+//        assert(!isnan(vector[i]));
+//        
+//    }
+}
+
++ (void)scaleFeatures:(double *)features
+{
+    features[0] *= 10;
+    features[1] *= 10;
+}
+
+
 
 @end

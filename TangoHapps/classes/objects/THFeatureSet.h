@@ -9,8 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface THFeatureSet : NSObject
-@property (nonatomic, strong, readonly) NSArray *features;
-
+//@property (nonatomic, strong, readonly) NSArray *features;
+@property (nonatomic, strong, readonly) NSArray *scaledFeatures;
 - (instancetype)initWithFeatures:(NSArray *)features;
-
 @end

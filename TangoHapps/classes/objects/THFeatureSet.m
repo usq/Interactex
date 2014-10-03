@@ -11,6 +11,7 @@
 
 @interface THFeatureSet ()
 @property (nonatomic, strong, readwrite) NSArray *features;
+@property (nonatomic, strong, readwrite) NSArray *scaledFeatures;
 @end
 
 @implementation THFeatureSet
@@ -21,6 +22,10 @@
     if (self)
     {
         self.features = features;
+        NSNumber *finger1 = @([features[0] integerValue] * 10);
+        NSNumber *finger2 = @([features[1] integerValue]* 10);
+        
+        self.scaledFeatures = @[finger1,finger2,features[2],features[3],features[4]];
     }
     return self;
 }

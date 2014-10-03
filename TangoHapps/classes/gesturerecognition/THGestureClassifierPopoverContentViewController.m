@@ -84,6 +84,8 @@ float constrain(float input, float min, float max)
 {
     NSValue *n = change[NSKeyValueChangeNewKey];
     
+
+    
     
     [self.visibleValues addObject:n];
     while([self.visibleValues count] > 300)
@@ -108,7 +110,7 @@ float constrain(float input, float min, float max)
     accZ = (constrain(accZ,accMin,accMax) + 15000)/30000;
 
     
-    NSLog(@"value1:%i value2: %i",s.finger1,s.finger2);
+//    NSLog(@"value1:%i value2: %i",s.finger1,s.finger2);
     n1 -= 100; //correcting offset 130 to 282 -> 30 to 182
     n2 -= 100; //correcting offset 130 to 282 -> 30 to 182
     accX *= 200;
@@ -213,9 +215,16 @@ float constrain(float input, float min, float max)
 
 - (void)cropVisibleValues
 {
-    NSUInteger leftIndex = floorf([self.visibleValues count] * self.leftPercentage);
-    NSUInteger rightIndex = ceilf([self.visibleValues count] * self.rightPercentage);
-    NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(leftIndex, rightIndex - leftIndex + 1)];
+    float leftIndex = 300 * self.leftPercentage;
+    float visibleFactor = (float)[self.visibleValues count]/300.f;
+    float rightIndex = fmaxf([self.visibleValues count]* fminf(self.rightPercentage/visibleFactor,1),01);
+    
+    if(leftIndex > rightIndex)
+    {
+        leftIndex = rightIndex -1;
+    }
+    
+    NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(leftIndex, rightIndex - leftIndex)];
     self.visibleValues = [[self.visibleValues objectsAtIndexes:set] mutableCopy];
 }
 

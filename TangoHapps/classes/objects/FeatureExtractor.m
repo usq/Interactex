@@ -168,73 +168,149 @@
     //MC_TODO implement
 }
 
--(void) computeMinMaxsFromWindow:(const float*) window count:(int) count peaks:(double*) minMaxs{
+- (void)computeMinMaxsFromValues:(float *)values
+                           count:(int)count
+                           peaks:(double *)minMaxs
+{
     
-    double mins[3] = {10000,10000,10000};
-    double maxs[3] = {-10000,-10000,-10000};
+    double min = 100000;
+    double max = -100000;
     
-    for(int i = 0 ; i < count * 3 ; i+=3){
+    for(int i = 0 ; i < count; i++)
+    {
+        double value = values[i];
         
-        double x = window[i];
-        double y = window[i+1];
-        double z = window[i+2];
-        
-        if(x < mins[0]){
-            mins[0] = x;
+        if(value < min)
+        {
+            min = value;
         }
-        if(x > maxs[0]){
-            maxs[0] = x;
-        }
-        
-        if(y < mins[1]){
-            mins[1] = y;
-        }
-        if(y > maxs[1]){
-            maxs[1] = y;
-        }
-        
-        if(z < mins[2]){
-            mins[2] = z;
-        }
-        if(z > maxs[2]){
-            maxs[2] = z;
+        if(value > max)
+        {
+            max = value;
         }
     }
-    
-    minMaxs[0] = mins[0];
-    minMaxs[1] = maxs[0];
-    minMaxs[2] = mins[1];
-    minMaxs[3] = maxs[1];
-    minMaxs[4] = mins[2];
-    minMaxs[5] = maxs[2];
+
+    minMaxs[0] = min;
+    minMaxs[1] = max;
 }
 
--(void) computeMinMaxDiffsFromWindow:(const float*) window count:(int) count diffs:(double*) diffs{
-    double peaks[6];
-    [self computeMinMaxsFromWindow:window count:count peaks:peaks];
+
+- (void)computeMinMaxsFromWindow:(Signal *)window
+                           count:(int)count
+                           peaks:(double [5][2])minMaxs
+{
+    float finger1Window[count];
+    float finger2Window[count];
+    float accXWindow[count];
+    float accYWindow[count];
+    float accZWindow[count];
     
-    diffs[0] = fabs(peaks[1] - peaks[0]);
-    diffs[1] = fabs(peaks[3] - peaks[2]);
-    diffs[2] = fabs(peaks[5] - peaks[4]);
+    [self extractValuesFromSignals:window
+                             count:count
+                         toFinger1:finger1Window
+                         toFinger2:finger2Window
+                              accX:accXWindow
+                              accY:accYWindow
+                              accZ:accZWindow];
+
+    double finger1MinMax[2];
+    [self computeMinMaxsFromValues:finger1Window
+                             count:count
+                             peaks:finger1MinMax];
+    minMaxs[0][0] = finger1MinMax[0];
+    minMaxs[0][1] = finger1MinMax[1];
+    
+    double finger2MinMax[2];
+    [self computeMinMaxsFromValues:finger2Window
+                             count:count
+                             peaks:finger2MinMax];
+    minMaxs[1][0] = finger2MinMax[0];
+    minMaxs[1][1] = finger2MinMax[1];
+    
+    double accXMinMax[2];
+    [self computeMinMaxsFromValues:accXWindow
+                             count:count
+                             peaks:accXMinMax];
+    minMaxs[2][0] = accXMinMax[0];
+    minMaxs[2][1] = accXMinMax[1];
+    
+    
+    double accYMinMax[2];
+    [self computeMinMaxsFromValues:accYWindow
+                             count:count
+                             peaks:accYMinMax];
+    minMaxs[3][0] = accYMinMax[0];
+    minMaxs[3][1] = accYMinMax[1];
+    
+    double accZMinMax[2];
+    [self computeMinMaxsFromValues:accZWindow
+                             count:count
+                             peaks:accZMinMax];
+    minMaxs[4][0] = accZMinMax[0];
+    minMaxs[4][1] = accZMinMax[1];
 }
 
+
+
+//
+//- (void)computeMinMaxDiffsFromWindow:(const float *)window
+//                               count:(int)count
+//                        minMaxValues:(double **)
+//                               diffs:(double *)diffs
+//{
+//    double peaks[6];
+//    [self computeMinMaxsFromWindow:window count:count peaks:peaks];
+//    
+//    diffs[0] = fabs(peaks[1] - peaks[0]);
+//    diffs[1] = fabs(peaks[3] - peaks[2]);
+//    diffs[2] = fabs(peaks[5] - peaks[4]);
+//}
+
+
+
+- (void)computeMinMaxDiffsFromMinMax:(double [5][2])minMax
+                               count:(int)count
+                               diffsOut:(double *)diffs
+{
+    for (int i = 0; i < count; i++)
+    {
+        diffs[i] = minMax[i][1] - minMax[i][0];
+    }
+}
 
 - (NSInteger)numberOfPeaksInValues:(float *)values
                         count:(int)count
                     tolerance:(float)tolerance
+                            invert:(BOOL)invert
 {
     float min = 100000;
     float max = -100000;
     
     BOOL lookForMax = YES;
-    int peakCount = 0;
-    
+    NSInteger peakCount = 0;
+//    NSLog(@"STARTING ");
+//    if(invert)
+//    {
+//        for (int i = 0; i < count; i++) {
+//            NSLog(@"value %f",values[i]);
+//        }
+//    }
+//    
+//    NSLog(@"ENDING");
+//    
     for(int i = 0 ; i < count; i++)
     {
-        uint16_t val1 = values[i];
+        double val1 = values[i];
         
         //this one is fishy
-        double value = 300 - val1;
+        double value = val1;
+        if(invert)
+        {
+            value = 300 - val1;
+        }
+        
+
+
         
         if(value > max){
             max = value;
@@ -244,12 +320,17 @@
             min = value;
         }
         
+        
         if(lookForMax)
         {
-            if(value < max - tolerance){
+//            NSLog(@"value %f      must be smaller than %f  ",value, max - tolerance);
+            if(value < max - tolerance)
+            {
+//                NSLog(@"PEAK!! because value: %f  < %f", value, max-tolerance);
                 min = value;
                 lookForMax = NO;
                 peakCount++;
+
             }
         } else
         {
@@ -260,6 +341,26 @@
         }
     }
     return peakCount;
+}
+
+
+- (void)extractValuesFromSignals:(Signal *)window
+                           count:(int)count
+                        toFinger1:(float *)finger1
+                        toFinger2:(float *)finger2
+                        accX:(float *)accX
+                        accY:(float *)accY
+                        accZ:(float *)accZ
+{
+    for (int i = 0; i < count; i++)
+    {
+        Signal s = window[i];
+        finger1[i] = (float)s.finger1;
+        finger2[i] = (float)s.finger2;
+        accX[i] = s.accX;
+        accY[i] = s.accY;
+        accZ[i] = s.accZ;
+    }
 }
 
 - (void)computeNumPeaksFromWindow:(Signal *)window
@@ -274,117 +375,38 @@
     float accYWindow[count];
     float accZWindow[count];
     
-    
-    for (int i = 0; i < count; i++)
-    {
-        Signal s = window[i];
-        finger1Window[i] = s.finger1;
-        finger2Window[i] = s.finger2;
-        accXWindow[i] = s.accX;
-        accYWindow[i] = s.accY;
-        accZWindow[i] = s.accZ;
-    }
+    [self extractValuesFromSignals:window
+                             count:count
+                         toFinger1:finger1Window
+                         toFinger2:finger2Window
+                              accX:accXWindow
+                              accY:accYWindow
+                              accZ:accZWindow];
     
     numPeaks[0] = [self numberOfPeaksInValues:finger1Window
                                         count:count
-                                    tolerance:tolerance];
+                                    tolerance:tolerance
+                                       invert:YES];
     
     numPeaks[1] = [self numberOfPeaksInValues:finger2Window
                                         count:count
-                                    tolerance:tolerance];
-    
+                                    tolerance:tolerance
+                                       invert:YES];
     numPeaks[2] = [self numberOfPeaksInValues:accXWindow
                                         count:count
-                                    tolerance:tolerance * 100];
+                                    tolerance:tolerance * 200
+                                       invert:NO];
     
     numPeaks[3] = [self numberOfPeaksInValues:accYWindow
                                         count:count
-                                    tolerance:tolerance * 100];
+                                    tolerance:tolerance * 200
+                                       invert:NO];
 
     numPeaks[4] = [self numberOfPeaksInValues:accZWindow
                                         count:count
-                                    tolerance:tolerance * 100];
-
-    
-    
-//    float min = 100000;
-//    float max = -100000;
-//    
-//    BOOL lookForMax = YES;
-//    int peakCount = 0;
-//    
-//    
-//    
-//    
-//    for(int i = 0 ; i < count * 3 ; i+=3)
-//    {
-//        uint16_t val1 = window[i+1].finger1;
-//        printf("%i ",val1);
-//        double value = 300 - val1;
-//        
-//        if(value > max){
-//            max = value;
-//        }
-//        
-//        if(value < min){
-//            min = value;
-//        }
-//        
-//        if(lookForMax)
-//        {
-//            if(value < max - tolerance){
-//                min = value;
-//                lookForMax = 0;
-//                peakCount++;
-//                printf(" |detected peak finger 1!| ");
-//            }
-//        } else
-//        {
-//            if(value > min + tolerance){
-//                max = value;
-//                lookForMax = 1;
-//            }
-//        }
-//    }
-//    
-//    
-//    
-//    
-//    
-//    //TODO: change to {peaks1,peaks2}
-//    min = 1000;
-//    max = -1000;
-//    
-//    lookForMax = YES;
-//    
-//    for(int i = 0 ; i < count * 3 ; i+=3){
-//        
-//        double value = 300 - window[i+1].finger2;
-//        
-//        if(value > max){
-//            max = value;
-//        }
-//        
-//        if(value < min){
-//            min = value;
-//        }
-//        
-//        if(lookForMax){
-//            if(value < max - tolerance){
-//                min = value;
-//                lookForMax = 0;
-//                peakCount++;
-//                printf(" |detected peak finger 2!| ");
-//            }
-//        } else{
-//            if(value > min + tolerance){
-//                max = value;
-//                lookForMax = 1;
-//            }
-//        }
-//    }
-//    
-//    return peakCount;
+                                    tolerance:tolerance * 200
+                                       invert:NO];
+ 
 }
 
 - (void)computeAllFeaturesFromWindow:(Signal*)window
@@ -406,7 +428,6 @@
                               count:count
                           tolerance:20
                            numPeaks:numpeaks];
-    NSLog(@"------------------- i just found %i peaks in finger 1",numpeaks[0]);
     
 
     
@@ -419,7 +440,41 @@
     
     
     
+    
+    double minMaxs[5][2];
+    [self computeMinMaxsFromWindow:window
+                             count:count
+                             peaks:minMaxs];
+    
+    features[5]  = minMaxs[0][0]; //feature 6 contains min finger 1
+    features[6]  = minMaxs[0][1]; //feature 7 contains max finger 1
+    
+    features[7]  = minMaxs[1][0]; //feature 8 contains min finger 2
+    features[8]  = minMaxs[1][1]; //feature 9 contains max finger 2
+    
+    features[9]  = minMaxs[2][0]; //feature 10 contains min accX
+    features[10] = minMaxs[2][1]; //feature 11 contains max accX
+    
+    features[11] = minMaxs[3][0]; //feature 12 contains min accY
+    features[12] = minMaxs[3][1]; //feature 13 contains max accY
+    
+    features[13] = minMaxs[4][0]; //feature 14 contains min accZ
+    features[14] = minMaxs[4][1]; //feature 15 contains max accZ
+    
+    double minMaxDiffs[5];
+    [self computeMinMaxDiffsFromMinMax:minMaxs
+                                 count:5
+                              diffsOut:minMaxDiffs];
+    
+    
+    features[15] = minMaxDiffs[0]; //feature 16 contains minMaxDiff finger1
+    features[16] = minMaxDiffs[1]; //feature 17 contains minMaxDiff finger2
+    features[17] = minMaxDiffs[2]; //feature 18 contains minMaxDiff accX
+    features[18] = minMaxDiffs[3]; //feature 19 contains minMaxDiff accY
+    features[19] = minMaxDiffs[4]; //feature 20 contains minMaxDiff accZ
+
     *featureCount = 5;
+    
     
     
 

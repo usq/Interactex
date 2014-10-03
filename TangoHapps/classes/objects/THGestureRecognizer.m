@@ -9,7 +9,7 @@
 #import "THGestureRecognizer.h"
 #import "Classifier.h"
 #import "FeatureExtractor.h"
-
+#import "Helper.h"
 
 
 @interface THGestureRecognizer ()
@@ -184,9 +184,8 @@
 
 - (void)checkWindow
 {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
     
-    double features[8];
+    double features[FEATURE_COUNT];
     int featureCount;
     [self.featureExtractor computeAllFeaturesFromWindow:self.signalWindow
                                                   count:self.halfWindowSize *2
@@ -194,6 +193,8 @@
                                            featureCount:&featureCount];
     
     
+
+    [Helper scaleFeatures:features];
     short label = [self.classifier classifyInputVector:features
                                                 ignore:-1];
     
@@ -314,12 +315,16 @@
     }
     
     
-    double features[25];
+    double features[FEATURE_COUNT];
     int featureCount;
     [self.featureExtractor computeAllFeaturesFromWindow:recordedSignals
                                                   count:[signals count]
                                                features:features
                                            featureCount:&featureCount];
+    
+    NSLog(@"added features:");
+    NSLog(@">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  %f %f %f %f %f",features[0],features[1],features[2],features[3],features[4]);
+    
     NSMutableArray *featureArray = [NSMutableArray array];
     for (int i = 0; i < featureCount; i++)
     {
