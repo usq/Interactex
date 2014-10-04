@@ -45,6 +45,8 @@ You should have received a copy of the GNU General Public License along with thi
 #import "THProjectViewController.h"
 #import "TFFileUtils.h"
 
+
+#import "Helper.h"
 @implementation THAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

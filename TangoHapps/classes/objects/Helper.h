@@ -36,6 +36,15 @@
                toVector:(short *)vector
               withCount:(int)count;
 
++ (double **)removeRow:(int)row
+            fromMatrix:(double **)matrix
+          withRowCount:(int)rowCount
+           columnCount:(int)columnCount;
+
++ (short *)removeIndex:(int)index
+            fromVector:(short *)vector
+                 count:(int)count;
+
 
 +(double) squaredNorm:(double*) v count:(unsigned int) N;
 

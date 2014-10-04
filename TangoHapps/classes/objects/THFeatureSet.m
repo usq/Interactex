@@ -18,19 +18,24 @@
 
 - (instancetype)initWithFeatures:(NSArray *)features
 {
+    return [self initWithFeatures:features
+                             name:@"Training"];
+}
+
+- (instancetype)initWithFeatures:(NSArray *)features
+                            name:(NSString *)name
+{
     self = [super init];
     if (self)
     {
         self.features = features;
         NSNumber *finger1 = @([features[0] integerValue] * 10);
         NSNumber *finger2 = @([features[1] integerValue]* 10);
-        
+        self.name = name;
         self.scaledFeatures = @[finger1,finger2,features[2],features[3],features[4]];
     }
     return self;
 }
-
-
 //
 //
 //- (void)fillPrimitivesFeatures:(double ***)features

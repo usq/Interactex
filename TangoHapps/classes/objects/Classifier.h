@@ -39,4 +39,7 @@
 
 - (void)calculateScaleMatrix;
 
+- (void)removeValuesForLabel:(short)labelToDelete
+                     atIndex:(int)index;
+
 @end

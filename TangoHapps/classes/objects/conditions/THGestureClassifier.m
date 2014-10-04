@@ -11,7 +11,7 @@
 #import "THSignalSource.h"
 #import "THAsyncConnection.h"
 
-
+NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDeleteTraining";
 
 //#define WINDOW_SIZE (HALF_WINDOW_SIZE*2)
 
@@ -56,6 +56,20 @@
                                              selector:@selector(changedStuff:)
                                                  name:kEventValueChanged
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(shouldDeleteTrainingNotification:)
+                                                 name:kGestureClassifierShouldDeleteTraining
+                                               object:nil];
+}
+
+- (void)shouldDeleteTrainingNotification:(NSNotification *)notification
+{
+    NSUInteger index = [notification.userInfo[@"index"] unsignedIntegerValue];
+    [self.trainedFeatureSets removeObjectAtIndex:index];
+    [self.recognizer removeTrainingAtIndex:index
+                                 withLabel:self.label
+                                forGesture:self];
 }
 
 - (void)recognized
@@ -86,23 +100,19 @@
 }
 
 
-
 //extract features and save in gesture
 - (void)finishedGesture:(NSArray *)gestureData
 {
     //extract features
-    THFeatureSet *featureSet = [self.recognizer featureSetFromSignals:gestureData];
+    NSString *featureName = [NSString stringWithFormat:@"Training %i", [self.trainedFeatureSets count] + 1];
+    THFeatureSet *featureSet = [self.recognizer featureSetFromSignals:gestureData
+                                name:featureName];
     
     //add feature set to saved features
     [self.trainedFeatureSets addObject:featureSet];
     
     //retrain kNN
     [self.recognizer trainRecognizerWithGesture:self];
-    
-//    self.recordedValues = gestureData;
-  
-    //self.numberOfTicksToDetect = [self.recognizer peaksInWindow:self.recordedValues];
-//    NSLog(@"Number of Peaks: %i",self.numberOfTicksToDetect);
 }
 
 #pragma mark - Archiving

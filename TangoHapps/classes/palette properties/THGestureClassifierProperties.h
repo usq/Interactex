@@ -8,6 +8,6 @@
 
 #import "THEditableObjectProperties.h"
 
-@interface THGestureClassifierProperties : THEditableObjectProperties
-- (void)stopProvidingSignals;
+@interface THGestureClassifierProperties : THEditableObjectProperties<UIPopoverControllerDelegate> 
+
 @end

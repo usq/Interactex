@@ -29,7 +29,6 @@
 @implementation THGestureRecognizer
 
 
-
 + (instancetype)sharedRecognizer
 {
     static THGestureRecognizer *sharedRecognizer = nil;
@@ -68,12 +67,6 @@
     return [self.registeredGestures count];
 }
 
-
-//- (void)trainRecognizerWithTrainingSet:(THTrainingsSet *)trainingsSet
-//{
-//    NSLog(@"training new set");
-//    [self.classifier loadTrainingDataFromTrainingsSet:trainingsSet];
-//}
 
 - (void)observeSignal:(Signal)signal
 {
@@ -121,6 +114,7 @@
  
 }
 
+
 - (void)trainRecognizerWithGesture:(THGestureClassifier *)gesture
 {
     NSLog(@"%s",__PRETTY_FUNCTION__);
@@ -131,6 +125,7 @@
     {
         [self.classifier appendFeatureSets:@[[gestureFeatureSets lastObject]]
                                   forLabel:9999];
+        gesture.isCalibrationGesture = YES;
         NSLog(@"inserted 0 vector");
     }
     else
@@ -142,42 +137,6 @@
     
     self.trainedGesture = YES;
     
-
-    
-//    - (void)fillPrimitivesFeatures:(double ***)features
-//labels:(short **)labels
-//nSamples:(int *)nSamples
-//nFeatures:(int *)nFeatures
-//    {
-//        NSParameterAssert([self.allInputs count] > 0);                      //we have at lease one input
-//        NSParameterAssert([self.labels count] == [self.allInputs count]);   //every input has a label
-//        NSParameterAssert([[self.allInputs firstObject] count] > 0);        //we have at least one feature per input
-//        
-//        NSInteger inputCount = [self.allInputs count];
-//        NSInteger featuresCount = [[self.allInputs firstObject] count];
-//        
-//        *nSamples = inputCount;
-//        *nFeatures = featuresCount;
-//        
-//        *features = [Helper emptyMatrixWithN:inputCount m:featuresCount];
-//        *labels = malloc(inputCount * sizeof(short));
-//        
-//        
-//        for (int n = 0; n < [self.allInputs count]; n++)
-//        {
-//            NSArray *inputVector = self.allInputs[n];
-//            
-//            NSParameterAssert([inputVector count] == featuresCount);           //every input has same number of features
-//            
-//            for (int i = 0; i < [inputVector count]; i++)
-//            {
-//                (*features)[n][i] = [inputVector[i] doubleValue];
-//            }
-//            
-//            (*labels)[n] = [self.labels[n] integerValue];
-//        }
-//    }
-
     
 }
 
@@ -201,48 +160,6 @@
     
     NSLog(@"--------------- i think its label %i",label);
     
-    /*
-    NSLog(@"--", self.halfWindowSize);
-
-    double features[8];
-    self.featureExtractor.peakDetectionTolerance = 30;
-    [self.featureExtractor computeAllFeaturesFromWindow:self.signalWindow
-                                                  count:self.halfWindowSize *2 / 3
-                                               features:features];
-    
-    double means =           features[0];
-    double magnitude =       features[1];
-    double deviations =      features[2];
-    double minMaxDiffs =     features[3];
-    double numPeaks =        features[4];
-    double correlations1 =   features[5];
-    double correlations2 =   features[6];
-    double correlations3 =   features[7];
-
-    
-    
-    
-    NSString *featuresInWindow = [NSString stringWithFormat:@"means: %.3f numPeaks: %.3f minmaxdiffs: %.3f  deviation: %.3f\n", means, numPeaks, minMaxDiffs, deviations];
-    NSLog(@"%@",featuresInWindow);
-    
-    NSString *txt = [NSString stringWithFormat:@"%.3f,%.3f,%.3f,%.3f\n",means, numPeaks, minMaxDiffs, deviations];
-    
-    [self.history appendString:txt];
-
-
-
-    int numPeaks = [self computeNumPeaksFromWindow:self.signalWindow
-                                             count:self.halfWindowSize * 2
-                                         tolerance:100];
-    */
-    
-    
-    
-//    int numPeaks =[self.featureExtractor computeNumPeaksFromWindow:self.signalWindow
-//                                                             count:self.halfWindowSize *2 / 3
-//                                                         tolerance:20];
-    
-    
 
     
     
@@ -262,48 +179,10 @@
             }
         }
     }
-//    NSLog(@"-----numpeaks: %i",numPeaks);
 }
-//
-//- (NSUInteger)peaksInWindow:(NSArray *)data
-//{
-//    self.featureExtractor.peakDetectionTolerance = 20;
-//    self.halfWindowSize = [data count]/2;
-//    
-//    for (int i = 0; i < self.halfWindowSize*2; i++)
-//    {
-//        NSValue *v = data[i];
-//        Signal s;
-//        [v getValue:&s];
-//        self.signalWindow[i] = s;
-//    }
-//    
-//    int numPeaks =[self.featureExtractor computeNumPeaksFromWindow:self.signalWindow
-//                                                             count:self.halfWindowSize *2 / 3
-//                                                         tolerance:20];
-//    
-//    NSLog(@"number of peaks: %i",numPeaks);
-//    /*
-//    if(numPeaks == 2)
-//    {
-//        if(self.gestureIsAlreadyRecognized == NO)
-//        {
-//            self.gestureIsAlreadyRecognized = YES;
-//            
-//            [self triggerEventNamed:kEventRecognized];
-//            
-//        }
-//    }
-//    else
-//    {
-//        self.gestureIsAlreadyRecognized = NO;
-//        [self triggerEventNamed:kEventNotRecognized];
-//    }*/
-//    return numPeaks;
-//    
-//}
 
 - (THFeatureSet *)featureSetFromSignals:(NSArray *)signals
+                                   name:(NSString *)name
 {
     Signal recordedSignals[[signals count]];
     
@@ -330,8 +209,27 @@
     {
         [featureArray addObject:@(features[i])];
     }
-    THFeatureSet *featureSet = [[THFeatureSet alloc] initWithFeatures:featureArray];
+    
+    
+    
+    THFeatureSet *featureSet = [[THFeatureSet alloc] initWithFeatures:featureArray
+                                                                 name:name];
     return featureSet;
+}
+
+
+- (void)removeTrainingAtIndex:(NSUInteger)index
+                    withLabel:(short)label
+                   forGesture:(THGestureClassifier *)gesture
+{
+    short labelToDelete = gesture.label;
+    if(gesture.isCalibrationGesture)
+    {
+        index --;
+    }
+    [self.classifier removeValuesForLabel:labelToDelete
+                                  atIndex:index];
+    [self.classifier calculateScaleMatrix];
 }
 
 - (void)printFeaturesForWindow:(NSArray *)data

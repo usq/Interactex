@@ -36,7 +36,7 @@
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil
                          bundle:(NSBundle *)nibBundleOrNil
-              gestureClassifierProperties:(THGestureClassifierProperties *)gestureClassifierProperties
+    gestureClassifierProperties:(THGestureClassifierProperties *)gestureClassifierProperties
 {
     self = [super initWithNibName:nibNameOrNil
                            bundle:nibBundleOrNil];
@@ -67,6 +67,7 @@
         [self.gestureClassifier finishedGesture:self.visibleValues];
         
         [self.currentPopoverController dismissPopoverAnimated:YES];
+        [self.gestureClassifierProperties popoverControllerDidDismissPopover:self.currentPopoverController];
     }
 }
 
@@ -84,7 +85,7 @@ float constrain(float input, float min, float max)
 {
     NSValue *n = change[NSKeyValueChangeNewKey];
     
-
+    
     
     
     [self.visibleValues addObject:n];
@@ -108,9 +109,9 @@ float constrain(float input, float min, float max)
     accX = (constrain(accX,accMin,accMax) + 15000)/30000;
     accY = (constrain(accY,accMin,accMax) + 15000)/30000;
     accZ = (constrain(accZ,accMin,accMax) + 15000)/30000;
-
     
-//    NSLog(@"value1:%i value2: %i",s.finger1,s.finger2);
+    
+    //    NSLog(@"value1:%i value2: %i",s.finger1,s.finger2);
     n1 -= 100; //correcting offset 130 to 282 -> 30 to 182
     n2 -= 100; //correcting offset 130 to 282 -> 30 to 182
     accX *= 200;
@@ -164,9 +165,9 @@ float constrain(float input, float min, float max)
     
     [self.graphView start];
     THGestureClassifierPopoverGraphView *contentView = [[THGestureClassifierPopoverGraphView alloc] initWithFrame:self.view.frame
-                                                                                                leftPercentage:0
-                                                                                               rightPercentage:1
-                                                                                                            of:self.graphSize];
+                                                                                                   leftPercentage:0
+                                                                                                  rightPercentage:1
+                                                                                                               of:self.graphSize];
     [self.view addSubview:contentView];
     
     
@@ -215,17 +216,22 @@ float constrain(float input, float min, float max)
 
 - (void)cropVisibleValues
 {
-    float leftIndex = 300 * self.leftPercentage;
-    float visibleFactor = (float)[self.visibleValues count]/300.f;
-    float rightIndex = fmaxf([self.visibleValues count]* fminf(self.rightPercentage/visibleFactor,1),01);
-    
-    if(leftIndex > rightIndex)
+    if([self.visibleValues count] > 0)
     {
-        leftIndex = rightIndex -1;
+        
+        float leftIndex = 300 * self.leftPercentage;
+        float visibleFactor = (float)[self.visibleValues count]/300.f;
+        float rightIndex = fmaxf([self.visibleValues count]* fminf(self.rightPercentage/visibleFactor,1),01);
+        
+        if(leftIndex > rightIndex)
+        {
+            leftIndex = rightIndex -1;
+        }
+        
+        NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(leftIndex, rightIndex - leftIndex)];
+        self.visibleValues = [[self.visibleValues objectsAtIndexes:set] mutableCopy];
     }
     
-    NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(leftIndex, rightIndex - leftIndex)];
-    self.visibleValues = [[self.visibleValues objectsAtIndexes:set] mutableCopy];
 }
 
 

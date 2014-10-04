@@ -56,9 +56,104 @@
 }
 
 
++ (short *)removeIndex:(int)index
+             fromVector:(short *)vector
+                  count:(int)count
+{
+    short *newVector = malloc(sizeof(short) * (count - 1));
+    for (int i = 0, k = 0; i < count; i++)
+    {
+        if (i == index) {
+            continue;
+        }
+        newVector[k] = vector[i];
+        k++;
+    }
+    return newVector;
+}
+
++ (double **)removeRow:(int)row
+            fromMatrix:(double **)matrix
+          withRowCount:(int)rowCount
+           columnCount:(int)columnCount
+{
+    assert(rowCount > 1);
+    double ** m = [Helper emptyMatrixWithN:rowCount-1
+                                         m:columnCount];
+    
+    if (row == 0)
+    {
+        //return lower matrix
+        [self copyToMatrixValuesFromRow:1
+                             fromColumn:0
+                                  toRow:0
+                               toColumn:0
+                               rowCount:rowCount - 1
+                            columnCount:columnCount
+                             fromMatrix:matrix
+                               toMatrix:m];
+    }
+    else if (row == rowCount -1)
+    {
+        //return upper matrix
+        [self copyToMatrixValuesFromRow:0
+                             fromColumn:0
+                                  toRow:0
+                               toColumn:0
+                               rowCount:rowCount - 1
+                            columnCount:columnCount
+                             fromMatrix:matrix
+                               toMatrix:m];
+    }
+    else
+    {
+        //combine upper
+        [self copyToMatrixValuesFromRow:0
+                             fromColumn:0
+                                  toRow:0
+                               toColumn:0
+                               rowCount:row
+                            columnCount:columnCount
+                             fromMatrix:matrix
+                               toMatrix:m];
+        
+        //combine lower
+        [self copyToMatrixValuesFromRow:row + 1
+                             fromColumn:0
+                                  toRow:row
+                               toColumn:0
+                               rowCount:rowCount - row - 1
+                            columnCount:columnCount
+                             fromMatrix:matrix
+                               toMatrix:m];
+    }
+    free(matrix);
+    return m;
+}
+
++ (void)copyToMatrixValuesFromRow:(int)fromRow
+                       fromColumn:(int)fromColumn
+                            toRow:(int)toRow
+                         toColumn:(int)toColumn
+                         rowCount:(int)rowCount
+                      columnCount:(int)columnCount
+                       fromMatrix:(double **)fromMatrix
+                         toMatrix:(double **)toMatrix
+{
+    //hope that's right...
+    for(int fr = fromRow, tr = toRow; fr - fromRow < rowCount; fr++, tr++)
+    {
+        for(int fc = fromColumn, tc = toColumn; fc - fromColumn < columnCount; fc++, tc++)
+        {
+            toMatrix[tr][tc] = fromMatrix[fr][fc];
+        }
+    }
+}
+
+
 + (short *)appendVector:(short *)vectorToAppend
-               withCount:(int)countToAppend
-                toVector:(short *)vector
+              withCount:(int)countToAppend
+               toVector:(short *)vector
                withCount:(int)count
 {    
     short *newVector = malloc(sizeof(short) * (countToAppend + count));
@@ -424,6 +519,7 @@
     features[0] *= 10;
     features[1] *= 10;
 }
+
 
 
 

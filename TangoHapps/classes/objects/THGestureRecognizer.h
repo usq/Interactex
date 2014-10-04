@@ -22,12 +22,17 @@
 //this one is fishy
 - (BOOL)registerGesture:(THGestureClassifier *)gesture;
 - (void)trainRecognizerWithGesture:(THGestureClassifier *)gesture;
-
+//- (void)updateFeatureSetForGesture:(THGestureClassifier *)gesture;
 
 - (void)observeSignal:(Signal)signal;
 - (void)printFeaturesForWindow:(NSArray *)data;
 //- (NSUInteger)peaksInWindow:(NSArray *)data;
 //- (void)retrainWithTrainingsSets:(NSArray *)trainings;
 
-- (THFeatureSet *)featureSetFromSignals:(NSArray *)signals;
+- (THFeatureSet *)featureSetFromSignals:(NSArray *)signals
+                                   name:(NSString *)name;
+
+- (void)removeTrainingAtIndex:(NSUInteger)index
+                    withLabel:(short)label
+                   forGesture:(THGestureClassifier *)gesture;
 @end

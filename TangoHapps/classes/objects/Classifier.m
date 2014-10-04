@@ -413,8 +413,8 @@ const double kDefaultLearningRate = 0.01;
                       m:self.featuresCount
                  labels:inputLabels];
     
+
     [self calculateScaleMatrix];
-    
   
 }
 
@@ -482,5 +482,34 @@ const double kDefaultLearningRate = 0.01;
     free(ncaInputTest);
     free(scaleMatrix);
 }
+
+- (void)removeValuesForLabel:(short)labelToDelete
+                     atIndex:(int)index
+{
+    int entryToDelete = 0;
+    int labelCount = 0;
+    for (int i = 0; i < self.inputCount; i++)
+    {
+        if(inputLabels[i] == labelToDelete)
+        {
+            if(labelCount == index)
+            {
+                entryToDelete = i;
+                break;
+            }
+            labelCount++;
+        }
+    }
+    inputLabels = [Helper removeIndex:entryToDelete
+                           fromVector:inputLabels
+                                count:self.inputCount];
+    
+    input = [Helper removeRow:entryToDelete
+                   fromMatrix:input
+                 withRowCount:self.inputCount
+                  columnCount:self.featuresCount];
+    self.inputCount--;
+}
+
 
 @end

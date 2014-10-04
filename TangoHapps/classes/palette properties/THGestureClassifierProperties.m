@@ -10,60 +10,32 @@
 #import "THGestureClassifierEditable.h"
 #import "THGestureClassifierPopoverContentViewController.h"
 #import "THSignalSourceEditable.h"
+#import "THGestureClassifier.h"
+#import "THFeatureSet.h"
 
-@interface THGestureClassifierProperties ()<UIPopoverControllerDelegate>
-@property (weak, nonatomic) IBOutlet UISegmentedControl *tickControll;
-@property (weak, nonatomic) IBOutlet UISlider *slider;
-@property (weak, nonatomic) IBOutlet UILabel *windowLabel;
+@interface THGestureClassifierProperties ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong, readwrite) UIPopoverController *recordingPopoverController;
+@property (nonatomic, strong, readwrite) IBOutlet UITableView *tableView;
 
 @end
 
 @implementation THGestureClassifierProperties
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self)
-    {
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    THGestureClassifierEditable *editable = (THGestureClassifierEditable *)self.editableObject;
-    [self.slider setValue:editable.halfWindowSize];
-    self.windowLabel.text = [NSString stringWithFormat:@"%i",editable.halfWindowSize];
-    
-//    [self.tickControll setSelectedSegmentIndex:fmax(editable.numberOfTicksToDetect-1,0)];
-    // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-- (IBAction)detectTickChanged:(UISegmentedControl *)sender
-{
-//    THGestureClassifierEditable *editable = (THGestureClassifierEditable *)self.editableObject;
-//    editable.numberOfTicksToDetect = sender.selectedSegmentIndex +1;
-}
-
-- (IBAction)sliderChanged:(UISlider *)sender
-{
-    THGestureClassifierEditable *editable = (THGestureClassifierEditable *)self.editableObject;
-    editable.halfWindowSize = sender.value;
-    self.windowLabel.text = [NSString stringWithFormat:@"%i",(NSUInteger)sender.value];
-}
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
-        [[THSignalSourceEditable sharedSignalSourceEditable] stopRecording];
+    [[THSignalSourceEditable sharedSignalSourceEditable] stopRecording];
+    if(self.tableView)
+    {
+        [self.tableView reloadData];
+    }
 }
 
 - (IBAction)recordGesturePressed:(UIButton *)sender
@@ -80,7 +52,7 @@
     self.recordingPopoverController = [[UIPopoverController alloc] initWithContentViewController:contentViewController];
     self.recordingPopoverController.delegate = self;
     self.recordingPopoverController.backgroundColor = [UIColor colorWithRed:0.321 green:0.402 blue:0.341 alpha:1.000];
-    self.recordingPopoverController.delegate = self;
+
     
     contentViewController.currentPopoverController = self.recordingPopoverController;
 
@@ -117,8 +89,59 @@
      fromRect:self.addRecordingButton.frame];
      */
     
+}
+
+- (NSArray *)trainedFeatureSets
+{
+    return ((THGestureClassifier *)((THGestureClassifierEditable *)self.editableObject).simulableObject).trainedFeatureSets;
+}
+
+
+#pragma mark - tableview delegates
+
+- (BOOL)tableView:(UITableView *)tableView
+canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        //delete training here
+        [[NSNotificationCenter defaultCenter] postNotificationName:kGestureClassifierShouldDeleteTraining
+                                                            object:self
+                                                          userInfo:@{
+                                                                     @"index":@(indexPath.row)
+                                                                     }];
+        [self.tableView reloadData];
+    }
+}
+
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section
+{
+    return [[self trainedFeatureSets] count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"THGestureClassifierTrainedFeatureSetsCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
+    if(cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                      reuseIdentifier:cellIdentifier];
+    }
+    THFeatureSet *featureSet = [self trainedFeatureSets][indexPath.row];
+    cell.textLabel.text = featureSet.name;
     
+    return cell;
 }
 
 

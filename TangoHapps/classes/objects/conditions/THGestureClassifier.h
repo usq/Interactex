@@ -8,7 +8,11 @@
 
 #import "TFSimulableObject.h"
 #import "THSignalSource.h"
+
+extern NSString * kGestureClassifierShouldDeleteTraining;
+
 @interface THGestureClassifier : TFSimulableObject
+@property (nonatomic, assign, readwrite) BOOL isCalibrationGesture;
 @property (nonatomic, assign, readonly) NSUInteger numberOfTicksToDetect;
 @property (nonatomic, assign, readwrite) NSUInteger halfWindowSize;
 @property (nonatomic, assign, readwrite) Signal currentSignal;
