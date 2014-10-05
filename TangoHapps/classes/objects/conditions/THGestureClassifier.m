@@ -10,6 +10,7 @@
 #import "THGestureRecognizer.h"
 #import "THSignalSource.h"
 #import "THAsyncConnection.h"
+#import "THProjectLocation.h"
 
 NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDeleteTraining";
 
@@ -33,7 +34,10 @@ NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDe
 - (void)load
 {
     self.hasAlreadyBeenRecognized = YES;
-    self.trainedFeatureSets = [NSMutableArray array];
+    if(self.trainedFeatureSets == nil)
+    {
+        self.trainedFeatureSets = [NSMutableArray array];
+    }
     
     TFMethod *inputMethod = [TFMethod methodWithName:@"addSignal"];
     inputMethod.numParams = 1;
@@ -47,21 +51,41 @@ NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDe
     
     
     self.label = [[THGestureRecognizer sharedRecognizer] registerGesture:self];
+    NSLog(@".............................................registered gesture with label:%i",self.label);
+    NSLog(@"self.simulating: %i",self.simulating);
     self.relaysInput =  self.label == 1;
     
     self.recognizer = [THGestureRecognizer sharedRecognizer];
     self.index = 0;
     self.connection = [THAsyncConnection sharedConnection];
+    
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(changedStuff:)
                                                  name:kEventValueChanged
                                                object:nil];
     
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(changedStuff:)
+//                                                 name:@"singletonSignalChanged"
+//                                               object:nil];
+//    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(shouldDeleteTrainingNotification:)
                                                  name:kGestureClassifierShouldDeleteTraining
                                                object:nil];
+    
+    if([THProjectLocation sharedProjectLocation].runningOnLocation == THProjectLocationRunningOnIPhone)
+    {
+        [THSignalSource sharedSignalSource];
+    }
 }
+
+- (void)willStartSimulating
+{
+    NSLog(@"will start simulating");
+}
+
 
 - (void)shouldDeleteTrainingNotification:(NSNotification *)notification
 {
@@ -72,11 +96,29 @@ NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDe
                                 forGesture:self];
 }
 
+- (void)prepareToDie
+{
+    [[THGestureRecognizer sharedRecognizer] deregisterGesture:self];
+}
+
+
 - (void)recognized
 {
+    self.hasAlreadyBeenRecognized = YES;
     NSLog(@"\n\nRECOGNIZED!!!!!!!!!!!!!!!\n");
+    [self triggerEventNamed:kEventRecognized
+     ignoreSimulating:YES];
     //gesture has been recognized
-    [self.connection nextSlide:nil];
+//    TFEvent *recognizedEvent = self.events[0];
+//    [self triggerEvent:recognizedEvent];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:event.name  object:self];
+//    [self triggerEventNamed:<#(NSString *)#>]
+//    [self.connection nextSlide:nil];
+}
+
+- (void)notRecognized
+{
+    
 }
 
 - (void)changedStuff:(NSNotification *)obj
@@ -112,7 +154,8 @@ NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDe
     [self.trainedFeatureSets addObject:featureSet];
     
     //retrain kNN
-    [self.recognizer trainRecognizerWithGesture:self];
+    [self.recognizer trainRecognizerWithGesture:self
+                                addedFeatureSet:featureSet];
 }
 
 #pragma mark - Archiving
@@ -134,11 +177,15 @@ NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDe
     self = [super initWithCoder:decoder];
     self.numberOfTicksToDetect = [decoder decodeIntForKey:@"numberOfTicks"];
     self.recognizer.halfWindowSize = [decoder decodeIntForKey:@"halfWindowSize"];
+    self.trainedFeatureSets = [decoder decodeObjectForKey:@"trainedFeatureSets"];
+    self.label = [[decoder decodeObjectForKey:@"label"] shortValue];
+    NSLog(@"initialized gesture with label: %i",self.label);
     if(self.recognizer.halfWindowSize == 0)
     {
         self.recognizer.halfWindowSize = HALF_WINDOW_SIZE_DEFAULT;
     }
     [self load];
+    [self.recognizer trainRecognizerWithGesture:self];
     return self;
 }
 
@@ -149,12 +196,18 @@ NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDe
               forKey:@"numberOfTicks"];
     [coder encodeInt:self.halfWindowSize
               forKey:@"halfWindowSize"];
+    [coder encodeObject:self.trainedFeatureSets
+                 forKey:@"trainedFeatureSets"];
+    [coder encodeObject:@(self.label)
+                 forKey:@"label"];
 }
 
 -(id)copyWithZone:(NSZone *)zone
 {
     THGestureClassifier *copy = [super copyWithZone:zone];
     copy.numberOfTicksToDetect = self.numberOfTicksToDetect;
+    copy.trainedFeatureSets = self.trainedFeatureSets;
+    copy.label = self.label;
 //    copy.halfWindowSize = self.halfWindowSize;
     return copy;
 }

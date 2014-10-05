@@ -8,6 +8,8 @@
 
 #import "THSignalSource.h"
 #import "THGestureRecognizer.h"
+#import "THProjectLocation.h"
+#import "THGestureBLEConnector.h"
 
 #define RECORDED_MAXCOUNT 500
 
@@ -61,23 +63,29 @@ Signal THDecodeSignal(uint8_t *input)
 @property (nonatomic, assign, readwrite) int16_t lastZ;
 @end
 
-
+static THSignalSource* instance;
 NSString * const kSignalSourceEditableLeftPercentage = @"kSignalSourceEditableLeftPercentage";
 NSString * const kSignalSourceEditableRightPercentage = @"kSignalSourceEditableRightPercentage";
 NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
-    static id instance;
+
 @implementation THSignalSource
 
 + (instancetype)sharedSignalSource
 {
-    assert(instance != nil);
+    if(instance == nil)
+    {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            instance = [[self alloc] init];
+        });
+    }
     return instance;
 }
 
 - (void)load
 {
-
-    instance = self;
+//    assert(instance == nil);
+//    instance = self;
     self.lastX = self.lastY = self.lastZ = 0;
     
     TFProperty * property = [TFProperty propertyWithName:@"currentOutputValue" andType:kDataTypeInteger];
@@ -102,9 +110,16 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
     {
        // [self switchSourceFile:self.currentFilePath];
     }
+    
     if(self.simulating)
     {
         
+    }
+    
+    if([THProjectLocation sharedProjectLocation].runningOnLocation == THProjectLocationRunningOnIPhone)
+    {
+        [[THGestureBLEConnector sharedConnector] registerSignalSource:self];
+        [[THGestureBLEConnector sharedConnector] start];
     }
 }
 
@@ -188,7 +203,11 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
     [r observeSignal:value];
     
     self.currentOutputValue = value;
-    [self triggerEventNamed:kEventValueChanged];
+    //
+    [self triggerEventNamed:kEventValueChanged
+           ignoreSimulating:YES];
+    
+//    [self triggerEventNamed:kEventValueChanged];
 }
 
 #pragma mark - Methods
@@ -267,11 +286,19 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
 
 - (id)init
 {
-    self = [super init];
-    if (self) {
-        _leftBorderPercentage = 0;
-        _rightBorderPercentage = 1;
-        [self load];
+    if(instance)
+    {
+        return instance;
+    }
+    else
+    {
+        self = [super init];
+        if (self) {
+            _leftBorderPercentage = 0;
+            _rightBorderPercentage = 1;
+            [self load];
+        }
+        
     }
     return self;
 }

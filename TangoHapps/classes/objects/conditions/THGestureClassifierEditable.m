@@ -71,8 +71,11 @@
 
 
 
-
-
+//
+//- (void)prepareToDie
+//{
+//    [(THGestureClassifier *)self.simulableObject deregisterFromRecognizer];
+//}
 
 
 

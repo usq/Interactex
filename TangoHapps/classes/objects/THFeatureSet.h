@@ -11,7 +11,7 @@
 @interface THFeatureSet : NSObject
 @property (nonatomic, copy, readwrite) NSString *name;
 @property (nonatomic, strong, readonly) NSArray *scaledFeatures;
-- (instancetype)initWithFeatures:(NSArray *)features;
+//- (instancetype)initWithFeatures:(NSArray *)features;
 - (instancetype)initWithFeatures:(NSArray *)features
                             name:(NSString *)name;
 @end

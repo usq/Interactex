@@ -21,23 +21,23 @@
 @property (nonatomic, assign, readwrite) BOOL recording;
 @end
 
-static id instance;
+
 @implementation THSignalSourceEditable
 
 + (instancetype)sharedSignalSourceEditable
 {
-    assert(instance != nil);
+    static THSignalSourceEditable* instance;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [[self alloc] init];
+        [instance load];
+    });
+
     return instance;
 }
 
 - (void)load
 {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        assert(self != nil);
-        instance = self;
-    });
-
     self.sprite = [CCSprite spriteWithFile:@"signalsource.png"];
     [self addChild:self.sprite];
     
@@ -48,7 +48,7 @@ static id instance;
 {
     self = [super init];
     if(self){
-        self.simulableObject = [[THSignalSource alloc] init];
+        self.simulableObject = [THSignalSource sharedSignalSource];
         [self load];
     }
     return self;

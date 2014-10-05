@@ -1,34 +1,37 @@
 //
-//  THMacbookEditable.m
+//  THMacbookCommandEditable.m
 //  TangoHapps
 //
-//  Created by Michael Conrads on 11/07/14.
+//  Created by Michael Conrads on 05/10/14.
 //  Copyright (c) 2014 Technische Universität München. All rights reserved.
 //
 
-#import "THMacbookEditable.h"
-#import "THMacbookProperties.h"
-#import "THMacbook.h"
-@implementation THMacbookEditable
-
-
-
+#import "THMacbookCommandEditable.h"
+#import "THMacbookCommand.h"
+#import "THMacbookCommandProperties.h"
+@implementation THMacbookCommandEditable
 - (void)load
 {
+    
     self.sprite = [CCSprite spriteWithFile:@"macbook.png"];
     [self addChild:self.sprite];
     
     self.acceptsConnections = YES;
 }
-
 - (id)init
 {
     self = [super init];
     if(self){
-        self.simulableObject = [[THMacbook alloc] init];
+        self.simulableObject = [[THMacbookCommand alloc] init];
         [self load];
     }
     return self;
+}
+
+
+- (NSString *)description
+{
+    return @"MacbookCommand";
 }
 
 
@@ -37,11 +40,9 @@
 - (NSArray *)propertyControllers
 {
     NSArray *controllers = [super propertyControllers];
-    THMacbookProperties *properties = [THMacbookProperties properties];
+    THMacbookCommandProperties *properties = [THMacbookCommandProperties properties];
     properties.editableObject = self;
     //add property-controllers here
-    
-    
     return [controllers arrayByAddingObject:properties];
 }
 
@@ -65,9 +66,8 @@
     [super encodeWithCoder:coder];
 }
 
-- (id)copyWithZone:(NSZone *)zone
-{
-    THMacbookEditable * copy = [super copyWithZone:zone];
+- (id)copyWithZone:(NSZone *)zone {
+    THMacbookCommandEditable * copy = [super copyWithZone:zone];
     return copy;
 }
 

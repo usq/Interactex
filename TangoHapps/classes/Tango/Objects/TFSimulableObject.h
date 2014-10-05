@@ -63,6 +63,8 @@ You should have received a copy of the GNU General Public License along with thi
 -(void) triggerEvent:(TFEvent*) event;
 -(TFEvent*) eventNamed:(NSString*) eventName;
 
+- (void)triggerEventNamed:(NSString *)name
+         ignoreSimulating:(BOOL)ignoreSimulating;
 //methods
 -(TFMethod*) methodNamed:(NSString*) methodName;
 

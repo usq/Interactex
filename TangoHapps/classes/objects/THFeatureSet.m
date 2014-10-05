@@ -9,8 +9,8 @@
 #import "THFeatureSet.h"
 #import "FeatureExtractor.h"
 
-@interface THFeatureSet ()
-@property (nonatomic, strong, readwrite) NSArray *features;
+@interface THFeatureSet ()<NSCoding, NSCopying>
+//@property (nonatomic, strong, readwrite) NSArray *features;
 @property (nonatomic, strong, readwrite) NSArray *scaledFeatures;
 @end
 
@@ -28,7 +28,7 @@
     self = [super init];
     if (self)
     {
-        self.features = features;
+//        self.features = features;
         NSNumber *finger1 = @([features[0] integerValue] * 10);
         NSNumber *finger2 = @([features[1] integerValue]* 10);
         self.name = name;
@@ -36,6 +36,34 @@
     }
     return self;
 }
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:self.scaledFeatures
+                  forKey:@"scaledFeatures"];
+    [aCoder encodeObject:self.name
+                  forKey:@"name"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    if(self)
+    {
+        self.scaledFeatures = [aDecoder decodeObjectForKey:@"scaledFeatures"];
+        self.name = [aDecoder decodeObjectForKey:@"name"];
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    THFeatureSet *featureSet = [[THFeatureSet alloc] initWithFeatures:self.scaledFeatures
+                                                                 name:self.name];
+    return featureSet;
+}
+
+
 //
 //
 //- (void)fillPrimitivesFeatures:(double ***)features

@@ -77,9 +77,20 @@
           withRowCount:(int)rowCount
            columnCount:(int)columnCount
 {
-    assert(rowCount > 1);
-    double ** m = [Helper emptyMatrixWithN:rowCount-1
-                                         m:columnCount];
+    double ** m;
+    if(rowCount == 1)
+    {
+        m = [Helper emptyMatrixWithN:1
+                                   m:columnCount];
+        
+    }
+    else
+    {
+        m = [Helper emptyMatrixWithN:rowCount-1
+                                   m:columnCount];
+    }
+    
+    
     
     if (row == 0)
     {

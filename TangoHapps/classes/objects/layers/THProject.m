@@ -82,6 +82,10 @@ You should have received a copy of the GNU General Public License along with thi
 #import "THGestureClassifierEditable.h"
 #import "THSignalSourceEditable.h"
 #import "THSignalSource.h"
+#import "THMacbook.h"
+#import "THMacbookEditable.h"
+#import "THMacbookCommand.h"
+#import "THMacbookCommandEditable.h"
 
 @implementation THProject
 
@@ -958,6 +962,16 @@ enum zPositions{
         NSInteger idx = [self idxOfEditable:editable inArray:self.values];
         return [project.values objectAtIndex:idx];
     }
+    else if ([editable isKindOfClass:[THMacbookEditable class]])
+    {
+        NSInteger idx = [self idxOfEditable:editable inArray:self.values];
+        return [project.values objectAtIndex:idx];
+    }
+    else if ([editable isKindOfClass:[THMacbookCommandEditable class]])
+    {
+        NSInteger idx = [self idxOfEditable:editable inArray:self.values];
+        return [project.values objectAtIndex:idx];
+    }
     else {
         NSAssert(NO, @"returning nil in simulableForEditable for %@",editable);
         return nil;
@@ -986,6 +1000,14 @@ enum zPositions{
         return [project.triggers objectAtIndex:idx];
     }
     else if ([simulable isKindOfClass:[THSignalSource class]]){
+        NSInteger idx = [self idxOfSimulable:simulable inArray:self.values];
+        return [project.values objectAtIndex:idx];
+    }
+    else if ([simulable isKindOfClass:[THMacbook class]]){
+        NSInteger idx = [self idxOfSimulable:simulable inArray:self.values];
+        return [project.values objectAtIndex:idx];
+    }
+    else if ([simulable isKindOfClass:[THMacbookCommand class]]){
         NSInteger idx = [self idxOfSimulable:simulable inArray:self.values];
         return [project.values objectAtIndex:idx];
     }

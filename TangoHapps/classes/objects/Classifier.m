@@ -88,14 +88,14 @@ const double kDefaultLearningRate = 0.01;
                 minmaxs[j][1] = val;
             }
             
-            NSLog(@"feature %i min %f",j,minmaxs[j][0]);
-            NSLog(@"max %f",minmaxs[j][1]);
-            NSLog(@"");
+            //            NSLog(@"feature %i min %f",j,minmaxs[j][0]);
+            //            NSLog(@"max %f",minmaxs[j][1]);
+            //            NSLog(@"");
         }
     }
     
     
-    NSLog(@"-------------------------------");
+    //    NSLog(@"-------------------------------");
     
     [Helper identityMatrix:A n:self.featuresCount];
     
@@ -111,10 +111,10 @@ const double kDefaultLearningRate = 0.01;
             A[i][i] = f; //was 1.0 /f
         }
         assert(fabsf(f) < 100000);
-        NSLog(@"-------------- %f",f);
+        //        NSLog(@"-------------- %f",f);
         
     }
-  
+    
     
     return A;
 }
@@ -207,8 +207,8 @@ const double kDefaultLearningRate = 0.01;
                 softmax[k] = exp(-squaredNorm) / softmaxNormalization;
             }
         }
+        //        [self printVector:softmax length:N];
         
-        //[self printVector:softmax length:N];
         
         double p = 0.0;
         
@@ -258,10 +258,10 @@ const double kDefaultLearningRate = 0.01;
         [Helper subtractToMatrix:firstTerm matrix:(const double**)secondTerm n:D m:D];
         [Helper multiplyMatrix:(const double**)A withMatrix:(const double**)firstTerm n:D result:term];
         [Helper multiplyMatrix:term withScalar:self.learningRate n:D m:D];
-
+        
         [Helper checkMatrix:A n:D m:D];
-            [Helper checkMatrix:firstTerm n:D m:D];
-                    [Helper checkMatrix:term n:D m:D];
+        [Helper checkMatrix:firstTerm n:D m:D];
+        [Helper checkMatrix:term n:D m:D];
         [Helper addToMatrix:A matrix:(const double**)term n:D m:D];
     }
     
@@ -278,17 +278,24 @@ const double kDefaultLearningRate = 0.01;
     
     
     double inputScaled[self.featuresCount];
-    
-//    NSLog(@"------------------------------------------------------------------------------------");
-    NSLog(@"before:");
-    [Helper printVector:inputVector
-                  count:self.featuresCount];
+    BOOL log = NO;
+    //    NSLog(@"------------------------------------------------------------------------------------");
+    if(log)
+    {
+        NSLog(@"before:");
+        [Helper printVector:inputVector
+                      count:self.featuresCount];
+        
+    }
     [Helper multiplyMatrix:(const double**)scaleMatrix withVector:inputVector n:self.featuresCount m:self.featuresCount result:inputScaled];
-    
-    NSLog(@"after:");
-    [Helper printVector:inputScaled
-                  count:self.featuresCount];
-    
+    if(log)
+    {
+        NSLog(@"after:");
+        [Helper printVector:inputScaled
+                      count:self.featuresCount];
+        
+        
+    }
     
     double minNorm = FLT_MAX;
     
@@ -303,20 +310,20 @@ const double kDefaultLearningRate = 0.01;
         [Helper subtractVector:inputScaled fromVector:input[j] count:self.featuresCount result:diff];
         
         double norm = [Helper norm:diff count:self.featuresCount];
-
+        
         NSLog(@"label: %i \t\t norm: %f", inputLabels[j],norm);
         
         if(norm < minNorm)
         {
             minNorm = norm;
             minNormLabel = inputLabels[j];
-//            NSLog(@"minnorm: %f", minNorm);
-//            NSLog(@"found smaller norm for label: %i",inputLabels[j]);
+            //            NSLog(@"minnorm: %f", minNorm);
+            //            NSLog(@"found smaller norm for label: %i",inputLabels[j]);
         }
     }
     
     NSLog(@"");
-//    NSLog(@"------------------------------------------------------------------------------------");
+    //    NSLog(@"------------------------------------------------------------------------------------");
     return minNormLabel;
 }
 
@@ -329,6 +336,7 @@ const double kDefaultLearningRate = 0.01;
     self.inputCount = inputCount;
     self.featuresCount = featuresCount;
 }
+
 
 
 
@@ -413,26 +421,33 @@ const double kDefaultLearningRate = 0.01;
                       m:self.featuresCount
                  labels:inputLabels];
     
-
+    
     [self calculateScaleMatrix];
-  
+    
 }
 
 
 -(void) calculateScaleMatrix{
     
-    double ** scalingMatrixTest = [self scalingMatrix];
-    [Helper printMatrix:scalingMatrixTest
-                      n:self.featuresCount
-                      m:self.featuresCount];
-    if(scaleMatrix)
-    {
-        free(scaleMatrix);
-    }
+    //    double ** scalingMatrixTest = [self scalingMatrix];
+    //    [Helper printMatrix:scalingMatrixTest
+    //                      n:self.featuresCount
+    //                      m:self.featuresCount];
+    //    if(scaleMatrix)
+    //    {
+    //        free(scaleMatrix);
+    //    }
+    
+    
+    double ** scalingMatrixTest = [Helper emptyMatrixWithN:self.featuresCount
+                                                         m:self.featuresCount];
+    [Helper identityMatrix:scalingMatrixTest
+                         n:self.featuresCount];
+    
     scaleMatrix = [self neighborhoodComponentsAnalysisWithInitialMatrix:(const double**)scalingMatrixTest];
-    [Helper printMatrix:scaleMatrix
-                      n:self.featuresCount
-                      m:self.featuresCount];
+    //    [Helper printMatrix:scaleMatrix
+    //                      n:self.featuresCount
+    //                      m:self.featuresCount];
 }
 
 -(void) testFile:(NSString*) fileName{
@@ -482,6 +497,28 @@ const double kDefaultLearningRate = 0.01;
     free(ncaInputTest);
     free(scaleMatrix);
 }
+
+- (void)removeValuesWithLabel:(short)label
+{
+    BOOL foundLabel = NO;
+    for (int i = 0; i < self.inputCount; i++)
+    {
+        if(inputLabels[i] == label)
+        {
+            foundLabel = YES;
+            break;
+        }
+    }
+    
+    if(foundLabel)
+    {
+        [self removeValuesForLabel:label
+                           atIndex:0];
+        [self removeValuesWithLabel:label];
+    }
+}
+
+
 
 - (void)removeValuesForLabel:(short)labelToDelete
                      atIndex:(int)index

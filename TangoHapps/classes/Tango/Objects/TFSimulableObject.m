@@ -138,6 +138,18 @@ You should have received a copy of the GNU General Public License along with thi
 }
 
 #pragma mark - Events
+- (void)triggerEventNamed:(NSString *)name
+         ignoreSimulating:(BOOL)ignoreSimulating
+{
+    if(ignoreSimulating)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:name  object:self];
+    }
+    else
+    {
+        [self triggerEventNamed:name];
+    }
+}
 
 -(void) triggerEventNamed:(NSString*) name{
     if(self.simulating){

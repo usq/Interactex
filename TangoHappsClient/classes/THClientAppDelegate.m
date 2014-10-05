@@ -45,6 +45,7 @@ You should have received a copy of the GNU General Public License along with thi
 #import "THClientProjectProxy.h"
 #import "THClientConnectionController.h"
 #import "THSlimConnectionClientController.h"
+#import "THProjectLocation.h"
 
 @interface THClientAppDelegate ()
 @property (nonatomic, strong, readwrite) THSlimConnectionClientController *slimConnectionController;
@@ -52,6 +53,8 @@ You should have received a copy of the GNU General Public License along with thi
 @implementation THClientAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [THProjectLocation sharedProjectLocation].runningOnLocation = THProjectLocationRunningOnIPhone;
     
     application.idleTimerDisabled = YES;
     if([TFFileUtils dataFile:kProjectProxiesFileName existsInDirectory:@""]){

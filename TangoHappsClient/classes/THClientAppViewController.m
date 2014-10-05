@@ -182,8 +182,7 @@ float const kConnectingTimeout = 100.0f;
     
     [super viewDidLoad];
     
-    [BLEDiscovery sharedInstance].discoveryDelegate = self;
-    [BLEDiscovery sharedInstance].peripheralDelegate = self;
+    
     
     self.firmataController = [[IFFirmata alloc] init];
     self.firmataController.delegate = self;
@@ -674,6 +673,9 @@ float const kConnectingTimeout = 100.0f;
 #pragma mark UI Interaction
 
 -(IBAction)startButtonTapped:(id)sender {
+    
+    [BLEDiscovery sharedInstance].discoveryDelegate = self;
+    [BLEDiscovery sharedInstance].peripheralDelegate = self;
     
     if([BLEDiscovery sharedInstance].connectedService){
         

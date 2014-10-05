@@ -65,7 +65,6 @@ float const kGraphViewOffsetX = 10.0f;
 		self.currentSegment = [self addSegment];
         
 	} else {
-        NSLog(@"length: %i",[self.segments count]);
 		[last reset];
         
         last.layer.position = CGPointMake(- last.layer.frame.size.width/2, self.frame.size.height/2);

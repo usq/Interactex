@@ -39,6 +39,7 @@
 
 - (void)calculateScaleMatrix;
 
+- (void)removeValuesWithLabel:(short)label;
 - (void)removeValuesForLabel:(short)labelToDelete
                      atIndex:(int)index;
 

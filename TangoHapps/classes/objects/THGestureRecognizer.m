@@ -25,7 +25,7 @@
 
 @property (nonatomic, assign, readwrite) BOOL trainedGesture;
 @end
-
+short lastLabel = 9999;
 @implementation THGestureRecognizer
 
 
@@ -57,16 +57,36 @@
 }
 
 
-- (BOOL)registerGesture:(THGestureClassifier *)gesture
+- (short)registerGesture:(THGestureClassifier *)gesture
 {
+    NSLog(@"%s",__PRETTY_FUNCTION__);
+    short label = gesture.label;
     if([self.registeredGestures containsObject:gesture] == NO)
     {
         [self.registeredGestures addObject:gesture];
     }
-
-    return [self.registeredGestures count];
+    
+    if(label == 0)
+    {
+        label = [self.registeredGestures count];
+    }
+    return label;
 }
 
+
+- (void)deregisterGesture:(THGestureClassifier *)gesture
+{
+    if([self.registeredGestures containsObject:gesture])
+    {
+        [self.registeredGestures removeObject:gesture];
+        if(gesture.isCalibrationGesture)
+        {
+            [self.classifier removeValuesWithLabel:9999];
+            self.trainedGesture = NO;
+        }
+        [self.classifier removeValuesWithLabel:gesture.label];
+    }
+}
 
 - (void)observeSignal:(Signal)signal
 {
@@ -76,7 +96,7 @@
     {
         for (int i = self.halfWindowSize; i < self.halfWindowSize * 2; i++)
         {
-            self.signalWindow[i - self.halfWindowSize] = self.signalWindow[i];
+            self.signalWindow[i - self.halfWindowSize] = self.signalWindow[i]; //
         }
         self.signalWindow[self.index] = signal;
         self.index++;
@@ -90,7 +110,6 @@
         {
             [self checkWindow];
         }
-
     }
     else
     {
@@ -101,42 +120,51 @@
 
 - (void)setHalfWindowSize:(NSUInteger)halfWindowSize
 {
- 
-     _halfWindowSize = halfWindowSize;
-     
-     if(self.signalWindow)
-     {
-         free(self.signalWindow);
-     }
-     
-     self.signalWindow = calloc(_halfWindowSize * 2, sizeof(Signal));
-     self.index = 0;
- 
+    
+    _halfWindowSize = halfWindowSize;
+    
+    if(self.signalWindow)
+    {
+        free(self.signalWindow);
+    }
+    
+    self.signalWindow = calloc(_halfWindowSize * 2, sizeof(Signal));
+    self.index = 0;
+    
 }
 
-
 - (void)trainRecognizerWithGesture:(THGestureClassifier *)gesture
+                   addedFeatureSet:(THFeatureSet *)featureSet
 {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-    
-    NSArray *gestureFeatureSets = gesture.trainedFeatureSets;
+    //    NSArray *gestureFeatureSets = gesture.trainedFeatureSets;
     
     if(self.trainedGesture == NO)
     {
-        [self.classifier appendFeatureSets:@[[gestureFeatureSets lastObject]]
+        
+        [self.classifier appendFeatureSets:@[featureSet]
                                   forLabel:9999];
         gesture.isCalibrationGesture = YES;
         NSLog(@"inserted 0 vector");
     }
     else
     {
-        [self.classifier appendFeatureSets:@[[gestureFeatureSets lastObject]]
+        [self.classifier appendFeatureSets:@[featureSet]
                                   forLabel:gesture.label];
         
     }
     
     self.trainedGesture = YES;
     
+}
+
+- (void)trainRecognizerWithGesture:(THGestureClassifier *)gesture
+{
+    NSLog(@"%s",__PRETTY_FUNCTION__);
+    for (THFeatureSet *featureSet in gesture.trainedFeatureSets)
+    {
+        [self trainRecognizerWithGesture:gesture
+                         addedFeatureSet:featureSet];
+    }
     
 }
 
@@ -152,33 +180,44 @@
                                            featureCount:&featureCount];
     
     
-
     [Helper scaleFeatures:features];
     short label = [self.classifier classifyInputVector:features
                                                 ignore:-1];
     
     
     NSLog(@"--------------- i think its label %i",label);
+    short recognizedLabel = 0;
     
-
-    
-    
-    int numPeaks = 0;
-    for (THGestureClassifier *oneGesture in self.registeredGestures)
+    if (label == 9999 && lastLabel != 9999)
     {
-        if(oneGesture.hasAlreadyBeenRecognized)
+        recognizedLabel  = lastLabel;
+    } else if(label < lastLabel && lastLabel != 9999)
+    {
+        recognizedLabel = lastLabel;
+        label = lastLabel;
+    }
+    
+    if(recognizedLabel != 0)
+    {
+        //recognized lastlabel
+        for (THGestureClassifier *oneGesture in self.registeredGestures)
         {
-            oneGesture.hasAlreadyBeenRecognized = NO;
-        }
-        else
-        {
-            if(oneGesture.numberOfTicksToDetect == numPeaks)
+            if(oneGesture.hasAlreadyBeenRecognized)
             {
-                oneGesture.hasAlreadyBeenRecognized = YES;
+                oneGesture.hasAlreadyBeenRecognized = NO;
+            }
+            else if (oneGesture.label == recognizedLabel)
+            {
                 [oneGesture recognized];
+            }
+            else
+            {
+                [oneGesture notRecognized];
             }
         }
     }
+    
+    lastLabel = label;
 }
 
 - (THFeatureSet *)featureSetFromSignals:(NSArray *)signals
@@ -236,41 +275,41 @@
 {
     NSLog(@"%s",__PRETTY_FUNCTION__);
     
-   
+    
     //MC_TODO:implement
     
     /*
-    self.halfWindowSize = [data count]/2;
-    
-    for (int i = 0; i < self.halfWindowSize*2; i++)
-    {
-        self.signalWindow[i] = [data[i] floatValue];
-    }
-    
-    
-    double features[8];
-    self.featureExtractor.peakDetectionTolerance = 30;
-    [self.featureExtractor computeAllFeaturesFromWindow:self.signalWindow
-                                                  count:self.halfWindowSize *2 / 3
-                                               features:features];
-    
-    double means =           features[0];
-    double magnitude =       features[1];
-    double deviations =      features[2];
-    double minMaxDiffs =     features[3];
-    double numPeaks =        features[4];
-    double correlations1 =   features[5];
-    double correlations2 =   features[6];
-    double correlations3 =   features[7];
-    
-    
-    
-    NSLog(@"---");
-    NSString *featuresInWindow = [NSString stringWithFormat:@"means: %.3f numPeaks: %.3f minmaxdiffs: %.3f  deviation: %.3f\n", means, numPeaks, minMaxDiffs, deviations];
-    NSLog(@"--- %@",featuresInWindow);
-    NSString *txt = [NSString stringWithFormat:@"%.3f,%.3f,%.3f,%.3f\n",means, numPeaks, minMaxDiffs, deviations];
-    
-    [self.history appendString:txt];
+     self.halfWindowSize = [data count]/2;
+     
+     for (int i = 0; i < self.halfWindowSize*2; i++)
+     {
+     self.signalWindow[i] = [data[i] floatValue];
+     }
+     
+     
+     double features[8];
+     self.featureExtractor.peakDetectionTolerance = 30;
+     [self.featureExtractor computeAllFeaturesFromWindow:self.signalWindow
+     count:self.halfWindowSize *2 / 3
+     features:features];
+     
+     double means =           features[0];
+     double magnitude =       features[1];
+     double deviations =      features[2];
+     double minMaxDiffs =     features[3];
+     double numPeaks =        features[4];
+     double correlations1 =   features[5];
+     double correlations2 =   features[6];
+     double correlations3 =   features[7];
+     
+     
+     
+     NSLog(@"---");
+     NSString *featuresInWindow = [NSString stringWithFormat:@"means: %.3f numPeaks: %.3f minmaxdiffs: %.3f  deviation: %.3f\n", means, numPeaks, minMaxDiffs, deviations];
+     NSLog(@"--- %@",featuresInWindow);
+     NSString *txt = [NSString stringWithFormat:@"%.3f,%.3f,%.3f,%.3f\n",means, numPeaks, minMaxDiffs, deviations];
+     
+     [self.history appendString:txt];
      */
 }
 

@@ -9,13 +9,36 @@
 #import "THMacbook.h"
 
 @implementation THMacbook
+
+
+
+//
+//- (void)load
+//{
+//    TFMethod *arrowRightMethod = [TFMethod methodWithName:@"arrowRight"];
+//    arrowRightMethod.numParams = 0;
+//    self.methods = [NSMutableArray arrayWithObject:arrowRightMethod];
+//}
+//
+
 - (void)load
 {
-    TFMethod *arrowRightMethod = [TFMethod methodWithName:@"arrowRight"];
-    arrowRightMethod.numParams = 0;
-    self.methods = [NSMutableArray arrayWithObject:arrowRightMethod];
+    TFMethod *sendCommandMethod = [TFMethod methodWithName:@"sendCommand"];
+    sendCommandMethod.numParams = 1;
+    sendCommandMethod.firstParamType = kDataTypeString;
+    
+    
+    self.methods = [NSMutableArray arrayWithObjects:sendCommandMethod, nil];
+
 }
 
+- (void)sendCommand:(NSString *)command
+{
+    
+    
+    
+    NSLog(@"sending Command::::::::::::::::: %@",command);
+}
 
 #pragma mark - Archiving
 

@@ -1281,6 +1281,26 @@
 		A3747F4218B697F300BAEAB7 /* palette_flexsensor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3747F4018B697F300BAEAB7 /* palette_flexsensor@2x.png */; };
 		A382F91E18B6428F000C1108 /* THFlexSensorPaletteItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A382F91D18B6428F000C1108 /* THFlexSensorPaletteItem.m */; };
 		A384F39819DDA23A003868F0 /* THFeatureSet.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B945EA19DD6FD400B39B5A /* THFeatureSet.m */; };
+		A386E96F19E1999B00C3D23C /* THProjectLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = A386E96E19E1999B00C3D23C /* THProjectLocation.m */; };
+		A386E97019E1999B00C3D23C /* THProjectLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = A386E96E19E1999B00C3D23C /* THProjectLocation.m */; };
+		A386E9AB19E19B7700C3D23C /* THGestureBLEConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = A386E9AA19E19B7700C3D23C /* THGestureBLEConnector.m */; };
+		A386E9AC19E19B7700C3D23C /* THGestureBLEConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = A386E9AA19E19B7700C3D23C /* THGestureBLEConnector.m */; };
+		A386E9AD19E19E7A00C3D23C /* libBLE.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAF283F182B88F000531E3A /* libBLE.a */; };
+		A386E9B219E19FD900C3D23C /* libFirmata.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1FBD6F187ED71900699B61 /* libFirmata.a */; };
+		A386E9B719E1AD1A00C3D23C /* macbook.png in Resources */ = {isa = PBXBuildFile; fileRef = A386E9B319E1AD1A00C3D23C /* macbook.png */; };
+		A386E9B819E1AD1A00C3D23C /* macbook.png in Resources */ = {isa = PBXBuildFile; fileRef = A386E9B319E1AD1A00C3D23C /* macbook.png */; };
+		A386E9B919E1AD1A00C3D23C /* macbook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A386E9B419E1AD1A00C3D23C /* macbook@2x.png */; };
+		A386E9BA19E1AD1A00C3D23C /* macbook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A386E9B419E1AD1A00C3D23C /* macbook@2x.png */; };
+		A386E9BB19E1AD1A00C3D23C /* palette_macbook.png in Resources */ = {isa = PBXBuildFile; fileRef = A386E9B519E1AD1A00C3D23C /* palette_macbook.png */; };
+		A386E9BC19E1AD1A00C3D23C /* palette_macbook.png in Resources */ = {isa = PBXBuildFile; fileRef = A386E9B519E1AD1A00C3D23C /* palette_macbook.png */; };
+		A386E9BD19E1AD1A00C3D23C /* palette_macbook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A386E9B619E1AD1A00C3D23C /* palette_macbook@2x.png */; };
+		A386E9BE19E1AD1A00C3D23C /* palette_macbook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A386E9B619E1AD1A00C3D23C /* palette_macbook@2x.png */; };
+		A386E9C219E1B1F900C3D23C /* THMacbookCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = A386E9C119E1B1F900C3D23C /* THMacbookCommand.m */; };
+		A386E9C319E1B1F900C3D23C /* THMacbookCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = A386E9C119E1B1F900C3D23C /* THMacbookCommand.m */; };
+		A386E9C619E1B20E00C3D23C /* THMacbookCommandEditable.m in Sources */ = {isa = PBXBuildFile; fileRef = A386E9C519E1B20E00C3D23C /* THMacbookCommandEditable.m */; };
+		A386E9CC19E1B25A00C3D23C /* THMacbookCommandProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A386E9CA19E1B25A00C3D23C /* THMacbookCommandProperties.m */; };
+		A386E9CD19E1B25A00C3D23C /* THMacbookCommandProperties.xib in Resources */ = {isa = PBXBuildFile; fileRef = A386E9CB19E1B25A00C3D23C /* THMacbookCommandProperties.xib */; };
+		A386E9D019E1B26F00C3D23C /* THMacbookCommandPaletteItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A386E9CF19E1B26F00C3D23C /* THMacbookCommandPaletteItem.m */; };
 		A39AEBE2191562E100F882A0 /* THSignalSourceGestureSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A39AEBE0191562E100F882A0 /* THSignalSourceGestureSetViewController.m */; };
 		A39AEBE3191562E100F882A0 /* THSignalSourceGestureSetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A39AEBE1191562E100F882A0 /* THSignalSourceGestureSetViewController.xib */; };
 		A39B4BCE18C7BF26004016B2 /* THSignalSourcePopoverContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A39B4BCC18C7BF26004016B2 /* THSignalSourcePopoverContentViewController.m */; };
@@ -1832,6 +1852,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 50CB2FC91004C8B100B7A750;
 			remoteInfo = CocosDenshion;
+		};
+		A386E9AE19E19F0200C3D23C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9AAF283A182B88EF00531E3A /* BLE.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 9A17359517B11D87001DD4A4;
+			remoteInfo = BLE;
+		};
+		A386E9B019E19FCB00C3D23C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A1FBD6A187ED71900699B61 /* Firmata.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 9A17359517B11D87001DD4A4;
+			remoteInfo = Firmata;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -2752,6 +2786,23 @@
 		A3747F4018B697F300BAEAB7 /* palette_flexsensor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "palette_flexsensor@2x.png"; sourceTree = "<group>"; };
 		A382F91C18B6428F000C1108 /* THFlexSensorPaletteItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THFlexSensorPaletteItem.h; sourceTree = "<group>"; };
 		A382F91D18B6428F000C1108 /* THFlexSensorPaletteItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THFlexSensorPaletteItem.m; sourceTree = "<group>"; };
+		A386E96D19E1999B00C3D23C /* THProjectLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THProjectLocation.h; path = TangoHapps/classes/THProjectLocation.h; sourceTree = SOURCE_ROOT; };
+		A386E96E19E1999B00C3D23C /* THProjectLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THProjectLocation.m; path = TangoHapps/classes/THProjectLocation.m; sourceTree = SOURCE_ROOT; };
+		A386E9A919E19B7700C3D23C /* THGestureBLEConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THGestureBLEConnector.h; path = TangoHapps/classes/gesturerecognition/THGestureBLEConnector.h; sourceTree = SOURCE_ROOT; };
+		A386E9AA19E19B7700C3D23C /* THGestureBLEConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THGestureBLEConnector.m; path = TangoHapps/classes/gesturerecognition/THGestureBLEConnector.m; sourceTree = SOURCE_ROOT; };
+		A386E9B319E1AD1A00C3D23C /* macbook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = macbook.png; sourceTree = "<group>"; };
+		A386E9B419E1AD1A00C3D23C /* macbook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "macbook@2x.png"; sourceTree = "<group>"; };
+		A386E9B519E1AD1A00C3D23C /* palette_macbook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = palette_macbook.png; sourceTree = "<group>"; };
+		A386E9B619E1AD1A00C3D23C /* palette_macbook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "palette_macbook@2x.png"; sourceTree = "<group>"; };
+		A386E9C019E1B1F900C3D23C /* THMacbookCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THMacbookCommand.h; sourceTree = "<group>"; };
+		A386E9C119E1B1F900C3D23C /* THMacbookCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THMacbookCommand.m; sourceTree = "<group>"; };
+		A386E9C419E1B20E00C3D23C /* THMacbookCommandEditable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THMacbookCommandEditable.h; sourceTree = "<group>"; };
+		A386E9C519E1B20E00C3D23C /* THMacbookCommandEditable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THMacbookCommandEditable.m; sourceTree = "<group>"; };
+		A386E9C919E1B25A00C3D23C /* THMacbookCommandProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THMacbookCommandProperties.h; sourceTree = "<group>"; };
+		A386E9CA19E1B25A00C3D23C /* THMacbookCommandProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THMacbookCommandProperties.m; sourceTree = "<group>"; };
+		A386E9CB19E1B25A00C3D23C /* THMacbookCommandProperties.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THMacbookCommandProperties.xib; sourceTree = "<group>"; };
+		A386E9CE19E1B26F00C3D23C /* THMacbookCommandPaletteItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THMacbookCommandPaletteItem.h; sourceTree = "<group>"; };
+		A386E9CF19E1B26F00C3D23C /* THMacbookCommandPaletteItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THMacbookCommandPaletteItem.m; sourceTree = "<group>"; };
 		A39AEBDF191562E100F882A0 /* THSignalSourceGestureSetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THSignalSourceGestureSetViewController.h; path = "TangoHapps/classes/palette properties/THSignalSourceGestureSetViewController.h"; sourceTree = SOURCE_ROOT; };
 		A39AEBE0191562E100F882A0 /* THSignalSourceGestureSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THSignalSourceGestureSetViewController.m; path = "TangoHapps/classes/palette properties/THSignalSourceGestureSetViewController.m"; sourceTree = SOURCE_ROOT; };
 		A39AEBE1191562E100F882A0 /* THSignalSourceGestureSetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = THSignalSourceGestureSetViewController.xib; path = "TangoHapps/classes/palette properties/THSignalSourceGestureSetViewController.xib"; sourceTree = SOURCE_ROOT; };
@@ -2842,6 +2893,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A386E9B219E19FD900C3D23C /* libFirmata.a in Frameworks */,
+				A386E9AD19E19E7A00C3D23C /* libBLE.a in Frameworks */,
 				A32B61A119D9F54B0083829E /* CFNetwork.framework in Frameworks */,
 				A3B048D3196FD5240028B800 /* Security.framework in Frameworks */,
 				9A9C425118B1F2BF002C2BC9 /* libpd-ios.a in Frameworks */,
@@ -3773,6 +3826,8 @@
 		9AF50205167B84B40020241C /* objects */ = {
 			isa = PBXGroup;
 			children = (
+				A386E96D19E1999B00C3D23C /* THProjectLocation.h */,
+				A386E96E19E1999B00C3D23C /* THProjectLocation.m */,
 				A39B4BC618C7BE53004016B2 /* gesture objects */,
 				9AF50206167B84B40020241C /* programming */,
 				9AF50264167B84B40020241C /* software */,
@@ -4265,6 +4320,10 @@
 		9AF502F7167B84B40020241C /* images */ = {
 			isa = PBXGroup;
 			children = (
+				A386E9B319E1AD1A00C3D23C /* macbook.png */,
+				A386E9B419E1AD1A00C3D23C /* macbook@2x.png */,
+				A386E9B519E1AD1A00C3D23C /* palette_macbook.png */,
+				A386E9B619E1AD1A00C3D23C /* palette_macbook@2x.png */,
 				9A4144A817DE7A060061EDF8 /* project */,
 				9A94F3E316A00EA400AF52AB /* selection */,
 				9A8BB909167C7D6400FBABFB /* properties */,
@@ -4428,6 +4487,38 @@
 			name = GestureSetTable;
 			sourceTree = "<group>";
 		};
+		A386E9BF19E1B1DD00C3D23C /* macbookCommand */ = {
+			isa = PBXGroup;
+			children = (
+				A386E9C819E1B21A00C3D23C /* ui */,
+				A386E9C719E1B21400C3D23C /* model */,
+			);
+			name = macbookCommand;
+			sourceTree = "<group>";
+		};
+		A386E9C719E1B21400C3D23C /* model */ = {
+			isa = PBXGroup;
+			children = (
+				A386E9C019E1B1F900C3D23C /* THMacbookCommand.h */,
+				A386E9C119E1B1F900C3D23C /* THMacbookCommand.m */,
+				A386E9C419E1B20E00C3D23C /* THMacbookCommandEditable.h */,
+				A386E9C519E1B20E00C3D23C /* THMacbookCommandEditable.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		A386E9C819E1B21A00C3D23C /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				A386E9C919E1B25A00C3D23C /* THMacbookCommandProperties.h */,
+				A386E9CA19E1B25A00C3D23C /* THMacbookCommandProperties.m */,
+				A386E9CB19E1B25A00C3D23C /* THMacbookCommandProperties.xib */,
+				A386E9CE19E1B26F00C3D23C /* THMacbookCommandPaletteItem.h */,
+				A386E9CF19E1B26F00C3D23C /* THMacbookCommandPaletteItem.m */,
+			);
+			name = ui;
+			sourceTree = "<group>";
+		};
 		A39B4BC518C7BDFB004016B2 /* signalSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -4441,6 +4532,7 @@
 		A39B4BC618C7BE53004016B2 /* gesture objects */ = {
 			isa = PBXGroup;
 			children = (
+				A386E9BF19E1B1DD00C3D23C /* macbookCommand */,
 				A3B048D7196FDC6B0028B800 /* macbook */,
 				A3C94A1618D244D30022C928 /* filter */,
 				A3C94A2F18D2695C0022C928 /* gesture classifier */,
@@ -4456,6 +4548,8 @@
 				A3CBF53F18BFFA1C00537127 /* THSignalSource.m */,
 				A3CBF54118BFFE3400537127 /* THSignalSourceEditable.h */,
 				A3CBF54218BFFE3400537127 /* THSignalSourceEditable.m */,
+				A386E9A919E19B7700C3D23C /* THGestureBLEConnector.h */,
+				A386E9AA19E19B7700C3D23C /* THGestureBLEConnector.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -4660,6 +4754,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				A386E9B119E19FCB00C3D23C /* PBXTargetDependency */,
+				A386E9AF19E19F0200C3D23C /* PBXTargetDependency */,
 				9A9C425018B1F2B9002C2BC9 /* PBXTargetDependency */,
 				9AFA65EA18296E000082990F /* PBXTargetDependency */,
 				9AFA65EC18296E000082990F /* PBXTargetDependency */,
@@ -5261,6 +5357,7 @@
 				9AF60BC616A04D9F00178439 /* THTabbar.xib in Resources */,
 				A3C94A2E18D2694E0022C928 /* palette_gesture@2x.png in Resources */,
 				9AF60BC816A04D9F00178439 /* THTabbarViewSection.xib in Resources */,
+				A386E9BD19E1AD1A00C3D23C /* palette_macbook@2x.png in Resources */,
 				9ABC279E1809B46C00B39D72 /* accelerometer@2x.png in Resources */,
 				9A5BD7411860C52E00842833 /* circleEmpty@2x.png in Resources */,
 				9A5F8D8D16A2C524000DF472 /* THContactBookProperties.xib in Resources */,
@@ -5280,6 +5377,7 @@
 				9A41453B17DE7A060061EDF8 /* add.png in Resources */,
 				9A41453D17DE7A060061EDF8 /* add@2x.png in Resources */,
 				A353ACCA196F1BAF007B49AE /* eye.txt in Resources */,
+				A386E9B719E1AD1A00C3D23C /* macbook.png in Resources */,
 				9A41453F17DE7A060061EDF8 /* backwards.png in Resources */,
 				9A41454117DE7A060061EDF8 /* backwards@2x.png in Resources */,
 				9A41454317DE7A060061EDF8 /* forward.png in Resources */,
@@ -5295,6 +5393,8 @@
 				9A41455117DE7A060061EDF8 /* accelerometerArrow@2x.png in Resources */,
 				9A41455317DE7A060061EDF8 /* accelerometerBall.png in Resources */,
 				9A41455517DE7A060061EDF8 /* button.png in Resources */,
+				A386E9CD19E1B25A00C3D23C /* THMacbookCommandProperties.xib in Resources */,
+				A386E9B919E1AD1A00C3D23C /* macbook@2x.png in Resources */,
 				9A41455717DE7A060061EDF8 /* button@2x.png in Resources */,
 				9A41455917DE7A060061EDF8 /* buzzer.png in Resources */,
 				9A41455B17DE7A060061EDF8 /* buzzer@2x.png in Resources */,
@@ -5492,6 +5592,7 @@
 				9AB7789D17E6C25700F82424 /* squareEmpty.png in Resources */,
 				9A6B285618AA08A0009AAE31 /* test.pd in Resources */,
 				9AB7789F17E6C25700F82424 /* squareFilled.png in Resources */,
+				A386E9BB19E1AD1A00C3D23C /* palette_macbook.png in Resources */,
 				9AB778A117E6C25700F82424 /* starEmpty.png in Resources */,
 				9ABC278E1809B2A500B39D72 /* palette_temperatureSensor.png in Resources */,
 				9AB778A317E6C25700F82424 /* starFilled.png in Resources */,
@@ -5804,6 +5905,8 @@
 				A3747F3D18B6978000BAEAB7 /* flexsensor.png in Resources */,
 				9AFB7E521833D89800694CCE /* threeColorLed.png in Resources */,
 				9A51101A1837DD5800EB25FA /* projectIcon@2x.png in Resources */,
+				A386E9BA19E1AD1A00C3D23C /* macbook@2x.png in Resources */,
+				A386E9B819E1AD1A00C3D23C /* macbook.png in Resources */,
 				9AF50032167B83140020241C /* iphoneFrame.png in Resources */,
 				9AF50033167B83140020241C /* iphoneFrame@2x.png in Resources */,
 				A3CBF55A18C007C500537127 /* palette_signalsource@2x.png in Resources */,
@@ -5813,8 +5916,10 @@
 				9A7E4D36183618C200657B72 /* LSMCompass@2x.png in Resources */,
 				9AFB7E421833D89800694CCE /* led.png in Resources */,
 				9A5D046E18844ADC006E9348 /* peer_disconnected.mp3 in Resources */,
+				A386E9BC19E1AD1A00C3D23C /* palette_macbook.png in Resources */,
 				9A51102D1839384200EB25FA /* backwards.png in Resources */,
 				A3CBF55918C007C500537127 /* palette_signalsource.png in Resources */,
+				A386E9BE19E1AD1A00C3D23C /* palette_macbook@2x.png in Resources */,
 				9A5110371839384200EB25FA /* musicPlay@2x.png in Resources */,
 				9AF50036167B83140020241C /* removeButton.png in Resources */,
 				9A84C1E61837820500848972 /* musicPlayer@2x.png in Resources */,
@@ -5943,6 +6048,7 @@
 				9AF503A0167B84B40020241C /* THView.m in Sources */,
 				9AF503A1167B84B40020241C /* THViewEditableObject.m in Sources */,
 				9AA4D74618AE17A400A43433 /* THBoardProperties.m in Sources */,
+				A386E96F19E1999B00C3D23C /* THProjectLocation.m in Sources */,
 				9ABC27B41809B57900B39D72 /* THAccelerometerEditable.m in Sources */,
 				9AF503A3167B84B40020241C /* THButtonPaletteItem.m in Sources */,
 				A3B945EB19DD6FD400B39B5A /* THFeatureSet.m in Sources */,
@@ -6011,6 +6117,7 @@
 				9ABC27B81809B6EC00B39D72 /* THAccelerometerPaletteItem.m in Sources */,
 				9AB29B46167F4DF800F5AF62 /* THImageViewEditable.m in Sources */,
 				A3AEF647191260100093E3CB /* FeatureExtractor.m in Sources */,
+				A386E9CC19E1B25A00C3D23C /* THMacbookCommandProperties.m in Sources */,
 				9AB29B4A167F4F2600F5AF62 /* THImageViewProperties.m in Sources */,
 				9AB29B59167F78C300F5AF62 /* THHelper.m in Sources */,
 				9A3165A1182795D000CB3E59 /* THMonitor.m in Sources */,
@@ -6020,6 +6127,7 @@
 				9AB29B6C167F82E900F5AF62 /* THMapperPaletteItem.m in Sources */,
 				9A6B27FA18AA075F009AAE31 /* THPureDataEditable.m in Sources */,
 				9AB29C00167F898B00F5AF62 /* THProgrammingElementEditable.m in Sources */,
+				A386E9AB19E19B7700C3D23C /* THGestureBLEConnector.m in Sources */,
 				9AD704AF18AA9E220080CD2E /* THGraphViewSegment.m in Sources */,
 				9AB29C03167F89B900F5AF62 /* THProgrammingElement.m in Sources */,
 				9A7DBF69169AC49900F86D71 /* THThreeColorLed.m in Sources */,
@@ -6071,6 +6179,7 @@
 				9A8572C1172AD7F500510D23 /* THAssetCollection.m in Sources */,
 				9A8426A617564A80009495AB /* TFConnectionLine.m in Sources */,
 				9A8426AC17564A80009495AB /* TFMethodSelectionPopup.m in Sources */,
+				A386E9C219E1B1F900C3D23C /* THMacbookCommand.m in Sources */,
 				A3BCF56F1966AEF300DBEA2F /* THGloveBLEConnector.m in Sources */,
 				9A8426B217564A80009495AB /* TFAction.m in Sources */,
 				9A8426B517564A80009495AB /* TFEvent.m in Sources */,
@@ -6097,6 +6206,7 @@
 				9A56CD4717D886A6001021B2 /* THBoolValueEditable.m in Sources */,
 				9A56CD4D17D88790001021B2 /* THBoolValueProperties.m in Sources */,
 				9A56CD5617D88A2C001021B2 /* THBoolValuePaletteItem.m in Sources */,
+				A386E9D019E1B26F00C3D23C /* THMacbookCommandPaletteItem.m in Sources */,
 				9A56CDAC17D8EDA2001021B2 /* THStringValue.m in Sources */,
 				9A56CDB117D8EE11001021B2 /* THStringValueEditable.m in Sources */,
 				9A56CDB717D8EF31001021B2 /* THStringValueProperties.m in Sources */,
@@ -6131,6 +6241,7 @@
 				A382F91E18B6428F000C1108 /* THFlexSensorPaletteItem.m in Sources */,
 				9A59324A17E5D58300B20D99 /* THPaletteItem.m in Sources */,
 				9A59324C17E5D58300B20D99 /* THPaletteViewController.m in Sources */,
+				A386E9C619E1B20E00C3D23C /* THMacbookCommandEditable.m in Sources */,
 				9A59324E17E5D58300B20D99 /* THPropertiesViewController.m in Sources */,
 				9AA4D73718AE171D00A43433 /* THLipoBatteryEditable.m in Sources */,
 				9A59325017E5D58300B20D99 /* THTabbarSection.m in Sources */,
@@ -6422,6 +6533,7 @@
 				9AF5002F167B83140020241C /* THClientConnectionController.m in Sources */,
 				9AF50447167B84C30020241C /* THProtocolSocket.m in Sources */,
 				9AF50448167B84C30020241C /* THTransferAgent.m in Sources */,
+				A386E97019E1999B00C3D23C /* THProjectLocation.m in Sources */,
 				9AA4D72F18AE16EE00A43433 /* THBLELilyPad.m in Sources */,
 				9AF50449167B84CE0020241C /* THComparisonCondition.m in Sources */,
 				9A1FBE09187F208400699B61 /* THI2CMessage.m in Sources */,
@@ -6449,6 +6561,7 @@
 				9A6B283318AA0768009AAE31 /* THPureData.m in Sources */,
 				9AF5045C167B850D0020241C /* THClientProject.m in Sources */,
 				9ABC276418098F2400B39D72 /* THSimpleLilypad.m in Sources */,
+				A386E9C319E1B1F900C3D23C /* THMacbookCommand.m in Sources */,
 				9ABC27801809AC7A00B39D72 /* THTemperatureSensor.m in Sources */,
 				9AF5045D167B850D0020241C /* THSimulableWorldController.m in Sources */,
 				9AF5045E167B852F0020241C /* THiPhone.m in Sources */,
@@ -6456,6 +6569,7 @@
 				9AF50460167B852F0020241C /* THiPhoneControl.m in Sources */,
 				9AFB7E6B1833DE6400694CCE /* THClientPresetsGenerator.m in Sources */,
 				9AF50461167B852F0020241C /* THiSwitch.m in Sources */,
+				A386E9AC19E19B7700C3D23C /* THGestureBLEConnector.m in Sources */,
 				9AF50462167B852F0020241C /* THLabel.m in Sources */,
 				9AF50463167B852F0020241C /* THMusicPlayer.m in Sources */,
 				9AFB7DC61832A91500694CCE /* THClientSceneSelectionViewController.m in Sources */,
@@ -6562,6 +6676,16 @@
 			name = CocosDenshion;
 			targetProxy = 9AFA65EB18296E000082990F /* PBXContainerItemProxy */;
 		};
+		A386E9AF19E19F0200C3D23C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = BLE;
+			targetProxy = A386E9AE19E19F0200C3D23C /* PBXContainerItemProxy */;
+		};
+		A386E9B119E19FCB00C3D23C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Firmata;
+			targetProxy = A386E9B019E19FCB00C3D23C /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -6656,6 +6780,11 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "TangoHapps/TangoHapps-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/Users/michaelconrads/dev/BA/code/Interactex/Frameworks/BLE/BLE/BLE,
+				);
 				INFOPLIST_FILE = "TangoHapps/TangoHapps-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "Interactex Designer";
@@ -6685,6 +6814,11 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "TangoHapps/TangoHapps-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/Users/michaelconrads/dev/BA/code/Interactex/Frameworks/BLE/BLE/BLE,
+				);
 				INFOPLIST_FILE = "TangoHapps/TangoHapps-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "Interactex Designer";
@@ -6739,6 +6873,11 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "TangoHapps/TangoHapps-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/Users/michaelconrads/dev/BA/code/Interactex/Frameworks/BLE/BLE/BLE,
+				);
 				INFOPLIST_FILE = "TangoHapps/TangoHapps-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "Interactex Designer";

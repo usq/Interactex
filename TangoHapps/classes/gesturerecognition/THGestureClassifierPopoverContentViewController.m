@@ -14,7 +14,7 @@
 #import "THSignalSource.h"
 #import "THGestureClassifierPopoverGraphView.h"
 
-
+#define VISIBLE_VALUES_MAX_COUNT 279.f
 
 @interface THGestureClassifierPopoverContentViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *okButton;
@@ -89,7 +89,7 @@ float constrain(float input, float min, float max)
     
     
     [self.visibleValues addObject:n];
-    while([self.visibleValues count] > 300)
+    while([self.visibleValues count] > VISIBLE_VALUES_MAX_COUNT)
     {
         [self.visibleValues removeLastObject];
     }
@@ -218,10 +218,12 @@ float constrain(float input, float min, float max)
 {
     if([self.visibleValues count] > 0)
     {
+        float visibleFactor = (float)[self.visibleValues count]/VISIBLE_VALUES_MAX_COUNT;
         
-        float leftIndex = 300 * self.leftPercentage;
-        float visibleFactor = (float)[self.visibleValues count]/300.f;
-        float rightIndex = fmaxf([self.visibleValues count]* fminf(self.rightPercentage/visibleFactor,1),01);
+        
+        float leftIndex = fmaxf([self.visibleValues count]* fminf(self.leftPercentage/visibleFactor,0.9),0.0);
+
+        float rightIndex = fmaxf([self.visibleValues count]* fminf(self.rightPercentage/visibleFactor,1),0.1);
         
         if(leftIndex > rightIndex)
         {

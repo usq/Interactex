@@ -25,6 +25,7 @@ extern NSString * kGestureClassifierShouldDeleteTraining;
 - (void)addSignal:(Signal)signal;
 - (void)finishedGesture:(NSArray *)gestureData;
 - (void)recognized;
-
+- (void)notRecognized;
+- (void)deregisterFromRecognizer;
 
 @end

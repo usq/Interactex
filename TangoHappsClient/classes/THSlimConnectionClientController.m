@@ -86,9 +86,21 @@
         case GKPeerStateConnected:
         {
             
-            [[BLEDiscovery sharedInstance] disconnectCurrentPeripheral];
+            if([BLEDiscovery sharedInstance].currentPeripheral.state == CBPeripheralStateConnected)
+            {
+                NSLog(@"---%@",[BLEDiscovery sharedInstance].connectedService);
+            }
+            else if([[BLEDiscovery sharedInstance].foundPeripherals count] == 1)
+            {
+                [[BLEDiscovery sharedInstance] connectPeripheral:[[BLEDiscovery sharedInstance].foundPeripherals firstObject]];
+            }
+            else
+            {
+                [[BLEDiscovery sharedInstance] startScanningForUUIDString:@"713d0000-503e-4c75-ba94-3148f18d941e"];
+            }
+//            [[BLEDiscovery sharedInstance] disconnectCurrentPeripheral];
             NSLog(@"connected gamekit session, scanning for ble...");
-            [[BLEDiscovery sharedInstance] startScanningForUUIDString:@"713d0000-503e-4c75-ba94-3148f18d941e"];
+  
             self.connectedPeer = peerID;
             self.sessionReady = YES;
             
@@ -96,6 +108,7 @@
             break;
             
         default:
+            NSLog(@"--- session changed state to %i",state); //1 == GKPeerStateUnavailable
             self.sessionReady = NO;
             break;
     }
@@ -113,6 +126,7 @@ didFailWithError:(NSError *)error
 - (void)discoveryDidRefresh
 {
     NSLog(@"%s",__PRETTY_FUNCTION__);
+//   NSLog(@"%@",[[BLEDiscovery sharedInstance] connectedService]);
 }
 
 - (void)bleServiceDidDisconnect:(BLEService *)service
@@ -120,7 +134,7 @@ didFailWithError:(NSError *)error
     NSLog(@"%s",__PRETTY_FUNCTION__);
     if(self.shouldConnect)
     {
-        [[BLEDiscovery sharedInstance] startScanningForSupportedUUIDs];
+        //[[BLEDiscovery sharedInstance] startScanningForSupportedUUIDs];
     }
 }
 
@@ -166,6 +180,7 @@ didFailWithError:(NSError *)error
     }
     else
     {
+        [[BLEDiscovery sharedInstance] disconnectCurrentPeripheral];
         NSLog(@"gksession not connected");
     }
 }

@@ -12,7 +12,7 @@
 #import "THSignalSource.h"
 #import "THFeatureSet.h"
 
-#define HALF_WINDOW_SIZE_DEFAULT 20
+#define HALF_WINDOW_SIZE_DEFAULT 40
 
 @interface THGestureRecognizer : NSObject
 @property (nonatomic, assign, readwrite) NSUInteger halfWindowSize;
@@ -20,14 +20,15 @@
 + (instancetype)sharedRecognizer;
 
 //this one is fishy
-- (BOOL)registerGesture:(THGestureClassifier *)gesture;
+- (short)registerGesture:(THGestureClassifier *)gesture;
+- (void)deregisterGesture:(THGestureClassifier *)gesture;
+
+- (void)trainRecognizerWithGesture:(THGestureClassifier *)gesture
+                   addedFeatureSet:(THFeatureSet *)featureSet;
 - (void)trainRecognizerWithGesture:(THGestureClassifier *)gesture;
-//- (void)updateFeatureSetForGesture:(THGestureClassifier *)gesture;
 
 - (void)observeSignal:(Signal)signal;
 - (void)printFeaturesForWindow:(NSArray *)data;
-//- (NSUInteger)peaksInWindow:(NSArray *)data;
-//- (void)retrainWithTrainingsSets:(NSArray *)trainings;
 
 - (THFeatureSet *)featureSetFromSignals:(NSArray *)signals
                                    name:(NSString *)name;

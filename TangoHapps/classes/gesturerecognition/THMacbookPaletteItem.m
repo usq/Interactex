@@ -7,7 +7,17 @@
 //
 
 #import "THMacbookPaletteItem.h"
+#import "THMacbookEditable.h"
 
 @implementation THMacbookPaletteItem
+- (void)dropAt:(CGPoint)location
+{
+    THMacbookEditable *editable = [[THMacbookEditable alloc] init];
+    editable.position = location;
+    
+    THProject *project = [THDirector sharedDirector].currentProject;
+    
+    [project addValue:editable];
+}
 
 @end
