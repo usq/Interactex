@@ -13,7 +13,7 @@
 - (void)load
 {
     
-    self.sprite = [CCSprite spriteWithFile:@"macbook.png"];
+    self.sprite = [CCSprite spriteWithFile:@"macbookCommand.png"];
     [self addChild:self.sprite];
     
     self.acceptsConnections = YES;

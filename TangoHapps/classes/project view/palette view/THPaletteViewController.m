@@ -456,7 +456,7 @@ You should have received a copy of the GNU General Public License along with thi
                                      [[THGestureClassifierPaletteItem alloc] initWithName:@"gesture"],
                                      
                                      [[THMacbookPaletteItem alloc] initWithName:@"macbook"],
-                                     [[THMacbookCommandPaletteItem alloc] initWithName:@"macbook"],
+                                     [[THMacbookCommandPaletteItem alloc] initWithName:@"macbookCommand"],
                                      
                                      nil];
     

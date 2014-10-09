@@ -1273,6 +1273,10 @@
 		A33442BD18B6280100AFB366 /* THFlexSensor.m in Sources */ = {isa = PBXBuildFile; fileRef = A33442BC18B6280100AFB366 /* THFlexSensor.m */; };
 		A33442C018B6355200AFB366 /* THFlexSensorEditable.m in Sources */ = {isa = PBXBuildFile; fileRef = A33442BF18B6355200AFB366 /* THFlexSensorEditable.m */; };
 		A353ACCA196F1BAF007B49AE /* eye.txt in Resources */ = {isa = PBXBuildFile; fileRef = A353ACC9196F1BAF007B49AE /* eye.txt */; };
+		A36BD4EA19E29353005E2C2E /* macbookCommand.png in Resources */ = {isa = PBXBuildFile; fileRef = A36BD4E619E29353005E2C2E /* macbookCommand.png */; };
+		A36BD4EB19E29353005E2C2E /* macbookCommand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A36BD4E719E29353005E2C2E /* macbookCommand@2x.png */; };
+		A36BD4EC19E29353005E2C2E /* palette_macbookCommand.png in Resources */ = {isa = PBXBuildFile; fileRef = A36BD4E819E29353005E2C2E /* palette_macbookCommand.png */; };
+		A36BD4ED19E29353005E2C2E /* palette_macbookCommand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A36BD4E919E29353005E2C2E /* palette_macbookCommand@2x.png */; };
 		A3747F3918B6976C00BAEAB7 /* flexsensor.png in Resources */ = {isa = PBXBuildFile; fileRef = A3747F3718B6976C00BAEAB7 /* flexsensor.png */; };
 		A3747F3A18B6976C00BAEAB7 /* flexsensor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3747F3818B6976C00BAEAB7 /* flexsensor@2x.png */; };
 		A3747F3D18B6978000BAEAB7 /* flexsensor.png in Resources */ = {isa = PBXBuildFile; fileRef = A3747F3B18B6978000BAEAB7 /* flexsensor.png */; };
@@ -2778,6 +2782,10 @@
 		A33442BE18B6355200AFB366 /* THFlexSensorEditable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THFlexSensorEditable.h; sourceTree = "<group>"; };
 		A33442BF18B6355200AFB366 /* THFlexSensorEditable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THFlexSensorEditable.m; sourceTree = "<group>"; };
 		A353ACC9196F1BAF007B49AE /* eye.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = eye.txt; sourceTree = "<group>"; };
+		A36BD4E619E29353005E2C2E /* macbookCommand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = macbookCommand.png; sourceTree = "<group>"; };
+		A36BD4E719E29353005E2C2E /* macbookCommand@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "macbookCommand@2x.png"; sourceTree = "<group>"; };
+		A36BD4E819E29353005E2C2E /* palette_macbookCommand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = palette_macbookCommand.png; sourceTree = "<group>"; };
+		A36BD4E919E29353005E2C2E /* palette_macbookCommand@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "palette_macbookCommand@2x.png"; sourceTree = "<group>"; };
 		A3747F3718B6976C00BAEAB7 /* flexsensor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flexsensor.png; sourceTree = "<group>"; };
 		A3747F3818B6976C00BAEAB7 /* flexsensor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flexsensor@2x.png"; sourceTree = "<group>"; };
 		A3747F3B18B6978000BAEAB7 /* flexsensor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flexsensor.png; sourceTree = "<group>"; };
@@ -4320,6 +4328,10 @@
 		9AF502F7167B84B40020241C /* images */ = {
 			isa = PBXGroup;
 			children = (
+				A36BD4E619E29353005E2C2E /* macbookCommand.png */,
+				A36BD4E719E29353005E2C2E /* macbookCommand@2x.png */,
+				A36BD4E819E29353005E2C2E /* palette_macbookCommand.png */,
+				A36BD4E919E29353005E2C2E /* palette_macbookCommand@2x.png */,
 				A386E9B319E1AD1A00C3D23C /* macbook.png */,
 				A386E9B419E1AD1A00C3D23C /* macbook@2x.png */,
 				A386E9B519E1AD1A00C3D23C /* palette_macbook.png */,
@@ -5343,7 +5355,9 @@
 				9AA4D6E918AE169100A43433 /* BLE-LilyPad.png in Resources */,
 				9A94F42C16A0192700AF52AB /* THLedProperties.xib in Resources */,
 				9A8942AD1836241C00B8CA0E /* jennic.png in Resources */,
+				A36BD4EB19E29353005E2C2E /* macbookCommand@2x.png in Resources */,
 				9A3165A91827989D00CB3E59 /* palette_monitor@2x.png in Resources */,
+				A36BD4EC19E29353005E2C2E /* palette_macbookCommand.png in Resources */,
 				9A94F43016A0192700AF52AB /* THMapperProperties.xib in Resources */,
 				9A94F43216A0192700AF52AB /* THMusicPlayerProperties.xib in Resources */,
 				9A94F43416A0192700AF52AB /* THPotentiometerProperties.xib in Resources */,
@@ -5431,6 +5445,7 @@
 				9A41459317DE7A060061EDF8 /* mapper.png in Resources */,
 				9A41459517DE7A060061EDF8 /* mapper@2x.png in Resources */,
 				9A41459717DE7A060061EDF8 /* music.png in Resources */,
+				A36BD4ED19E29353005E2C2E /* palette_macbookCommand@2x.png in Resources */,
 				9A41459917DE7A060061EDF8 /* music@2x.png in Resources */,
 				9A41459B17DE7A060061EDF8 /* palette_boolean.png in Resources */,
 				9A41459D17DE7A060061EDF8 /* palette_boolean@2x.png in Resources */,
@@ -5559,6 +5574,7 @@
 				9A8942AB1836241C00B8CA0E /* palette_jennic@2x.png in Resources */,
 				9A41464517DE7A060061EDF8 /* editormode@2x.png in Resources */,
 				9AA4D6EE18AE169100A43433 /* palette_BLE-LilyPad@2x.png in Resources */,
+				A36BD4EA19E29353005E2C2E /* macbookCommand.png in Resources */,
 				9A41464717DE7A060061EDF8 /* hideiphone.png in Resources */,
 				9AA4D74E18AE17F900A43433 /* THSimpleLilypadProperties.xib in Resources */,
 				9A41464917DE7A060061EDF8 /* hideiphone@2x.png in Resources */,

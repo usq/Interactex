@@ -195,6 +195,7 @@ short lastLabel = 9999;
     {
         recognizedLabel = lastLabel;
         label = lastLabel;
+        
     }
     
     if(recognizedLabel != 0)
@@ -202,11 +203,7 @@ short lastLabel = 9999;
         //recognized lastlabel
         for (THGestureClassifier *oneGesture in self.registeredGestures)
         {
-            if(oneGesture.hasAlreadyBeenRecognized)
-            {
-                oneGesture.hasAlreadyBeenRecognized = NO;
-            }
-            else if (oneGesture.label == recognizedLabel)
+            if(oneGesture.hasAlreadyBeenRecognized == NO && oneGesture.label == recognizedLabel)
             {
                 [oneGesture recognized];
             }
@@ -216,6 +213,18 @@ short lastLabel = 9999;
             }
         }
     }
+    
+  if(label == 9999)
+  {
+      for (THGestureClassifier *oneGesture in self.registeredGestures)
+      {
+          if(oneGesture.hasAlreadyBeenRecognized)
+          {
+              
+              oneGesture.hasAlreadyBeenRecognized = NO;
+          }
+      }
+  }
     
     lastLabel = label;
 }

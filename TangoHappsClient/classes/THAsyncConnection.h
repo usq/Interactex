@@ -11,4 +11,5 @@
 @interface THAsyncConnection : NSObject
 + (instancetype)sharedConnection;
 - (IBAction)nextSlide:(id)sender;
+- (void)sendCommand:(NSString *)command;
 @end

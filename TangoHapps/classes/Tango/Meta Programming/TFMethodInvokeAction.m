@@ -103,7 +103,10 @@ You should have received a copy of the GNU General Public License along with thi
     SEL selector = NSSelectorFromString(self.method.signature);
     
     NSMethodSignature *signature = [self.target methodSignatureForSelector:selector];
-    
+    if(signature == nil)
+    {
+        return;
+    }
     NSAssert(signature != nil, @"signature not found for method %@ on target %@",self.method,self.target);
     
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];

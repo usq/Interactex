@@ -9,7 +9,7 @@
 #import "THGestureClassifier.h"
 #import "THGestureRecognizer.h"
 #import "THSignalSource.h"
-#import "THAsyncConnection.h"
+
 #import "THProjectLocation.h"
 
 NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDeleteTraining";
@@ -23,7 +23,7 @@ NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDe
 @property (nonatomic, strong, readwrite) THGestureRecognizer *recognizer;
 @property (nonatomic, assign, readwrite) BOOL *relaysInput;
 @property (nonatomic, strong, readwrite) NSArray *recordedValues;
-@property (nonatomic, strong, readwrite) THAsyncConnection *connection;
+
 
 @property (nonatomic, strong, readwrite) NSMutableArray *trainedFeatureSets;
 @property (nonatomic, assign, readwrite) short label;
@@ -57,7 +57,7 @@ NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDe
     
     self.recognizer = [THGestureRecognizer sharedRecognizer];
     self.index = 0;
-    self.connection = [THAsyncConnection sharedConnection];
+
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -99,6 +99,8 @@ NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDe
 - (void)prepareToDie
 {
     [[THGestureRecognizer sharedRecognizer] deregisterGesture:self];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -113,7 +115,7 @@ NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDe
 //    [self triggerEvent:recognizedEvent];
 //    [[NSNotificationCenter defaultCenter] postNotificationName:event.name  object:self];
 //    [self triggerEventNamed:<#(NSString *)#>]
-//    [self.connection nextSlide:nil];
+
 }
 
 - (void)notRecognized

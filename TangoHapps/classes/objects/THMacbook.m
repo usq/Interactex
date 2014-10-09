@@ -7,6 +7,11 @@
 //
 
 #import "THMacbook.h"
+#import "THAsyncConnection.h"
+
+@interface THMacbook ()
+@property (nonatomic, strong, readwrite) THAsyncConnection *connection;
+@end
 
 @implementation THMacbook
 
@@ -29,13 +34,16 @@
     
     
     self.methods = [NSMutableArray arrayWithObjects:sendCommandMethod, nil];
+    
+    
+    self.connection = [THAsyncConnection sharedConnection];
 
 }
 
 - (void)sendCommand:(NSString *)command
 {
     
-    
+    [self.connection sendCommand:command];
     
     NSLog(@"sending Command::::::::::::::::: %@",command);
 }

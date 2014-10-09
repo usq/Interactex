@@ -11,7 +11,7 @@
 
 typedef struct
 {
-    uint8_t opcode;
+    uint16_t length;
 } Controll_MSG;
 
 @interface THAsyncConnection ()<GCDAsyncSocketDelegate>
@@ -43,7 +43,7 @@ typedef struct
     self.socket = [[GCDAsyncSocket alloc] initWithDelegate:self
                                              delegateQueue:dispatch_get_main_queue()];
     NSError *error;
-    BOOL success = [self.socket connectToHost:@"192.168.42.1"
+    BOOL success = [self.socket connectToHost:@"192.168.178.64"
                                        onPort:1234
                                         error:&error];
     
@@ -72,6 +72,28 @@ didConnectToHost:(NSString *)host
     NSLog(@"connected to host: %@",host);
     
 }
+
+- (void)sendCommand:(NSString *)command
+{
+    //NSArray *components = [command componentsSeparatedByString:@"#-#"];
+    NSData *d = [command dataUsingEncoding:NSUTF8StringEncoding];
+    Controll_MSG msg = {};
+    msg.length = d.length;
+    
+    NSData *msgData = [NSData dataWithBytes:&msg
+                                     length:sizeof(Controll_MSG)];
+    [self.socket writeData:msgData
+               withTimeout:-1
+                       tag:42];
+    
+    
+
+    
+    [self.socket writeData:d
+               withTimeout:-1
+                       tag:43];
+}
+
 - (IBAction)startPres:(id)sender {
     [self writeOpcode:1];
 }
@@ -85,14 +107,14 @@ didConnectToHost:(NSString *)host
 
 - (void)writeOpcode:(uint8_t)opcode
 {
-    Controll_MSG msg;
-    msg.opcode = opcode;
-    NSData *d = [[NSData alloc] initWithBytes:&msg
-                                       length:sizeof(Controll_MSG)];
-    [self.socket writeData:d
-               withTimeout:-1
-                       tag:42];
-    
+//    Controll_MSG msg;
+////    msg.opcode = opcode;
+//    NSData *d = [[NSData alloc] initWithBytes:&msg
+//                                       length:sizeof(Controll_MSG)];
+//    [self.socket writeData:d
+//               withTimeout:-1
+//                       tag:42];
+//    
 }
 
 @end
