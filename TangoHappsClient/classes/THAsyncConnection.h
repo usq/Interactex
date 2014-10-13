@@ -12,4 +12,6 @@
 + (instancetype)sharedConnection;
 - (IBAction)nextSlide:(id)sender;
 - (void)sendCommand:(NSString *)command;
+- (void)connectToHost:(NSString *)hostAddress;
+- (void)disconnect;
 @end

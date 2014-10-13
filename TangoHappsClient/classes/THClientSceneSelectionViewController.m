@@ -53,7 +53,14 @@ You should have received a copy of the GNU General Public License along with thi
 #import "THClientScene.h"
 #import "THSlimConnectionClientController.h"
 
+
+@interface THClientSceneSelectionViewController ()
+@property (nonatomic, strong, readwrite) THSlimConnectionClientController *slimConnectionController;
+@end
+
 @implementation THClientSceneSelectionViewController
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -73,6 +80,7 @@ You should have received a copy of the GNU General Public License along with thi
     
     self.navigationItem.leftBarButtonItem = self.editButton;
     
+    self.slimConnectionController = [[THSlimConnectionClientController alloc] init];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -84,6 +92,7 @@ You should have received a copy of the GNU General Public License along with thi
     [self.tableView reloadData];
     
     [self updateEditButtonEnabledState];
+    [self.slimConnectionController startConnection];
 }
 
 - (void)didReceiveMemoryWarning

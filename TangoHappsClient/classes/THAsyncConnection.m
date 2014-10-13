@@ -23,7 +23,6 @@ typedef struct
     self = [super init];
     if (self)
     {
-        [self connect];
 
     }
     return self;
@@ -35,15 +34,17 @@ typedef struct
     dispatch_once(&onceToken, ^{
         instance = [[self alloc] init];
     });
+    
     return instance;
 }
-- (void)connect
+//@"192.168.178.64"
+- (void)connectToHost:(NSString *)hostAddress
 {
     NSLog(@"connecting to presentation server....");
     self.socket = [[GCDAsyncSocket alloc] initWithDelegate:self
                                              delegateQueue:dispatch_get_main_queue()];
     NSError *error;
-    BOOL success = [self.socket connectToHost:@"192.168.178.64"
+    BOOL success = [self.socket connectToHost:hostAddress
                                        onPort:1234
                                         error:&error];
     
@@ -92,6 +93,15 @@ didConnectToHost:(NSString *)host
     [self.socket writeData:d
                withTimeout:-1
                        tag:43];
+}
+
+- (void)disconnect
+{
+    if(self.socket)
+    {
+        [self.socket disconnect];
+        self.socket = nil;
+    }
 }
 
 - (IBAction)startPres:(id)sender {

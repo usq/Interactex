@@ -37,7 +37,6 @@
     
     
     self.connection = [THAsyncConnection sharedConnection];
-
 }
 
 - (void)sendCommand:(NSString *)command
@@ -46,6 +45,12 @@
     [self.connection sendCommand:command];
     
     NSLog(@"sending Command::::::::::::::::: %@",command);
+}
+
+- (void)setHostAddress:(NSString *)hostAddress
+{
+    _hostAddress = hostAddress;
+    [self.connection connectToHost:self.hostAddress];
 }
 
 #pragma mark - Archiving
@@ -63,6 +68,7 @@
 - (id)initWithCoder:(NSCoder *)decoder
 {
     self = [super initWithCoder:decoder];
+    _hostAddress = [decoder decodeObjectForKey:@"hostAddress"];
     [self load];
     return self;
 }
@@ -70,11 +76,14 @@
 - (void)encodeWithCoder:(NSCoder *)coder
 {
     [super encodeWithCoder:coder];
+    [coder encodeObject:self.hostAddress
+                 forKey:@"hostAddress"];
 }
 
 -(id)copyWithZone:(NSZone *)zone
 {
     THMacbook *copy = [super copyWithZone:zone];
+    copy.hostAddress = [self.hostAddress copy];
     return copy;
 }
 

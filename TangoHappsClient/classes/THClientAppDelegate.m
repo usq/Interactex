@@ -48,7 +48,7 @@ You should have received a copy of the GNU General Public License along with thi
 #import "THProjectLocation.h"
 
 @interface THClientAppDelegate ()
-@property (nonatomic, strong, readwrite) THSlimConnectionClientController *slimConnectionController;
+
 @end
 @implementation THClientAppDelegate
 
@@ -69,8 +69,7 @@ You should have received a copy of the GNU General Public License along with thi
     }
     
     self.connectionController = [[THClientConnectionController alloc] init];
-    self.slimConnectionController = [[THSlimConnectionClientController alloc] init];
-    [self.slimConnectionController startConnection];
+  
     
     //[self generateRandomScenes];
     

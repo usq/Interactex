@@ -123,6 +123,7 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
     }
 }
 
+
 - (void)updateIndizes
 {
     self.leftIndex = floor((float)([self.data count] -1) * self.leftBorderPercentage) - 1;

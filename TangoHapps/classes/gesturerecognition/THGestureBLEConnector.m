@@ -12,6 +12,7 @@
 
 @interface THGestureBLEConnector ()<BLEDiscoveryDelegate, BLEServiceDelegate, BLEServiceDataDelegate>
 @property (nonatomic, weak, readwrite) THSignalSource *registeredSignalSource;
+@property (nonatomic, assign, readwrite) BOOL scanning;
 @end
 
 @implementation THGestureBLEConnector
@@ -21,6 +22,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [[THGestureBLEConnector alloc] init];
+        instance.scanning = NO;
     });
     return instance;
 }
@@ -40,11 +42,16 @@
 
 - (void)start
 {
-    [BLEDiscovery sharedInstance].discoveryDelegate = self;
-    [BLEDiscovery sharedInstance].peripheralDelegate = self;
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-    [[BLEDiscovery sharedInstance] startScanningForUUIDString:@"713d0000-503e-4c75-ba94-3148f18d941e"];
-}
+    if(self.scanning == NO || [BLEDiscovery sharedInstance].discoveryDelegate != self)
+    {
+        
+        [[BLEDiscovery sharedInstance] stopScanning];
+        //[[BLEDiscovery sharedInstance] disconnectCurrentPeripheral];
+        [BLEDiscovery sharedInstance].discoveryDelegate = self;
+        [BLEDiscovery sharedInstance].peripheralDelegate = self;
+        [[BLEDiscovery sharedInstance] startScanningForUUIDString:@"713d0000-503e-4c75-ba94-3148f18d941e"];
+        self.scanning = YES;
+    }}
 
 - (void)discoveryDidRefresh
 {
@@ -53,6 +60,7 @@
 
 - (void)bleServiceDidConnect:(BLEService *)service
 {
+    self.scanning = NO;
     NSLog(@"%s",__PRETTY_FUNCTION__);
     service.delegate = self;
     service.shouldUseCRC = NO;
@@ -71,6 +79,7 @@
 
 - (void)peripheralDiscovered:(CBPeripheral *)peripheral
 {
+
     [[BLEDiscovery sharedInstance] connectPeripheral:peripheral];
 }
 

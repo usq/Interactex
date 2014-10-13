@@ -10,7 +10,7 @@
 #import "Classifier.h"
 #import "FeatureExtractor.h"
 #import "Helper.h"
-
+#import "THGestureBLEConnector.h"
 
 @interface THGestureRecognizer ()
 @property (nonatomic, assign, readwrite) Signal *signalWindow;
@@ -25,6 +25,7 @@
 
 @property (nonatomic, assign, readwrite) BOOL trainedGesture;
 @end
+
 short lastLabel = 9999;
 @implementation THGestureRecognizer
 
@@ -59,6 +60,8 @@ short lastLabel = 9999;
 
 - (short)registerGesture:(THGestureClassifier *)gesture
 {
+
+    [[THGestureBLEConnector sharedConnector] start];
     NSLog(@"%s",__PRETTY_FUNCTION__);
     short label = gesture.label;
     if([self.registeredGestures containsObject:gesture] == NO)
@@ -79,11 +82,6 @@ short lastLabel = 9999;
     if([self.registeredGestures containsObject:gesture])
     {
         [self.registeredGestures removeObject:gesture];
-        if(gesture.isCalibrationGesture)
-        {
-            [self.classifier removeValuesWithLabel:9999];
-            self.trainedGesture = NO;
-        }
         [self.classifier removeValuesWithLabel:gesture.label];
     }
 }
@@ -138,22 +136,20 @@ short lastLabel = 9999;
 {
     //    NSArray *gestureFeatureSets = gesture.trainedFeatureSets;
     
-    if(self.trainedGesture == NO)
+    if([self.classifier has0Gesture] == NO)
     {
-        
-        [self.classifier appendFeatureSets:@[featureSet]
+        THFeatureSet *f = [[THFeatureSet alloc] initWithFeatures:@[@(0),@(0),@(0),@(0),@(0)]
+                                                            name:@"Non-Gesture"];
+        [self.classifier appendFeatureSets:@[f]
                                   forLabel:9999];
         gesture.isCalibrationGesture = YES;
         NSLog(@"inserted 0 vector");
     }
-    else
-    {
-        [self.classifier appendFeatureSets:@[featureSet]
-                                  forLabel:gesture.label];
-        
-    }
-    
     self.trainedGesture = YES;
+    [self.classifier appendFeatureSets:@[featureSet]
+                              forLabel:gesture.label];
+    
+    
     
 }
 

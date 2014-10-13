@@ -8,8 +8,10 @@
 
 #import "THMacbookProperties.h"
 #import "THMacbookEditable.h"
+#import "THMacbook.h"
 
-@interface THMacbookProperties ()
+@interface THMacbookProperties ()<UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *ipTextField;
 
 @end
 
@@ -20,6 +22,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
+        
     }
     return self;
 }
@@ -27,19 +30,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-//    THMacbookEditable *editable = (THMacbookEditable *)self.editableObject;
-//    [self.slider setValue:editable.halfWindowSize];
-//    self.windowLabel.text = [NSString stringWithFormat:@"%i",editable.halfWindowSize];
-    
-    //    [self.tickControll setSelectedSegmentIndex:fmax(editable.numberOfTicksToDetect-1,0)];
-    // Do any additional setup after loading the view.
+    THMacbookEditable *editable = (THMacbookEditable *)self.editableObject;
+    self.ipTextField.text = ((THMacbook *)editable.simulableObject).hostAddress;
 }
 
-- (void)didReceiveMemoryWarning
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    NSURL *url = [NSURL URLWithString:textField.text];
+    if(url)
+    {
+        THMacbookEditable *editable = (THMacbookEditable *)self.editableObject;
+        ((THMacbook *)editable.simulableObject).hostAddress = textField.text;
+    }
+    return YES;
 }
 
 @end

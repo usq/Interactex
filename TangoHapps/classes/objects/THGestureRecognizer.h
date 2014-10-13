@@ -12,7 +12,7 @@
 #import "THSignalSource.h"
 #import "THFeatureSet.h"
 
-#define HALF_WINDOW_SIZE_DEFAULT 40
+#define HALF_WINDOW_SIZE_DEFAULT 30
 
 @interface THGestureRecognizer : NSObject
 @property (nonatomic, assign, readwrite) NSUInteger halfWindowSize;

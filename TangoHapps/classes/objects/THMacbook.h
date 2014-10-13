@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface THMacbook : TFSimulableObject
-
+@property (nonatomic, copy, readwrite) NSString *hostAddress;
 @end

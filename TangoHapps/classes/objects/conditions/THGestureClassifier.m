@@ -181,7 +181,7 @@ NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDe
     self.recognizer.halfWindowSize = [decoder decodeIntForKey:@"halfWindowSize"];
     self.trainedFeatureSets = [decoder decodeObjectForKey:@"trainedFeatureSets"];
     self.label = [[decoder decodeObjectForKey:@"label"] shortValue];
-    NSLog(@"initialized gesture with label: %i",self.label);
+
     if(self.recognizer.halfWindowSize == 0)
     {
         self.recognizer.halfWindowSize = HALF_WINDOW_SIZE_DEFAULT;

@@ -234,8 +234,11 @@ static BLEDiscovery * sharedInstance;
 		{
             [self clearDevices];
             [self.discoveryDelegate discoveryDidRefresh];
-            
-            [self.discoveryDelegate discoveryStatePoweredOff];
+            if([self.discoveryDelegate respondsToSelector:@selector(discoveryStatePoweredOff)])
+            {
+            [self.discoveryDelegate discoveryStatePoweredOff];                
+            }
+
 			break;
 		}
             
@@ -268,5 +271,18 @@ static BLEDiscovery * sharedInstance;
 	}
     
     previousState = [centralManager state];
+}
+
+
+- (void)setPeripheralDelegate:(id<BLEServiceDelegate>)peripheralDelegate
+{
+ //   NSLog(@"---- setting peripheral Delegate to: %@",peripheralDelegate);
+    _peripheralDelegate = peripheralDelegate;
+}
+
+- (void)setDiscoveryDelegate:(id<BLEDiscoveryDelegate>)discoveryDelegate
+{
+//    NSLog(@"---- setting discovery Delegate to: %@",discoveryDelegate);
+    _discoveryDelegate = discoveryDelegate;
 }
 @end

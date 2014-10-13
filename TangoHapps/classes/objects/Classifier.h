@@ -42,5 +42,5 @@
 - (void)removeValuesWithLabel:(short)label;
 - (void)removeValuesForLabel:(short)labelToDelete
                      atIndex:(int)index;
-
+- (BOOL)has0Gesture;
 @end

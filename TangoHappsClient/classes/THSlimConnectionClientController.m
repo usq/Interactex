@@ -40,6 +40,7 @@
 {
     NSLog(@"initializing GKSession");
     self.shouldConnect = YES;
+    [[BLEDiscovery sharedInstance] stopScanning];
     [BLEDiscovery sharedInstance].discoveryDelegate = self;
     [BLEDiscovery sharedInstance].peripheralDelegate = self;
     
@@ -65,8 +66,6 @@
            peer:(NSString *)peerID
  didChangeState:(GKPeerConnectionState)state
 {
-    
-    
     //    GKPeerStateAvailable,    // not connected to session, but available for connectToPeer:withTimeout:
     //    GKPeerStateUnavailable,  // no longer available
     //    GKPeerStateConnected,    // connected to the session
@@ -98,7 +97,6 @@
             {
                 [[BLEDiscovery sharedInstance] startScanningForUUIDString:@"713d0000-503e-4c75-ba94-3148f18d941e"];
             }
-//            [[BLEDiscovery sharedInstance] disconnectCurrentPeripheral];
             NSLog(@"connected gamekit session, scanning for ble...");
   
             self.connectedPeer = peerID;
@@ -108,7 +106,7 @@
             break;
             
         default:
-            NSLog(@"--- session changed state to %i",state); //1 == GKPeerStateUnavailable
+            NSLog(@"--- session changed state to %i",state);
             self.sessionReady = NO;
             break;
     }
@@ -126,7 +124,6 @@ didFailWithError:(NSError *)error
 - (void)discoveryDidRefresh
 {
     NSLog(@"%s",__PRETTY_FUNCTION__);
-//   NSLog(@"%@",[[BLEDiscovery sharedInstance] connectedService]);
 }
 
 - (void)bleServiceDidDisconnect:(BLEService *)service
@@ -166,17 +163,27 @@ didFailWithError:(NSError *)error
 {
     if(self.sessionReady)
     {
-        NSData *dataToSend = [NSData dataWithBytes:buffer
-                                            length:originalLength];
-        NSError *e;
-        [self.session sendData:dataToSend
-                       toPeers:@[self.connectedPeer]
-                  withDataMode:GKSendDataReliable
-                         error:&e];
-        if(e)
-        {
-            NSLog(@"%@",e);
+        
+        @try {
+            NSData *dataToSend = [NSData dataWithBytes:buffer
+                                                length:originalLength];
+            NSError *e;
+            [self.session sendData:dataToSend
+                           toPeers:@[self.connectedPeer]
+                      withDataMode:GKSendDataReliable
+                             error:&e];
+            if(e)
+            {
+                NSLog(@"%@",e);
+            }
         }
+        @catch (NSException *exception) {
+            NSLog(@"%@",exception);
+        }
+        @finally {
+            
+        }
+       
     }
     else
     {

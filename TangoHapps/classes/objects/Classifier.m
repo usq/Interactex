@@ -338,7 +338,19 @@ const double kDefaultLearningRate = 0.01;
 }
 
 
-
+- (BOOL)has0Gesture
+{
+    BOOL has0Gesture = NO;
+    for (int i = 0; i < self.featuresCount; i++)
+    {
+        if(inputLabels[i] == 9999)
+        {
+            has0Gesture = YES;
+            break;
+        }
+    }
+    return has0Gesture;
+}
 
 - (void)appendFeatureSets:(NSArray *)featureSets
                  forLabel:(short)label
