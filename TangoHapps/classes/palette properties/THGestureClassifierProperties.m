@@ -13,10 +13,12 @@
 #import "THGestureClassifier.h"
 #import "THFeatureSet.h"
 
-@interface THGestureClassifierProperties ()<UITableViewDelegate, UITableViewDataSource>
+@interface THGestureClassifierProperties ()<UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate>
 @property (nonatomic, strong, readwrite) UIPopoverController *recordingPopoverController;
 @property (nonatomic, strong, readwrite) IBOutlet UITableView *tableView;
-
+@property (weak, nonatomic) IBOutlet UILabel *gestureNameLabel;
+@property (weak, nonatomic) IBOutlet UITextField *gestureNameTextfield;
+@property (nonatomic, strong, readwrite) UITapGestureRecognizer *tapGestureRecognizer;
 @end
 
 @implementation THGestureClassifierProperties
@@ -25,9 +27,36 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tapGestureRecognizer =[[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                       action:@selector(textfieldTapped)];
+    self.tapGestureRecognizer.numberOfTapsRequired = 1;
+    [self.gestureNameLabel addGestureRecognizer:self.tapGestureRecognizer];
+    self.gestureNameLabel.userInteractionEnabled = YES;
+    
+    self.gestureNameLabel.text = [self gesture].name;
 }
 
+- (THGestureClassifier *)gesture
+{
+    return (THGestureClassifier *)((THGestureClassifierEditable *)self.editableObject).simulableObject;
+}
 
+- (void)textfieldTapped
+{
+    self.gestureNameLabel.hidden = YES;
+    self.gestureNameTextfield.hidden = NO;
+    self.gestureNameTextfield.text = self.gestureNameLabel.text;
+    [self.gestureNameTextfield becomeFirstResponder];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    self.gestureNameLabel.hidden = NO;
+    self.gestureNameTextfield.hidden = YES;
+    self.gestureNameLabel.text = textField.text;
+    [self gesture].name = textField.text;
+    return YES;
+}
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
@@ -63,32 +92,6 @@
                                                      inView:director.view
                                    permittedArrowDirections:UIPopoverArrowDirectionLeft
                                                    animated:YES];
-    
-    
-    //    [self presentPopoverWithConcentViewController:namingViewController
-    //                                         fromRect:rect];
-    
-    //    //get new name
-    //create new empty sample
-    
-    //    while([[NSFileManager defaultManager] fileExistsAtPath:[self filePathWithIndex:self.lastSampleIndex]])
-    //    {
-    //        self.lastSampleIndex ++;
-    //    }
-    //    NSString *newFile = [self filePathWithIndex:self.lastSampleIndex];
-    //    NSString *fileName = [[newFile componentsSeparatedByString:@"/"] lastObject];
-    //    self.gestures = [@[fileName] arrayByAddingObjectsFromArray:self.gestures];
-    /*
-     THSignalSourceEditable *signalSourceEditable = (THSignalSourceEditable *)self.editableObject;
-     [signalSourceEditable recordeNewGesture];
-     THSignalSourcePopoverContentViewController *contentViewController = [[THSignalSourcePopoverContentViewController alloc] initWithNibName:@"THSignalSourcePopoverContentViewController"
-     bundle:[NSBundle mainBundle]
-     signalSourceEditable:signalSourceEditable];
-     
-     [self presentPopoverWithConcentViewController:contentViewController
-     fromRect:self.addRecordingButton.frame];
-     */
-    
 }
 
 - (NSArray *)trainedFeatureSets

@@ -57,6 +57,10 @@ NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDe
     
     self.recognizer = [THGestureRecognizer sharedRecognizer];
     self.index = 0;
+    if(self.name== nil || [self.name isEqualToString:@""])
+    {
+        self.name = @"Gesture";
+    }
 
     
     
@@ -181,7 +185,7 @@ NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDe
     self.recognizer.halfWindowSize = [decoder decodeIntForKey:@"halfWindowSize"];
     self.trainedFeatureSets = [decoder decodeObjectForKey:@"trainedFeatureSets"];
     self.label = [[decoder decodeObjectForKey:@"label"] shortValue];
-
+    self.name = [decoder decodeObjectForKey:@"name"];
     if(self.recognizer.halfWindowSize == 0)
     {
         self.recognizer.halfWindowSize = HALF_WINDOW_SIZE_DEFAULT;
@@ -202,6 +206,8 @@ NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDe
                  forKey:@"trainedFeatureSets"];
     [coder encodeObject:@(self.label)
                  forKey:@"label"];
+    [coder encodeObject:self.name
+                 forKey:@"name"];
 }
 
 -(id)copyWithZone:(NSZone *)zone
@@ -210,6 +216,7 @@ NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDe
     copy.numberOfTicksToDetect = self.numberOfTicksToDetect;
     copy.trainedFeatureSets = self.trainedFeatureSets;
     copy.label = self.label;
+    copy.name = self.name;
 //    copy.halfWindowSize = self.halfWindowSize;
     return copy;
 }

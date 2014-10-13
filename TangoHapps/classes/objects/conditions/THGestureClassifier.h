@@ -17,6 +17,7 @@ extern NSString * kGestureClassifierShouldDeleteTraining;
 @property (nonatomic, assign, readwrite) NSUInteger halfWindowSize;
 @property (nonatomic, assign, readwrite) Signal currentSignal;
 @property (nonatomic, assign, readwrite) BOOL hasAlreadyBeenRecognized;
+@property (nonatomic, copy, readwrite) NSString *name;
 
 @property (nonatomic, strong, readonly) NSMutableArray *trainedFeatureSets;
 
