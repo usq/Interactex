@@ -11,7 +11,7 @@
 @interface THSlimConnectionClientController()<GKSessionDelegate, BLEDiscoveryDelegate, BLEServiceDelegate, BLEServiceDataDelegate>
 @property (nonatomic, strong, readwrite) GKSession *session;
 @property (nonatomic, assign, readwrite) BOOL sessionReady;
-@property (nonatomic, assign, readwrite) NSString *connectedPeer;
+@property (nonatomic, strong, readwrite) NSString *connectedPeer;
 @property (nonatomic, assign, readwrite) BOOL shouldConnect;
 @end
 @implementation THSlimConnectionClientController
@@ -38,14 +38,9 @@
 
 - (void)startConnection
 {
+    NSLog(@"%s",__PRETTY_FUNCTION__);
     NSLog(@"initializing GKSession");
-    self.shouldConnect = YES;
-    [[BLEDiscovery sharedInstance] stopScanning];
-    [BLEDiscovery sharedInstance].discoveryDelegate = self;
-    [BLEDiscovery sharedInstance].peripheralDelegate = self;
-    
-    
-    
+
     self.session = [[GKSession alloc] initWithSessionID:@"flexSession"
                                             displayName:nil
                                             sessionMode:GKSessionModeClient];
@@ -56,10 +51,25 @@
 
 - (void)stopConnection
 {
+    NSLog(@"%s",__PRETTY_FUNCTION__);
     self.shouldConnect = NO;
+    self.sessionReady = NO;
+    self.session.delegate = nil;
     [self.session disconnectFromAllPeers];
     self.session.available = NO;
-    [[BLEDiscovery sharedInstance] disconnectCurrentPeripheral];
+    
+    if([BLEDiscovery sharedInstance].peripheralDelegate == self)
+    {
+        [[BLEDiscovery sharedInstance] disconnectCurrentPeripheral];
+        [BLEDiscovery sharedInstance].discoveryDelegate = nil;
+        [BLEDiscovery sharedInstance].peripheralDelegate = nil;
+    }
+    else
+    {
+        NSLog(@"!______________________________________________________________________________________");
+    }
+    
+    self.session = nil;
 }
 
 - (void)session:(GKSession *)session
@@ -76,28 +86,46 @@
     {
         case GKPeerStateAvailable:
         {
+            NSLog(@"%s",__PRETTY_FUNCTION__);
+            NSLog(@"session available, connecting to peer");
             [self.session connectToPeer:peerID
                             withTimeout:4];
         }
+            break;
             
+        case GKPeerStateDisconnected:
+        {
+            NSLog(@"SESSION DISCONNECTED");
+            self.sessionReady = NO;
+        }
             break;
             
         case GKPeerStateConnected:
         {
             
+            //[[BLEDiscovery sharedInstance] stopScanning];
+            //[[BLEDiscovery sharedInstance] disconnectCurrentPeripheral];
+            [BLEDiscovery sharedInstance].discoveryDelegate = self;
+            [BLEDiscovery sharedInstance].peripheralDelegate = self;
+
+            
+            NSLog(@"connected gamekit session");
+            self.shouldConnect = YES;
             if([BLEDiscovery sharedInstance].currentPeripheral.state == CBPeripheralStateConnected)
             {
                 NSLog(@"---%@",[BLEDiscovery sharedInstance].connectedService);
             }
             else if([[BLEDiscovery sharedInstance].foundPeripherals count] == 1)
             {
+                NSLog(@"connect known peripheral");
                 [[BLEDiscovery sharedInstance] connectPeripheral:[[BLEDiscovery sharedInstance].foundPeripherals firstObject]];
             }
             else
             {
+                NSLog(@"scanning for ble...");
                 [[BLEDiscovery sharedInstance] startScanningForUUIDString:@"713d0000-503e-4c75-ba94-3148f18d941e"];
             }
-            NSLog(@"connected gamekit session, scanning for ble...");
+
   
             self.connectedPeer = peerID;
             self.sessionReady = YES;
@@ -131,7 +159,7 @@ didFailWithError:(NSError *)error
     NSLog(@"%s",__PRETTY_FUNCTION__);
     if(self.shouldConnect)
     {
-        //[[BLEDiscovery sharedInstance] startScanningForSupportedUUIDs];
+        [[BLEDiscovery sharedInstance] startScanningForSupportedUUIDs];
     }
 }
 
@@ -158,6 +186,9 @@ didFailWithError:(NSError *)error
     service.dataDelegate = self;
 }
 
+
+#warning this message is not clean
+
 - (void)didReceiveData:(uint8_t *)buffer
                 lenght:(NSInteger)originalLength
 {
@@ -168,14 +199,18 @@ didFailWithError:(NSError *)error
             NSData *dataToSend = [NSData dataWithBytes:buffer
                                                 length:originalLength];
             NSError *e;
-            [self.session sendData:dataToSend
-                           toPeers:@[self.connectedPeer]
-                      withDataMode:GKSendDataReliable
-                             error:&e];
-            if(e)
+            if(self.session && dataToSend.length > 0)
             {
-                NSLog(@"%@",e);
+                [self.session sendData:dataToSend
+                               toPeers:@[self.connectedPeer]
+                          withDataMode:GKSendDataReliable
+                                 error:&e];
+                if(e)
+                {
+                    NSLog(@"%@",e);
+                }
             }
+            
         }
         @catch (NSException *exception) {
             NSLog(@"%@",exception);

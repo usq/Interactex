@@ -172,19 +172,26 @@ didReceiveConnectionRequestFromPeer:(NSString *)peerID
            peer:(NSString *)peerID
  didChangeState:(GKPeerConnectionState)state
 {
+
     switch (state)
     {
         case GKPeerStateAvailable:
-            NSLog(@"peer available");
+            NSLog(@"--- peer available");
             break;
         case GKPeerStateDisconnected:
             session.available = YES;
+            NSLog(@"--- peer disconnected");
             break;
         case GKPeerStateConnected:
+            NSLog(@"connected peer");
             session.available = NO;
+            break;
+        case GKPeerStateConnecting:
+            NSLog(@"Connecting");
             break;
             
         default:
+            
             break;
     }
 }

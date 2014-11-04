@@ -37,6 +37,11 @@
     
     
     self.connection = [THAsyncConnection sharedConnection];
+    if(self.hostAddress)
+    {
+        [self.connection connectToHost:self.hostAddress];
+    }
+
 }
 
 - (void)sendCommand:(NSString *)command
@@ -50,7 +55,6 @@
 - (void)setHostAddress:(NSString *)hostAddress
 {
     _hostAddress = hostAddress;
-    [self.connection connectToHost:self.hostAddress];
 }
 
 #pragma mark - Archiving

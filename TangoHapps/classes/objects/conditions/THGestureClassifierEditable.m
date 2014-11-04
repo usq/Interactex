@@ -50,12 +50,12 @@
 //    ((THGestureClassifier *)self.simulableObject).numberOfTicksToDetect = numberOfTicksToDetect;
 //}
 
-- (int)numberOfTicksToDetect
-{
-    int n = ((THGestureClassifier *)self.simulableObject).numberOfTicksToDetect;
-            NSLog(@"returning %i", n);
-    return n;
-}
+//- (int)numberOfTicksToDetect
+//{
+//    int n = ((THGestureClassifier *)self.simulableObject).numberOfTicksToDetect;
+//            NSLog(@"returning %i", n);
+//    return n;
+//}
 
 - (NSUInteger)halfWindowSize
 {

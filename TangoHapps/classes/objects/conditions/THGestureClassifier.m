@@ -17,7 +17,8 @@ NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDe
 //#define WINDOW_SIZE (HALF_WINDOW_SIZE*2)
 
 @interface THGestureClassifier()
-@property (nonatomic, assign, readwrite) NSUInteger numberOfTicksToDetect;
+@property (nonatomic, assign, readwrite) NSUInteger numberOfPeaks;
+//@property (nonatomic, assign, readwrite) NSUInteger numberOfTicksToDetect;
 @property (nonatomic, assign, readwrite) NSUInteger index;
 @property (nonatomic, assign, readwrite) BOOL gestureIsAlreadyRecognized;
 @property (nonatomic, strong, readwrite) THGestureRecognizer *recognizer;
@@ -113,13 +114,7 @@ NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDe
     self.hasAlreadyBeenRecognized = YES;
     NSLog(@"\n\nRECOGNIZED!!!!!!!!!!!!!!!\n");
     [self triggerEventNamed:kEventRecognized
-     ignoreSimulating:YES];
-    //gesture has been recognized
-//    TFEvent *recognizedEvent = self.events[0];
-//    [self triggerEvent:recognizedEvent];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:event.name  object:self];
-//    [self triggerEventNamed:<#(NSString *)#>]
-
+           ignoreSimulating:YES];
 }
 
 - (void)notRecognized
@@ -156,6 +151,15 @@ NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDe
     THFeatureSet *featureSet = [self.recognizer featureSetFromSignals:gestureData
                                 name:featureName];
     
+    __block NSUInteger numPeaks = 0;
+    [featureSet.scaledFeatures enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSNumber *peakCount = (NSNumber *)obj;
+        NSLog(@"adding peakcount%@",peakCount);
+        numPeaks += [peakCount unsignedIntegerValue];
+    }];
+    self.numberOfPeaks = numPeaks;
+    
+        NSParameterAssert(self.numberOfPeaks < 1000);
     //add feature set to saved features
     [self.trainedFeatureSets addObject:featureSet];
     
@@ -171,7 +175,6 @@ NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDe
     self = [super init];
     if (self)
     {
-        self.numberOfTicksToDetect = 1;
         self.recognizer.halfWindowSize = HALF_WINDOW_SIZE_DEFAULT;
         [self load];
     }
@@ -181,11 +184,13 @@ NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDe
 - (id)initWithCoder:(NSCoder *)decoder
 {
     self = [super initWithCoder:decoder];
-    self.numberOfTicksToDetect = [decoder decodeIntForKey:@"numberOfTicks"];
     self.recognizer.halfWindowSize = [decoder decodeIntForKey:@"halfWindowSize"];
     self.trainedFeatureSets = [decoder decodeObjectForKey:@"trainedFeatureSets"];
     self.label = [[decoder decodeObjectForKey:@"label"] shortValue];
     self.name = [decoder decodeObjectForKey:@"name"];
+    self.numberOfPeaks = [[decoder decodeObjectForKey:@"mc_numberOfPeaks"] unsignedIntegerValue];
+    
+    NSParameterAssert(self.numberOfPeaks < 1000);
     if(self.recognizer.halfWindowSize == 0)
     {
         self.recognizer.halfWindowSize = HALF_WINDOW_SIZE_DEFAULT;
@@ -198,8 +203,6 @@ NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDe
 - (void)encodeWithCoder:(NSCoder *)coder
 {
     [super encodeWithCoder:coder];
-    [coder encodeInt:self.numberOfTicksToDetect
-              forKey:@"numberOfTicks"];
     [coder encodeInt:self.halfWindowSize
               forKey:@"halfWindowSize"];
     [coder encodeObject:self.trainedFeatureSets
@@ -208,16 +211,20 @@ NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDe
                  forKey:@"label"];
     [coder encodeObject:self.name
                  forKey:@"name"];
+    
+    NSParameterAssert(self.numberOfPeaks < 1000);
+    [coder encodeObject:[NSNumber numberWithUnsignedInteger:self.numberOfPeaks]
+                 forKey:@"mc_numberOfPeaks"];
 }
 
 -(id)copyWithZone:(NSZone *)zone
 {
     THGestureClassifier *copy = [super copyWithZone:zone];
-    copy.numberOfTicksToDetect = self.numberOfTicksToDetect;
     copy.trainedFeatureSets = self.trainedFeatureSets;
     copy.label = self.label;
     copy.name = self.name;
-//    copy.halfWindowSize = self.halfWindowSize;
+    copy.numberOfPeaks = self.numberOfPeaks;
+
     return copy;
 }
 

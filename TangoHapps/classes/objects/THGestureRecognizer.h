@@ -36,4 +36,5 @@
 - (void)removeTrainingAtIndex:(NSUInteger)index
                     withLabel:(short)label
                    forGesture:(THGestureClassifier *)gesture;
+
 @end

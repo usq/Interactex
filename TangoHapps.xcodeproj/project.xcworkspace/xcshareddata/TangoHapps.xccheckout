@@ -14,7 +14,7 @@
 		<string>https://github.com/usq/Interactex.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>TangoHapps.xcodeproj/project.xcworkspace</string>
+	<string>TangoHapps.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>84410F66CAD3859283F4388870B4C7B8079BC454</key>

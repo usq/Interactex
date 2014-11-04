@@ -37,14 +37,20 @@
 
 - (void)deregisterSignalSource:(THSignalSource *)signalSource
 {
-    self.registeredSignalSource = nil;
+    if([BLEDiscovery sharedInstance].discoveryDelegate == self)
+    {
+        [BLEDiscovery sharedInstance].discoveryDelegate = nil;
+        [BLEDiscovery sharedInstance].peripheralDelegate = nil;
+        self.registeredSignalSource = nil;
+    }
 }
 
 - (void)start
 {
+
     if(self.scanning == NO || [BLEDiscovery sharedInstance].discoveryDelegate != self)
     {
-        
+        NSLog(@"%s",__PRETTY_FUNCTION__);
         [[BLEDiscovery sharedInstance] stopScanning];
         //[[BLEDiscovery sharedInstance] disconnectCurrentPeripheral];
         [BLEDiscovery sharedInstance].discoveryDelegate = self;
@@ -70,6 +76,10 @@
 - (void)bleServiceDidDisconnect:(BLEService *)service
 {
     NSLog(@"%s",__PRETTY_FUNCTION__);
+    if(self.registeredSignalSource)
+    {
+        [self start];
+    }
 }
 
 - (void)bleServiceIsReady:(BLEService *)service
@@ -83,6 +93,10 @@
     [[BLEDiscovery sharedInstance] connectPeripheral:peripheral];
 }
 
+- (void)dealloc
+{
+    [self deregisterSignalSource:nil];
+}
 
 - (void)didReceiveData:(uint8_t *)buffer
                 lenght:(NSInteger)originalLength

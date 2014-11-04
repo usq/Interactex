@@ -95,6 +95,17 @@ You should have received a copy of the GNU General Public License along with thi
     [self.slimConnectionController startConnection];
 }
 
+-(void) viewWillDisappear:(BOOL)animated{
+    
+    [[THSlimConnectionClientController sharedSlimConnectionController] stopConnection];
+    [self stopEditingScenes];
+    [self removeGestureRecognizers];
+    
+    THClientAppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
+    [appDelegate saveProjectProxies];
+}
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -132,20 +143,10 @@ You should have received a copy of the GNU General Public License along with thi
     longpressRecognizer = nil;
 }
 
--(void) viewWillDisappear:(BOOL)animated{
-    
-    [self stopEditingScenes];
-    [self removeGestureRecognizers];
-    
-    THClientAppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
-    [appDelegate saveProjectProxies];
-}
 
 #pragma mark - Private
 
 - (void)proceedToProjectAtIndex:(NSInteger) index{
-    
-    [[THSlimConnectionClientController sharedSlimConnectionController] stopConnection];
     
     THClientProjectProxy * proxy = [self.currentProxiesArray objectAtIndex:index];
     

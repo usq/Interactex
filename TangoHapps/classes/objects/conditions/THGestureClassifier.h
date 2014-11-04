@@ -12,8 +12,9 @@
 extern NSString * kGestureClassifierShouldDeleteTraining;
 
 @interface THGestureClassifier : TFSimulableObject
+@property (nonatomic, assign, readonly) NSUInteger numberOfPeaks;
 @property (nonatomic, assign, readwrite) BOOL isCalibrationGesture;
-@property (nonatomic, assign, readonly) NSUInteger numberOfTicksToDetect;
+//@property (nonatomic, assign, readonly) NSUInteger numberOfTicksToDetect;
 @property (nonatomic, assign, readwrite) NSUInteger halfWindowSize;
 @property (nonatomic, assign, readwrite) Signal currentSignal;
 @property (nonatomic, assign, readwrite) BOOL hasAlreadyBeenRecognized;

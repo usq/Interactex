@@ -191,7 +191,7 @@ static NSMutableArray * supportedCharacteristicUUIDs;
     
 	for (CBCharacteristic *characteristic in service.characteristics) {
         
-        NSLog(@"discovered characteristic %@",[characteristic UUID]);
+        //NSLog(@"discovered characteristic %@",[characteristic UUID]);
         
         if ([[characteristic UUID] isEqual:self.currentCharacteristicUUIDs[0]]) {
             
@@ -441,6 +441,16 @@ static NSMutableArray * supportedCharacteristicUUIDs;
     }
 }
 
+- (void)peripheral:(CBPeripheral *)peripheral
+didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
+             error:(NSError *)error
+{
+    if(characteristic.isNotifying)
+    {
+        
+    }
+}
+
 -(NSInteger) receiveBufferSize{
     
     if(receiveDataCurrentIndex > receiveDataStart){
@@ -518,9 +528,12 @@ static NSMutableArray * supportedCharacteristicUUIDs;
     return [NSData dataWithBytes:receiveBuffer length:receiveDataLength];
 }
 
-- (void) peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
-    
-	if (peripheral != _peripheral) {
+- (void) peripheral:(CBPeripheral *)peripheral
+didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
+              error:(NSError *)error
+{
+	if (peripheral != _peripheral)
+    {
 		NSLog(@"Wrong peripheral\n");
 		return;
 	}

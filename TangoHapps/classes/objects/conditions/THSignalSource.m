@@ -123,6 +123,10 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
     }
 }
 
+- (void)prepareToDie
+{
+    [[THGestureBLEConnector sharedConnector] deregisterSignalSource:self];
+}
 
 - (void)updateIndizes
 {

@@ -426,7 +426,7 @@
     NSInteger numpeaks[5];
     [self computeNumPeaksFromWindow:window
                               count:count
-                          tolerance:20
+                          tolerance:50
                            numPeaks:numpeaks];
     
 

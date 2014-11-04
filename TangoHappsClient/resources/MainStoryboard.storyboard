@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="dCN-sI-2fp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="dCN-sI-2fp">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
         <!--Projects-->
@@ -270,17 +271,8 @@
         <scene sceneID="X7L-oF-nqh">
             <objects>
                 <viewController title="First" id="ooT-9x-Q8c" customClass="THClientAppViewController" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="Application" id="h6l-f2-78d">
-                        <barButtonItem key="rightBarButtonItem" title="Start" id="cXQ-Ks-m7U">
-                            <connections>
-                                <action selector="startButtonTapped:" destination="ooT-9x-Q8c" id="JGB-CI-hqb"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Application" id="h6l-f2-78d"/>
                     <nil key="simulatedStatusBarMetrics"/>
-                    <connections>
-                        <outlet property="startButton" destination="cXQ-Ks-m7U" id="FyL-Za-lxZ"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h83-zx-Iae" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

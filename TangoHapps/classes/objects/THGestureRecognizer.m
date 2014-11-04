@@ -27,6 +27,7 @@
 @end
 
 short lastLabel = 9999;
+NSUInteger lastDetectedPeaks = 0;
 @implementation THGestureRecognizer
 
 
@@ -71,18 +72,52 @@ short lastLabel = 9999;
     
     if(label == 0)
     {
-        label = [self.registeredGestures count];
+        label = [self labelForGesture:gesture];
     }
+    NSLog(@"assigning label: %i",label);
     return label;
 }
 
+- (short)labelForGesture:(THGestureClassifier *)gesture
+{
+    NSLog(@"%s",__PRETTY_FUNCTION__);
+    short label = 1;
+
+    while (YES)
+    {
+        label ++;
+        BOOL found = NO;
+        for (THGestureClassifier *g in self.registeredGestures)
+        {
+            if(g.label == label)
+            {
+                found = YES;
+                break;
+            }
+        }
+
+        
+        if(found == NO)
+        {
+            break;
+        }
+    }
+    
+    return label;
+}
 
 - (void)deregisterGesture:(THGestureClassifier *)gesture
 {
+
     if([self.registeredGestures containsObject:gesture])
     {
+            NSLog(@"removing gesture %@",gesture);
         [self.registeredGestures removeObject:gesture];
         [self.classifier removeValuesWithLabel:gesture.label];
+    }
+    else
+    {
+            NSLog(@"NOT removing gesture %@",gesture);
     }
 }
 
@@ -181,17 +216,33 @@ short lastLabel = 9999;
                                                 ignore:-1];
     
     
-    NSLog(@"--------------- i think its label %i",label);
-    short recognizedLabel = 0;
     
+    __block NSUInteger detectedPeaks = 0;
+    NSParameterAssert(featureCount == 5);
+    for (int i = 0; i < featureCount; i++)
+    {
+        detectedPeaks += (NSUInteger)features[i];
+    }
+    
+    
+    
+    NSLog(@"current numPeaks: %u--------------- i think its label %i",detectedPeaks, label);
+    short recognizedLabel = 0;
+
     if (label == 9999 && lastLabel != 9999)
     {
         recognizedLabel  = lastLabel;
-    } else if(label < lastLabel && lastLabel != 9999)
+    }
+    else if(lastLabel != 9999) // i detected less peaks this time
     {
-        recognizedLabel = lastLabel;
-        label = lastLabel;
-        
+        THGestureClassifier *lastGesture = [self gestureForLabel:lastLabel];
+        NSParameterAssert(lastGesture != nil);
+        if(detectedPeaks < lastGesture.numberOfPeaks)
+        {
+            NSLog(@"detected Peaks: %u smaller than lastPeaks: %u",detectedPeaks, lastGesture.numberOfPeaks);
+            recognizedLabel = lastLabel;
+            label = lastLabel;
+        }
     }
     
     if(recognizedLabel != 0)
@@ -223,6 +274,20 @@ short lastLabel = 9999;
   }
     
     lastLabel = label;
+}
+
+- (THGestureClassifier *)gestureForLabel:(short)label
+{
+    __block THGestureClassifier *gesture;
+    [self.registeredGestures enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        THGestureClassifier *g = obj;
+        if(g.label == label)
+        {
+            gesture = g;
+            *stop = YES;
+        }
+    }];
+    return gesture;
 }
 
 - (THFeatureSet *)featureSetFromSignals:(NSArray *)signals
