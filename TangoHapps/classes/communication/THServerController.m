@@ -71,7 +71,7 @@ You should have received a copy of the GNU General Public License along with thi
 #pragma mark - Server Control
 
 -(void)startServer {
-        NSLog(@"%s",__PRETTY_FUNCTION__);
+
     if(session)
     {
         NSLog(@"stopping serer");

@@ -26,6 +26,8 @@ extern Signal THDecodeSignal(uint8_t *signal);
 @property (nonatomic, assign, readonly) float rightBorderPercentage;
 
 + (instancetype)sharedSignalSource;
+- (void)connectBLE;
+
 - (void)updatedSimulation;
 - (void)start;
 - (void)stop;

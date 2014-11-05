@@ -9,6 +9,7 @@
 #import "THGestureBLEConnector.h"
 
 #import "BLE.h"
+#import "THProjectLocation.h"
 
 @interface THGestureBLEConnector ()<BLEDiscoveryDelegate, BLEServiceDelegate, BLEServiceDataDelegate>
 @property (nonatomic, weak, readwrite) THSignalSource *registeredSignalSource;
@@ -47,20 +48,57 @@
 
 - (void)start
 {
-
-    if(self.scanning == NO || [BLEDiscovery sharedInstance].discoveryDelegate != self)
+//    if([THProjectLocation appRunning] == NO)
+//    {
+//        return;
+//    }
+//    
+    NSLog(@"-------------------------%i",self.scanning);
+    if([BLEDiscovery sharedInstance].currentPeripheral == nil)
     {
         NSLog(@"%s",__PRETTY_FUNCTION__);
-        [[BLEDiscovery sharedInstance] stopScanning];
+//        [[BLEDiscovery sharedInstance] stopScanning];
         //[[BLEDiscovery sharedInstance] disconnectCurrentPeripheral];
         [BLEDiscovery sharedInstance].discoveryDelegate = self;
         [BLEDiscovery sharedInstance].peripheralDelegate = self;
-        [[BLEDiscovery sharedInstance] startScanningForUUIDString:@"713d0000-503e-4c75-ba94-3148f18d941e"];
+        
+        if([[BLEDiscovery sharedInstance].foundPeripherals count] > 0)
+        {
+            [[BLEDiscovery sharedInstance] connectPeripheral:[BLEDiscovery sharedInstance].foundPeripherals[0]];
+        }
+        else
+        {
+            [[BLEDiscovery sharedInstance] startScanningForUUIDString:@"713d0000-503e-4c75-ba94-3148f18d941e"];
+        }
+
         self.scanning = YES;
-    }}
+    }
+    else
+    {
+        [BLEDiscovery sharedInstance].discoveryDelegate = self;
+        [BLEDiscovery sharedInstance].peripheralDelegate = self;
+    }
+}
 
 - (void)discoveryDidRefresh
 {
+    NSLog(@"%s",__PRETTY_FUNCTION__);
+    NSLog(@"%@",[BLEDiscovery sharedInstance].currentPeripheral);
+    NSLog(@"%@",[BLEDiscovery sharedInstance].foundPeripherals);
+    NSLog(@"");
+    if([BLEDiscovery sharedInstance].currentPeripheral == nil &&
+       [BLEDiscovery sharedInstance].foundPeripherals.count == 0)
+    {
+        [[BLEDiscovery sharedInstance] startScanningForUUIDString:@"713d0000-503e-4c75-ba94-3148f18d941e"];
+    }
+    else if ([[BLEDiscovery sharedInstance].foundPeripherals count] > 1)
+    {
+        CBPeripheral *p = [[BLEDiscovery sharedInstance].foundPeripherals firstObject];
+        [[BLEDiscovery sharedInstance] connectPeripheral:p];
+    }
+
+    
+    
     NSLog(@"%s",__PRETTY_FUNCTION__);
 }
 
@@ -78,7 +116,8 @@
     NSLog(@"%s",__PRETTY_FUNCTION__);
     if(self.registeredSignalSource)
     {
-        [self start];
+        NSLog(@"\n\n\nSKIPPING restart \n\n\n");
+     // [self start];
     }
 }
 

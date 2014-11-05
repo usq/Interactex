@@ -77,8 +77,10 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             instance = [[self alloc] init];
+
         });
     }
+    [instance connectBLE];
     return instance;
 }
 
@@ -119,8 +121,21 @@ NSString * const kSignalSourceCurrentFilePath = @"kSignalSourceCurrentFilePath";
     if([THProjectLocation sharedProjectLocation].runningOnLocation == THProjectLocationRunningOnIPhone)
     {
         [[THGestureBLEConnector sharedConnector] registerSignalSource:self];
-        [[THGestureBLEConnector sharedConnector] start];
     }
+}
+
+- (void)connectBLE
+{
+    if([THGestureBLEConnector sharedConnector].registeredSignalSource == self)
+    {
+        
+    }
+    else
+    {
+
+        [[THGestureBLEConnector sharedConnector] registerSignalSource:self];
+    }
+    
 }
 
 - (void)prepareToDie

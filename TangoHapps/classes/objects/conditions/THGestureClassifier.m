@@ -82,7 +82,7 @@ NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDe
     
     if([THProjectLocation sharedProjectLocation].runningOnLocation == THProjectLocationRunningOnIPhone)
     {
-        [THSignalSource sharedSignalSource];
+       // [[THSignalSource sharedSignalSource] connectBLE];
     }
 }
 
@@ -106,6 +106,7 @@ NSString * kGestureClassifierShouldDeleteTraining = @"kGestureClassifierShouldDe
     [[THGestureRecognizer sharedRecognizer] deregisterGesture:self];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[THSignalSource sharedSignalSource] prepareToDie];
 }
 
 

@@ -8,6 +8,7 @@
 
 #import "THProjectLocation.h"
 
+static BOOL bAppRunning = NO;
 
 @implementation THProjectLocation
 + (instancetype)sharedProjectLocation
@@ -21,5 +22,13 @@
     return instance;
 }
 
++ (BOOL)appRunning
+{
+    return bAppRunning;
+}
 
++ (void)setAppRunning:(BOOL)value
+{
+    bAppRunning = value;
+}
 @end

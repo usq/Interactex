@@ -62,8 +62,6 @@ NSUInteger lastDetectedPeaks = 0;
 - (short)registerGesture:(THGestureClassifier *)gesture
 {
 
-    [[THGestureBLEConnector sharedConnector] start];
-    NSLog(@"%s",__PRETTY_FUNCTION__);
     short label = gesture.label;
     if([self.registeredGestures containsObject:gesture] == NO)
     {
@@ -74,13 +72,12 @@ NSUInteger lastDetectedPeaks = 0;
     {
         label = [self labelForGesture:gesture];
     }
-    NSLog(@"assigning label: %i",label);
+
     return label;
 }
 
 - (short)labelForGesture:(THGestureClassifier *)gesture
 {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
     short label = 1;
 
     while (YES)
@@ -111,13 +108,8 @@ NSUInteger lastDetectedPeaks = 0;
 
     if([self.registeredGestures containsObject:gesture])
     {
-            NSLog(@"removing gesture %@",gesture);
         [self.registeredGestures removeObject:gesture];
         [self.classifier removeValuesWithLabel:gesture.label];
-    }
-    else
-    {
-            NSLog(@"NOT removing gesture %@",gesture);
     }
 }
 
@@ -190,7 +182,6 @@ NSUInteger lastDetectedPeaks = 0;
 
 - (void)trainRecognizerWithGesture:(THGestureClassifier *)gesture
 {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
     for (THFeatureSet *featureSet in gesture.trainedFeatureSets)
     {
         [self trainRecognizerWithGesture:gesture

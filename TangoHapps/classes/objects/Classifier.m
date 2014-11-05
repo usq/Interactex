@@ -355,7 +355,6 @@ const double kDefaultLearningRate = 0.01;
 - (void)appendFeatureSets:(NSArray *)featureSets
                  forLabel:(short)label
 {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
     NSParameterAssert([featureSets count] > 0);
     
     THFeatureSet *featureSet1 = [featureSets firstObject];

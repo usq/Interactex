@@ -30,7 +30,6 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [[self alloc] init];
-        [instance load];
     });
 
     return instance;
@@ -49,6 +48,10 @@
     self = [super init];
     if(self){
         self.simulableObject = [THSignalSource sharedSignalSource];
+        self.session = [[GKSession alloc] initWithSessionID:@"flexSession"
+                                                displayName:@"TangoHapps Designer"
+                                                sessionMode:GKSessionModeServer];
+        self.session.delegate = self;
         [self load];
     }
     return self;
@@ -122,6 +125,8 @@
     self.recording = NO;
    THSignalSource *source = (THSignalSource *)self.simulableObject;
     [source stopRecording];
+    
+    
     [self.session disconnectFromAllPeers];
     self.session.available = NO;
 }
@@ -142,17 +147,9 @@
 
 
 
-
-
-
-
 - (void)establishConnection
 {
     NSLog(@"%s",__PRETTY_FUNCTION__);
-    self.session = [[GKSession alloc] initWithSessionID:@"flexSession"
-                                            displayName:nil
-                                            sessionMode:GKSessionModeServer];
-    self.session.delegate = self;
     self.session.available = YES;
 }
 
@@ -165,6 +162,7 @@ didReceiveConnectionRequestFromPeer:(NSString *)peerID
     [self.session setDataReceiveHandler:self
                             withContext:nil];
     [self.session acceptConnectionFromPeer:peerID error:&error];
+    self.session.available = NO;
 }
 
 
@@ -172,19 +170,19 @@ didReceiveConnectionRequestFromPeer:(NSString *)peerID
            peer:(NSString *)peerID
  didChangeState:(GKPeerConnectionState)state
 {
-
+    NSLog(@"%s",__PRETTY_FUNCTION__);
     switch (state)
     {
         case GKPeerStateAvailable:
             NSLog(@"--- peer available");
             break;
         case GKPeerStateDisconnected:
-            session.available = YES;
+//            session.available = YES;
             NSLog(@"--- peer disconnected");
             break;
         case GKPeerStateConnected:
             NSLog(@"connected peer");
-            session.available = NO;
+//            session.available = NO;
             break;
         case GKPeerStateConnecting:
             NSLog(@"Connecting");
@@ -226,9 +224,11 @@ didReceiveConnectionRequestFromPeer:(NSString *)peerID
 - (void)session:(GKSession *)session
 didFailWithError:(NSError *)error
 {
-    NSLog(@"%@",error);
+    NSLog(@"%s error: %@",__PRETTY_FUNCTION__,error);
     session.available = YES;
 }
+
+
 
 
 

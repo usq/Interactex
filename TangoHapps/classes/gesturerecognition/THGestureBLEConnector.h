@@ -10,6 +10,7 @@
 #import "THSignalSource.h"
 
 @interface THGestureBLEConnector : NSObject
+@property (nonatomic, weak, readonly) THSignalSource *registeredSignalSource;
 + (instancetype)sharedConnector;
 - (void)registerSignalSource:(THSignalSource *)signalSource;
 - (void)deregisterSignalSource:(THSignalSource *)signalSource;

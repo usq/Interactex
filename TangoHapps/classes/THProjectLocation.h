@@ -18,4 +18,6 @@ typedef NS_ENUM(NSUInteger, THProjectLocationRunningOn)
 @interface THProjectLocation : NSObject
 @property (nonatomic, assign, readwrite) THProjectLocationRunningOn runningOnLocation;
 + (instancetype)sharedProjectLocation;
++ (BOOL)appRunning;
++ (void)setAppRunning:(BOOL)value;
 @end

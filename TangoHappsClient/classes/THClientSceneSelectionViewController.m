@@ -52,10 +52,12 @@ You should have received a copy of the GNU General Public License along with thi
 #import "THClientPresetsGenerator.h"
 #import "THClientScene.h"
 #import "THSlimConnectionClientController.h"
-
+#import "THProjectLocation.h"
+#import "THGestureBLEConnector.h"
+#import "THSignalSource.h"
 
 @interface THClientSceneSelectionViewController ()
-@property (nonatomic, strong, readwrite) THSlimConnectionClientController *slimConnectionController;
+//@property (nonatomic, strong, readwrite) THSlimConnectionClientController *slimConnectionController;
 @end
 
 @implementation THClientSceneSelectionViewController
@@ -80,10 +82,12 @@ You should have received a copy of the GNU General Public License along with thi
     
     self.navigationItem.leftBarButtonItem = self.editButton;
     
-    self.slimConnectionController = [[THSlimConnectionClientController alloc] init];
+   // self.slimConnectionController = [[THSlimConnectionClientController alloc] init];
 }
 
--(void) viewWillAppear:(BOOL)animated{
+-(void) viewWillAppear:(BOOL)animated
+{
+    [THProjectLocation setAppRunning:NO];
     if(self.showingIcons){
         [self addGestureRecognizers];
     }
@@ -92,10 +96,11 @@ You should have received a copy of the GNU General Public License along with thi
     [self.tableView reloadData];
     
     [self updateEditButtonEnabledState];
-    [self.slimConnectionController startConnection];
+    [[THSlimConnectionClientController sharedSlimConnectionController] startConnection];
 }
 
--(void) viewWillDisappear:(BOOL)animated{
+-(void) viewWillDisappear:(BOOL)animated
+{
     
     [[THSlimConnectionClientController sharedSlimConnectionController] stopConnection];
     [self stopEditingScenes];
@@ -146,7 +151,10 @@ You should have received a copy of the GNU General Public License along with thi
 
 #pragma mark - Private
 
-- (void)proceedToProjectAtIndex:(NSInteger) index{
+- (void)proceedToProjectAtIndex:(NSInteger) index
+{
+
+
     
     THClientProjectProxy * proxy = [self.currentProxiesArray objectAtIndex:index];
     
@@ -168,6 +176,8 @@ You should have received a copy of the GNU General Public License along with thi
     [THSimulableWorldController sharedInstance].currentProjectProxy = proxy;
     
     [self performSegueWithIdentifier:@"segueToProjectView" sender:self];
+    [[THGestureBLEConnector sharedConnector] start];
+    [THSignalSource sharedSignalSource];
 }
 
 -(void) deleteProjectAtIndex:(NSInteger) index{
